@@ -14,7 +14,7 @@ Welcome to the UFS Weather Model User's Guide
    CodeOverview
    BuildingAndRunning
    ConfigParameters
-   InputsOutputs
+   Configurations
    AutomatedTesting
    FAQ
    Acronyms
