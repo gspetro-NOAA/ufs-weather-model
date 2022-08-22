@@ -1,119 +1,44 @@
 .. _Configurations:
 
 *************************
-Configurations
+Inputs and Outputs
 *************************
 
-The ``ufs-weather-model`` can be configured to form several applications, from a single-component atmospheric model to a fully coupled model with multiple earth system components (atmosphere, ocean, sea-ice and mediator). Currently the supported configurations are:
+The ``ufs-weather-model`` can be configured as one of several applications, from a single component atmosphere model to a fully coupled model with multiple earth system components (atmosphere, ocean, sea-ice and mediator). Currently the supported configurations are:
 
 .. _UFS-configurations:
 
-.. list-table:: *Supported ufs-weather-model Configurations*
+.. list-table:: *Supported ufs-weather-model applications*
    :widths: 10 70
    :header-rows: 1
    
    * - Configuration Name
      - Description
    * - ATM
-     - Standalone Atmospheric Model (:term:`ATM`)
+     - Standalone UFSAtm
    * - ATMW
-     - :term:`ATM` coupled to :term:`WW3`
+     - UFSAtm coupled to WW3
    * - ATMAERO
-     - :term:`ATM` coupled to :term:`GOCART`
+     - UFSAtm coupled to GOCART
    * - ATMAQ
-     - :term:`ATM` coupled to :term:`CMAQ`
+     - UFSAtm coupled to CMAQ
    * - S2S
-     - Coupled :term:`ATM` - :term:`MOM6` - :term:`CICE6` - :term:`CMEPS`
+     - Coupled UFSATM-MOM6-CICE6-CMEPS
    * - S2SA
-     - Coupled :term:`ATM` - :term:`MOM6` - :term:`CICE6` - :term:`GOCART` - :term:`CMEPS`
+     - Coupled UFSATM-MOM6-CICE6-GOCART-CMEPS
    * - S2SW
-     - Coupled :term:`ATM` - :term:`MOM6` - :term:`CICE6` - :term:`WW3` - :term:`CMEPS`
+     - Coupled UFSATM-MOM6-CICE6-WW3-CMEPS
    * - S2SWA
-     - Coupled :term:`ATM` - :term:`MOM6` - :term:`CICE6` - :term:`GOCART` - :term:`WW3` - :term:`CMEPS`
+     - Coupled UFSATM-MOM6-CICE6-WW3-GOCART-CMEPS
    * - NG-GODAS
-     - Coupled :term:`CDEPS` - :term:`DATM` - :term:`MOM6` - :term:`CICE6` - :term:`CMEPS`
+     - Coupled CDEPS-DATM-MOM6-CICE6-CMEPS
    * - HAFS
-     - Coupled :term:`ATM` - :term:`HYCOM` - :term:`CMEPS`
+     - Coupled UFSATM-HYCOM-CMEPS
    * - HAFSW
-     - Coupled :term:`ATM` - :term:`HYCOM` - :term:`WW3` - :term:`CMEPS`
+     - Coupled UFSATM-HYCOM-WW3-CMEPS
    * - HAFS-ALL
-     - Coupled :term:`CDEPS` - :term:`ATM` - :term:`HYCOM` - :term:`WW3` - :term:`CMEPS`
-
-.. COMMENT: Should HAFS-ALL be DATM instead of ATM?
-
-==============
-ATM
-==============
-
-
-==============
-ATMW
-==============
-
-
-==============
-ATMAERO
-==============
-
-
-==============
-ATMAQ
-==============
-
-
-==============
-S2S
-==============
-
-
-==============
-S2SW
-==============
-
-
-==============
-S2SA
-==============
-
-
-==============
-S2SWA
-==============
-
-
-==============
-NG-GODAS
-==============
-
-
-==============
-HAFS
-==============
-
-
-==============
-HAFSW
-==============
-
-
-==============
-HAFS-ALL
-==============
-
-
-
-
-
-
-
-
-
-
-
-# ---------------------------------------DELETE BELOW THIS LINE---------------------------------------
-
-
-
+     - Coupled CDEPS-UFSATM-HYCOM-WW3-CMEPS
+	 
 This chapter describes the input and output files needed for executing the model in the various supported configurations.
 
 =============
