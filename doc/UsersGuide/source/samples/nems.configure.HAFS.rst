@@ -4,9 +4,6 @@
 Sample ``nems.configure`` File for the ``HAFS`` WM Configuration
 *******************************************************************
 
-
-For the coupled HAFS application, a sample *nems.configure* is shown below :
-
 .. code-block:: console
 
         # EARTH #
