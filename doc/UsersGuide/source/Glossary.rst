@@ -4,7 +4,7 @@
 Glossary
 *************************
 
-.. UPDATE links to NOAA-EMC repo instead of community one
+.. Add SRW & MRW to Glossary. 
 
 .. glossary::
 

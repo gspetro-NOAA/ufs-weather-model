@@ -81,9 +81,9 @@ The Automated Regression Testing (AutoRT) system:
    |  jobs/rt.py       | Functions for the regression test job               |
    +-------------------+-----------------------------------------------------+
 
-~~~~~~~~~~~~~~~
+
 AutoRT Workflow
-~~~~~~~~~~~~~~~
+=====================
 * Cron-job on supported HPC systems runs start_rt_auto.sh bash script every
   15 minutes.
 
