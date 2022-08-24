@@ -91,9 +91,8 @@ Compiling the model will take place within the ``ufs-weather-model`` directory y
 Building the Weather Model
 ==========================
 
-----------------------------
 Loading the Required Modules
-----------------------------
+===============================
 
 Modulefiles for `pre-configured platforms <https://github.com/ufs-community/ufs/wiki/Supported-Platforms-and-Compilers>`_
 are located in ``modulefiles/ufs_<platform>.<compiler>``. For example, to load the modules from the ``ufs-weather-model``
@@ -131,136 +130,37 @@ manually. For example, in a bash shell, a command in the following form will set
    export CMAKE_C_COMPILER=</path/to/C/compiler>
 
 
--------------------------------------------------------------
 Setting the ``CMAKE_FLAGS`` and ``CCPP_SUITES`` Environment Variables
--------------------------------------------------------------
+========================================================================
 
 The UFS Weather Model can be built in one of twelve configurations (cf. :numref:`Table %s <UFS-configurations>`). 
 The ``CMAKE_FLAGS`` environment variable specifies which configuration to build.
 Additionally, users must select the :term:`CCPP` suite(s) by setting the ``CCPP_SUITES`` environment variable at
 build time in order to have one or more CCPP physics suites available at runtime. Multiple suites can be set. 
-Additional environment variables, such as ``-D32BIT=ON``, can be set if the user chooses. These options are documented 
-in :numref:`Section %s <other-build-options>`. 
-The following examples assume a bash shell.
-
-ATM Configurations
----------------------
-
-For the ``ufs-weather-model ATM`` configuration (standalone :term:`ATM`):
+The basic command to set ``CMAKE_FLAGS`` and ``CCPP_SUITES`` should be formatted as follows (examples assume a bash shell):
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=ATM -DCCPP_SUITES=FV3_GFS_v16"
+   export CMAKE_FLAGS="-DAPP=<APP_NAME> -DCCPP_SUITES=<physics_suite_1>,<physics_suite_2>"
 
-For the ``ufs-weather-model ATMW`` configuration (standalone ATM coupled to :term:`WW3`):
+where:
 
-.. code-block:: console
+   * ``<APP_NAME>`` is a valid value for ``-DAPP`` (e.g., ``ATM``, ``S2SW``, ``HAFS-ALL``). See :numref:`Section %s <dapp>` for a full list of options. 
+   * ``<physics_suite_#>`` is a valid physics suite. See :numref:`Section %s <suites>` for a full list of options. 
 
-    export CMAKE_FLAGS="-DAPP=ATMW -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v16_coupled"
-
-.. CHECK above!!
-
-For the ``ufs-weather-model ATMAERO`` configuration (standalone ATM coupled to :term:`GOCART`):
+Additional flags and environment variables, such as ``-D32BIT=ON``, ``-DDEBUG=ON``, and ``BUILD_VERBOSE=1``, can be set if the user chooses. For example:
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=ATMAERO -DCCPP_SUITES=FV3_GFS_v16"
+   export CMAKE_FLAGS="-DAPP=S2S -DDEBUG=ON -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_2017_satmedmf_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_couplednsst"
+   export BUILD_VERBOSE=1
 
-For the ``ufs-weather-model ATMAQ`` configuration (standalone ATM coupled to :term:`CMAQ`):
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=ATMAQ -DCCPP_SUITES=FV3_GFS_v15p2"
+These additional options are documented in :numref:`Section %s <other-build-options>`. For concrete examples, see :numref:`Chapter %s <Configurations>`, which contains information and sample code for each of the 12 supported configurations of the UFS Weather Model. 
 
 
-S2S Configurations 
-----------------------
-
-For the ``ufs-weather-model S2S`` configuration (coupled atm/ice/ocean):
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=S2S -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_2017_satmedmf_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_couplednsst"
-
-.. Which ocean model is it coupled to? All? 
-
-To turn on debugging flags, add ``-DDEBUG=ON`` flag after ``-DAPP=S2S``. Users can allow verbose build messages by running: 
-
-.. code-block:: console
-
-    export BUILD_VERBOSE=1
-
-For the ``ufs-weather-model S2S`` configuration (atm/ice/ocean) with activating CCPP host model under CMEPS and receiving atmosphere-ocean fluxes from mediator:
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=S2S -DCCPP_SUITES=FV3_GFS_v17_coupled_p8_sfcocn -DCMEPS_AOFLUX=ON"
-
-..
-   COMMENT: Need some clarification on what the above code does with CCPP/CMEPS... not clear from description. 
-
-For the ``ufs-weather-model S2SW`` configuration (atm/ice/ocean/wave):
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=S2SW -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_coupled_noahmp"
-
-For the ``ufs-weather-model S2SA`` configuration (atm/ice/ocean/aerosols):
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=S2SA -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_coupled_noahmp"
-
-..
-   CHECK: DAPP flag and physics suites
-
-For the ``ufs-weather-model S2SWA`` configuration (atm/ice/ocean/wave/aerosols):
-
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=S2SWA -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_coupled_noahmp"
-
-..
-   CHECK: physics suites
-
-NG-GODAS Configuration
-------------------------
-
-For the ``ufs-weather-model NG-GODAS`` configuration (atm/ocean/ice/data assimilation): 
-
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=NG-GODAS -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled"
-..
-   COMMENT: NG-GODAS --> Coupled CDEPS-DATM-MOM6-CICE6-CMEPS
-   What is the DAPP argument? And the physics suites?
-
-HAFS Configurations
-----------------------
-
-For the ``ufs-weather-model HAFS`` configuration (atm/ocean) in 32 bit:
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=HAFS -D32BIT=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf_nonsst,FV3_HAFS_v0_gfdlmp_tedmf,FV3_HAFS_v0_hwrf_thompson,FV3_HAFS_v0_hwrf"
-
-For the ``ufs-weather-model HAFSW`` configuration (atm/ocean/wave) in 32 bit:
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=HAFSW -D32BIT=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf_nonsst,FV3_HAFS_v0_gfdlmp_tedmf,FV3_HAFS_v0_hwrf_thompson,FV3_HAFS_v0_hwrf"
-
-For the ``ufs-weather-model HAFS-ALL`` configuration (data/atm/ocean/wave) in 32 bit:
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=HAFS-ALL -D32BIT=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf_nonsst,FV3_HAFS_v0_gfdlmp_tedmf,FV3_HAFS_v0_hwrf_thompson,FV3_HAFS_v0_hwrf"
-
-------------------
 Building the Model
-------------------
+===============================
+
 The UFS Weather Model uses the CMake build system.  There is a build script called ``build.sh`` in the
 top-level directory of the WM repository that configures the build environment and runs the ``make``
 command.  This script also checks that all necessary environment variables have been set.
@@ -284,15 +184,15 @@ will build in the `ufs-weather-model/test_cpld` directory instead.
 Expert help is available through a `user support forum <https://forums.ufscommunity.org/forum/ufs-weather-model>`__
 set up specifically for issues related to the Weather Model.
 
-=================
+==================
 Running the Model
-=================
+==================
 
 .. _UsingRegressionTest:
 
---------------------------------
 Using the Regression Test Script
---------------------------------
+=================================
+
 The regression test script ``rt.sh`` in the tests/ directory can be
 used to run a number of preconfigured test cases. It is the top-level script
 that calls lower-level scripts to build, set up environments and run tests.
@@ -423,9 +323,10 @@ directories.
 
 .. _UsingOpnReqTest:
 
----------------------------------------------
+
 Using the operational requirement test script
----------------------------------------------
+==================================================
+
 The operational requirement test script ``opnReqTest`` in the tests/ directory can also be used to run
 tests. Given the name of a test, ``opnReqTest`` carries out a suite of test cases.
 Each test case addresses an aspect of the requirements new implementations
