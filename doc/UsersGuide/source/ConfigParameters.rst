@@ -24,7 +24,35 @@ Physics Options
 
 ``-DCCPP_SUITES``:
    Sets the physics suites that will be made available when the :term:`WM` is built. 
-   Valid values: 
+   
+   Physics suites supported in regression testing:
+   
+   | ``FV3_GFS_cpld_rasmgshocnsstnoahmp_ugwp``
+   | ``FV3_GFS_v15p2``
+   | ``FV3_GFS_v15_thompson_mynn``
+   | ``FV3_GFS_v15_thompson_mynn_lam3km``
+   | ``FV3_GFS_v16``
+   | ``FV3_GFS_v16_csawmg``
+   | ``FV3_GFS_v16_fv3wam``
+   | ``FV3_GFS_v16_noahmp``
+   | ``FV3_GFS_v16_ras``
+   | ``FV3_GFS_v16_ugwpv1``
+   | ``FV3_GFS_v17_p8``
+   | ``FV3_GFS_v17_p8_rrtmgp``
+   | ``FV3_GFS_v17_coupled_p8``
+   | ``FV3_GFS_v17_coupled_p8_sfcocn``
+   | ``FV3_HAFS_v0_gfdlmp_tedmf``
+   | ``FV3_HAFS_v0_gfdlmp_tedmf_nonsst``
+   | ``FV3_HAFS_v0_thompson_tedmf_gfdlsf``
+   | ``FV3_HRRR``
+   | ``FV3_HRRR_smoke``
+   | ``FV3_RAP``
+   | ``FV3_RAP_RRTMGP``
+   | ``FV3_RAP_sfcdiff``
+   | ``FV3_RRFS_v1beta``
+   | ``FV3_RRFS_v1nssl``
+
+   Other valid values: 
 
    | ``FV3_CPT_v0``
    | ``FV3_GFS_2017``
@@ -48,7 +76,6 @@ Physics Options
    | ``FV3_GFS_cpld_rasmgshocnsst``
    | ``FV3_GFS_cpld_rasmgshocnsst_flake``
    | ``FV3_GFS_cpld_rasmgshocnsst_ugwp``
-   | ``FV3_GFS_cpld_rasmgshocnsstnoahmp_ugwp``
    | ``FV3_GFS_cpldnst_rasmgshoc``
    | ``FV3_GFS_rasmgshoc``
    | ``FV3_GFS_v15``
@@ -58,13 +85,9 @@ Physics Options
    | ``FV3_GFS_v15_ras``
    | ``FV3_GFS_v15_rasmgshoc``
    | ``FV3_GFS_v15_thompson``
-   | ``FV3_GFS_v15_thompson_mynn``
-   | ``FV3_GFS_v15_thompson_mynn_lam3km``
-   | ``FV3_GFS_v15p2``
    | ``FV3_GFS_v15p2_no_nsst``
    | ``FV3_GFS_v15plus``
    | ``FV3_GFS_v15plusras``
-   | ``FV3_GFS_v16``
    | ``FV3_GFS_v16_coupled``
    | ``FV3_GFS_v16_coupled_noahmp``
    | ``FV3_GFS_v16_coupled_nsstNoahmp``
@@ -72,20 +95,11 @@ Physics Options
    | ``FV3_GFS_v16_coupled_p8``
    | ``FV3_GFS_v16_coupled_p8_sfcocn``
    | ``FV3_GFS_v16_couplednsst``
-   | ``FV3_GFS_v16_csawmg``
    | ``FV3_GFS_v16_flake``
-   | ``FV3_GFS_v16_fv3wam``
    | ``FV3_GFS_v16_no_nsst``
-   | ``FV3_GFS_v16_noahmp``
    | ``FV3_GFS_v16_nsstNoahmpUGWPv1``
    | ``FV3_GFS_v16_p8``
-   | ``FV3_GFS_v16_ras``
    | ``FV3_GFS_v16_thompson``
-   | ``FV3_GFS_v16_ugwpv1``
-   | ``FV3_GFS_v17_coupled_p8``
-   | ``FV3_GFS_v17_coupled_p8_sfcocn``
-   | ``FV3_GFS_v17_p8``
-   | ``FV3_GFS_v17_p8_rrtmgp``
    | ``FV3_GFSv17alp_cpldnsstrasnoahmp``
    | ``FV3_GFSv17alp_cpldnsstrasugwpnoahmp``
    | ``FV3_GFSv17alp_cpldnsstsasugwpnoahmp``
@@ -99,24 +113,14 @@ Physics Options
    | ``FV3_GFSv17alpha_ras_flake``
    | ``FV3_GFSv17alpha_ras_ugwp``
    | ``FV3_GFSv17alpha_sas``
-   | ``FV3_HAFS_v0_gfdlmp_tedmf``
-   | ``FV3_HAFS_v0_gfdlmp_tedmf_nonsst``
-   | ``FV3_HAFS_v0_thompson_tedmf_gfdlsf``
-   | ``FV3_HRRR``
-   | ``FV3_HRRR_smoke``
-   | ``FV3_RAP``
-   | ``FV3_RAP_RRTMGP``
    | ``FV3_RAP_cires_ugwp``
    | ``FV3_RAP_flake``
    | ``FV3_RAP_noah``
    | ``FV3_RAP_noah_sfcdiff_cires_ugwp``
    | ``FV3_RAP_noah_sfcdiff_ugwpv1``
    | ``FV3_RAP_noah_sfcdiff_unified_ugwp``
-   | ``FV3_RAP_sfcdiff``
    | ``FV3_RAP_unified_ugwp``
    | ``FV3_RRFS_v1alpha``
-   | ``FV3_RRFS_v1beta``
-   | ``FV3_RRFS_v1nssl``
 
 .. _other-build-options:
 
@@ -154,7 +158,7 @@ Other Build Options
    .. COMMENT: But what does that mean? When/why is the moving nest used?
 
 ``-DMULTI_GASES``: (Default: OFF)
-   Enable MULTI_GASES. 
+   Enable ``MULTI_GASES``. 
    Valid values: ``ON`` | ``OFF``
 
    .. COMMENT: But what does this DO?! And when/why is it used?

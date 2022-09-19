@@ -4,7 +4,9 @@
 Configurations
 *************************
 
-The ``ufs-weather-model`` can be configured to form several applications, from a single-component atmospheric model to a fully coupled model with multiple earth system components (atmosphere, ocean, sea-ice and mediator). Currently, the supported configurations are:
+The UFS Weather Model can be run in one of several configurations, from a single-component atmospheric 
+model to a fully coupled model with multiple earth system components (e.g., atmosphere, ocean, sea-ice and 
+mediator). Currently the supported configurations are:
 
 .. _UFS-configurations:
 
@@ -65,7 +67,7 @@ The standalone atmospheric model (:term:`ATM`) is an :term:`FV3`-based prognosti
 
 
 Supported Physics Suites
-   * ``FV3_GFS_v16``
+   - ``FV3_GFS_v16``
 
 
 .. Add later: 
@@ -85,18 +87,10 @@ The ATMW configuration couples :term:`ATM` with :term:`WW3`.
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=ATMW -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v16_coupled"
-
-.. CHECK above!!
-
+    export CMAKE_FLAGS="-DAPP=ATMW -DCCPP_SUITES=FV3_GFS_v16"
 
 Supported Physics Suites
-   * ``FV3_GFS_v16``
-
-      .. Check!
-
-   * ``FV3_GFS_2017_coupled``
-   * ``FV3_GFS_v16_coupled``
+   - ``FV3_GFS_v16``
 
 .. _atmaero:
 
@@ -110,11 +104,11 @@ The ATMAERO configuration couples :term:`ATM` with :term:`GOCART`.
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=ATMAERO -DCCPP_SUITES=FV3_GFS_v16" 
+    export CMAKE_FLAGS="-DAPP=ATMAERO -DCCPP_SUITES=FV3_GFS_v17_p8"
 
 
 Supported Physics Suites
-   * ``FV3_GFS_v16``
+   - ``FV3_GFS_v17_p8``
 
 
 .. _atmaq:
@@ -128,11 +122,11 @@ The ATMAQ configuration couples :term:`ATM` with :term:`CMAQ`.
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=ATMAQ -DCCPP_SUITES=FV3_GFS_v15p2" 
-    
+    export CMAKE_FLAGS="-DAPP=ATMAQ -DCCPP_SUITES=FV3_GFS_v15p2"
+
 
 Supported Physics Suites
-   * FV3_GFS_v15p2
+   - FV3_GFS_v15p2
 
 
 
@@ -152,9 +146,10 @@ The S2S configuration couples atmosphere (:term:`ATM`), ocean (:term:`MOM6`), an
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=S2S -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_2017_satmedmf_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_couplednsst" 
+    export CMAKE_FLAGS="-DAPP=S2S -DCCPP_SUITES=FV3_GFS_v17_coupled_p8"
 
-To run the ``S2S`` configuration with activating CCPP host model under CMEPS and receiving atmosphere-ocean fluxes from mediator:
+To receive atmosphere-ocean fluxes from the CMEPS :term:`mediator`, add the argument ``-DCMEPS_AOFLUX=ON``.
+For example:
 
 .. code-block:: console
 
@@ -165,12 +160,8 @@ To run the ``S2S`` configuration with activating CCPP host model under CMEPS and
     
 
 Supported Physics Suites
-   * ``FV3_GFS_2017_coupled``
-   * ``FV3_GFS_2017_satmedmf_coupled``
-   * ``FV3_GFS_v15p2_coupled``
-   * ``FV3_GFS_v16_coupled``
-   * ``FV3_GFS_v16_couplednsst``
-   * ``FV3_GFS_v17_coupled_p8_sfcoc``
+   - ``FV3_GFS_v17_coupled_p8``
+   - ``FV3_GFS_v17_coupled_p8_sfcocn``
 
 
 .. _s2sw:
@@ -185,11 +176,11 @@ The S2SW configuration couples atmosphere (:term:`ATM`), ocean (:term:`MOM6`), a
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=S2SW -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_coupled_noahmp" 
-    
+    export CMAKE_FLAGS="-DAPP=S2SW -DCCPP_SUITES=FV3_GFS_v17_coupled_p8" 
+
 
 Supported Physics Suites
-   * 
+   - ``FV3_GFS_v17_coupled_p8``
 
 
 .. _s2sa:
@@ -197,6 +188,27 @@ Supported Physics Suites
 S2SA
 ==============
 
+The S2SA configuration couples atmosphere (:term:`ATM`), ocean (:term:`MOM6`), and sea ice (:term:`CICE6`), and aerosol (:term:`GOCART`) models through a :term:`NUOPC`-compliant :term:`mediator` (:term:`CMEPS`).
+
+
+**Sample** ``CMAKE_FLAGS`` **Setting**
+
+.. code-block:: console
+
+    export CMAKE_FLAGS="-DAPP=S2SA -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_coupled_noahmp"
+
+
+Supported Physics Suites
+   - ``FV3_GFS_2017_coupled``
+   - ``FV3_GFS_v15p2_coupled``
+   - ``FV3_GFS_v16_coupled``
+   - ``FV3_GFS_v16_coupled_noahmp``
+
+
+.. _s2swa:
+
+S2SWA
+==============
 The S2SW configuration couples atmosphere (:term:`ATM`), ocean (:term:`MOM6`), and sea ice (:term:`CICE6`), wave (:term:`WW3`), and aerosol (:term:`GOCART`) models through a :term:`NUOPC`-compliant :term:`mediator` (:term:`CMEPS`).
 
 
@@ -204,33 +216,11 @@ The S2SW configuration couples atmosphere (:term:`ATM`), ocean (:term:`MOM6`), a
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=S2SA -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_coupled_noahmp" 
-
-.. CHECK: DAPP flag and physics suites
-    
+    export CMAKE_FLAGS="-DAPP=S2SWA -DCCPP_SUITES=FV3_GFS_v17_coupled_p8,FV3_GFS_cpld_rasmgshocnsstnoahmp_ugwp"  
 
 Supported Physics Suites
-   * 
-
-
-.. _s2swa:
-
-S2SWA
-==============
-The S2SW configuration couples atmosphere (:term:`ATM`), ocean (:term:`MOM6`), and sea ice (:term:`CICE6`), and aerosol (:term:`GOCART`) models through a :term:`NUOPC`-compliant :term:`mediator` (:term:`CMEPS`).
-
-
-**Sample** ``CMAKE_FLAGS`` **Setting**
-
-.. code-block:: console
-
-    export CMAKE_FLAGS="-DAPP=S2SWA -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled,FV3_GFS_v16_coupled_noahmp" 
-
-.. CHECK: physics suites
-    
-
-Supported Physics Suites
-   * 
+   - ``FV3_GFS_v17_coupled_p8``
+   - ``FV3_GFS_cpld_rasmgshocnsstnoahmp_ugwp``
 
 
 .. _ng-godas:
@@ -247,15 +237,16 @@ The Next Generation-Global Ocean Data Assimilation System (NG-GODAS) is a UFS We
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=NG-GODAS -DCCPP_SUITES=FV3_GFS_2017_coupled,FV3_GFS_v15p2_coupled,FV3_GFS_v16_coupled"
+    export CMAKE_FLAGS="-DAPP=NG-GODAS"
 
+.. COMMENT: Check! --> In rt.conf, no CCPP suite is set. Is there a default one?
 ..
    COMMENT: NG-GODAS --> Coupled CDEPS-DATM-MOM6-CICE6-CMEPS
    What is the DAPP argument? And the physics suites?
 
 
 Supported Physics Suites
-   * 
+   -  
 
 
 
@@ -278,14 +269,12 @@ The HAFS configuration couples atmosphere (:term:`ATM`) and ocean (:term:`HYCOM`
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=HAFS -D32BIT=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf_nonsst,FV3_HAFS_v0_gfdlmp_tedmf,FV3_HAFS_v0_hwrf_thompson,FV3_HAFS_v0_hwrf" 
+    export CMAKE_FLAGS="-DAPP=HAFS -D32BIT=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf_nonsst,FV3_HAFS_v0_gfdlmp_tedmf"
     
 
 Supported Physics Suites
-   * ``FV3_HAFS_v0_gfdlmp_tedmf_nonsst``
-   * ``FV3_HAFS_v0_gfdlmp_tedmf``
-   * ``FV3_HAFS_v0_hwrf_thompson``
-   * ``FV3_HAFS_v0_hwrf``
+   - ``FV3_HAFS_v0_gfdlmp_tedmf_nonsst``
+   - ``FV3_HAFS_v0_gfdlmp_tedmf``
 
 .. _hafsw:
 
@@ -299,14 +288,13 @@ The HAFSW configuration couples atmosphere (:term:`ATM`), ocean (:term:`HYCOM`),
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=HAFSW -D32BIT=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf_nonsst,FV3_HAFS_v0_gfdlmp_tedmf,FV3_HAFS_v0_hwrf_thompson,FV3_HAFS_v0_hwrf" 
+    export CMAKE_FLAGS="-DAPP=HAFSW -D32BIT=ON -DMOVING_NEST=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf,FV3_HAFS_v0_gfdlmp_tedmf_nonsst,FV3_HAFS_v0_thompson_tedmf_gfdlsf"
     
 
 Supported Physics Suites
-   * ``FV3_HAFS_v0_gfdlmp_tedmf_nonsst``
-   * ``FV3_HAFS_v0_gfdlmp_tedmf``
-   * ``FV3_HAFS_v0_hwrf_thompson``
-   * ``FV3_HAFS_v0_hwrf``
+   - ``FV3_HAFS_v0_gfdlmp_tedmf``
+   - ``FV3_HAFS_v0_gfdlmp_tedmf_nonsst``
+   - ``FV3_HAFS_v0_thompson_tedmf_gfdlsf``
 
 .. _hafs-all:
 
@@ -320,14 +308,12 @@ The HAFS-ALL configuration couples atmosphere (:term:`ATM`), ocean (:term:`HYCOM
 
 .. code-block:: console
 
-    export CMAKE_FLAGS="-DAPP=HAFS-ALL -D32BIT=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf_nonsst,FV3_HAFS_v0_gfdlmp_tedmf,FV3_HAFS_v0_hwrf_thompson,FV3_HAFS_v0_hwrf" 
+    export CMAKE_FLAGS="-DAPP=HAFS-ALL -D32BIT=ON -DCCPP_SUITES=FV3_HAFS_v0_gfdlmp_tedmf,FV3_HAFS_v0_gfdlmp_tedmf_nonsst" 
     
 
 Supported Physics Suites
-   * ``FV3_HAFS_v0_gfdlmp_tedmf_nonsst``
-   * ``FV3_HAFS_v0_gfdlmp_tedmf``
-   * ``FV3_HAFS_v0_hwrf_thompson``
-   * ``FV3_HAFS_v0_hwrf``
+   - ``FV3_HAFS_v0_gfdlmp_tedmf``
+   - ``FV3_HAFS_v0_gfdlmp_tedmf_nonsst``
 
 
 
