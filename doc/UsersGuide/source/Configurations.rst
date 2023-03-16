@@ -4,7 +4,7 @@
 Configurations
 *************************
 
-The UFS Weather Model can be run in one of several configurations, from a single-component atmospheric 
+The UFS Weather Model can be run in any of several configurations, from a single-component atmospheric 
 model to a fully coupled model with multiple earth system components (e.g., atmosphere, ocean, sea-ice and 
 mediator). Currently the supported configurations are:
 

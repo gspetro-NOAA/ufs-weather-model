@@ -155,13 +155,13 @@ Other Build Options
    Enables moving nest code.
    Valid values: ``ON`` | ``OFF``
 
-   .. COMMENT: But what does that mean? When/why is the moving nest used?
+   .. COMMENT: But what does that mean? When/why is the moving nest used? Is this relevant? https://noaa-emc.github.io/FV3_Dycore_ufs-v2.0.0/html/fv__nesting_8F90.html
 
 ``-DMULTI_GASES``: (Default: OFF)
    Enable ``MULTI_GASES``. 
    Valid values: ``ON`` | ``OFF``
 
-   .. COMMENT: But what does this DO?! And when/why is it used?
+   .. COMMENT: But what does this DO?! And when/why is it used? See: https://noaa-emc.github.io/FV3_Dycore_ufs-v2.0.0/html/multi__gases_8F90.html
 
 
 .. COMMENT: Add any of the following options with -D in front???
