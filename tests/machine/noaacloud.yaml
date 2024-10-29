@@ -1,0 +1,30 @@
+# Machine-specific settings: NOAA Cloud
+
+platform:
+  #TPN: '{{ 44 if (user.ACCOUNT == "cz-epic") else 36 if (user.ACCOUNT == "ca-epic") else 30 }}'
+  # Need to figure out how to access $PW_CSP. Where is that set/coming from? How to access here? 
+  TPN: '{{ 44 if (${PW_CSP} == "azure") else 36 if (${PW_CSP} == "aws") else 30 }}'
+  INPES_dflt: 3
+  JNPES_dflt: 8
+  INPES_thrd: 3
+  JNPES_thrd: 4
+  INPES_c384: 8
+  JNPES_c384: 6
+  THRD_c384: 2
+  INPES_c768: 8
+  JNPES_c768: 16
+  THRD_c768: 2
+  THRD_cpl_dflt: 1
+  INPES_cpl_dflt: 3
+  JNPES_cpl_dflt: 8
+  WPG_cpl_dflt: 6
+  OCN_tasks_cpl_dflt: 20
+  ICE_tasks_cpl_dflt: 10
+  WAV_tasks_cpl_dflt: 20
+  THRD_cpl_thrd: 2
+  INPES_cpl_thrd: 3
+  JNPES_cpl_thrd: 4
+  WPG_cpl_thrd: 6
+  OCN_tasks_cpl_thrd: 20
+  ICE_tasks_cpl_thrd: 10
+  WAV_tasks_cpl_thrd: 12
