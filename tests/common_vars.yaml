@@ -110,3 +110,12 @@ common:
   ocn_omp_num_threads: 1
   wav_omp_num_threads: 1
   fbh_omp_num_threads: 1
+
+  WLCLK_dflt: 30
+  WLCLK: ${WLCLK_dflt}  # Figure out how env var is accessed...
+  CMP_DATAONLY: false
+
+  # Defaults for ufs.configure
+  esmf_logkind: "ESMF_LOGKIND_MULTI"
+  DumpFields: "false"
+  MED_history_n: 1000000

@@ -1,0 +1,440 @@
+export_fv3:
+
+  if [[ -z ${ATMRES+x} || -z ${ATMRES} ]]; then
+      export ATMRES=C96
+  fi
+
+  # ufs.configure defaults
+  ufs.configure:
+    UFS_CONFIGURE: ufs.configure.atm_esmf.IN
+    MODEL_CONFIGURE: model_configure.IN
+    atm_model: fv3
+
+    POST_ITAG: post_itag_gfs
+    POSTXCONFIG: postxconfig-NT-gfs.txt
+    POSTXCONFIG_FH00: postxconfig-NT-gfs_FH00.txt
+
+    FV3: true
+    S2S: false
+    HAFS: false
+    AQM: false
+    FIRE_BEHAVIOR: false
+    DATM_CDEPS: false
+    DOCN_CDEPS: false
+    DICE_CDEPS: false
+    CICE_PRESCRIBED: false
+    CDEPS_INLINE: false
+    POSTAPP: 'global'
+    USE_MERRA2: .true.
+    NESTED: .false.
+
+    NTILES: 6
+    INPES: ${INPES_dflt}
+    JNPES: ${JNPES_dflt}
+    RESTART_INTERVAL: 0
+    QUILTING: .true.
+    QUILTING_RESTART: .true.
+    WRITE_GROUP: 1
+    WRTTASK_PER_GROUP: 6
+    ITASKS: 1
+    OUTPUT_HISTORY: .true.
+    HISTORY_FILE_ON_NATIVE_GRID: .false.
+    WRITE_DOPOST: .false.
+    NUM_FILES: 2
+    FILENAME_BASE: "'atm' 'sfc'"
+    OUTPUT_GRID: "'cubed_sphere_grid'"
+    OUTPUT_FILE: "'netcdf'"
+    ZSTANDARD_LEVEL: 0
+    IDEFLATE: 0
+    QUANTIZE_NSD: 0
+    ICHUNK2D: 0
+    JCHUNK2D: 0
+    ICHUNK3D: 0
+    JCHUNK3D: 0
+    KCHUNK3D: 0
+    IMO: 384
+    JMO: 190
+    WRITE_NSFLIP: .true.
+
+# New damping coefficients made the following dynamic based on resolution
+    N_SPLIT: 5
+    K_SPLIT: 2
+    TAU: 0.0
+    RF_CUTOFF: 10.
+    FV_SG_ADJ: 450
+
+    DZ_MIN: 6
+    MIN_SEAICE: 0.15
+    FRAC_GRID: .true.
+    MIN_LAKEICE: 0.15
+
+  input_files:
+    FV3_RUN: control_run.IN
+    CCPP_SUITE: FV3_GFS_v17_p8
+    FIELD_TABLE: field_table_thompson_noaero_tke
+    DIAG_TABLE: diag_table_cpld.IN
+    INPUT_NML: global_control.nml.IN
+
+    DOMAINS_STACK_SIZE: 3000000
+
+# Coldstart/warmstart
+#rt script for ICs
+    MODEL_INITIALIZATION: false
+  namelist_vars:
+    WARM_START: .false.
+    READ_INCREMENT: .false.
+    RES_LATLON_DYNAMICS: "''"
+    INCREMENT_FILE_ON_NATIVE_GRID: .false.
+    NGGPS_IC: .true.
+    EXTERNAL_IC: .true.
+    MAKE_NH: .true.
+    MOUNTAIN: .false.
+    NA_INIT: 1
+    DO_VORT_DAMP: .true.
+    HYDROSTATIC: .false.
+    KORD_XX: 9
+    KORD_TM: -9
+    D_CON: 1.
+    HORD_XX: 5
+    HORD_DP: -5
+    HORD_TR: 8
+
+  # Radiation
+  radiation: 
+    DO_RRTMGP: .false.
+    DOGP_CLDOPTICS_LUT: .true.
+    DOGP_LWSCAT: .true.
+    DOGP_SGS_CNV: .true.
+    USE_LW_JACOBIAN: .false.
+    DAMP_LW_FLUXADJ: .false.
+    RRTMGP_LW_PHYS_BLKSZ: 2
+    ICLOUD: 0
+    IAER: 1011
+    ICLIQ_SW: 2
+    IOVR: 3
+    LFNC_K: -999
+    LFNC_P0: -999
+
+  # Microphysics
+  microphysics:
+    IMP_PHYSICS: 8
+    NWAT: 6
+    # GFDL MP
+    gfdl_mp:
+      DNATS: 0
+      DO_SAT_ADJ: .false.
+      LHEATSTRG: .false.
+      LSEASPRAY: .true.
+      LGFDLMPRAD: .false.
+      EFFR_IN: .false.
+    # Thompson MP
+    thompson_mp:
+      LRADAR: .true.
+      LTAEROSOL: .true.
+      EXT_DIAG_THOMPSON: .false.
+      SEDI_SEMI: .true.
+      DECFL: 10
+    # NSSL MP
+    nssl_mp:
+      NSSL_CCCN: 0.6e9
+      NSSL_ALPHAH: 0.0
+      NSSL_ALPHAHL: 1.0
+      NSSL_HAIL_ON: .false.
+      NSSL_CCN_ON: .true.
+      NSSL_INVERTCCN: .true.
+
+  # Smoke
+  smoke: 
+    RRFS_SMOKE: .false.
+    SMOKE_FORECAST: 0
+    RRFS_RESTART: NO
+    SEAS_OPT: 2
+
+  # Gravity Wave Drag (GWD)
+  gwd:
+    LDIAG_UGWP: .false.
+    DO_UGWP: .false.
+    DO_TOFD: .false.
+    GWD_OPT: 2
+    DO_UGWP_V0: .true.
+    DO_UGWP_V1_W_GSLDRAG: .false.
+    DO_UGWP_V0_OROG_ONLY: .false.
+    DO_GSL_DRAG_LS_BL: .false.
+    DO_GSL_DRAG_SS: .true.
+    DO_GWD_OPT_PSL: .false.
+    PSL_GWD_DX_FACTOR: 6.0
+    DO_GSL_DRAG_TOFD: .false.
+    DO_UGWP_V1: .false.
+    DO_UGWP_V1_OROG_ONLY: .false.
+    KNOB_UGWP_DOKDIS: 1
+    KNOB_UGWP_NDX4LH: 1
+    KNOB_UGWP_VERSION: 0
+    KNOB_UGWP_PALAUNCH: 500.e2
+    KNOB_UGWP_NSLOPE: 1
+    KNOB_UGWP_TAUAMP: 3.0e-3
+    DO_UGWP_V0_NST_ONLY: .false.
+
+  # resolution dependent settings
+  res_dependent:
+    CDMBWD_c48: '0.071,2.1,1.0,1.0'
+    CDMBWD_c96: '0.14,1.8,1.0,1.0'
+    CDMBWD_c192: '0.23,1.5,1.0,1.0'
+    CDMBWD_c384: '1.1,0.72,1.0,1.0'
+    CDMBWD_c768: '4.0,0.15,1.0,1.0'
+
+    #DT_INNER: (Time step)/2
+    DT_INNER_c96: 360
+    DT_INNER_c192: 300
+    DT_INNER_c384: 150
+    DT_INNER_c768: 75
+
+    # set default
+    CDMBWD: ${CDMBWD_c96}
+    DT_INNER: ${DT_INNER_c96}
+
+  # PBL
+  pbl:
+    SATMEDMF: .true.
+    HYBEDMF: .true.
+    SHINHONG: .false.
+    DO_YSU: .false.
+    DO_MYNNEDMF: .false.
+    HURR_PBL: .false.
+    MONINQ_FAC: 1.0
+    SFCLAY_COMPUTE_FLUX: .false.
+
+  # Shallow/deep convection
+  convection:
+    DO_DEEP: .true.
+    SHAL_CNV: .true.
+    IMFSHALCNV: 2
+    HWRF_SAMFSHAL: .false.
+    IMFDEEPCNV: 2
+    HWRF_SAMFDEEP: .false.
+    RAS: .false.
+    RANDOM_CLDS: .false.
+    CNVCLD: .true.
+    PROGSIGMA: .false.
+    BETASCU: 8.0
+    BETAMCU: 1.0
+    BETADCU: 2.0
+
+  # Aerosol convective scavenging
+  aero_conv_scavenging:
+    FSCAV_AERO: '"*:0.3","so2:0.0","msa:0.0","dms:0.0","nh3:0.4","nh4:0.6","bc1:0.6","bc2:0.6","oc1:0.4","oc2:0.4","dust1:0.6","dust2:0.6","dust3:0.6","dust4:0.6","dust5:0.6","seas1:0.5","seas2:0.5","seas3:0.5","seas4:0.5","seas5:0.5"'
+
+  # SFC
+  sfc:
+    DO_MYJSFC: .false.
+    DO_MYNNSFCLAY: .false.
+    BL_MYNN_TKEADVECT: .false.
+
+  # LSM
+  lsm:
+    LSM: 2
+    LSOIL_LSM: 4
+    LANDICE: .false.
+    KICE: 2
+    IALB: 2
+    IEMS: 2
+    IOPT_DVEG: 4
+    IOPT_CRS: 2
+    IOPT_RAD: 3
+    IOPT_ALB: 1
+    IOPT_STC: 3
+
+    IOPT_SFC: 3
+    IOPT_TRS: 2
+    IOPT_DIAG: 2
+
+    D2_BG_K1: 0.20
+    D2_BG_K2: 0.04
+    PSM_BC: 1
+
+    DDDMP: 0.1
+
+  # Ozone / stratospheric H2O
+  ozone:
+    OZ_PHYS_OLD: .true.
+    OZ_PHYS_NEW: .false.
+    H2O_PHYS: .false.
+
+  # Lake models
+  lake_models:
+    LKM: 0 # 0=no lake, 1=run lake model, 2=run both lake and nsst on lake points
+    IOPT_LAKE: 2 # 1=flake, 2=clm lake
+    LAKEFRAC_THRESHOLD: 0.0 # lake fraction must be higher for lake model to run it
+    LAKEDEPTH_THRESHOLD: 1.0 # lake must be deeper (in meters) for a lake model to run it
+    FRAC_ICE: .true. # should be false for flake, true for clm_lake
+
+  # Tiled Fix files
+  tiled_fix_files:
+    TILEDFIX: .true.
+
+    CPL: .false.
+    CPLCHM: .false.
+    CPLFLX: .false.
+    CPLICE: .false.
+    CPLWAV: .false.
+    CPLWAV2ATM: .false.
+    CPLLND: .false.
+    CPLLND2ATM: .false.
+    USE_MED_FLUX: .false.
+    DAYS: 1
+    NPX: 97
+    NPY: 97
+    NPZ: 64
+    NPZP: 65
+    NSTF_NAME: 2,1,0,0,0
+    OUTPUT_FH: "12 -1"
+    FHZERO: 6
+    FSICL: 0
+    FSICS: 0
+
+  # Dynamical core
+  dycore:
+    FV_CORE_TAU: 0.
+    FAST_TAU_W_SEC: 0.2
+    DRY_MASS: 98320.0
+
+    ENS_NUM: 1
+    SYEAR: 2016
+    SMONTH: 10
+    SDAY: 03
+    SHOUR: 00
+    SECS: $(( SHOUR*3600 ))
+    FHMAX: $(( DAYS*24 ))
+    DT_ATMOS: 1800
+    FHCYC: 24
+    FHROT: 0
+    LDIAG3D: .false.
+    QDIAG3D: .false.
+    PRINT_DIFF_PGR: .false.
+    MAX_OUTPUT_FIELDS: 310
+    UPDATE_FULL_OMEGA: .false.
+
+  # Stochastic physics
+  stochastic_physics:
+    STOCHINI: .false.
+    DO_SPPT: .false.
+    DO_SHUM: .false.
+    DO_SKEB: .false.
+    LNDP_TYPE: 0
+    N_VAR_LNDP: 0
+    SKEB: -999.
+    SPPT: -999.
+    SHUM: -999.
+    LNDP_VAR_LIST: "'XXX'"
+    LNDP_PRT_LIST: -999
+    LNDP_MODEL_TYPE: 0
+    LNDP_TAU: 21600,
+    LNDP_LSCALE: 500000,
+    ISEED_LNDP: 2010,
+
+  #IAU
+  iau:
+    IAU_INC_FILES: "''"
+    IAU_DELTHRS: 0
+    IAUFHRS: -1
+    IAU_OFFSET: 0
+
+    FH_DFI_RADAR: '-2e10'
+
+  # Cellular automata
+  cellular_automata:
+    DO_CA: .true.
+    CA_SGS: .true.
+    CA_GLOBAL: .false.
+    NCA: 1
+    NCELLS: 5
+    NLIVES: 12
+    NTHRESH: 18
+    NSEED: 1
+    NFRACSEED: 0.5
+    CA_TRIGGER: .true.
+    NSPINUP: 1
+    ISEED_CA: 12345
+
+  # Waves
+  waves:
+    WW3_RSTDTHR: 12
+    WW3_DT_2_RST: "$(printf "%02d" $(( WW3_RSTDTHR*3600 )))"
+    WW3_DT_2_RST
+    WW3_OUTDTHR: 1
+    WW3_DTFLD: "$(printf "%02d" $(( WW3_OUTDTHR*3600 )))"
+    WW3_DTFLD
+    WW3_DTPNT: "$(printf "%02d" $(( WW3_OUTDTHR*3600 )))"
+    WW3_DTPNT
+    DTRST: 0
+    RSTTYPE: T
+    GOFILETYPE: 1
+    POFILETYPE: 1
+    WW3_OUTPARS: "WND HS FP DP PHS PTP PDIR"
+    CPLILINE: '$'
+    ICELINE: '$'
+    WINDLINE: '$'
+    CURRLINE: '$'
+    NFGRIDS: 0
+    NMGRIDS: 1
+    WW3GRIDLINE: "'glo_1deg'  'no' 'no' 'CPL:native' 'no' 'no' 'no' 'no' 'no' 'no'   1  1  0.00 1.00  F"
+    FUNIPNT: T
+    IOSRV: 1
+    FPNTPROC: T
+    FGRDPROC: T
+    UNIPOINTS: 'points'
+    FLAGMASKCOMP: ' F'
+    FLAGMASKOUT: ' F'
+    RUN_BEG: "${SYEAR}${SMONTH}${SDAY} $(printf "%02d" $(( SHOUR  )))0000"
+    RUN_END: "2100${SMONTH}${SDAY} $(printf "%02d" $(( SHOUR  )))0000"
+    OUT_BEG: ${RUN_BEG}
+    OUT_END: ${RUN_END}
+    RST_BEG: ${RUN_BEG}
+    RST_2_BEG: ${RUN_BEG}
+    RST_END: ${RUN_END}
+    RST_2_END: ${RUN_END}
+    WW3_CUR: 'F'
+    WW3_ICE: 'F'
+    WW3_IC1: 'F'
+    WW3_IC5: 'F'
+  # ATMW
+  atmw:
+    WW3_MULTIGRID: true
+    WW3_MODDEF: mod_def.glo_1deg
+    MESH_WAV: mesh.glo_1deg.nc
+
+  # ATMA
+  atma:
+    AOD_FRQ: 060000
+
+  # Regional
+  regional:
+    WRITE_RESTART_WITH_BCS: .false.
+
+  # Diagnostics
+  diagnostics:
+    PRINT_DIFF_PGR: .false.
+
+  # Coupling
+  coupling:
+    coupling_interval_fast_sec: 0
+    CHOUR: 06
+    MOM6_OUTPUT_DIR: ./MOM6_OUTPUT
+    MOM6_RESTART_DIR: ./RESTART/
+    MOM6_RESTART_SETTING: n
+
+    # Following not used for standalone
+    USE_CICE_ALB: .false.
+
+  # GFDL Cloud Microphysics
+  gfdl_cloud_mp:
+    FTSFS: 90
+
+
+  # NAM sfc
+  nam_sfc:
+    FNGLAC: "'global_glacier.2x2.grb'"
+    FNMXIC: "'global_maxice.2x2.grb'"
+    FNTSFC: "'RTGSST.1982.2012.monthly.clim.grb'"
+    FNSNOC: "'global_snoclim.1.875.grb'"
+    FNZORC: "'igbp'"
+    FNAISC: "'IMS-NIC.blended.ice.monthly.clim.grb'"
