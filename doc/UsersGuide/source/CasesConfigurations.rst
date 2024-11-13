@@ -169,9 +169,18 @@ PTMP="${dprefix}/stmp2"
 Baroclinic Instability Case
 ============================
 
-The baroclinic wave test case evaluates the performance of dry dynamical cores in atmospheric models, focusing on the idealized growth of a northern hemisphere wave. The initial zonal state is a quasi-realistic steady solution to the adiabatic, inviscid primitive equations, specified analytically. The test begins with an assessment of whether the models maintain this steady state, followed by a perturbation that induces baroclinic wave growth over several days.
+The paper "A baroclinic instability test case for atmospheric model dynamical cores" by Christiane Jablonowski and David L. Williamson outlines a test designed to evaluate the accuracy of various atmospheric models in simulating a specific type of wave, known as a baroclinic wave, that commonly forms in the Northern Hemisphere and influences weather patterns. This test aims to assess how well "dry dynamical cores," the foundational components of weather and climate models that handle air movement and temperature changes, perform in idealized conditions.
 
-Four dynamical cores with varying resolutions are tested: NASA/NCAR’s Finite Volume package, NCAR’s spectral transform Eulerian and semi-Lagrangian cores in CAM3, and the German Weather Service’s GME model. These hydrostatic cores, which span a range of numerical methods, offer independent high-resolution reference solutions. The study analyzes each model's convergence characteristics and explores the uncertainty of the high-resolution results.
+The simulation begins by setting the model’s atmosphere to an initial steady state, designed to be a simple, realistic representation of atmospheric conditions using the adiabatic (no heat exchange) and inviscid (no friction) primitive equations. The test first checks whether each model can maintain this steady, zonal (west-to-east) state without developing any unintended changes. After verifying this, the next step is to introduce a small disturbance, or perturbation, which triggers the growth of a baroclinic wave. The wave then evolves over several simulated days, allowing the researchers to observe how accurately each model handles the wave’s development and movement.
 
-Refernces 
+The study includes four different dynamical cores with varying grid resolutions: NASA/NCAR’s Finite Volume package, NCAR’s spectral transform Eulerian and semi Lagrangian cores from the CAM3 model, and the German Weather Service’s GME model. Each of these hydrostatic cores, which assume no vertical acceleration in the atmosphere, uses different numerical methods to simulate changes in atmospheric pressure, temperature, and wind. Higher resolution grids provide a more detailed look at these processes but require more computing power, while lower resolution grids offer broader, less precise results.
 
+The test showed that models with higher resolutions, which captured atmospheric changes in finer detail, produced more accurate wave patterns that matched expected high resolution "reference solutions." However, the 1 degree resolution (used in lower resolution models) often missed some of the finer details in the wave's growth and behavior. By comparing each model’s results against these high resolution references, the study could analyze how well each model captured the core aspects of wave formation and its growth.
+
+To conclude, this test case provides a standard way to assess how different atmospheric models handle the development of baroclinic waves. The results help identify which models are more accurate and serve as benchmarks for model improvement, ultimately contributing to better simulations of atmospheric behavior in weather and climate predictions.
+
+References
+
+Jablonowski, C., & Williamson, D. L. (2006). A baroclinic instability test case for atmospheric model dynamical cores. Quarterly Journal of the Royal Meteorological Society, 132(621C), 2943-2975. https://doi.org/10.1256/qj.06.12
+
+https://doi.org/10.1256/qj.06.12
