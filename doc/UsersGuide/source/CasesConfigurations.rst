@@ -27,10 +27,110 @@ For a full list of supported WM configurations, view the `rt.conf <https://githu
 ``ufs_test.sh``
 ================
 
-The ``ufs-test.sh`` script ....
+This section will include details on how to run idealized cases using the ``ufs-test.sh`` script.
 
-.. COMMENT: Expand w/background info
+Clone the Repository
+--------------------
 
+To start, clone the branch containing the test cases:
+
+.. code-block:: console
+
+   git clone --recursive -b feature/enable_test_cases https://github.com/natalie-perlin/ufs-weather-model.git
+
+After cloning, set up the environment:
+
+.. code-block:: console
+
+   cd ufs-weather-model
+   export UFS_WM=$PWD         # This variable is for convenience
+   cd tests-dev
+
+The tests are configured to be run on NOAA Tier1 platforms, and the configuration files for each platform are located at:
+
+.. code-block:: console
+
+   ${UFS_WM}/tests-dev/machine_config/machine_<PLATFORM>.config
+
+This file loads the necessary Python and Rocoto modules for each platform.
+
+Baseline Configuration
+----------------------
+
+Another configuration file, ``${UFS_WM}/tests-dev/baseline_setup.yaml``, contains details for staged input data location, user-specific output directories, and batch job scheduling. Verify the following variables in this file:
+
+- ``dprefix``: Ensure the directory exists and you have write permissions.
+- ``STMP``: Directory for baseline test outputs.
+- ``PTMP``: Directory for runtime files.
+
+Running Tests
+-------------
+
+Launch tests from the ``${UFS_WM}/tests-dev`` directory with the following command:
+
+.. code-block:: console
+
+   ./ufs_test.sh -a <ACCOUNT> [-s] [-c] -k -r -n "<CASE_NAME> <COMPILER>"
+
+where:
+
+- ``<ACCOUNT>``: Account/project number for batch jobs.
+- ``<CASE_NAME>``: Name of the test case (e.g., ``2020_CAPE`` or ``baroclinic_wave``).
+- ``<COMPILER>``: Compiler used for the tests (``intel`` or ``gnu``).
+
+**Comand-line Options:**
+
+- ``-s``: Sync scripts (only required on the first run, it syncs scripts from ``./ufs-wm/tests`` to ``./ufs-wm/tests-dev``.).
+- ``-c``: Create a baseline (necessary until baselines are staged).
+- ``-k``: Keep runtime directories after test completion.
+- ``-r``: Use Rocoto workflow manager.
+- ``-n``: Run a single test case.
+
+Example Commands
+----------------
+
+To run the ``2020_CAPE`` test case with the ``intel`` compiler on ``Hera``, ``Orion``, or ``Gaea``:
+
+.. code-block:: console
+
+   ./ufs_test.sh -a epic -s -c -k -r -n "2020_CAPE intel"
+
+For the ``baroclinic_wave`` test case, which takes longer:
+
+.. code-block:: console
+
+   ./ufs_test.sh -a epic -s -c -k -r -n "baroclinic_wave intel"
+
+Running Multiple Cases
+----------------------
+
+To run multiple cases at once, copy ``test_cases.yaml`` from the test cases directory, then use the ``-l`` argument:
+
+.. code-block:: console
+
+   cp ${UFS_WM}/tests-dev/test_cases/test_cases.yaml ${UFS_WM}/tests-dev/
+   ./ufs_test.sh -a epic -s -c -k -r -l test_cases.yaml
+
+Accessing Run and Output Files
+------------------------------
+
+Compilation and model run directories can be accessed in the local repository via the ``run_dir`` softlink, which points to the actual ``FV3_RT`` directory. Each test generates ``atm*.nc`` and ``sfc*.nc`` files at specified forecast hour intervals. To monitor progress:
+
+.. code-block:: console
+
+   tail -f <file>  
+
+Once the tests run successfully with the ``-c`` option (baseline created), future tests can compare results with the new baseline using ``-m`` instead of ``-c``.
+
+.. note::
+
+   After the initial run of ``ufs_test.sh`` with the ``-s`` option, you do not need to use it again. Once the baseline is created, you can also use the ``-m`` option to compare with the new baseline if additional testing is done within the same local clone.
+
+For further test management, you may save the test directory location in an environment variable for convenience:
+
+.. code-block:: console
+
+   export UFS_WM_TEST=/path/to/expt_dirs/ufs_test
 
 .. _cape-2020:
 
@@ -38,13 +138,15 @@ The ``ufs-test.sh`` script ....
 2020 July CAPE Case
 ====================
 
-The July 2020 CAPE case illustrates one of the shortcomings of the Global Forecast System (GFS) v16: low Convective Available Potential Energy (CAPE) predictions during summertime. The NOAA Environmental Modeling Center (EMC) Model Evaluation Group (MEG) identified this concern, and ... (:cite:t:`SunEtAl2024`).
+The July 2020 CAPE case illustrates one of the shortcomings of the Global Forecast System (GFS) v16, which is low Convective Available Potential Energy (CAPE) predictions during summertime (:cite:t:`SunEtAl2024`). CAPE is an important index when it comes to forecasting storms and can be affected by a multitude of atmospheric variables. 
 
-The case runs are initialized at 00z Jul 23, 2020 with a 24 hour forecast length. The corresponding namelist options that need to be changed are listed below. The app uses ``./xmlchange`` to change the runtime settings. The settings that need to be modified to set up the start date, start time, and run time are listed below.
+This case study helped identify that the lower CAPE results from the GFS were due to the overall drier atmosphere than what was observed in the lowest 1km. This can be attributed to the bias within the initial conditions taken from the Global Data Assimilation System (GDAS) that have a drier soil moisture. 
 
-Initial condition (IC) files are created from GFS operational dataset in NEMSIO format. The GFS analysis dataset is used as ‘truth’ to compare with simulated synoptic dynamic fields. The CAPE field is evaluated based on Rapid Refresh (RAP) analysis dataset and atmospheric sounding.
+When compared to the older version of the GFS (v15.2), we see the difference can be attributed to an excessive boundary layer cloud cover that leads to a drop in net radiation at the surface and thus less latent heat flux. This makes for less heat and moisture being fed back to the low levels and ultimately changes the overall vertical 
 
-Both MRW App v1.0 and GFS.v16.0.10 simulate a lower value of CAPE compared with RAP_ANL and sounding observation in this summertime case study. Further investigations (MEG 2021) show that this is related to the drier soil layers in GFS initial conditions. The SRW_RRFSv1alpha also underestimates the CAPE. (:cite:t:`SunEtAl2024`)
+profile of the atmosphere which changes CAPE values. And in the GFS’s case it results in lower CAPE. All these conditions and biases occuring make this a great case to experiment with as changing the different values talked about above can make for some varying results in the CAPE. See for yourself if you can get 
+
+the outcome to be close to real life observations!
 
 References
 
@@ -60,3 +162,16 @@ Last name and initials of author(s) (if nine or more, the first author is follow
 export dprefix="/scratch2/NAGAPE"
 STMP="${dprefix}/stmp4"
 PTMP="${dprefix}/stmp2"
+
+.. _baroclinicwave:
+
+============================
+Baroclinic Instability Case
+============================
+
+The baroclinic wave test case evaluates the performance of dry dynamical cores in atmospheric models, focusing on the idealized growth of a northern hemisphere wave. The initial zonal state is a quasi-realistic steady solution to the adiabatic, inviscid primitive equations, specified analytically. The test begins with an assessment of whether the models maintain this steady state, followed by a perturbation that induces baroclinic wave growth over several days.
+
+Four dynamical cores with varying resolutions are tested: NASA/NCAR’s Finite Volume package, NCAR’s spectral transform Eulerian and semi-Lagrangian cores in CAM3, and the German Weather Service’s GME model. These hydrostatic cores, which span a range of numerical methods, offer independent high-resolution reference solutions. The study analyzes each model's convergence characteristics and explores the uncertainty of the high-resolution results.
+
+Refernces 
+
