@@ -10,9 +10,6 @@
 Hierarchical System Development (HSD) Cases
 ********************************************
 
-
-
-
 The UFS Weather Model (WM) can be run in any of several configurations, from a single-component atmospheric 
 model to a fully coupled model with multiple earth system components (e.g., atmosphere, ocean, sea-ice, land, and 
 mediator). This chapter documents a few of the cases designed to support hierarchical system development (HSD) within the UFS. 
@@ -41,9 +38,9 @@ The ``ufs-test.sh`` script ....
 2020 July CAPE Case
 ====================
 
-The July 2020 CAPE case illustrates one of the shortcomings of the Global Forecast System (GFS) v16: low Convective Available Potential Energy (CAPE) predictions during summertime. The NOAA Environmental Modeling Center (EMC) Model Evaluation Group (MEG) identified this concern, and .
+The July 2020 CAPE case illustrates one of the shortcomings of the Global Forecast System (GFS) v16: low Convective Available Potential Energy (CAPE) predictions during summertime. The NOAA Environmental Modeling Center (EMC) Model Evaluation Group (MEG) identified this concern, and ... (:cite:t:`SunEtAl2024`).
 
-The case runs are initialized at 00z Jul 23, 2020 with a 24 hour forecast length. The corresponding namelist options that need to be changed are listed below. The app uses ./xmlchange to change the runtime settings. The settings that need to be modified to set up the start date, start time, and run time are listed below.
+The case runs are initialized at 00z Jul 23, 2020 with a 24 hour forecast length. The corresponding namelist options that need to be changed are listed below. The app uses ``./xmlchange`` to change the runtime settings. The settings that need to be modified to set up the start date, start time, and run time are listed below.
 
 Initial condition (IC) files are created from GFS operational dataset in NEMSIO format. The GFS analysis dataset is used as ‘truth’ to compare with simulated synoptic dynamic fields. The CAPE field is evaluated based on Rapid Refresh (RAP) analysis dataset and atmospheric sounding.
 
