@@ -29,6 +29,39 @@ For a full list of supported WM configurations, view the `rt.conf <https://githu
    and this chapter merely details a few supported configurations. It will be expanded over time
    to include a wide variety of idealized test cases for use in research and testing. 
 
+
+.. _cape-2020:
+
+====================
+July 2020 CAPE Case
+====================
+
+The July 2020 CAPE case illustrates one of the shortcomings of the Global Forecast System (GFS) v16, which is low Convective Available Potential Energy (CAPE) predictions during summertime (:cite:t:`SunEtAl2024`). CAPE is an important index when it comes to forecasting storms and can be affected by a multitude of atmospheric variables. 
+
+This case study helped identify that the lower CAPE results from the GFS were due to the overall drier atmosphere than what was observed in the lowest 1km. This can be attributed to the bias within the initial conditions taken from the Global Data Assimilation System (GDAS) that have a drier soil moisture. 
+
+When compared to the older version of the GFS (v15.2), we see the difference can be attributed to an excessive boundary layer cloud cover that leads to a drop in net radiation at the surface and thus less latent heat flux. This makes for less heat and moisture being fed back to the low levels and ultimately changes the overall vertical 
+profile of the atmosphere which changes CAPE values. And in the GFS’s case it results in lower CAPE. All these conditions and biases occuring make this a great case to experiment with as changing the different values talked about above can make for some varying results in the CAPE. See for yourself if you can get the outcome to be close to real life observations!
+
+.. _baroclinic-wave:
+
+============================
+Baroclinic Instability Case
+============================
+
+The UFS WM baroclinic wave case adapts the test outlined in :cite:t:`Jablonowski&Williamson2006` (2006). This test is designed to evaluate the accuracy of various atmospheric models in simulating a specific type of wave, known as a baroclinic wave, that commonly forms in the Northern Hemisphere and influences weather patterns. This test aims to assess how well "dry dynamical cores," the foundational components of weather and climate models that handle air movement and temperature changes, perform in idealized conditions. 
+
+The simulation sets the model's atmosphere to an initial steady state, designed to be a simple, realistic representation of atmospheric conditions using the adiabatic (no heat exchange) and inviscid (no friction) primitive equations. The test first checks whether each model can maintain this steady, zonal (west-to-east) state without developing any unintended changes. After verifying this, the next step is to introduce a small disturbance, or perturbation, which triggers the growth of a baroclinic wave. The wave then evolves over several simulated days, allowing the researchers to observe how accurately different models handle the wave's development and movement.
+
+.. COMMENT: Perhaps not necessary? 
+   The study includes four different dynamical cores with varying grid resolutions: NASA/NCAR's Finite Volume package, NCAR's spectral transform Eulerian and semi Lagrangian cores from the CAM3 model, and the German Weather Service's GME model. Each of these hydrostatic cores, which assume no vertical acceleration in the atmosphere, use different numerical methods to simulate changes in atmospheric pressure, temperature, and wind. Higher resolution grids provide a more detailed look at these processes but require more computing power, while lower resolution grids offer broader, less precise results.
+
+   The test showed that models with higher resolutions, which captured atmospheric changes in finer detail, produced more accurate wave patterns that matched expected high resolution "reference solutions." However, the 1 degree resolution (used in lower resolution models) often missed some of the finer details in the wave's growth and behavior. By comparing each model's results against these high resolution references, the study could analyze how well each model captured the core aspects of wave formation and its growth.
+
+This test provides a standard way to assess how different atmospheric models handle the development of baroclinic waves. The results help identify which models are more accurate and can serve as benchmarks for model improvement, ultimately contributing to better simulations of atmospheric behavior in weather and climate predictions.
+
+.. COMMENT: Need info on this case specifically
+
 .. _ufs-test:
 
 ============================================
@@ -113,7 +146,6 @@ where:
 
 .. COMMENT: What is the -m option? It should be listed here. 
 
-
 .. note::
 
    After the initial run of ``ufs_test.sh`` with the ``-s`` option, users do not need to use ``-s`` again. 
@@ -182,38 +214,3 @@ For further test management, users may save the test directory location in an en
 .. code-block:: console
 
    export UFS_WM_TEST=/path/to/expt_dirs/ufs_test
-
-.. _cape-2020:
-
-====================
-July 2020 CAPE Case
-====================
-
-The July 2020 CAPE case illustrates one of the shortcomings of the Global Forecast System (GFS) v16, which is low Convective Available Potential Energy (CAPE) predictions during summertime (:cite:t:`SunEtAl2024`). CAPE is an important index when it comes to forecasting storms and can be affected by a multitude of atmospheric variables. 
-
-This case study helped identify that the lower CAPE results from the GFS were due to the overall drier atmosphere than what was observed in the lowest 1km. This can be attributed to the bias within the initial conditions taken from the Global Data Assimilation System (GDAS) that have a drier soil moisture. 
-
-When compared to the older version of the GFS (v15.2), we see the difference can be attributed to an excessive boundary layer cloud cover that leads to a drop in net radiation at the surface and thus less latent heat flux. This makes for less heat and moisture being fed back to the low levels and ultimately changes the overall vertical 
-profile of the atmosphere which changes CAPE values. And in the GFS’s case it results in lower CAPE. All these conditions and biases occuring make this a great case to experiment with as changing the different values talked about above can make for some varying results in the CAPE. See for yourself if you can get the outcome to be close to real life observations!
-
-.. _baroclinic-wave:
-
-============================
-Baroclinic Instability Case
-============================
-
-The paper "A baroclinic instability test case for atmospheric model dynamical cores" by Christiane Jablonowski and David L. Williamson outlines a test designed to evaluate the accuracy of various atmospheric models in simulating a specific type of wave, known as a baroclinic wave, that commonly forms in the Northern Hemisphere and influences weather patterns. This test aims to assess how well "dry dynamical cores," the foundational components of weather and climate models that handle air movement and temperature changes, perform in idealized conditions.
-
-The simulation begins by setting the model’s atmosphere to an initial steady state, designed to be a simple, realistic representation of atmospheric conditions using the adiabatic (no heat exchange) and inviscid (no friction) primitive equations. The test first checks whether each model can maintain this steady, zonal (west-to-east) state without developing any unintended changes. After verifying this, the next step is to introduce a small disturbance, or perturbation, which triggers the growth of a baroclinic wave. The wave then evolves over several simulated days, allowing the researchers to observe how accurately each model handles the wave’s development and movement.
-
-The study includes four different dynamical cores with varying grid resolutions: NASA/NCAR’s Finite Volume package, NCAR’s spectral transform Eulerian and semi Lagrangian cores from the CAM3 model, and the German Weather Service’s GME model. Each of these hydrostatic cores, which assume no vertical acceleration in the atmosphere, uses different numerical methods to simulate changes in atmospheric pressure, temperature, and wind. Higher resolution grids provide a more detailed look at these processes but require more computing power, while lower resolution grids offer broader, less precise results.
-
-The test showed that models with higher resolutions, which captured atmospheric changes in finer detail, produced more accurate wave patterns that matched expected high resolution "reference solutions." However, the 1 degree resolution (used in lower resolution models) often missed some of the finer details in the wave's growth and behavior. By comparing each model’s results against these high resolution references, the study could analyze how well each model captured the core aspects of wave formation and its growth.
-
-To conclude, this test case provides a standard way to assess how different atmospheric models handle the development of baroclinic waves. The results help identify which models are more accurate and serve as benchmarks for model improvement, ultimately contributing to better simulations of atmospheric behavior in weather and climate predictions.
-
-References
-
-Jablonowski, C., & Williamson, D. L. (2006). A baroclinic instability test case for atmospheric model dynamical cores. Quarterly Journal of the Royal Meteorological Society, 132(621C), 2943-2975. https://doi.org/10.1256/qj.06.12
-
-https://doi.org/10.1256/qj.06.12
