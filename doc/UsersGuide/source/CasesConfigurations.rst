@@ -36,33 +36,35 @@ To start, recursively clone the repository:
 .. code-block:: console
 
    git clone --recursive -b develop https://github.com/ufs-community/ufs-weather-model.git
+   cd ufs-weather-model
 
 After cloning, users may save (or "export") the path to the UFS WM in an environment variable:
 
 .. code-block:: console
 
-   cd ufs-weather-model
-   export UFS_WM=$PWD         # This variable is for convenience
-   cd tests-dev
+   export UFS_WM=$PWD
 
-Although this step is optional, users may find it convenient when navigating between directories. This documentation will use ``${UFS_WM}``, but users may choose to type out the full path. 
+Although this step is optional, users may find it convenient when navigating between directories. This documentation will use ``${UFS_WM}`` to refer to the path to the ``ufs-weather-model`` directory, but users may choose to type out the full path instead. 
 
-The tests are configured to be run on NOAA Tier1 platforms, and the configuration files for each platform are located at:
+Machine Configuration
+-----------------------
+
+The HSD cases are configured to be run on NOAA Tier-1 platforms, and the configuration files for each platform are located at:
 
 .. code-block:: console
 
    ${UFS_WM}/tests-dev/machine_config/machine_<PLATFORM>.config
 
-This file loads the necessary Python and Rocoto modules for each platform.
+where ``<PLATFORM>`` corresponds to the name of the platform. These configuration files load the necessary Python and Rocoto modules for each platform. Users generally do not need to make any changes to these files. 
 
 Baseline Configuration
 ----------------------
 
-Another configuration file, ``${UFS_WM}/tests-dev/baseline_setup.yaml``, contains details for staged input data location, user-specific output directories, and batch job scheduling. Verify the following variables in this file:
+Users may need to modify the baseline configuration file (``${UFS_WM}/tests-dev/baseline_setup.yaml``), which contains details on the location of staged input data, user-specific output directories, and batch job scheduling. The following variables are of particular importance:
 
-- ``dprefix``: Ensure the directory exists and you have write permissions.
-- ``STMP``: Directory for baseline test outputs.
-- ``PTMP``: Directory for runtime files.
+* ``dprefix``: Set this value to an existing directory where the user has write permissions. 
+* ``STMP``: Directory for baseline test output (typically ``${dprefix}/stmp4``)
+* ``PTMP``: Directory for runtime files (typically ``${dprefix}/stmp2``)
 
 Running Tests
 -------------
@@ -71,63 +73,90 @@ Launch tests from the ``${UFS_WM}/tests-dev`` directory with the following comma
 
 .. code-block:: console
 
+   cd tests-dev
    ./ufs_test.sh -a <ACCOUNT> [-s] [-c] -k -r -n "<CASE_NAME> <COMPILER>"
 
 where:
 
-- ``<ACCOUNT>``: Account/project number for batch jobs.
-- ``<CASE_NAME>``: Name of the test case (e.g., ``2020_CAPE`` or ``baroclinic_wave``).
-- ``<COMPILER>``: Compiler used for the tests (``intel`` or ``gnu``).
+* ``<ACCOUNT>``: Account/project number for batch jobs.
+* ``<CASE_NAME>``: Name of the test case (e.g., ``2020_CAPE`` or ``baroclinic_wave``).
+* ``<COMPILER>``: Compiler used for the tests (``intel`` or ``gnu``).
 
 **Comand-line Options:**
 
-- ``-s``: Sync scripts (only required on the first run, it syncs scripts from ``./ufs-wm/tests`` to ``./ufs-wm/tests-dev``.).
-- ``-c``: Create a baseline (necessary until baselines are staged).
-- ``-k``: Keep runtime directories after test completion.
-- ``-r``: Use Rocoto workflow manager.
-- ``-n``: Run a single test case.
+- ``-s``: Syncs scripts from ``./ufs-wm/tests`` to ``./ufs-wm/tests-dev`` (only required on the first run)
+- ``-c``: Creates a new baseline (necessary until idealized case baselines are staged in the ``UFS_WM_RT`` directory).  
+- ``-k``: Keeps runtime directories after test completion
+- ``-r``: Uses Rocoto workflow manager
+- ``-n``: Runs a single test case
 
-Example Commands
-----------------
+.. COMMENT: What is the -m option? It should be listed here. 
 
-To run the ``2020_CAPE`` test case with the ``intel`` compiler on ``Hera``, ``Orion``, or ``Gaea``:
+
+.. note::
+
+   After the initial run of ``ufs_test.sh`` with the ``-s`` option, users do not need to use ``-s`` again. 
+
+Examples
+^^^^^^^^^^
+
+A user with access to the ``epic`` account can run the ``2020_CAPE`` test case with the ``intel`` compiler on ``Hera``, ``Orion``, or ``Gaea`` using the following command:
 
 .. code-block:: console
 
    ./ufs_test.sh -a epic -s -c -k -r -n "2020_CAPE intel"
 
-For the ``baroclinic_wave`` test case, which takes longer:
+For the ``baroclinic_wave`` test case, which takes longer, the same user would run:
 
 .. code-block:: console
 
    ./ufs_test.sh -a epic -s -c -k -r -n "baroclinic_wave intel"
 
 Running Multiple Cases
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-To run multiple cases at once, copy ``test_cases.yaml`` from the test cases directory, then use the ``-l`` argument:
+To run multiple cases at once, copy ``test_cases.yaml`` from the test cases directory and use the ``-l`` argument:
 
 .. code-block:: console
 
    cp ${UFS_WM}/tests-dev/test_cases/test_cases.yaml ${UFS_WM}/tests-dev/
    ./ufs_test.sh -a epic -s -c -k -r -l test_cases.yaml
 
-Accessing Run and Output Files
-------------------------------
+Checking Results
+-----------------
 
-Compilation and model run directories can be accessed in the local repository via the ``run_dir`` softlink, which points to the actual ``FV3_RT`` directory. Each test generates ``atm*.nc`` and ``sfc*.nc`` files at specified forecast hour intervals. To monitor progress:
+When the test case finishes running, users should see console output that includes a ``SUCCESS`` message: 
+
+.. code-block:: console
+   :emphasize-lines: 2 
+
+   Performing Cleanup...
+   REGRESSION TEST RESULT: SUCCESS
+   + echo 'ufs_test.sh finished'
+   ufs_test.sh finished
+   + cleanup
+   ++ awk '{print $2}'
+   + PID_LOCK=2133541
+   + [[ 2133541 == \2\1\3\3\5\4\1 ]]
+   + rm -rf /scratch2/NAGAPE/epic/Gillian.Petro/ufs-weather-model/tests-dev/lock
+   + [[ false == true ]]
+   + trap 0
+   + exit
+
+Compilation and model run directories can be accessed in the local repository via the ``run_dir`` softlink, which points to the actual ``FV3_RT`` directory. Each test generates ``atm*.nc`` and ``sfc*.nc`` files at specified forecast hour intervals. 
+
+Users can view progress of compile or model run phases by using the ``tail -f <file>`` command or ``vi``/``vim`` on the ``err`` or ``out`` files in the ``run_dir/compile*`` or ``run_dir/<case_name>`` directories. For example, to monitor progress or check results for the ``2020_CAPE_intel`` case, run:
 
 .. code-block:: console
 
-   tail -f <file>  
-
-Once the tests run successfully with the ``-c`` option (baseline created), future tests can compare results with the new baseline using ``-m`` instead of ``-c``.
+   tail -f ${UFS_WM}/tests-dev/run_dir/2020_CAPE_intel/err
+   tail -f ${UFS_WM}/tests-dev/run_dir/2020_CAPE_intel/out
 
 .. note::
+   
+   Once the tests run successfully with the ``-c`` option (baseline created), users can compare future test results with the newly created baseline using ``-m`` instead of ``-c``.
 
-   After the initial run of ``ufs_test.sh`` with the ``-s`` option, you do not need to use it again. Once the baseline is created, you can also use the ``-m`` option to compare with the new baseline if additional testing is done within the same local clone.
-
-For further test management, you may save the test directory location in an environment variable for convenience:
+For further test management, users may save the test directory location in an environment variable:
 
 .. code-block:: console
 
