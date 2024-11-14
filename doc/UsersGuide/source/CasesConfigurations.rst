@@ -38,7 +38,9 @@ July 2020 CAPE Case
 
 The July 2020 CAPE case is an atmosphere-only forecast run at C48 resolution with 127 vertical levels. It is set to run a 24-hour forecast from 2020-07-23 at 0z using the `FV3_GFS_v16 <https://dtcenter.ucar.edu/GMTB/v7.0.0/sci_doc/_g_f_s_v16_page.html>`_ physics suite and default values from the WM's `default_vars.sh <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/default_vars.sh>`_ ``export_fv3_v16`` function.
 
-The July 2020 CAPE case illustrates a shortcoming of the Global Forecast System (GFS) v16 --- low Convective Available Potential Energy (CAPE) predictions during summertime (:cite:t:`SunEtAl2024`). :cite:t:`SunEtAl2024` (2024) used this case study to investigate the low CAPE bias in the GFS and determined that "the GFS simulates smaller surface latent heat flux and larger surface sensible heat flux than the observations" due to "slightly drier-than-observed soil moisture" within the offline Global Data Assimilation System (GDAS) initial conditions used in the study. This results in less latent heat and moisture being fed back to the lower levels of the atmosphere and ultimately changes the overall vertical profile of the atmosphere, which lowers CAPE values relative to the older GFS v15.2. Users may wish to run this case and then experiment with different initial conditions, a coupled land surface model (LSM), or other factors to explore factors that improve or worsen this CAPE bias. Additionally, :cite:t:`SunEtAl2024`'s findings only apply to this case study, so users may wish to expand their research to include other warm-season cases.
+The original July 2020 CAPE case illustrated a shortcoming of the Global Forecast System (GFS) v16 --- low Convective Available Potential Energy (CAPE) predictions during summertime (:cite:t:`SunEtAl2024`). :cite:t:`SunEtAl2024` (2024) used this case study to investigate the low CAPE bias in the GFS and determined that "the GFS simulates smaller surface latent heat flux and larger surface sensible heat flux than the observations" due to "slightly drier-than-observed soil moisture" within the offline Global Data Assimilation System (GDAS) initial conditions used in the study. This resulted in less latent heat and moisture being fed back to the lower levels of the atmosphere and ultimately changed the overall vertical profile of the atmosphere, which lowered CAPE values relative to the older GFS v15.2. 
+ 
+The UFS WM and its subcomponents have undergone signficant changes since the original July 2020 CAPE case study was posted and since :cite:t:`SunEtAl2024`'s experiment, so the current GFS v16 CAPE bias may have shifted. However, users may still wish to run this case and then experiment with different (potentially user-generated) initial conditions, a coupled land surface model (LSM), or other factors to explore factors that improve or worsen CAPE bias. Additionally, :cite:t:`SunEtAl2024`'s findings only apply to this case study, so users may wish to expand their research to include other warm-season cases. 
 
 .. _baroclinic-wave:
 
@@ -54,7 +56,20 @@ This test provides a standard way to assess how different atmospheric models han
 
 In the UFS WM, the idealized baroclinic wave test case is an atmosphere-only, :term:`dycore`-only forecast run at C192 resolution with 127 vertical levels. It uses default values from the WM's ``export_fv3`` function, along with default values for a tiled grid namelist (from ``export_tiled``) and for the `Unified Gravity Wave Physics version 1 <https://dtcenter.ucar.edu/GMTB/v7.0.0/sci_doc/ugwpv1_gsldrag.html>`_ (from ``export_ugwpv1``). These initial values are all set based on values from `default_vars.sh <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/default_vars.sh>`_. 
 
-The test is set to run a 24-hour forecast from 2019-12-03 at 0z using the `FV3_GFS_v17_p8_ugwpv1 <https://dtcenter.ucar.edu/GMTB/v7.0.0/sci_doc/_g_f_s_v17_p8_ugwpv1_page.html>`_ physics suite. However, it is recommended that users modify the case to run it as a 5-10 day forecast by setting the forecast length (``FHMAX``) to 120-240 hours in the test file (see :numref:`Section %s <test-config>` for instructions). Users will also need to update ``OUTPUT_FH`` accordingly. 
+The test is set to run a dynamics-only 24-hour forecast from 2019-12-03 at 0z. However, it is recommended that users modify the case to run it as a 5-10 day forecast by setting the forecast length (``FHMAX``) to 120-240 hours in the test file (see :numref:`Section %s <test-config>` for instructions). Users will also need to update ``OUTPUT_FH`` accordingly. 
+
+.. _hsd-data:
+
+=============================
+Obtaining Data for HSD Cases
+=============================
+
+Data for the HSD cases is already staged on Tier-1 platforms at the ``INPUTROOT_*`` locations listed in `baseline_setup.yaml <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests-dev/baseline_setup.yaml>`_. However, users on any platform can download the data directly from the `HTF data bucket <https://registry.opendata.aws/noaa-ufs-htf-pds/>` using ``wget``. 
+
+.. code-block:: console 
+
+   wget https://noaa-ufs-htf-pds.s3.amazonaws.com/develop-20241025/HSD_INPUT_DATA/HSD_INPUT_DATA.tar.gz
+   tar xvfz HSD_INPUT_DATA.tar.gz
 
 .. _ufs-test:
 
@@ -176,6 +191,8 @@ To run multiple cases at once, copy ``test_cases.yaml`` from the test cases dire
 
    cp ${UFS_WM}/tests-dev/test_cases/test_cases.yaml ${UFS_WM}/tests-dev/
    ./ufs_test.sh -a epic -s -c -k -r -l test_cases.yaml
+
+.. _check-results:
 
 Checking Results
 -----------------
