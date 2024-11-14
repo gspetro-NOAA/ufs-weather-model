@@ -18,8 +18,8 @@ Currently, users can find information on:
 * :ref:`Running the HSD cases using ufs_test.sh <ufs-test>` and
 * Two HSD cases: 
 
-   * The `July 2020 CAPE Case <cape-2020>`
-   * The `Baroclinic Instability Case <baroclinic-wave>`
+   * The :ref:`July 2020 CAPE Case <cape-2020>`
+   * The :ref:`Baroclinic Instability Case <baroclinic-wave>`
 
 For a full list of supported WM configurations, view the `rt.conf <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/rt.conf>`_ file.
 
@@ -49,18 +49,15 @@ profile of the atmosphere which changes CAPE values. And in the GFS’s case it 
 Baroclinic Instability Case
 ============================
 
-The UFS WM baroclinic wave case adapts the test outlined in :cite:t:`Jablonowski&Williamson2006` (2006). This test is designed to evaluate the accuracy of various atmospheric models in simulating a specific type of wave, known as a baroclinic wave, that commonly forms in the Northern Hemisphere and influences weather patterns. This test aims to assess how well "dry dynamical cores," the foundational components of weather and climate models that handle air movement and temperature changes, perform in idealized conditions. 
+The UFS WM baroclinic wave case adapts the test outlined in :cite:t:`Jablonowski&Williamson2006` (2006). This test is designed to evaluate the accuracy of various atmospheric models in simulating a baroclinic wave, which commonly forms in the Northern Hemisphere and influences weather patterns. This test aims to assess how well "dry dynamical cores," the foundational components of weather and climate models that handle air movement and temperature changes, perform in idealized conditions. 
 
 The simulation sets the model's atmosphere to an initial steady state, designed to be a simple, realistic representation of atmospheric conditions using the adiabatic (no heat exchange) and inviscid (no friction) primitive equations. The test first checks whether each model can maintain this steady, zonal (west-to-east) state without developing any unintended changes. After verifying this, the next step is to introduce a small disturbance, or perturbation, which triggers the growth of a baroclinic wave. The wave then evolves over several simulated days, allowing the researchers to observe how accurately different models handle the wave's development and movement.
 
-.. COMMENT: Perhaps not necessary? 
-   The study includes four different dynamical cores with varying grid resolutions: NASA/NCAR's Finite Volume package, NCAR's spectral transform Eulerian and semi Lagrangian cores from the CAM3 model, and the German Weather Service's GME model. Each of these hydrostatic cores, which assume no vertical acceleration in the atmosphere, use different numerical methods to simulate changes in atmospheric pressure, temperature, and wind. Higher resolution grids provide a more detailed look at these processes but require more computing power, while lower resolution grids offer broader, less precise results.
-
-   The test showed that models with higher resolutions, which captured atmospheric changes in finer detail, produced more accurate wave patterns that matched expected high resolution "reference solutions." However, the 1 degree resolution (used in lower resolution models) often missed some of the finer details in the wave's growth and behavior. By comparing each model's results against these high resolution references, the study could analyze how well each model captured the core aspects of wave formation and its growth.
-
 This test provides a standard way to assess how different atmospheric models handle the development of baroclinic waves. The results help identify which models are more accurate and can serve as benchmarks for model improvement, ultimately contributing to better simulations of atmospheric behavior in weather and climate predictions.
 
-.. COMMENT: Need info on this case specifically
+In the UFS WM, the idealized baroclinic wave test case is an atmosphere-only, :term:`dycore`-only forecast run at C192 resolution with 127 vertical levels. It uses default values from the WM's ``export_fv3`` function, along with default values for a tiled grid namelist (``export_tiled``) and for the `Unified Gravity Wave Physics <https://dtcenter.ucar.edu/GMTB/v7.0.0/sci_doc/ugwpv1_gsldrag.html>`_ (``export_ugwpv1``) version 1. These initial values are all set based on values from `default_vars.sh <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/default_vars.sh>`_. 
+
+The test is set to run a 24-hour forecast from 2019-12-03 at 0z using the `FV3_GFS_v17_p8_ugwpv1 <https://dtcenter.ucar.edu/GMTB/v7.0.0/sci_doc/_g_f_s_v17_p8_ugwpv1_page.html>`_ physics suite. However, it is recommended that users modify the case to run it as a 5-10 day forecast by setting the forecast length (``FHMAX``) to 120-240 hours in the test file (see :numref:`Section %s <test-config>` for instructions). Users will also need to update ``OUTPUT_FH`` accordingly. 
 
 .. _ufs-test:
 
@@ -68,7 +65,7 @@ This test provides a standard way to assess how different atmospheric models han
 Running the HSD Cases Using ``ufs_test.sh``
 ============================================
 
-This section will include details on how to run idealized cases using the ``ufs-test.sh`` script.
+This section explains how to run the idealized cases described above using the ``ufs-test.sh`` script.
 
 Clone the Repository
 --------------------
@@ -88,6 +85,8 @@ After cloning, users may save (or "export") the path to the UFS WM in an environ
 
 Although this step is optional, users may find it convenient when navigating between directories. This documentation will use ``${UFS_WM}`` to refer to the path to the ``ufs-weather-model`` directory, but users may choose to type out the full path instead. 
 
+.. _machine-config:
+
 Machine Configuration
 -----------------------
 
@@ -98,6 +97,8 @@ The HSD cases are configured to be run on NOAA Tier-1 platforms, and the configu
    ${UFS_WM}/tests-dev/machine_config/machine_<PLATFORM>.config
 
 where ``<PLATFORM>`` corresponds to the name of the platform. These configuration files load the necessary Python and Rocoto modules for each platform. Users generally do not need to make any changes to these files. 
+
+.. _test-config:
 
 Test Configuration
 ----------------------
@@ -111,6 +112,8 @@ The July 2020 CAPE case can be run as-is without adjusting the configuration. Ho
 
 In general, it is preferable to make ``FHMAX`` a multiple of 24. 
 
+.. _baseline-config:
+
 Baseline Configuration
 ----------------------
 
@@ -119,6 +122,8 @@ Users may need to modify the baseline configuration file (``${UFS_WM}/tests-dev/
 * ``dprefix``: Set this value to an existing directory where the user has write permissions. 
 * ``STMP``: Directory for baseline test output (typically ``${dprefix}/stmp4``)
 * ``PTMP``: Directory for runtime files (typically ``${dprefix}/stmp2``)
+
+.. _run-tests:
 
 Running Tests
 -------------
