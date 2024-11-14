@@ -69,16 +69,14 @@ where ``<PLATFORM>`` corresponds to the name of the platform. These configuratio
 Test Configuration
 ----------------------
 
-they need to add export FHMAX=120 (or 240) in https://github.com/ufs-community/ufs-weather-model/blob/develop/tests-dev/test_cases/tests/baroclinic_wave, and then can update https://github.com/ufs-community/ufs-weather-model/blob/29c2703c715ebdb47bbd4bcc811db340eae530e5/tests-dev/test_cases/tests/baroclinic_wave#L51 to range out , in increments of 6, to the FHMAX they set.
+The July 2020 CAPE case can be run as-is without adjusting the configuration. However, it is recommended that users adjust certain values in the baroclinic wave case. Currently, the forecast length (``FHMAX``) is set to 24 hours, but it is recommended that users run the case for 5 or 10 days (120 or 240 hours). To do this, open ``${UFS_WM}/tests-dev/test_cases/tests/baroclinic_wave`` using ``vi``/``vim`` or a code editor. Then, add ``FHMAX`` and update ``OUTPUT_FH`` to extend by increments of 6 to the new ``FHMAX``. 
 
-Can FHMAX be any value, or does it need to be a multiple of 24 or 120?
-3:25
-Also, do you have a definition for HSD somewhere?
+.. code-block:: console
 
+   export FHMAX=120      # (or 240) 
+   export OUTPUT_FH='0 6 12 18 24 30 36 42 48 54 60 66 72 78 84 90 96 102 108 114 120'
 
-Cameron Book
-  3:27 PM
-multip of 24 is probably best. and the dev recommended 5/6 days or 10 days. in that range.
+In general, it is preferable to make ``FHMAX`` a multiple of 24. 
 
 Baseline Configuration
 ----------------------
