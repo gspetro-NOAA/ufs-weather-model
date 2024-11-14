@@ -38,15 +38,7 @@ July 2020 CAPE Case
 
 The July 2020 CAPE case is an atmosphere-only forecast run at C48 resolution with 127 vertical levels. It is set to run a 24-hour forecast from 2020-07-23 at 0z using the `FV3_GFS_v16 <https://dtcenter.ucar.edu/GMTB/v7.0.0/sci_doc/_g_f_s_v16_page.html>`_ physics suite and default values from the WM's `default_vars.sh <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/default_vars.sh>`_ ``export_fv3_v16`` function.
 
-The July 2020 CAPE case illustrates one of the shortcomings of the Global Forecast System (GFS) v16: low Convective Available Potential Energy (CAPE) predictions during summertime (:cite:t:`SunEtAl2024`). CAPE is an important index for forecasting storms and can be affected by a multitude of atmospheric variables. 
-
-.. COMMENT: Such as...? ^ 
-   surface energy budget, soil properties, and near-surface and upper-level meteorological fields?
-
-This case study originally helped identify that the lower CAPE results from the GFS were due to the overall drier atmosphere than what was observed in the lowest 1 km. This can be attributed to the bias within the initial conditions taken from the Global Data Assimilation System (GDAS) that have a drier soil moisture. 
-
-When compared to the older version of the GFS (v15.2), we see the difference can be attributed to an excessive boundary layer cloud cover that leads to a drop in net radiation at the surface and thus less latent heat flux. This makes for less heat and moisture being fed back to the low levels and ultimately changes the overall vertical 
-profile of the atmosphere, which changes CAPE values. And in the GFS's case it results in lower CAPE. All these conditions and biases occuring make this a great case to experiment with as changing the different values talked about above can make for some varying results in the CAPE. 
+The July 2020 CAPE case illustrates a shortcoming of the Global Forecast System (GFS) v16 --- low Convective Available Potential Energy (CAPE) predictions during summertime (:cite:t:`SunEtAl2024`). :cite:t:`SunEtAl2024` (2024) used this case study to investigate the low CAPE bias in the GFS and determined that "the GFS simulates smaller surface latent heat flux and larger surface sensible heat flux than the observations" due to "slightly drier-than-observed soil moisture" within the offline Global Data Assimilation System (GDAS) initial conditions used in the study. This results in less latent heat and moisture being fed back to the lower levels of the atmosphere and ultimately changes the overall vertical profile of the atmosphere, which lowers CAPE values relative to the older GFS v15.2. Users may wish to run this case and then experiment with different initial conditions, a coupled land surface model (LSM), or other factors to explore factors that improve or worsen this CAPE bias. Additionally, :cite:t:`SunEtAl2024`'s findings only apply to this case study, so users may wish to expand their research to include other warm-season cases.
 
 .. _baroclinic-wave:
 
@@ -146,7 +138,7 @@ where:
 * ``<CASE_NAME>``: Name of the test case (e.g., ``2020_CAPE`` or ``baroclinic_wave``).
 * ``<COMPILER>``: Compiler used for the tests (``intel`` or ``gnu``).
 
-**Comand-line Options:**
+**Command-line Options:**
 
 - ``-s``: Syncs scripts from ``./ufs-wm/tests`` to ``./ufs-wm/tests-dev`` (only required on the first run)
 - ``-c``: Creates a new baseline (necessary until idealized case baselines are staged in the ``UFS_WM_RT`` directory).  
