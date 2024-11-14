@@ -1,6 +1,3 @@
-.. |nbsp| unicode:: 0xA0 
-   :trim:
-
 .. role:: raw-html(raw)
     :format: html
 
@@ -10,9 +7,11 @@
 Hierarchical System Development (HSD) Cases
 ********************************************
 
+Hierarchical System Development ... _____ADD MORE HERE_____ ...
+
 The UFS Weather Model (WM) can be run in any of several configurations, from a single-component atmospheric 
-model to a fully coupled model with multiple earth system components (e.g., atmosphere, ocean, sea-ice, land, and 
-mediator). This chapter documents a few of the cases designed to support hierarchical system development (HSD) within the UFS. 
+model to a fully coupled model with multiple earth system components (e.g., atmosphere, ocean, sea-ice, land, mediator). 
+This chapter documents a few of the cases designed to support hierarchical system development (HSD) within the UFS. 
 For a full list of supported WM configurations, view the `rt.conf <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/rt.conf>`__ file.
 
 .. attention::
@@ -32,19 +31,21 @@ This section will include details on how to run idealized cases using the ``ufs-
 Clone the Repository
 --------------------
 
-To start, clone the branch containing the test cases:
+To start, recursively clone the repository:
 
 .. code-block:: console
 
-   git clone --recursive -b feature/enable_test_cases https://github.com/natalie-perlin/ufs-weather-model.git
+   git clone --recursive -b develop https://github.com/ufs-community/ufs-weather-model.git
 
-After cloning, set up the environment:
+After cloning, users may save (or "export") the path to the UFS WM in an environment variable:
 
 .. code-block:: console
 
    cd ufs-weather-model
    export UFS_WM=$PWD         # This variable is for convenience
    cd tests-dev
+
+Although this step is optional, users may find it convenient when navigating between directories. This documentation will use ``${UFS_WM}``, but users may choose to type out the full path. 
 
 The tests are configured to be run on NOAA Tier1 platforms, and the configuration files for each platform are located at:
 
