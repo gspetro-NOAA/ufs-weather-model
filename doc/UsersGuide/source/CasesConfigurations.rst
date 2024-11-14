@@ -7,12 +7,21 @@
 Hierarchical System Development (HSD) Cases
 ********************************************
 
-Hierarchical System Development ... _____ADD MORE HERE_____ ...
+Hierarchical System Development is the ability to engage in development and testing at multiple levels of complexity in numerical weather prediction (NWP) software (such as the :term:`UFS`). It typically includes multiple entry points into development (e.g., atmospheric physics, ocean and ice dynamics, or data assimilation for land models and other earth system components), and it can include both operationally relevant and idealized configurations. 
 
-The UFS Weather Model (WM) can be run in any of several configurations, from a single-component atmospheric 
-model to a fully coupled model with multiple earth system components (e.g., atmosphere, ocean, sea-ice, land, mediator). 
-This chapter documents a few of the cases designed to support hierarchical system development (HSD) within the UFS. 
-For a full list of supported WM configurations, view the `rt.conf <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/rt.conf>`__ file.
+Although the UFS Weather Model (WM) can be run in any of several configurations, from a single-component atmospheric 
+model to a fully coupled model with multiple earth system components (e.g., atmosphere, ocean, sea-ice, land, mediator), 
+this chapter documents just a few of the cases designed to support hierarchical system development (HSD) within the UFS. 
+
+Currently, users can find information on:
+
+* :ref:`Running the HSD cases using ufs_test.sh <ufs-test>` and
+* Two HSD cases: 
+
+   * The `July 2020 CAPE Case <cape-2020>`
+   * The `Baroclinic Instability Case <baroclinic-wave>`
+
+For a full list of supported WM configurations, view the `rt.conf <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/rt.conf>`_ file.
 
 .. attention::
 
@@ -22,9 +31,9 @@ For a full list of supported WM configurations, view the `rt.conf <https://githu
 
 .. _ufs-test:
 
-================
-``ufs_test.sh``
-================
+============================================
+Running the HSD Cases Using ``ufs_test.sh``
+============================================
 
 This section will include details on how to run idealized cases using the ``ufs-test.sh`` script.
 
@@ -56,6 +65,20 @@ The HSD cases are configured to be run on NOAA Tier-1 platforms, and the configu
    ${UFS_WM}/tests-dev/machine_config/machine_<PLATFORM>.config
 
 where ``<PLATFORM>`` corresponds to the name of the platform. These configuration files load the necessary Python and Rocoto modules for each platform. Users generally do not need to make any changes to these files. 
+
+Test Configuration
+----------------------
+
+they need to add export FHMAX=120 (or 240) in https://github.com/ufs-community/ufs-weather-model/blob/develop/tests-dev/test_cases/tests/baroclinic_wave, and then can update https://github.com/ufs-community/ufs-weather-model/blob/29c2703c715ebdb47bbd4bcc811db340eae530e5/tests-dev/test_cases/tests/baroclinic_wave#L51 to range out , in increments of 6, to the FHMAX they set.
+
+Can FHMAX be any value, or does it need to be a multiple of 24 or 120?
+3:25
+Also, do you have a definition for HSD somewhere?
+
+
+Cameron Book
+  3:27 PM
+multip of 24 is probably best. and the dev recommended 5/6 days or 10 days. in that range.
 
 Baseline Configuration
 ----------------------
@@ -165,7 +188,7 @@ For further test management, users may save the test directory location in an en
 .. _cape-2020:
 
 ====================
-2020 July CAPE Case
+July 2020 CAPE Case
 ====================
 
 The July 2020 CAPE case illustrates one of the shortcomings of the Global Forecast System (GFS) v16, which is low Convective Available Potential Energy (CAPE) predictions during summertime (:cite:t:`SunEtAl2024`). CAPE is an important index when it comes to forecasting storms and can be affected by a multitude of atmospheric variables. 
@@ -173,27 +196,9 @@ The July 2020 CAPE case illustrates one of the shortcomings of the Global Foreca
 This case study helped identify that the lower CAPE results from the GFS were due to the overall drier atmosphere than what was observed in the lowest 1km. This can be attributed to the bias within the initial conditions taken from the Global Data Assimilation System (GDAS) that have a drier soil moisture. 
 
 When compared to the older version of the GFS (v15.2), we see the difference can be attributed to an excessive boundary layer cloud cover that leads to a drop in net radiation at the surface and thus less latent heat flux. This makes for less heat and moisture being fed back to the low levels and ultimately changes the overall vertical 
+profile of the atmosphere which changes CAPE values. And in the GFS’s case it results in lower CAPE. All these conditions and biases occuring make this a great case to experiment with as changing the different values talked about above can make for some varying results in the CAPE. See for yourself if you can get the outcome to be close to real life observations!
 
-profile of the atmosphere which changes CAPE values. And in the GFS’s case it results in lower CAPE. All these conditions and biases occuring make this a great case to experiment with as changing the different values talked about above can make for some varying results in the CAPE. See for yourself if you can get 
-
-the outcome to be close to real life observations!
-
-References
-
-NOAA Environmental Modeling Center Model Evaluation Group (MEG) (2021). [Link]
-
-Sun X., D. Heinzeller, L. Bernardet, L. Pan, W. Li, D. Turner, and J. Brown. 2024: A Case Study Investigating the Low Summertime CAPE Behavior in the Global Forecast System. Weather and Forecasting. 
-
-https://doi.org/10.1175/WAF-D-22-0208.1
-
-https://journals.ametsoc.org/view/journals/wefo/39/1/WAF-D-22-0208.1.xml
-Last name and initials of author(s) (if nine or more, the first author is followed by "and Coauthors"), year of publication, title of paper, title of journal (italicized),* volume of journal (bolded), issue or citation number (only if required for identification), page range, and DOI (if available).
-
-export dprefix="/scratch2/NAGAPE"
-STMP="${dprefix}/stmp4"
-PTMP="${dprefix}/stmp2"
-
-.. _baroclinicwave:
+.. _baroclinic-wave:
 
 ============================
 Baroclinic Instability Case
