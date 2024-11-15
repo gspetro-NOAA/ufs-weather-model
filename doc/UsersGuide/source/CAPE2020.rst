@@ -19,10 +19,13 @@ Obtaining Data for the July 2020 CAPE Case
 
 .. include:: ./doc-snippets/hsd_data.rst
 
+.. _chgres-data:
+
 User-Generated Data
 ---------------------
 
-Users can enable the WM to run using GFS initial conditions (ICs) from the UFS Case Studies page. 
+Users can enable the WM to run using GFS initial conditions (ICs) from the UFS Case Studies page. Users can use these files 
+
 
 .. _run-cape:
 
@@ -47,7 +50,13 @@ Machine Configuration
 Test Configuration
 ----------------------
 
-The July 2020 CAPE case can be run as-is without adjusting the configuration. 
+The July 2020 CAPE case can be run as-is without adjusting the configuration. If users choose to run the case at higher resolutions, they can generate GFS ICs at C192, C384, or C768 resolutions following the instructions :ref:`above <chgres-data>`. However, they will also need to adapt the experiment configuration files (``${UFS_WM}/tests-dev/test_cases/tests/2020_CAPE`` and potentially ``${UFS_WM}/tests-dev/test_cases/exp_conf/2020_CAPE``). Configurations at these higher resolutions are untested, and users can expect to do some troubleshooting to make them work. 
+
+It is recommended that users view the :wm-repo:`control_c192 <blob/develop/tests/tests/control_c192>`, :wm-repo:`control_c384 <blob/develop/tests/tests/control_c384>`, or :wm-repo:`control_c768 <blob/develop/tests/tests/control_c768>` test files as a starting point. Those test files will provide guidance on variable settings and model_configure/input namelist settings. Additionally, users will need to ensure that the ``FV3_RUN`` file (named ``2020_CAPE.IN`` for the 2020_CAPE experiment) points to the correct input data. Users can modify the ``parm/fv3_conf`` files associated with the sample ``control_*`` tests to enable use of v2 surface data (as in the :wm-repo:`control_c48.v2.sfc <blob/develop/tests/tests/control_c48.v2.sfc>` or 2020_CAPE cases). 
+
+.. attention::
+
+   Although it is *possible* to adjust the July 2020 CAPE case to run at non-default resolutions, this is unsupported functionality. Users may experiment with the capability but will need to commit to significant troubleshooting/experimentation to run the case at those resolutions. 
 
 Baseline Configuration
 ----------------------
