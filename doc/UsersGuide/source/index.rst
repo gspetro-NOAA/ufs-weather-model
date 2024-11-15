@@ -15,7 +15,7 @@ Welcome to the UFS Weather Model User's Guide
    BuildingAndRunning
    InputsOutputs
    RTConfigurations
-   CasesConfigurations
+   HSD
    modules
    ConfigParameters
    AutomatedTesting
