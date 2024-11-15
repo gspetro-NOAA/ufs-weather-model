@@ -47,6 +47,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
+    'sphinx.ext.extlinks',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
@@ -248,6 +249,14 @@ napoleon_custom_sections = [('Returns', 'params_style')] # Allows return of mult
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'landda': ('https://land-da-workflow.readthedocs.io/en/latest/', None),
                        }
+
+# -- Options for extlinks extension ---------------------------------------
+
+extlinks_detect_hardcoded_links = True
+extlinks = {'nco': ('https://www.nco.ncep.noaa.gov/idsb/implementation_standards/%s', '%s'),
+            'wm-repo': ('https://github.com/ufs-community/ufs-weather-model/%s', '%s'),
+            'wm-wiki': ('https://github.com/ufs-community/ufs-weather-model/wiki/%s','%s'),
+            }
 
 # -- Options for todo extension ----------------------------------------------
 
