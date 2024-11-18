@@ -13,11 +13,13 @@ where:
 
 **Command-line Options:**
 
-- ``-s``: Syncs scripts from ``./ufs-wm/tests`` to ``./ufs-wm/tests-dev`` (only required on the first run)
-- ``-c``: Creates a new baseline (necessary until idealized case baselines are staged in the ``UFS_WM_RT`` directory).  
-- ``-k``: Keeps runtime directories after test completion
-- ``-r``: Uses Rocoto workflow manager
-- ``-n``: Runs a single test case
+* ``-s``: Syncs scripts from ``./ufs-wm/tests`` to ``./ufs-wm/tests-dev`` (only required on the first run)
+* ``-c``: Creates a new baseline (necessary until idealized case baselines are staged in the ``UFS_WM_RT`` directory).  
+* ``-k``: Keeps runtime directories after test completion
+* ``l``: Runs test cases listed in a YAML file
+* ``-m``:  Compares against existing baseline results
+* ``-n``: Runs a single test case
+* ``-r``: Uses Rocoto workflow manager
 
 .. COMMENT: What is the -m option? It should be listed here. 
 
