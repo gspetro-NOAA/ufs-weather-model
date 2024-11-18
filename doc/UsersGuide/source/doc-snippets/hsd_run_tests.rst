@@ -21,8 +21,6 @@ where:
 * ``-n``: Runs a single test case
 * ``-r``: Uses Rocoto workflow manager
 
-.. COMMENT: What is the -m option? It should be listed here. 
-
 .. note::
 
-   After the initial run of ``ufs_test.sh`` with the ``-s`` option, users do not need to use ``-s`` again. 
+   After the initial run of ``ufs_test.sh`` with the ``-s`` option, users do not need to use ``-s`` again unless they subsequently alter files inside of ``tests-dev/test_cases``. If files have changed, the user will need to rerun ``ufs_test.sh`` with ``-s`` or work from a fresh clone so that everything is properly copied via ``-s``.
