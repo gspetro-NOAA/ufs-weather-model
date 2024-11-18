@@ -2,5 +2,5 @@ Data for the HSD cases is already staged on Tier-1 platforms at the ``INPUTDATA_
 
 .. code-block:: console 
 
-   wget https://noaa-ufs-htf-pds.s3.amazonaws.com/develop-20241115/HSD_cases_data.tar.gz
+   wget https://noaa-ufs-htf-pds.s3.amazonaws.com/develop-20241115/HSD_INPUT_DATA/HSD_INPUT_DATA.tar.gz
    tar xvfz HSD_cases_data.tar.gz
