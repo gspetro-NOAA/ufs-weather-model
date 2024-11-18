@@ -126,7 +126,7 @@ Baseline Configuration
 
 .. include:: ./doc-snippets/hsd_baseline_config.rst
 
-.. run-2020-cape:
+.. _run-2020-cape:
 
 Running Tests
 -------------
