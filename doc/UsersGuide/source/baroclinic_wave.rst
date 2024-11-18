@@ -3,9 +3,9 @@
 
 .. _baroclinic-wave:
 
-============================
+*****************************
 Baroclinic Instability Case
-============================
+*****************************
 
 The UFS WM baroclinic wave case adapts the test outlined in :cite:t:`Jablonowski&Williamson2006` (2006). This test is designed to evaluate the accuracy of various atmospheric models in simulating a baroclinic wave, which commonly forms in the Northern Hemisphere and influences weather patterns. This test aims to assess how well "dry dynamical cores," the foundational components of weather and climate models that handle air movement and temperature changes, perform in idealized conditions. 
 
