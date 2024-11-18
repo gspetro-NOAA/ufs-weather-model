@@ -17,7 +17,7 @@ where:
 * ``-c``: Creates a new baseline (necessary until idealized case baselines are staged in the ``UFS_WM_RT`` directory).  
 * ``-k``: Keeps runtime directories after test completion
 * ``l``: Runs test cases listed in a YAML file
-* ``-m``:  Compares against existing baseline results
+* ``-m``: Compares against existing baseline results (baseline must exist)
 * ``-n``: Runs a single test case
 * ``-r``: Uses Rocoto workflow manager
 
