@@ -26,21 +26,20 @@ User-Generated Data
 
 .. attention::
 
-   The following instructions only apply to users with access to :term:`HPSS` on :term:`RDHPCS`. In the future, there are plans to expand options for access to raw ICs data for other users. 
+   The following instructions apply only to users with access to :term:`HPSS` on :term:`RDHPCS`. In the future, there are plans to expand options for access to raw initial conditions data for other users. 
 
-Users who have access to :term:`HPSS` can generate initial conditions (:term:`ICs`) for a particular forecast case and resolution by downloading the raw GFS data and converting it to the appropriate version using the the UFS_UTILS ``gdas_init`` utility. ``gdas_init`` pulls the input data required by ``chgres_cube`` from HPSS and then runs the ``chgres_cube`` utility to create coldstart initial conditions for the desired resolution and number of vertical levels. Users who already have access to raw GFS ICs can use just the ``chgres_cube`` utility to perform the conversion on their existing data. Users may wish to refer to the `UFS_UTILS User's Guide <https://noaa-emcufs-utils.readthedocs.io/en/latest/ufs_utils.html>`_ for more information. 
+Users who have access to :term:`HPSS` can generate initial conditions (:term:`ICs`) for a particular forecast case and resolution by downloading the raw GFS data and converting it to the appropriate resolution using the the UFS_UTILS ``gdas_init`` utility. ``gdas_init`` pulls the input data required by ``chgres_cube`` from HPSS and then runs the ``chgres_cube`` utility to create coldstart initial conditions for the desired resolution and number of vertical levels. Users who already have access to raw GFS ICs can use just the ``chgres_cube`` utility to perform the conversion on their existing data. Users may wish to refer to the `UFS_UTILS User's Guide <https://noaa-emcufs-utils.readthedocs.io/en/latest/ufs_utils.html>`_ for more information. 
 
 .. note:: 
    
-   In order to generate all necessary configuration, data, input, and fix files to run in this method, the user first needs to run the base RT script using ``./rt.sh -n`` to set up the run directory. 
+   In order to generate all necessary configuration, data, input, and fix files to run in this method, the user first needs to run the base RT script using ``./ufs_test.sh -n`` to set up the run directory. 
 
-To generate cold start ICs via the UFS_UTILS ``gdas_init``/``chgres_cube`` utilities on an :term:`RDHPCS` with :term:`HPSS` access (e.g., Hera or Jet), the user can run the following commands:
+To generate coldstart ICs via the UFS_UTILS ``gdas_init``/``chgres_cube`` utilities on an :term:`RDHPCS` with :term:`HPSS` access (e.g., Hera or Jet), the user can run the following commands:
 
 .. code-block:: console 
    
    git clone https://github.com/ufs-community/UFS_UTILS.git
-   cd UFS_UTILS
-   cd fix
+   cd UFS_UTILS/fix
    ./link_fixdirs.sh emc <platform>
    cd ..
    ./build_all.sh
@@ -51,11 +50,14 @@ where ``<platform>`` is Hera or Jet.
 Then, users will need to edit the ``config`` file to: 
 
 * Set paths for data extraction and converted files (``EXTRACT_DIR`` and ``OUTDIR``, respectively)
-* Set  ``yy/mm/dd/hh`` to desired forecast start time +6 hours
-* Set CDUMP to ``gfs``  to generate GFS ICs
+* Set  ``yy/mm/dd/hh`` to desired forecast start time +6 hours 
+   .. COMMENT Why +6? 
+* Set ``CDUMP`` to ``gfs``  to generate GFS ICs
 * Set ``LEVS`` to 128
 * Set ``EXTRACT_DATA`` to ``yes`` (unless data is already staged in ``EXTRACT_DIR``)
 * Set ``CRES_HIRES`` to desired resolution for coldstart files (e.g., ``C192``)
+
+These variables are documented in more detail in the `UFS_UTILS gdas_init documentation <https://noaa-emcufs-utils.readthedocs.io/en/latest/ufs_utils.html#configure-for-your-experiment>`_. 
 
 In the machine-specific driver (e.g., ``driver.jet.sh``), users will need to set ``PROJECT_CODE`` to an account that the user can use for submitting batch jobs. 
 
@@ -65,9 +67,9 @@ After configuring the utility, users can run the driver script:
    
    ./driver.<platform>.sh
 
-These steps will (1) pull raw GFS data from HPSS into ``EXTRACT_DIR`` and then (2) convert the raw data to coldstart ICs (placed in ``OUTDIR/gfs.YYYYMMDD/HH/model_data/atmos/input``). The converted cold start ICs can then be used as input data for certain UFS WM regression tests (RTs) of corresponding model resolution and configuration. 
+These steps will (1) pull raw GFS data from HPSS into ``EXTRACT_DIR`` and then (2) convert the raw data to coldstart ICs (placed in ``OUTDIR/gfs.YYYYMMDD/HH/model_data/atmos/input``). The converted coldstart ICs can then be used as input data for certain UFS WM regression tests (RTs) of corresponding model resolution and configuration (e.g., C48 GFS coldstart data in the ``control_c48.v2.sfc`` RT). 
 
-To use the converted coldstart files with the UFS WM, copy the ``gfs*.nc`` and ``sfc*.nc`` files from ``OUTDIR/gfs.YYYYMMDD/HH/model_data/atmos/input`` into the ``INPUT`` directory of the UFS WM RT run directory, and adjust the model start time in the ``model_configure`` file. Note that the resolution of the converted cold start GFS data must match the ATM resolution of the UFS WM RT (e.g., use C48 GFS cold start data in the ``control_c48.v2.sfc`` RT). Then, edit the model start year, month, day, and hour in the RT ``model_configure`` file. For example: 
+To use the converted coldstart files with the UFS WM, copy the ``gfs*.nc`` and ``sfc*.nc`` files from ``OUTDIR/gfs.YYYYMMDD/HH/model_data/atmos/input`` into the ``INPUT`` directory of the UFS WM RT run directory. (The run directory is set in ``rt.sh`` as ``${PTMP}/${USER}/FV3_RT}/rt_$$`` using the ``PTMP`` value from ``baseline_setup.yaml``.) Additionally, adjust the model start time in the ``model_configure`` file. Then, edit the model start year, month, day, and hour in the RT ``model_configure`` file. For example: 
 
 .. code-block::
 
@@ -81,18 +83,9 @@ To use the converted coldstart files with the UFS WM, copy the ``gfs*.nc`` and `
    fhrot:                   0
    ...
 
-The user can then run the ``sbatch job_card`` command to rerun ``fv3.exe``. The case should now run at the new model start time with the coldstart ICs. Users with access to Jet may view an example RT at ``/lfs4/HFIP/hfv3gfs/Cameron.Book/RT_RUNDIRS/Cameron.Book/FV3_RT/rt_1826477/control_c48.v2.sfc_intel``, which used coldstart ICs generated through ``gdas_init``/``chgres_cube`` for the 2020 CAPE case. The input data can be viewed at ``/lfs4/HFIP/hfv3gfs/Cameron.Book/chgres_data/converted/gfs.20200723/00/model_data/atmos/input``:
-
-.. code-block:: console
-
-   gfs_ctrl.nc	   gfs_data.tile4.nc  sfc_data.tile2.nc  sfc_data.tile6.nc
-   gfs_data.tile1.nc  gfs_data.tile5.nc  sfc_data.tile3.nc
-   gfs_data.tile2.nc  gfs_data.tile6.nc  sfc_data.tile4.nc
-   gfs_data.tile3.nc  sfc_data.tile1.nc  sfc_data.tile5.nc
-
 .. note:: 
 
-   Note that since 6/4/24, the ``develop`` branch of UFS_UTILS generates only version 2 (v2) surface (sfc) files via ``gdas_init`` and ``chgres_cube``. Therefore, successful integration of the converted cold start files has only been achieved using the recently added ``v2.sfc`` WM RTs (see e.g., :wm-repo:`control_c48.v2.sfc <blob/develop/tests/tests/control_c48.v2.sfc>` and PRs :wm-repo:`#2005 <pull/2005>` and :wm-repo:`#1977 <pull/1977>`). Since the v2 surface files are significantly different from the v1 surface file format, v2 files do not work with non-v2.sfc RTs.
+   Note that since 6/4/24, the ``develop`` branch of UFS_UTILS generates only version 2 (v2) surface (sfc) files via ``gdas_init`` and ``chgres_cube``. Therefore, successful integration of the converted coldstart files has only been achieved using the recently added ``v2.sfc`` WM RTs (see e.g., :wm-repo:`control_c48.v2.sfc <blob/develop/tests/tests/control_c48.v2.sfc>` and PRs :wm-repo:`#2005 <pull/2005>` and :wm-repo:`#1977 <pull/1977>`). Since the v2 surface files are significantly different from the v1 surface file format, the user may need to re-configure the higher resolution test case to ensure that fix files, physics suite, and other input data used are consistent with v2 surface files.
 
 .. _run-cape:
 
@@ -119,7 +112,7 @@ Test Configuration
 
 The July 2020 CAPE case can be run as-is without adjusting the configuration. If users choose to run the case at higher resolutions, they can generate GFS ICs at C192, C384, or C768 resolutions following the instructions :ref:`above <chgres-data>`. However, they will also need to adapt the experiment configuration files (``${UFS_WM}/tests-dev/test_cases/tests/2020_CAPE`` and potentially ``${UFS_WM}/tests-dev/test_cases/exp_conf/2020_CAPE``). Configurations at these higher resolutions are untested, and users can expect to do some troubleshooting to make them work. 
 
-It is recommended that users view the :wm-repo:`control_c192 <blob/develop/tests/tests/control_c192>`, :wm-repo:`control_c384 <blob/develop/tests/tests/control_c384>`, or :wm-repo:`control_c768 <blob/develop/tests/tests/control_c768>` test files as a starting point. Those test files will provide guidance on variable settings and model_configure/input namelist settings. Additionally, users will need to ensure that the ``FV3_RUN`` file (named ``2020_CAPE.IN`` for the 2020_CAPE experiment) points to the correct input data. Users can modify the ``parm/fv3_conf`` files associated with the sample ``control_*`` tests to enable use of v2 surface data (as in the :wm-repo:`control_c48.v2.sfc <blob/develop/tests/tests/control_c48.v2.sfc>` or 2020_CAPE cases). 
+It is recommended that users view the :wm-repo:`control_c192 <blob/develop/tests/tests/control_c192>`, :wm-repo:`control_c384 <blob/develop/tests/tests/control_c384>`, or :wm-repo:`control_c768 <blob/develop/tests/tests/control_c768>` test files as a starting point. Those test files will provide guidance on variable settings and model_configure/input namelist settings. Additionally, users will need to ensure that the ``FV3_RUN`` file (named ``2020_CAPE.IN`` for the 2020_CAPE experiment) points to the correct input data. Users can modify the ``parm/fv3_conf`` files associated with the sample ``control_*`` tests to enable use of v2 surface data (as in the :wm-repo:`control_c48.v2.sfc <blob/develop/tests/tests/control_c48.v2.sfc>` or 2020_CAPE cases). Any new or modified test file, input namelist, or ``*.IN`` file should be placed in the appropriate directory in ``tests-dev/exp_conf``, so that the files are correctly propagated into the ``tests-dev`` directory when invoking the ``-s`` argument with ``ufs_test.sh``.
 
 .. attention::
 
@@ -138,7 +131,7 @@ Running Tests
 Examples
 ^^^^^^^^^^
 
-A user with access to the ``epic`` account can run the ``2020_CAPE`` test case with the ``intel`` compiler on ``Hera``, ``Orion``, or ``Gaea`` using the following command:
+A user with access to the ``epic`` account can run the ``2020_CAPE`` test case with the ``intel`` compiler on an :term:`RDHPCS` where they have access using the following command:
 
 .. code-block:: console
 

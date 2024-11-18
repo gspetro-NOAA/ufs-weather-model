@@ -13,9 +13,9 @@ The simulation sets the model's atmosphere to an initial steady state, designed 
 
 This test provides a standard way to assess how different atmospheric models handle the development of baroclinic waves. The results help identify which models are more accurate and can serve as benchmarks for model improvement, ultimately contributing to better simulations of atmospheric behavior in weather and climate predictions.
 
-In the UFS WM, the idealized baroclinic wave test case is an atmosphere-only, :term:`dycore`-only forecast run at C192 resolution with 127 vertical levels. It uses default values from the WM's ``export_fv3`` function, along with default values for a tiled grid namelist (from ``export_tiled``) and for the `Unified Gravity Wave Physics version 1 <https://dtcenter.ucar.edu/GMTB/v7.0.0/sci_doc/ugwpv1_gsldrag.html>`_ (from ``export_ugwpv1``). These initial values are all set based on values from `default_vars.sh <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/default_vars.sh>`_. 
+In the UFS WM, the idealized baroclinic wave test case is an atmosphere-only, :term:`dycore`-only forecast run at C192 resolution with 127 vertical levels. It uses default values from the WM's ``export_fv3`` function, along with default values for a tiled grid namelist (from ``export_tiled``). These initial values are set based on values from `default_vars.sh <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/default_vars.sh>`_. 
 
-The test is set to run a dynamics-only 24-hour forecast from 2019-12-03 at 0z. However, it is recommended that users modify the case to run it as a 5-10 day forecast by setting the forecast length (``FHMAX``) to 120-240 hours in the test file (see :numref:`Section %s <bw-config>` for instructions). Users will also need to update ``OUTPUT_FH`` accordingly. 
+The test is set to run a dynamics-only 24-hour forecast from 2019-12-03 at 0z. However, it is recommended that users modify the case to run it as a 5-10 day forecast by setting the forecast length (``FHMAX``) to 120-240 hours in the test file (see :numref:`Section %s <bw-config>` for instructions). Users will also need to update ``OUTPUT_FH`` accordingly. This ensures that users will be able to see the disturbance develop (wave propagation), starting about 120-150 hours into the forecast. 
 
 =============================
 Obtaining Data for HSD Cases
@@ -46,7 +46,7 @@ Machine Configuration
 Test Configuration
 ----------------------
 
-It is recommended that users adjust certain values in the baroclinic wave case. Currently, the forecast length (``FHMAX``) is set to 24 hours, but it is recommended that users run the case for 5 or 10 days (120 or 240 hours). To do this, open ``${UFS_WM}/tests-dev/test_cases/tests/baroclinic_wave`` using ``vi``/``vim`` or a code editor. Then, add ``FHMAX`` and update ``OUTPUT_FH`` to extend by increments of 6 to the new ``FHMAX``. 
+It is recommended that users adjust certain values in the baroclinic wave case. Currently, the forecast length (``FHMAX``) is set to 24 hours to maintain the regression testing baselines with reduced resource consumption. However, it is recommended that users run the case for 5 or 10 days (120 or 240 hours) to see the disturbance (wave propagation) develop about 120-150 hours into the forecast. To do modify the case, open ``${UFS_WM}/tests-dev/test_cases/tests/baroclinic_wave`` using ``vi``/``vim`` or a code editor. Then, add ``FHMAX`` and update ``OUTPUT_FH`` to extend by increments of 6 to the new ``FHMAX``. 
 
 .. code-block:: console
 
@@ -77,7 +77,7 @@ Running Tests
 Example:
 ^^^^^^^^^
 
-A user with access to the ``epic`` account can run the ``baroclinic_wave`` test case with the ``intel`` compiler on ``Hera``, ``Orion``, or ``Gaea`` using the following command:
+Users with access to the ``epic`` account can run the ``baroclinic_wave`` test case with the ``intel`` compiler on :term:`RDHPCS` where they have access using the following command:
 
 .. code-block:: console
 

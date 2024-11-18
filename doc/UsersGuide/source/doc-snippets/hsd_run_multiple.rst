@@ -1,6 +1,7 @@
-To run multiple cases at once, copy ``test_cases.yaml`` from the test cases directory and use the ``-l`` argument:
+To run multiple cases at once, modify ``ufs_test.yaml`` to contain only a subset of tests (e.g., ``2020_CAPE`` and ``baroclinic_wave``) and use the ``-l`` argument:
 
 .. code-block:: console
 
-   cp ${UFS_WM}/tests-dev/test_cases/test_cases.yaml ${UFS_WM}/tests-dev/
-   ./ufs_test.sh -a epic -s -c -k -r -l test_cases.yaml
+   ./ufs_test.sh -a epic -s -c -k -r -l ufs_test.yaml
+
+Alternatively, users may copy the sections for ``2020_CAPE``/``baroclinic_wave`` tests into a new YAML file (e.g., ``test_cases.yaml``) to call via ``ufs_test.sh``.
