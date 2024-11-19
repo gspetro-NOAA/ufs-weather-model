@@ -278,9 +278,7 @@ The machine configuration file is located at ``ufs-weather-model/tests-dev/machi
 Host Machine Modifications
 ---------------------------
 
-Default variables for regression tests and HSD tests are set in the ``default_vars.sh`` script. The individual test scripts (e.g., ``baroclinic_wave``, ``2020_CAPE``) override these variables where necessary. However, when running the HSD cases in a container, the tasks-per-node (TPN) variables in the singularity section need to be modified to reflect the user's host machine TPN configuration. 
-
-.. COMMENT: Where is the singularity section...?
+Default variables for regression tests and HSD tests are set in the ``default_vars.sh`` script in the ``ufs-weather-model`` directory copied *from the container*. The individual test scripts (e.g., ``baroclinic_wave``, ``2020_CAPE``) override these variables where necessary. However, when running the HSD cases in a container, the tasks-per-node (TPN) variables in the singularity section need to be modified to reflect the user's host machine TPN configuration. 
 
 Test Configuration
 --------------------

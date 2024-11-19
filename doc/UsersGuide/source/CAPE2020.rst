@@ -28,11 +28,11 @@ User-Generated Data
 
    The following instructions apply only to users with access to :term:`HPSS` on :term:`RDHPCS`. In the future, there are plans to expand options for access to raw initial conditions data for other users. 
 
-Users who have access to :term:`HPSS` can generate initial conditions (:term:`ICs`) for a particular forecast case and resolution by downloading the raw GFS data and converting it to the appropriate resolution using the the UFS_UTILS ``gdas_init`` utility. ``gdas_init`` pulls the input data required by ``chgres_cube`` from HPSS and then runs the ``chgres_cube`` utility to create coldstart initial conditions for the desired resolution and number of vertical levels. Users who already have access to raw GFS ICs can use just the ``chgres_cube`` utility to perform the conversion on their existing data. Users may wish to refer to the `UFS_UTILS User's Guide <https://noaa-emcufs-utils.readthedocs.io/en/latest/ufs_utils.html>`_ for more information. 
+Users who have access to :term:`HPSS` can generate initial conditions (:term:`ICs`) for a particular forecast case (date) and resolution by downloading the raw GFS data and converting it to the appropriate resolution using the the UFS_UTILS ``gdas_init`` utility. ``gdas_init`` pulls the input data required by ``chgres_cube`` from HPSS and then runs the ``chgres_cube`` utility to create coldstart initial conditions for the desired resolution and number of vertical levels. Users who already have access to raw GFS ICs can use just the ``chgres_cube`` utility to perform the conversion on their existing data. Users may wish to refer to the `UFS_UTILS User's Guide <https://noaa-emcufs-utils.readthedocs.io/en/latest/ufs_utils.html>`_ for more information. 
 
 .. note:: 
    
-   In order to generate all necessary configuration, data, input, and fix files to run in this method, the user first needs to run the base RT script for the July 2020 CAPE case as described in :numref:`Section %s <run-2020-cape>`. 
+   In order to generate all necessary configuration, data, input, and fix files to run a configuration similar to the July 2020 CAPE case for another date (still C48 resolution), the user first needs to run the base ``ufs_test.sh`` script for the default July 2020 CAPE case as described in :numref:`Section %s <run-2020-cape>`. 
 
 To generate coldstart ICs via the UFS_UTILS ``gdas_init``/``chgres_cube`` utilities on an :term:`RDHPCS` with :term:`HPSS` access (e.g., Hera or Jet), the user can run the following commands:
 
@@ -78,7 +78,7 @@ These steps will (1) pull raw GFS data from HPSS into ``EXTRACT_DIR`` and then (
 Running the July 2020 CAPE Case
 =================================
 
-This section explains how to run the July 2020 CAPE case described above using the ``ufs-test.sh`` script.
+This section explains how to run the July 2020 CAPE case described above using the ``ufs_test.sh`` script.
 
 Clone the Repository
 --------------------
@@ -95,7 +95,7 @@ Machine Configuration
 Test Configuration
 ----------------------
 
-The July 2020 CAPE case can be run as-is without adjusting the configuration. If users choose to run the case at higher resolutions, they can generate GFS ICs at C192, C384, or C768 resolutions following the instructions :ref:`above <chgres-data>`. However, they will also need to adapt the experiment configuration files (``${UFS_WM}/tests-dev/test_cases/tests/2020_CAPE`` and potentially ``${UFS_WM}/tests-dev/test_cases/exp_conf/2020_CAPE``). Configurations at these higher resolutions are untested, and users can expect to do some troubleshooting to make them work. 
+The July 2020 CAPE case can be run as-is without adjusting the configuration. Users may also run a similar configuration for different dates with user-generated ICs (see :numref:`Section %s <chgres-data>` for instructions on downloading this data from :term:`HPSS`). If users choose to run the case at higher resolutions, they can generate GFS ICs at C192, C384, or C768 resolutions following the instructions :ref:`above <chgres-data>`. However, they will also need to ensure that the experiment configuration files (i.e., ``${UFS_WM}/tests-dev/test_cases/tests/2020_CAPE`` and potentially ``${UFS_WM}/tests-dev/test_cases/exp_conf/2020_CAPE``), input namelist, physics suites, and ``fv3_conf/*.IN`` file are consistent and configured properly for their desired resolution. Configurations at these higher resolutions are untested, and users can expect to do significant troubleshooting to make them work. 
 
 It is recommended that users view the :wm-repo:`control_c192 <blob/develop/tests/tests/control_c192>`, :wm-repo:`control_c384 <blob/develop/tests/tests/control_c384>`, or :wm-repo:`control_c768 <blob/develop/tests/tests/control_c768>` test files as a starting point. Those test files will provide guidance on variable settings and ``model_configure``/input namelist settings. Additionally, users will need to ensure that the ``FV3_RUN`` file (named ``2020_CAPE.IN`` for the 2020_CAPE experiment) points to the correct input data. Users can modify the ``parm/fv3_conf`` files associated with the sample ``control_*`` tests to enable use of v2 surface data (as in the :wm-repo:`control_c48.v2.sfc <blob/develop/tests/tests/control_c48.v2.sfc>` or :wm-repo:`2020_CAPE <blob/develop/tests-dev/test_cases/tests/2020_CAPE>` cases). Any new or modified test file, input namelist, or ``*.IN`` file should be placed in the appropriate directory in ``tests-dev/exp_conf`` so that the files are correctly propagated into the ``tests-dev`` directory when invoking the ``-s`` argument with ``ufs_test.sh``.
 
