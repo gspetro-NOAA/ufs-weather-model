@@ -1,4 +1,4 @@
-When the test case finishes running, users should see console output that includes a ``SUCCESS`` message. FOr example: 
+When the test case finishes running, users should see console output that includes a ``SUCCESS`` message. For example: 
 
 .. code-block:: console
    :emphasize-lines: 2 
