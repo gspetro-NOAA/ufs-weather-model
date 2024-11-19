@@ -16,7 +16,7 @@ This chapter provides instructions for building and running the Unified Forecast
 
 .. attention::
 
-   This chapter of the User's Guide should **only** be used for container builds. For non-container builds, see the chapters for individual cases. These chapters describe the steps for configuring and running the UFS WM HSD cases on a :wm-wiki:`Level 1 System <Regression-Test-Policy-for-Weather-Model-Platforms-and-Compilers>` **without** a container.
+   This chapter of the User's Guide should **only** be used for container builds. For non-container builds, see the chapters above for instructions on how to run individual cases. These chapters describe the steps for configuring and running the UFS WM HSD cases on a :wm-wiki:`Level 1 System <Regression-Test-Policy-for-Weather-Model-Platforms-and-Compilers>` **without** a container.
 
 .. _Prereqs:
 
@@ -60,7 +60,7 @@ For users working on systems with limited disk space in their ``/home`` director
    export SINGULARITY_CACHEDIR=/absolute/path/to/writable/directory/cache
    export SINGULARITY_TMPDIR=/absolute/path/to/writable/directory/tmp
 
-where ``/absolute/path/to/writable/directory/`` refers to a writable directory (usually a project or user directory within ``/lustre``, ``/work``, ``/scratch``, or ``/glade`` on NOAA :term:`RDHPCS` systems). If the ``cache`` and ``tmp`` directories do not exist already, they must be created with a ``mkdir`` command. 
+where ``/absolute/path/to/writable/directory/`` refers to a writable directory (usually a project or user directory within ``/lustre``, ``/work``, ``/scratch``, or ``/glade`` on NOAA :term:`RDHPCS` systems). If the ``cache`` and ``tmp`` directories do not already exist, they must be created with the ``mkdir`` command. 
 
 On NOAA Cloud systems, the ``sudo su`` command may also be required. For example, users would run:
    
@@ -94,7 +94,7 @@ Set a top-level directory location for UFS WM work, and navigate to it. For exam
 where ``/path/to/hsd`` is the path to this top-level directory (e.g., ``/Users/Joe.Schmoe/hsd``). 
 
 .. hint::
-   If a ``singularity: command not found`` error message appears in any of the following steps, try running: ``module load singularity`` or (on Derecho) ``module load apptainer``.
+   If a ``singularity: command not found`` error message appears in any of the following steps, try running: ``module load singularity`` or ``module load apptainer``.
 
 NOAA RDHPCS Systems
 ----------------------
@@ -140,7 +140,7 @@ To download from the data bucket, users can run:
 
 .. code-block:: console
 
-   wget https://noaa-ufs-land-da-pds.s3.amazonaws.com/current_land_da_release_data/v2.0.0/ubuntu22.04-intel-wm-dev-hsd-test.img
+   wget https://noaa-ufs-htf-pds.s3.amazonaws.com/develop-20241115/ubuntu22.04-intel-wm-dev-hsd-test.img
 
 To build the container from a Docker image, users can run:
 
@@ -159,7 +159,7 @@ This process may take several hours depending on the system.
 Get Data
 ***********
 
-In order to run the UFS WM HSD cases, users will need model input data. These files are already present on Level 1 systems (see :wm-wiki:`Level 1 <Regression-Test-Policy-for-Weather-Model-Platforms-and-Compilers>` for details). 
+In order to run the UFS WM HSD cases, users will need both fix files and model input data. These files are already present on :wm-wiki:`Level 1 <Regression-Test-Policy-for-Weather-Model-Platforms-and-Compilers>` systems. 
 
 Users on any system may download and untar the data from the `UFS Hierarchical Testing Framework (HTF) Data Bucket <https://registry.opendata.aws/noaa-ufs-htf-pds/>`_ into their ``$HSD`` directory. 
 
