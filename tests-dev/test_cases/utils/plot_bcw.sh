@@ -33,7 +33,7 @@ if [[ ${HOSTNAME} == gaea6[1-9] ]]; then module load Core/24.11 ; fi
 module load grads wgrib2
 
 # check if model output file exists:
-nfiles=$(find GFSPRS.GrbF* | wc -li || true)
+nfiles=$(find GFSPRS.GrbF* | wc -l || true)
 if ls GFSPRS.GrbF* >/dev/null 2>&1
 then
   echo Using files: GFSPRS.GrbF\*
