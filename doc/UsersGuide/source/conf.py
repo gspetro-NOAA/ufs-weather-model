@@ -96,7 +96,14 @@ linkcheck_anchors_ignore = [r"L\d*",
 # Ignore working links that cause a linkcheck 403 error.
 linkcheck_ignore = [r'https://agupubs\.onlinelibrary\.wiley\.com/doi/10\.1029/2020MS002260',
                     r'https://glossary.ametsoc.org/wiki/*',
+                    r'https://www.intel.com/content/www/us/en/developer/tools/oneapi/hpc-toolkit-download.html',
                    ]
+
+linkcheck_allowed_redirects = {r"https://doi.org/.*": 
+                                 r"https://rmets.onlinelibrary.wiley.com/doi/.*",
+                               r"https://doi.org/.*": 
+                                 r"https://journals.ametsoc.org/view/journals/.*",
+                               }
 
 # -- Options for HTML output -------------------------------------------------
 
