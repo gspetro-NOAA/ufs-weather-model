@@ -54,7 +54,8 @@ chmod 755 g2ctl
 [[ -f cbar.gs ]] || wget -q http://cola.gmu.edu/grads/scripts/cbar.gs
 
 # load modules grads and wgrib2
-if [[ $(hostname) == gaea6[1-9] ]]; then module load Core/24.11 ; fi
+HOSTNAME=$(hostname)
+if [[ ${HOSTNAME} == gaea6[1-9] ]]; then module load Core/24.11 ; fi
 module load grads wgrib2
 
 # check if model output file exxists:
