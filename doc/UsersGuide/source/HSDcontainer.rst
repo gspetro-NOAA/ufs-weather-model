@@ -240,7 +240,18 @@ where:
 
    When using a Singularity container, Intel compilers and Intel :term:`MPI` (preferably 2020 versions or newer) need to be available on the host system to properly launch MPI jobs. Generally, this is accomplished by loading a module with a recent Intel compiler and then loading the corresponding Intel MPI. 
 
-The user should now see the ``ufs-weather-model`` directory in the ``$HSD`` directory. 
+When this command runs, ``stage-rt.sh`` will print the following message to the console: 
+
+.. code-block:: console
+
+   Copying out ufs-weather-model repo from the container
+   Set run_test.sh to use exe in the container
+   Updating compiler and mpi in fv3_slurm.IN_singularity
+   Creating ufs_singularity.intel.lua
+   Tricking ufs_test.sh file
+   Updating various files with host paths
+
+Additionally, the user should see the ``ufs-weather-model`` directory in the ``$HSD`` directory (``ls``). 
 
 .. _ConfigureExptC:
 
@@ -259,12 +270,7 @@ Host Machine Modifications
 
 Default variables for regression tests and HSD tests are set in the ``default_vars.sh`` script. The individual test scripts (e.g., ``baroclinic_wave``, ``2020_CAPE``) override these variables where necessary. However, when running the HSD cases in a container, the tasks-per-node (TPN) variables in the singularity section need to be modified to reflect the user's host machine TPN configuration. 
 
-.. COMMENT: Remove:
-   .. code-block:: console
-
-      module load rocoto
-      
-   The ``setup_container.sh`` script creates the ``parm_xml.yaml`` from the ``parm_xml_singularity.yaml`` file. Update any relevant variables in this file (e.g., ``account`` or ``exp_basedir``) before creating the Rocoto XML file.
+.. COMMENT: Where is the singularity section...?
 
 Test Configuration
 --------------------
@@ -283,7 +289,7 @@ To start the experiment, run:
 
 .. code-block:: console
    
-   cd ufs-weather-model/tests-dev
+   cd $HSD/ufs-weather-model/tests-dev
    ./ufs_test.sh -a <ACCOUNT> -s -c -k -r -n "<CASE_NAME> <COMPILER>"
 
 where:
@@ -292,14 +298,7 @@ where:
 * ``<CASE_NAME>``: Name of the test case (e.g., ``2020_CAPE`` or ``baroclinic_wave``).
 * ``<COMPILER>``: Compiler used for the tests (``intel`` or ``gnu``).
 
-.. COMMENT: Remove? 
-   Users will need to issue the ``rocotorun`` command multiple times. The tasks must be run in order, and ``rocotorun`` initiates the next task once its dependencies have completed successfully. 
-
-   See the :ref:`Workflow Overview <wflow-overview>` section to learn more about the steps in the workflow process.
-
-The script will loop until it runs both tasks or crashes. ``rococtostat`` can be used to track its progress.
-
-.. COMMENT: How to use rocotostat...? 
+The script will loop until it runs both tasks or crashes. ``rococtostat`` can be used to track its progress; see the :ref:`Track Progress <TrackProgress>` section for details.
 
 .. _TrackProgress:
 
@@ -312,14 +311,20 @@ To check on the job status, users on a system with a Slurm job scheduler may run
 
    squeue -u $USER
 
-.. COMMENT: Adapt? Delete?
-   To view the experiment status, run:
+To view the experiment status, run:
 
-   .. code-block:: console
+.. code-block:: console
 
-      rocotostat -w land_analysis.xml -d land_analysis.db
+   rocotostat -w rocoto_workflow.xml -d rocoto_workflow.db -v 10
 
-   See the :ref:`Track Experiment Status <VerifySuccess>` section to learn more about the ``rocotostat`` output.
+It will print a status table:
+
+.. code-block:: console
+
+          CYCLE                     TASK   JOBID     STATE   EXIT STATUS  TRIES      DURATION
+   ===========================================================================================
+   197001010000  compile_atm_dyn32_intel       1   RUNNING             -      0           0.0
+   197001010000          2020_CAPE_intel       -         -             -      -             -
 
 If the job hangs or otherwise fails, stop the workflow in the active terminal using ``(Ctrl+C)``. To resubmit the experiment, remove the ``rocoto_workflow*`` files and lock directory:
 
