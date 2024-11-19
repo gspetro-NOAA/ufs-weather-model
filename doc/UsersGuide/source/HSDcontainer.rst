@@ -305,13 +305,13 @@ The script will loop until it runs both tasks or crashes. ``rococtostat`` can be
 Track Progress
 ----------------
 
-To check on the job status, users on a system with a Slurm job scheduler may run: 
+To check on the job status, users on a system with a Slurm job scheduler may run (usually in a separate terminal window): 
 
 .. code-block:: console
 
    squeue -u $USER
 
-To view the experiment status, run:
+To view the experiment status, make sure that rocoto is loaded and run:
 
 .. code-block:: console
 
@@ -326,13 +326,11 @@ It will print a status table:
    197001010000  compile_atm_dyn32_intel       1   RUNNING             -      0           0.0
    197001010000          2020_CAPE_intel       -         -             -      -             -
 
-If the job hangs or otherwise fails, stop the workflow in the active terminal using ``(Ctrl+C)``. To resubmit the experiment, remove the ``rocoto_workflow*`` files and lock directory:
+If the job hangs or otherwise fails, stop the workflow in the active terminal using ``(Ctrl+C)``. To resubmit the experiment, remove the ``rocoto_workflow*`` files and lock directory before rerunning the ``ufs_test.sh`` script again:
 
 .. code-block:: console
 
 	rm -rf rocoto_workflow* lock
-
-.. COMMENT: Command for trying again...?
 
 .. _CheckExptOutput:
 
