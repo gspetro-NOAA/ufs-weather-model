@@ -234,22 +234,25 @@ where:
 
    * ``-c`` is the compiler on the user's local machine (e.g., ``intel/2022.1.2``)
    * ``-m`` is the :term:`MPI` on the user's local machine (e.g., ``impi/2022.1.2``)
-   * ``-i`` is the full path to the container image ( e.g., ``$HSD/ubuntu22.04-intel-wm-dev-hsd-test.img``).
-   
-When using a Singularity container, Intel compilers and Intel :term:`MPI` (preferably 2020 versions or newer) need to be available on the host system to properly launch MPI jobs. Generally, this is accomplished by loading a module with a recent Intel compiler and then loading the corresponding Intel MPI. 
+   * ``-i`` is the full path to the container image (e.g., ``$img`` or ``$HSD/ubuntu22.04-intel-wm-dev-hsd-test.img``).
+
+.. note::
+
+   When using a Singularity container, Intel compilers and Intel :term:`MPI` (preferably 2020 versions or newer) need to be available on the host system to properly launch MPI jobs. Generally, this is accomplished by loading a module with a recent Intel compiler and then loading the corresponding Intel MPI. 
+
+The user should now see the ``ufs-weather-model`` directory in the ``$HSD`` directory. 
 
 .. _ConfigureExptC:
 
 Configure the Experiment
 ===========================
 
-Update the ``default_vars.sh`` script or the ``machine_singularity.config`` files if necessary. 
-
+To configure the experiment, users may need to update the ``default_vars.sh`` script and/or the ``machine_singularity.config`` files. 
 
 Module Modification
 --------------------
 
-Users may need to modify the machine configuration file, located at ``ufs-weather-model/tests-dev/machine_config/machine_singularity.config``. The configuration file assumes that Rocoto can be loaded via ``module load`` from the host machine's initial state. If an additional path or module needs to be loaded, modify the ``machine_singularity.config`` to reflect those additions. For example, if the Rocoto package is found within the ``contrib`` module, add ``module load contrib`` before the ``module load rocoto`` statement in the machine configuration file.
+The machine configuration file is located at ``ufs-weather-model/tests-dev/machine_config/machine_singularity.config``. It assumes that Rocoto can be loaded via ``module load`` command from the host machine's initial state. If an additional path or module needs to be loaded, modify the ``machine_singularity.config`` to reflect those additions. For example, if the Rocoto package is found within the ``contrib`` module, add ``module load contrib`` before the ``module load rocoto`` statement in the machine configuration file.
 
 Host Machine Modifications
 ---------------------------
@@ -262,6 +265,14 @@ Default variables for regression tests and HSD tests are set in the ``default_va
       module load rocoto
       
    The ``setup_container.sh`` script creates the ``parm_xml.yaml`` from the ``parm_xml_singularity.yaml`` file. Update any relevant variables in this file (e.g., ``account`` or ``exp_basedir``) before creating the Rocoto XML file.
+
+Test Configuration
+--------------------
+
+Additional configuration may be needed for the specific test the user plans to run. For information on test-specific configuration, view the information for specific tests: 
+
+   * The :ref:`July 2020 CAPE Test Configuration <cape-config>`
+   * The :ref:`Baroclinic Instability Test Configuration <bw-config>`
 
 .. _RunExptC:
 
