@@ -2,7 +2,7 @@ Launch tests from the ``${UFS_WM}/tests-dev`` directory with the following comma
 
 .. code-block:: console
 
-   cd tests-dev
+   cd ${UFS_WM}/tests-dev
    ./ufs_test.sh -a <ACCOUNT> [-s] [-c] -k -r -n "<CASE_NAME> <COMPILER>"
 
 where:

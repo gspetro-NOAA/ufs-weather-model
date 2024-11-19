@@ -29,7 +29,7 @@ Obtaining Data for HSD Cases
 Running the Baroclinic Wave Case
 ==================================
 
-This section explains how to run the baroclinic wave case described above using the ``ufs-test.sh`` script.
+This section explains how to run the baroclinic wave case described above using the ``ufs_test.sh`` script.
 
 Clone the Repository
 --------------------
@@ -55,14 +55,16 @@ It is recommended that users adjust certain values in the baroclinic wave case. 
 
 In general, it is preferable to make ``FHMAX`` a multiple of 24. 
 
-On Jet, users will also need to adjust ``${UFS_WM}/tests/fv3_conf/compile_slurm.IN_jet`` in order to manage memory requirements for longer runs of the ``baroclinic_wave`` test. Users will need to change the number of tasks per node from 8 to 6 and add ``#SBATCH --mem=0``. 
+.. note:: 
 
-The file should say: 
+   On Jet, users will also need to adjust ``${UFS_WM}/tests/fv3_conf/compile_slurm.IN_jet`` in order to manage memory requirements for longer runs of the ``baroclinic_wave`` test. Users will need to change the number of tasks per node from 8 to 6 and add ``#SBATCH --mem=0``. 
 
-.. code-block:: console 
-   
-   #SBATCH --ntasks-per-node=6``
-   #SBATCH --mem=0
+   The file should include: 
+
+   .. code-block:: console 
+      
+      #SBATCH --ntasks-per-node=6
+      #SBATCH --mem=0
 
 Baseline Configuration
 ----------------------
@@ -97,7 +99,7 @@ For example, to monitor progress or check results for the ``baroclinic_wave`` ca
 
 .. code-block:: console
 
-   tail -f ${UFS_WM}/tests-dev/run_dir/baroclinic_wave/err
-   tail -f ${UFS_WM}/tests-dev/run_dir/baroclinic_wave/out
+   tail -f ${UFS_WM}/tests-dev/run_dir/baroclinic_wave_intel/err
+   tail -f ${UFS_WM}/tests-dev/run_dir/baroclinic_wave_intel/out
 
 .. include:: ./doc-snippets/hsd_notes.rst
