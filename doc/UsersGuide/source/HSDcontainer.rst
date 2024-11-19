@@ -105,19 +105,21 @@ On many NOAA :term:`RDHPCS`, a container named ``ubuntu22.04-intel-wm-dev-hsd-te
 
 .. table:: Locations of Pre-Built Containers
 
-   +-----------------+--------------------------------------------------------+
-   | Machine         | File location                                          |
-   +=================+========================================================+
-   | Gaea            | /gpfs/f5/epic/world-shared/containers                  |
-   +-----------------+--------------------------------------------------------+
-   | Hera            | /scratch1/NCEPDEV/nems/role.epic/containers            |
-   +-----------------+--------------------------------------------------------+
-   | Jet             | /mnt/lfs5/HFIP/hfv3gfs/role.epic/containers            |
-   +-----------------+--------------------------------------------------------+
-   | NOAA Cloud      | /contrib/EPIC/containers                               |
-   +-----------------+--------------------------------------------------------+
-   | Orion/Hercules  | /work/noaa/epic/role-epic/contrib/containers           |
-   +-----------------+--------------------------------------------------------+
+   +--------------------+--------------------------------------------------------+
+   | Machine            | File location                                          |
+   +====================+========================================================+
+   | Gaea               | /gpfs/f5/epic/world-shared/containers                  |
+   +--------------------+--------------------------------------------------------+
+   | Hera               | /scratch1/NCEPDEV/nems/role.epic/containers            |
+   +--------------------+--------------------------------------------------------+
+   | Jet                | /mnt/lfs5/HFIP/hfv3gfs/role.epic/containers            |
+   +--------------------+--------------------------------------------------------+
+   | NOAA Cloud [#fn]_  | /contrib/EPIC/containers                               |
+   +--------------------+--------------------------------------------------------+
+   | Orion/Hercules     | /work/noaa/epic/role-epic/contrib/containers           |
+   +--------------------+--------------------------------------------------------+
+
+.. [#fn] The CAPE case can run on the NOAA Cloud ParallelWorks (PW) platforms, but the baroclinic wave case cannot.
 
 Users can simply set an environment variable to point to the container: 
 
@@ -134,7 +136,7 @@ If users prefer, they may copy the container to their local working directory. F
 Other Systems
 ----------------
 
-On other systems, users can build the Singularity container from a public Docker :term:`container` image or download the ``ubuntu22.04-intel-wm-dev-hsd-test.img`` container from the `UFS Hierarchical Testing Framework (HTF) Data Bucket <https://registry.opendata.aws/noaa-ufs-htf-pds/>`_. Downloading may be faster depending on the download speed on the user's system. However, the container in the data bucket is the ``release/public-v2.0.0`` container rather than an updated ``develop`` branch container.
+On other systems, users can build the Singularity container from a public Docker :term:`container` image or download the ``ubuntu22.04-intel-wm-dev-hsd-test.img`` container from the `UFS Hierarchical Testing Framework (HTF) Data Bucket <https://registry.opendata.aws/noaa-ufs-htf-pds/>`_. Downloading may be faster depending on the download speed on the user's system. Note that the container in the data bucket is from the November 20, 2024 ``develop`` branch.
 
 To download from the data bucket, users can run:
 
@@ -228,12 +230,13 @@ Run the ``stage-rt.sh`` script with the proper arguments.
 
 .. code-block:: console
 
-   ./stage-rt.sh -c=<compiler> -m=<mpi_implementation> -i=$img
+   ./stage-rt.sh -c=<compiler> -m=<mpi_implementation> [-p=<platform>] -i=$img
 
 where:
 
    * ``-c`` is the compiler on the user's local machine (e.g., ``intel/2022.1.2``)
    * ``-m`` is the :term:`MPI` on the user's local machine (e.g., ``impi/2022.1.2``)
+   * ``-p`` refers to the local machine/platform (e.g., ``hera``, ``jet``, ``gaea``, ``noaacloud``). Required for Gaea and Jet only. 
    * ``-i`` is the full path to the container image (e.g., ``$img`` or ``$HSD/ubuntu22.04-intel-wm-dev-hsd-test.img``).
 
 .. note::
@@ -250,8 +253,15 @@ When this command runs, ``stage-rt.sh`` will print the following message to the 
    Creating ufs_singularity.intel.lua
    Tricking ufs_test.sh file
    Updating various files with host paths
+   Done
 
 Additionally, the user should see the ``ufs-weather-model`` directory in the ``$HSD`` directory (``ls``). 
+
+.. note::
+
+   Gaea and Jet:
+      * Gaea uses a different compiler and MPI to run with the container: ``-c=intel-classic/2023.2.0 -m=cray-mpich/8.1.28``
+      * On Jet, ``cd`` to ``/mnt`` first before navigating to individual user workspaces to use the container.
 
 .. _ConfigureExptC:
 
