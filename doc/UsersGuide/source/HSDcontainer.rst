@@ -340,6 +340,7 @@ Check Experiment Output
 If the experiment completes successfully, the loop will exit with output similar to the following:
 
 .. code-block:: console
+   :emphasize-lines: 1, 2, 11
 
    Rocoto workflow has completed.
    + return 0
@@ -349,7 +350,7 @@ If the experiment completes successfully, the loop will exit with output similar
    + TEST_END_TIME='20241115 16:43:41'
    + export TEST_END_TIME
    + python -c 'import create_log; create_log.finish_log()'
-   running: /usr/bin/singularity exec --env-file /scratch1/NCEPDEV/stmp4/Edward.Snyder/hsd-test/new-cont/ufs-weather-model/container-scripts/ufswm.env -B /scratch1:/scratch1 /scratch1/NCEPDEV/stmp4/Edward.Snyder/hsd-test/new-cont/ubuntu22.04-intel-wm-dev-hsd-test.img python tmp_arg_file.py
+   running: /usr/bin/singularity exec --env-file /scratch1/NCEPDEV/stmp4/User.Name/hsd-test/new-cont/ufs-weather-model/container-scripts/ufswm.env -B /scratch1:/scratch1 /scratch1/NCEPDEV/stmp4/User.Name/hsd-test/new-cont/ubuntu22.04-intel-wm-dev-hsd-test.img python tmp_arg_file.py
    Performing Cleanup...
    REGRESSION TEST RESULT: SUCCESS
    + echo 'ufs_test.sh finished'
@@ -358,7 +359,7 @@ If the experiment completes successfully, the loop will exit with output similar
    ++ awk '{print $2}'
    + PID_LOCK=2947803
    + [[ 2947803 == \2\9\4\7\8\0\3 ]]
-   + rm -rf /scratch1/NCEPDEV/stmp4/Edward.Snyder/hsd-test/new-cont/ufs-weather-model/tests-dev/lock
+   + rm -rf /scratch1/NCEPDEV/stmp4/User.Name/hsd-test/new-cont/ufs-weather-model/tests-dev/lock
    + [[ false == true ]]
    + trap 0
    + exit
