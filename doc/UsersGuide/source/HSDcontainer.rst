@@ -166,8 +166,8 @@ Users on any system may download and untar the data from the `UFS Hierarchical T
 .. code-block:: console
 
    cd $HSD
-   wget https://noaa-ufs-htf-pds.s3.amazonaws.com/develop-20241115/HSD_cases_data.tar.gz
-   tar xvfz HSD_cases_data.tar.gz
+   wget https://noaa-ufs-htf-pds.s3.amazonaws.com/develop-20241115/HSD_fix_files_and_case_data.tar.gz
+   tar xvfz HSD_fix_files_and_case_data.tar.gz
 
 .. _RunContainer:
 
