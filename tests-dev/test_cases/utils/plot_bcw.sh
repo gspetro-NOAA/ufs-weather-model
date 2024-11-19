@@ -28,7 +28,7 @@ cp gscript/xcbar.gs .
 rm -rf gscript
 
 # load modules grads and wgrib2
-if [[ $(hostname) == gaea6[1-9] ]]; then module load Core/24.11 ; fi
+if [[ $(hostname) == gaea6[1-9] || true  ]]; then module load Core/24.11 ; fi
 module load grads wgrib2
 
 # check if model output file exists:
