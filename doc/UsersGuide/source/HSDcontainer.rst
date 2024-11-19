@@ -363,9 +363,10 @@ If the experiment completes successfully, the loop will exit with output similar
    + trap 0
    + exit
 
-The experiment output can be found under the run directory (``${PTMP}/${USER}/FV3_RT/rt_${pid}``), which will contain two directories, two log files, and two environment variable files (one for the compile task and one for the experiment task). For example: 
+The experiment output can be found under the run directory (``${PTMP}/${USER}/FV3_RT/rt_${pid}``), which will contain two subdirectories, two log files, and two environment variable files (one for the compile task and one for the experiment task). For example: 
 
 .. code-block:: console
 
    $ ls run_dir/
-   baroclinic_wave_intel  baroclinic_wave_intel.log  compile_atm_dyn32_intel  compile_atm_dyn32_intel.env  compile_atm_dyn32_intel.log  run_test_baroclinic_wave_intel.env
+   baroclinic_wave_intel      compile_atm_dyn32_intel       compile_atm_dyn32_intel.log
+   baroclinic_wave_intel.log  compile_atm_dyn32_intel.env   run_test_baroclinic_wave_intel.env
