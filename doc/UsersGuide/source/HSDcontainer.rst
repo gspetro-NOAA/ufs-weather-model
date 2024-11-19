@@ -169,18 +169,6 @@ Users on any system may download and untar the data from the `UFS Hierarchical T
    wget https://noaa-ufs-htf-pds.s3.amazonaws.com/develop-20241115/HSD_cases_data.tar.gz
    tar xvfz HSD_cases_data.tar.gz
 
-.. COMMENT: Update w/new file name! 
-
-If users choose to add data in a location other than ``$HSD``, they can set the input data directory by running:
-
-.. code-block:: console
-
-   export LANDDA_INPUTS=/path/to/inputs
-
-.. COMMENT: Update? ^ 
-
-where ``/path/to`` is replaced by the absolute path to the location of their HSD input data. 
-
 .. _RunContainer:
 
 Run the Container
@@ -236,9 +224,7 @@ where ``<local_base_dir>`` and ``<container_dir>`` are replaced with a top-level
 
    Sometimes binding directories with different names can cause problems. In general, it is recommended that the local base directory and the container directory have the same name. For example, if the host system's top-level directory is ``/user1234``, the user may want to convert the ``.img`` file to a writable sandbox and create a ``user1234`` directory in the sandbox to bind to. 
 
-Run the ``stage-rt.sh`` script with the proper arguments. Ensure ``LANDDA_INPUTS`` variable is set before running this script.
-
-.. COMMENT: Remove LANDDA_INPUTS comment? ^
+Run the ``stage-rt.sh`` script with the proper arguments. 
 
 .. code-block:: console
 
