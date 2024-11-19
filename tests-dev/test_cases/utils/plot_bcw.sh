@@ -61,7 +61,7 @@ gribmap -i GFSPRS.ctl
 cat << EOF > bcw.gs
 exp="${exp_name}"
 var="hcurl(ugrdprs,vgrdprs)"
-llev=${level}
+lev=${level}
 tt=${fcst_time}
 t=tt/6+1
 'reinit'
