@@ -11,13 +11,13 @@ fcst_time=150
 
 ###############################################################
 # initialize module
-. $LMOD_ROOT/lmod/init/bash
+. ${LMOD_ROOT}/lmod/init/bash
 
 # update path with current directory
-export PATH=.:$PATH
+export PATH=.:${PATH}
 
 # if grads-to-control app is not present, get it from web:
-[ -f g2ctl ] || wget -q https://ftp.cpc.ncep.noaa.gov/wd51we/g2ctl/g2ctl
+[[ -f g2ctl ]] || wget -q https://ftp.cpc.ncep.noaa.gov/wd51we/g2ctl/g2ctl
 chmod 755 g2ctl
 
 # get colorbar scripts from github
@@ -28,40 +28,40 @@ cp gscript/xcbar.gs .
 rm -rf gscript
 
 # load modules grads and wgrib2
-if [[ `hostname` == gaea6[1-9] ]]; then module load Core/24.11 ; fi
+if [[ $(hostname) == gaea6[1-9] ]]; then module load Core/24.11 ; fi
 module load grads wgrib2
 
 # check if model output file exists:
-nfiles=`ls GFSPRS.GrbF* | wc -l`
+nfiles=$(ls GFSPRS.GrbF* | wc -l)
 if ls GFSPRS.GrbF* >/dev/null 2>&1
-then 
+then
   echo Using files: GFSPRS.GrbF\*
 else
   echo "No model output (GFSPRS.GrbF*) ... exiting"
   exit
 fi
 # check if plotting fcst time is <= existing forecast time
-last_fcst=$((($nfiles-1)*6))
-if (( $fcst_time > $last_fcst )); then
-  echo "Plot time "$fcst_time "is larger than existing fcst time "$last_fcst
+last_fcst=$(((${nfiles}-1)*6))
+ if (( ${fcst_time} > ${last_fcst} )); then
+  echo "Plot time ""${fcst_time}" "is larger than existing fcst time ""${last_fcst}"
   echo "Exiting... "
   exit
 fi
 
 # Create grads control and index files
 g2ctl -0 GFSPRS.GrbF%f2 GFSPRS.idx > GFSPRS.ctl
-sed -i 's/tdef 1/tdef '$nfiles'/g' GFSPRS.ctl
+sed -i 's/tdef 1/tdef '"${nfiles}"'/g' GFSPRS.ctl
 sed -i 's/ 1mo/ 6hr/g' GFSPRS.ctl
-#gribmap -i GFSPRS.ctl
+gribmap -i GFSPRS.ctl
 
 ###############################################################
 # Plot baroclinic case
 ###############################################################
 cat << EOF > bcw.gs
-exp="$exp_name"
+exp="${exp_name}"
 var="hcurl(ugrdprs,vgrdprs)"
-lev=$level
-tt=$fcst_time
+llev=${level}
+tt=${fcst_time}
 t=tt/6+1
 'reinit'
 'open GFSPRS.ctl'
