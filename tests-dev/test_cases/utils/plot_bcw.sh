@@ -11,7 +11,7 @@ fcst_time=150
 
 ###############################################################
 # initialize module
-. ${LMOD_ROOT}/lmod/init/bash
+. "${LMOD_ROOT}"/lmod/init/bash
 
 # update path with current directory
 export PATH=.:${PATH}
