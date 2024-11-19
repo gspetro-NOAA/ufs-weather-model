@@ -28,11 +28,12 @@ cp gscript/xcbar.gs .
 rm -rf gscript
 
 # load modules grads and wgrib2
-if [[ $(hostname) == gaea6[1-9] || true  ]]; then module load Core/24.11 ; fi
+HOSTNAME=$(hostname)
+if [[ ${HOSTNAME} == gaea6[1-9] ]]; then module load Core/24.11 ; fi
 module load grads wgrib2
 
 # check if model output file exists:
-nfiles=$(ls GFSPRS.GrbF* | wc -l)
+nfiles=$(find GFSPRS.GrbF* | wc -l)
 if ls GFSPRS.GrbF* >/dev/null 2>&1
 then
   echo Using files: GFSPRS.GrbF\*
@@ -41,8 +42,8 @@ else
   exit
 fi
 # check if plotting fcst time is <= existing forecast time
-last_fcst=$(((${nfiles}-1)*6))
- if (( ${fcst_time} > ${last_fcst} )); then
+last_fcst=$(((nfiles-1)*6))
+ if (( fcst_time > last_fcst )); then
   echo "Plot time ""${fcst_time}" "is larger than existing fcst time ""${last_fcst}"
   echo "Exiting... "
   exit
