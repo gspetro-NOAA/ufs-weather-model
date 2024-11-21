@@ -208,19 +208,25 @@ When making a writable sandbox on NOAA :term:`RDHPCS`, the following warnings co
    WARNING: integrity: signature not found for object group 1
    WARNING: Bootstrap image could not be verified, but build will continue.
 
+When a sandbox container directory is created, update the ``$img`` environmental variable to reference that  directory, for example: ``export img=/path/to/ubuntu22.04-intel-wm-dev-hsd-test``.
+ 
 From within the ``$HSD`` directory, copy the ``stage-rt.sh`` script out of the container. 
 
 .. code-block:: console
 
    singularity exec -H $PWD $img cp /opt/stage-rt.sh .
 
-The ``stage-rt.sh`` script should now be in the ``$HSD`` directory. If for some reason, the previous command was unsuccessful, users may try a version of the following command instead: 
+The ``stage-rt.sh`` script should now be in the ``$HSD`` directory. If the previous command did not work as expected, users can attempt an alternative version of the command: 
 
 .. code-block:: console
 
    singularity exec -B /<local_base_dir>:/<container_dir> $img cp /opt/stage-rt.sh .
 
-where ``<local_base_dir>`` and ``<container_dir>`` are replaced with a top-level directory on the local system and in the container, respectively. Additional directories can be bound by adding another ``-B /<local_base_dir>:/<container_dir>`` argument before the container location (``$img``). Note that if previous steps included a ``sudo`` command, ``sudo`` may be required in front of this command. 
+In this command: 
+   * replace  ``<local_base_dir>`` with a top-level directory on the local system
+   * replace ``<container_dir>`` with the corresponding top-level directory inside the container
+
+Users can bind additional directories by including another ``-B /<local_base_dir>:/<container_dir>`` option  before the container location (``$img``). Note that if earlier steps included a ``sudo`` command, ``sudo`` may be required in front of this command as well.
 
 .. note::
 
@@ -273,12 +279,15 @@ To configure the experiment, users may need to update the ``default_vars.sh`` sc
 Module Modification
 --------------------
 
-The machine configuration file is located at ``ufs-weather-model/tests-dev/machine_config/machine_singularity.config``. It assumes that Rocoto can be loaded via ``module load`` command from the host machine's initial state. If an additional path or module needs to be loaded, modify the ``machine_singularity.config`` to reflect those additions. For example, if the Rocoto package is found within the ``contrib`` module, add ``module load contrib`` before the ``module load rocoto`` statement in the machine configuration file.
+The machine configuration file can be found at ``ufs-weather-model/tests-dev/machine_config/machine_singularity.config``. It assumes that Rocoto can be loaded via ``module load`` command from the host machine's default environment. If an additional modules or paths are required, update the  ``machine_singularity.config`` accordingly. For example, if the Rocoto module requres loading ``contrib`` module first, add ``module load contrib`` before the ``module load rocoto`` statement in the machine configuration file.
 
 Host Machine Modifications
 ---------------------------
 
-Default variables for regression tests and HSD tests are set in the ``default_vars.sh`` script in the ``ufs-weather-model`` directory copied *from the container*. The individual test scripts (e.g., ``baroclinic_wave``, ``2020_CAPE``) override these variables where necessary. However, when running the HSD cases in a container, the tasks-per-node (TPN) variables in the singularity section need to be modified to reflect the user's host machine TPN configuration. 
+Default variables for regression tests and HSD tests are set in the ``default_vars.sh`` script in the ``ufs-weather-model/tests`` directory copied *from the container*. When running the HSD cases in a container, you must update the tasks-per-node (TPN) variables in the Singularity section to match the TPN configuration of your host machine. The individual test scripts (e.g., ``baroclinic_wave``, ``2020_CAPE``) found under ``ufs-weather-model/tests-dev/test_cases/tests`` override variables set in the ``default_vars.sh`` where necessary. 
+
+You may need to adjust the batch job submission scripts to suit your host machine. The scripts ``compile_slurm.IN_singularity`` (for building) and ``fv3_slurm.IN_singularity`` (for running HSD tests) can be found in the ``ufs-weather-model/test_cases/expt_conf`` directory.
+
 
 Test Configuration
 --------------------
