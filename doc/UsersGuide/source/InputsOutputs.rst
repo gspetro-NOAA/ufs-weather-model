@@ -1659,18 +1659,18 @@ A sample of the file contents is shown below:
 
 However, ``ufs.configure`` files for other configurations of the Weather Model are more complex. A full set of ``ufs.configure`` templates is available in the ``ufs-weather-model/tests/parm/`` directory `here <https://github.com/ufs-community/ufs-weather-model/tree/develop/tests/parm>`__. Template names follow the pattern ``ufs.configure.*.IN``. A number of samples are available below: 
 
-   * `ATMAQ <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.atmaq.IN>`__ configuration
-   * `S2S <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.s2s_aoflux_esmf.IN>`__ (fully coupled ``S2S`` configuration that receives atmosphere-ocean fluxes from a mediator)
-   * `S2SW <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.s2sw.IN>`__ (fully coupled ``S2SW`` configuration)
-   * `S2SWA <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.s2swa.IN>`__ (coupled GOCART in the S2SAW configuration)
-   * `ATM-LND <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.atm_lnd.IN>`__ (ATML configuration)
+   * `ATMAQ <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.atmaq.IN>`_ configuration
+   * `S2S <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.s2s_aoflux.IN>`_ (fully coupled ``S2S`` configuration that receives atmosphere-ocean fluxes from a mediator)
+   * `S2SW <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.s2sw.IN>`_ (fully coupled ``S2SW`` configuration)
+   * `S2SWA <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.s2swa.IN>`_ (coupled GOCART in the S2SAW configuration)
+   * `ATM-LND <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.atm_lnd.IN>`_ (ATML configuration)
 
    * For more HAFS, HAFSW, and HAFS-ALL configurations please see the following ``ufs.configure`` templates:
 
-      * `HAFS ATM-OCN <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.hafs_atm_ocn.IN>`__
-      * `HAFS ATM-WAV <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.hafs_atm_wav.IN>`__
-      * `HAFS ATM-OCN-WAV <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.hafs_atm_ocn_wav.IN>`__
-      * `HAFS ATM-DOCN <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.hafs_atm_docn.IN>`__
+      * `HAFS ATM-OCN <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.hafs_atm_ocn.IN>`_
+      * `HAFS ATM-WAV <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.hafs_atm_wav.IN>`_
+      * `HAFS ATM-OCN-WAV <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.hafs_atm_ocn_wav.IN>`_
+      * `HAFS ATM-DOCN <https://github.com/ufs-community/ufs-weather-model/blob/develop/tests/parm/ufs.configure.hafs_atm_docn.IN>`_
 
 .. note:: The ``aoflux_grid`` option is used to select the grid/mesh to perform atmosphere-ocean flux calculation. The possible options are ``xgrid`` (exchange grid), ``agrid`` (atmosphere model grid) and ``ogrid`` (ocean model grid).
 
@@ -2208,10 +2208,10 @@ Two files (``model_configure`` and ``diag_table``) control the output that is ge
 
    Relationship between ``diag_table``, ``model_configure`` and generated output files
 
-Standard output files are ``logfHHH`` (one per forecast hour), and out and err as specified by the job submission. ESMF may also produce log
+Standard output files are ``logfHHH`` (one per forecast hour), and ``out`` and ``err`` as specified by the job submission. ESMF may also produce log
 files (controlled by variable print_esmf in the ``model_configure`` file), called ``PETnnn.ESMF_LogFile`` (one per MPI task).
 
-Additional output files include: ``nemsusage.xml``, a timing log file; `time_stamp.out`, contains the model init time; ``RESTART/*nc``, files needed for restart runs.
+Additional output files include: ``nemsusage.xml``, a timing log file; ``time_stamp.out``, contains the model init time; ``RESTART/*nc``, files needed for restart runs.
 
 .. _mom-out:
 
