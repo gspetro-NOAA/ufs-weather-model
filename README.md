@@ -30,9 +30,10 @@ The top level directory structure groups source code and input files as follow:
 | ```MOM6-interface/```     | Contains MOM6 ocean model component |
 | ```NOAHMP-interface/```   | Contains Noah-MP land model component |
 | ```WW3/```                | Contains community wave modeling framework WW3 |
+| ```fire_behavior/```      | Contains the Community Fire Behavior Model component |
 | ```stochastic_physics/``` | Contains the stochastic physics source code |
-| ```cmake/```              | Contains compile option files on various platforms. |
-| ```modulefiles/```        | Contains module files on various platforms. |
+| ```cmake/```              | Contains compile option files on various platforms |
+| ```modulefiles/```        | Contains module files on various platforms |
 | ```tests/```              | Regression and unit testing framework scripts. |
 | ```tests-dev/```          | Developmental testing framework scripts. |
 | ```build.sh```            | Script to build the model executable (also used by `tests/`) |
