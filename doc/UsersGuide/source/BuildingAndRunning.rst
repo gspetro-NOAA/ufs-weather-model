@@ -63,7 +63,7 @@ As of February 24, 2025, the UFS WM Regression Tests (:term:`RTs <RT>`) on Level
    zlib/1.2.13
 
 The most updated list of common modules can be viewed in ``ufs_common.lua`` 
-`here <https://github.com/ufs-community/ufs-weather-model/blob/develop/modulefiles/ufs_common.lua>`_.
+:wm-repo:`here <blob/develop/modulefiles/ufs_common.lua>`_.
 
 .. attention::
    Documentation is available for installing `spack-stack <https://spack-stack.readthedocs.io/en/latest/>`_. 
@@ -145,7 +145,7 @@ To clone the develop branch of the ``ufs-weather-model`` repository and update i
   git clone --recursive https://github.com/ufs-community/ufs-weather-model.git
   cd ufs-weather-model
 
-Compiling the model will take place within the ``ufs-weather-model`` directory created by this command.
+Compiling the model will take place within the ``ufs-weather-model`` directory created by this clone command.
 
 .. _build-wm:
 
@@ -767,8 +767,9 @@ To display detailed information on how to use ``rt.sh``, users can simply run ``
 When running a large number (10's or 100's) of tests, the ``-e`` or ``-r`` options can significantly
 decrease testing time by using a workflow manager (ecFlow or Rocoto, respectively) to queue the jobs 
 according to dependencies and run them concurrently. 
-The ``-n`` option can be used to run a single test; for example, ``./rt.sh -n "control_c48 intel"`` 
-will build the ATM model and run the ``control_c48`` test with an Intel compiler. 
+The ``-n`` option can be used to run a single test; for example, ``./rt.sh -a epic -n "control_c48 intel"`` 
+will build the ATM model and run the ``control_c48`` test with an Intel compiler using the "epic" account 
+(users should substitute an account where they can charge computational resources).
 The ``-c`` option is used to create a baseline. New baselines are needed when code changes lead 
 to result changes and therefore deviate from existing baselines on a bit-for-bit basis.
 
