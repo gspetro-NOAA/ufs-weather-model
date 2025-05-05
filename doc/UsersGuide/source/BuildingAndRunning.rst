@@ -63,7 +63,7 @@ As of February 24, 2025, the UFS WM Regression Tests (:term:`RTs <RT>`) on Level
    zlib/1.2.13
 
 The most updated list of common modules can be viewed in ``ufs_common.lua`` 
-:wm-repo:`here <blob/develop/modulefiles/ufs_common.lua>`_.
+:wm-repo:`here <blob/develop/modulefiles/ufs_common.lua>`.
 
 .. attention::
    Documentation is available for installing `spack-stack <https://spack-stack.readthedocs.io/en/latest/>`_. 
