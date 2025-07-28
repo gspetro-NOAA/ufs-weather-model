@@ -40,5 +40,6 @@ export OUTPUT_FH="2 4 6"
 NTILES=1
 
 if [[ ${MACHINE_ID} = ursa ]]; then
-   WLCLK=30
+   #WLCLK=30
+   TPN=88
 fi
