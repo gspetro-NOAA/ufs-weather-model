@@ -105,5 +105,5 @@ export FV3_RUN="hafs_fv3_run.IN hafs_ww3_run.IN"
 
 if [[ ${MACHINE_ID} = ursa ]]; then
    #WLCLK=40
-   TPN=144
+   TPN=168
 fi
