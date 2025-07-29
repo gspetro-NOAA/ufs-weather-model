@@ -41,5 +41,5 @@ NTILES=1
 
 if [[ ${MACHINE_ID} = ursa ]]; then
    #WLCLK=30
-   TPN=88
+   TPN=168
 fi
