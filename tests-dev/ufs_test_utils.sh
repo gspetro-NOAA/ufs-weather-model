@@ -31,6 +31,7 @@ function set_run_task() {
 
     export WLCLK
 	export TASKS
+    export UFS_TASKS
     export NODES
     export TPN
     export PPN
