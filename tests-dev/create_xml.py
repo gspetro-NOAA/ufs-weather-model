@@ -188,8 +188,9 @@ def write_runtest_env():
     delete_rundir = str(os.getenv('delete_rundir'))
     WLCLK         = str(os.getenv('WLCLK'))
     MACHINE_ID    = str(os.getenv('MACHINE_ID'))
-    THRD    = str(os.getenv('THRD'))
-    TASKS   = str(os.getenv('TASKS'))
+    THRD     = str(os.getenv('THRD'))
+    TASKS    = str(os.getenv('TASKS'))
+    UFS_TASKS= str(os.getenv('UFS_TASKS'))
     NODES   = str(os.getenv('NODES'))
     TPN     = str(os.getenv('TPN'))
     runtest_envs = f"""
@@ -223,6 +224,7 @@ export WLCLK={WLCLK}
 export RTVERBOSE=false
 export THRD={THRD}
 export TASKS={TASKS}
+export UFS_TASKS={UFS_TASKS}
 export NODES={NODES}
 export TPN={TPN}
 """
