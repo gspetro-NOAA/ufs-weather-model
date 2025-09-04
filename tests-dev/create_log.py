@@ -28,16 +28,6 @@ def get_timestamps(path):
 def finish_log():
     """Collect regression test results and generate log file.
     """
-    #UFS_TEST_YAML = env.ufs_test_yaml
-    #PATHRT     = env.pathrt
-    #MACHINE_ID = env.machine_id
-    REGRESSIONTEST_LOG = env.pathrt+'/logs/RegressionTests_'+env.machine_id+'.log'
-    filename   = REGRESSIONTEST_LOG
-    #KEEP_RUNDIR= env.keep_rundir
-    #ROCOTO     = env.rocoto
-    CREATE_BASELINE = env.create_baseline
-    COMPILE_ONLY = env.compile_only
-
     run_logs= f"""
 """
     COMPILE_PASS= 0
