@@ -46,7 +46,7 @@ def finish_log():
     PASS_NR= 0
     FAIL_NR= 0
     failed_list= []
-    test_changes_list= PATHRT+'/test_changes.list'
+    test_changes_list= env.pathrt+'/test_changes.list'
     with open(env.ufs_test_yaml, 'r') as f:
         rt_yaml = yaml.load(f, Loader=yaml.FullLoader)
         for apps, jobs in rt_yaml.items():
@@ -63,7 +63,7 @@ def finish_log():
                         COMPILE_CHECK1 ='Compile '+COMPILE_ID+' Completed'
                         COMPILE_CHECK2 ='[100%] Linking Fortran executable'
                         try:
-                            with open('./logs/log_'+MACHINE_ID+'/'+COMPILE_LOG) as f:
+                            with open('./logs/log_'+env.machine_id+'/'+COMPILE_LOG) as f:
                                 if COMPILE_CHECK1 in f.read() or COMPILE_CHECK2 in f.read():                        
                                     COMPILE_PASS += 1
                                     f.seek(0)
@@ -99,7 +99,7 @@ def finish_log():
                                 f.close()
                         except FileNotFoundError:
                             compile_log = "FAIL -- COMPILE "+COMPILE_ID+"\n"
-                            print('./logs/log_'+MACHINE_ID+'/'+COMPILE_LOG+': does not exist')
+                            print('./logs/log_'+env.machine_id+'/'+COMPILE_LOG+': does not exist')
                         run_logs += compile_log
                     else:
                         PASS_TESTS = True
