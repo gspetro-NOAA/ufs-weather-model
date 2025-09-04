@@ -350,5 +350,5 @@ def rrmdir(path):
     #        os.remove(entry)
     #        os.rmdir(path)
 
-#if __name__ == "__main__":
-#    create_yaml()
+if __name__ == "__main__":
+    create_yaml()
