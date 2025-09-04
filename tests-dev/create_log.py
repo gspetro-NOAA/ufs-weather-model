@@ -103,7 +103,7 @@ def finish_log():
                         run_logs += compile_log
                     else:
                         PASS_TESTS = True
-                if (str(key) == 'tests' and COMPILE_ONLY == 'false' and not PASS_TESTS):
+                if (str(key) == 'tests' and env.compile_only == 'false' and not PASS_TESTS):
                     for test in val:
                         case, config = get_testcase(test)
                         machine_check = machine_check_off(env.machine_id, config)
