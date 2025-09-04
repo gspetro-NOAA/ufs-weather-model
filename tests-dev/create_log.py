@@ -144,6 +144,7 @@ def finish_log():
                                     FAIL_NR += 1
                                 run_logs += test_log
                     run_logs += '\n'
+    filename = env.pathrt+'/logs/RegressionTests_'+env.machine_id+'.log'
     write_logfile(filename, "a", output=run_logs)
 
     TEST_START_TIME, TEST_END_TIME = get_timestamps('./logs/log_'+env.machine_id+'/')
