@@ -224,7 +224,7 @@ Result: FAILURE
     modfiles= env.pathrt+'modulefiles/modules.fv3_*'; delete_files(modfiles)
     tmpfiles= env.pathrt+'/keep_tests.tmp'; delete_files(tmpfiles)
     if env.keep_rundir == 'false':
-        rundir = PATHRT+'/run_dir'
+        rundir = env.pathrt+'/run_dir'
         os.unlink(rundir)
     if env.rocoto == 'true':
         rocotofiles=env.pathrt+'/rocoto*'
