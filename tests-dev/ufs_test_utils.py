@@ -6,6 +6,52 @@ import yaml
 import shutil
 import subprocess
 
+def process_test_job(machine_id, test_name, compiler, config):
+    """
+    Process a single test job and return its log string and pass status.
+    """
+    test_id = f"{test_name}_{compiler}"
+    test_log_path = f"./logs/log_{machine_id}/rt_{test_id}.log"
+    timestamp_path = f"./logs/log_{machine_id}/run_{test_id}_timestamp.txt"
+    pass_check = f"Test {test_id} PASS"
+    maxs_check = "The maximum resident set size (KB)"
+    pass_flag = False
+    memsize = ""
+    time_log = ""
+
+    try:
+        with open(test_log_path) as f:
+            if pass_check in f.read():
+                pass_flag = True
+    except FileNotFoundError:
+        print(f"{test_log_path}: does not exist")
+        return f"FAIL -- TEST {test_id}\n", False, test_name
+
+    if pass_flag:
+        try:
+            with open(timestamp_path) as f:
+                timing_data = f.read().split('\n', 1)[0]
+                etime = int(timing_data.split(",")[4].strip()) - int(timing_data.split(",")[1].strip())
+                rtime = int(timing_data.split(",")[3].strip()) - int(timing_data.split(",")[2].strip())
+                etime_min, etime_sec = divmod(etime, 60)
+                rtime_min, rtime_sec = divmod(rtime, 60)
+                time_log = f" [{etime_min:02}:{etime_sec:02}, {rtime_min:02}:{rtime_sec:02}]"
+        except FileNotFoundError:
+            time_log = ""
+
+        try:
+            with open(test_log_path) as f:
+                for line in f:
+                    if maxs_check in line:
+                        memsize = line.split("=")[1].strip()
+                        break
+        except FileNotFoundError:
+            memsize = ""
+
+        return f"PASS -- TEST {test_id}{time_log} ({memsize} MB)\n", True, None
+    else:
+        return f"FAIL -- TEST {test_id}\n", False, test_name
+
 def process_compile_log(machine_id, compile_id, compiler, pathrt):
     """
     Process a single compile job and return its log string and pass status.
