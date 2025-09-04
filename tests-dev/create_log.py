@@ -28,13 +28,13 @@ def get_timestamps(path):
 def finish_log():
     """Collect regression test results and generate log file.
     """
-    UFS_TEST_YAML = env.ufs_test_yaml
-    PATHRT     = env.pathrt
-    MACHINE_ID = env.machine_id
-    REGRESSIONTEST_LOG = PATHRT+'/logs/RegressionTests_'+MACHINE_ID+'.log'
+    #UFS_TEST_YAML = env.ufs_test_yaml
+    #PATHRT     = env.pathrt
+    #MACHINE_ID = env.machine_id
+    REGRESSIONTEST_LOG = env.pathrt+'/logs/RegressionTests_'+env.machine_id+'.log'
     filename   = REGRESSIONTEST_LOG
-    KEEP_RUNDIR= env.keep_rundir
-    ROCOTO     = env.rocoto
+    #KEEP_RUNDIR= env.keep_rundir
+    #ROCOTO     = env.rocoto
     CREATE_BASELINE = env.create_baseline
     COMPILE_ONLY = env.compile_only
 
@@ -47,12 +47,12 @@ def finish_log():
     FAIL_NR= 0
     failed_list= []
     test_changes_list= PATHRT+'/test_changes.list'
-    with open(UFS_TEST_YAML, 'r') as f:
+    with open(env.ufs_test_yaml, 'r') as f:
         rt_yaml = yaml.load(f, Loader=yaml.FullLoader)
         for apps, jobs in rt_yaml.items():
             for key, val in jobs.items():
                 if (str(key) == 'build'):
-                    machine_check = machine_check_off(MACHINE_ID, val)
+                    machine_check = machine_check_off(env.machine_id, val)
                     PASS_TESTS = False
                     if machine_check:
                         COMPILE_NR += 1
@@ -82,7 +82,7 @@ def finish_log():
                                     warning_log = ""
                                     warning_log = "("+str(count_warning)+" warnings"
                                     warning_log+= ","+str(count_remarks)+" remarks)"
-                                    flog = open('./logs/log_'+MACHINE_ID+'/'+COMPILE_LOG_TIME)
+                                    flog = open('./logs/log_'+env.machine_id+'/'+COMPILE_LOG_TIME)
                                     timing_data = flog.read()
                                     first_line = timing_data.split('\n', 1)[0]
                                     etime = int(first_line.split(",")[4].strip()) - int(first_line.split(",")[1].strip())
@@ -106,7 +106,7 @@ def finish_log():
                 if (str(key) == 'tests' and COMPILE_ONLY == 'false' and not PASS_TESTS):
                     for test in val:
                         case, config = get_testcase(test)
-                        machine_check = machine_check_off(MACHINE_ID, config)
+                        machine_check = machine_check_off(env.machine_id, config)
                         if machine_check:
                             JOB_NR+=1
                             TEST_NAME = case
@@ -121,14 +121,14 @@ def finish_log():
                             MAXS_CHECK = 'The maximum resident set size (KB)'
                             pass_flag = False
                             try:
-                                with open('./logs/log_'+MACHINE_ID+'/'+TEST_LOG) as f:
+                                with open('./logs/log_'+env.machine_id+'/'+TEST_LOG) as f:
                                     if PASS_CHECK in f.read():
                                         pass_flag = True
                                         f.close()                                    
                             except FileNotFoundError:
-                                print('./logs/log_'+MACHINE_ID+'/'+TEST_LOG+': does not exist')
+                                print('./logs/log_'+env.machine_id+'/'+TEST_LOG+': does not exist')
                             if pass_flag:
-                                f = open('./logs/log_'+MACHINE_ID+'/'+TEST_LOG_TIME)
+                                f = open('./logs/log_'+env.machine_id+'/'+TEST_LOG_TIME)
                                 timing_data = f.read()
                                 first_line = timing_data.split('\n', 1)[0]
                                 etime = str(int(first_line.split(",")[4].strip()) - int(first_line.split(",")[1].strip()))
@@ -140,7 +140,7 @@ def finish_log():
                                 time_log = " ["+etime_min+':'+etime_sec+', '+rtime_min+':'+rtime_sec+"]"
                                 f.close()
                                 if pass_flag :
-                                    with open('./logs/log_'+MACHINE_ID+'/'+TEST_LOG) as f:
+                                    with open('./logs/log_'+env.machine_id+'/'+TEST_LOG) as f:
                                         rtlog_file = f.readlines()
                                         for line in rtlog_file:
                                             if MAXS_CHECK in line:
@@ -156,7 +156,7 @@ def finish_log():
                     run_logs += '\n'
     write_logfile(filename, "a", output=run_logs)
 
-    TEST_START_TIME, TEST_END_TIME = get_timestamps('./logs/log_'+MACHINE_ID+'/')
+    TEST_START_TIME, TEST_END_TIME = get_timestamps('./logs/log_'+env.machine_id+'/')
     
     clean_START_TIME= TEST_START_TIME.split('.')[0]
     start_time      = datetime.strptime(clean_START_TIME, "%Y-%m-%d %H:%M:%S")
@@ -219,17 +219,17 @@ Result: FAILURE
         write_logfile(filename, "a", output=comment_log)
    
     print("Performing Cleanup...")
-    exefiles= PATHRT+'/fv3_*.*x*'; delete_files(exefiles)
-    modfiles= PATHRT+'/modules.fv3_*'; delete_files(modfiles)
-    modfiles= PATHRT+'modulefiles/modules.fv3_*'; delete_files(modfiles)
-    tmpfiles= PATHRT+'/keep_tests.tmp'; delete_files(tmpfiles)
-    if KEEP_RUNDIR == 'false':
+    exefiles= env.pathrt+'/fv3_*.*x*'; delete_files(exefiles)
+    modfiles= env.pathrt+'/modules.fv3_*'; delete_files(modfiles)
+    modfiles= env.pathrt+'modulefiles/modules.fv3_*'; delete_files(modfiles)
+    tmpfiles= env.pathrt+'/keep_tests.tmp'; delete_files(tmpfiles)
+    if env.keep_rundir == 'false':
         rundir = PATHRT+'/run_dir'
         os.unlink(rundir)
-    if ROCOTO == 'true':
-        rocotofiles=PATHRT+'/rocoto*'
+    if env.rocoto == 'true':
+        rocotofiles=env.pathrt+'/rocoto*'
         delete_files(rocotofiles)
-        lockfiles=PATHRT+'/*_lock.db'
+        lockfiles=env.pathrt+'/*_lock.db'
         delete_files(lockfiles)
     print("REGRESSION TEST RESULT: SUCCESS")    
 
