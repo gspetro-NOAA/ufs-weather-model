@@ -6,6 +6,48 @@ import yaml
 import shutil
 import subprocess
 
+def process_compile_log(machine_id, compile_id, compiler, pathrt):
+    """
+    Process a single compile job and return its log string and pass status.
+    """
+    compile_log_path = f"./logs/log_{machine_id}/compile_{compile_id}.log"
+    timestamp_path = f"./logs/log_{machine_id}/compile_{compile_id}_timestamp.txt"
+    compile_err_path = f"{pathrt}/compile_{compile_id}/err"
+
+    compile_check1 = f"Compile {compile_id} Completed"
+    compile_check2 = "[100%] Linking Fortran executable"
+    compile_pass = False
+    warning_log = ""
+
+    try:
+        with open(compile_log_path) as f:
+            contents = f.read()
+            if compile_check1 in contents or compile_check2 in contents:
+                compile_pass = True
+            f.seek(0)
+            for line in f:
+                if 'export RUNDIR_ROOT=' in line:
+                    rundir_root = line.split("=")[1].strip()
+                    break
+            compile_err = f"{rundir_root}/compile_{compile_id}/err"
+        with open(compile_err) as ferr:
+            err_contents = ferr.read()
+            count_warning = err_contents.count(": warning #")
+            count_remarks = err_contents.count(": remark #")
+            warning_log = f" ({count_warning} warnings, {count_remarks} remarks)"
+        with open(timestamp_path) as flog:
+            timing_data = flog.read().split('\n', 1)[0]
+            etime = int(timing_data.split(",")[4].strip()) - int(timing_data.split(",")[1].strip())
+            btime = int(timing_data.split(",")[3].strip()) - int(timing_data.split(",")[2].strip())
+            etime_min, etime_sec = divmod(etime, 60)
+            btime_min, btime_sec = divmod(btime, 60)
+            time_log = f" [{etime_min:02}:{etime_sec:02}, {btime_min:02}:{btime_sec:02}]"
+        status = "PASS" if compile_pass else "FAIL"
+        return f"{status} -- COMPILE {compile_id}{time_log}{warning_log}\n", compile_pass
+    except FileNotFoundError:
+        print(f"{compile_log_path}: does not exist")
+        return f"FAIL -- COMPILE {compile_id}\n", False
+
 def update_testyaml(input_list):
     """Generates temporary test YAML based on list of tests received
 

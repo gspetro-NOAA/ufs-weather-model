@@ -6,8 +6,48 @@ from datetime import datetime
 #import datetime
 from ufs_test_utils import get_testcase, write_logfile, delete_files, machine_check_off
 from runtime_env import EnvConfig
+from ufs_test_utils import process_compile_log
 
 env = EnvConfig()
+
+def process_test_job(test, RT_COMPILER, MACHINE_ID):
+    case, config = get_testcase(test)
+    TEST_NAME = case
+    TEST_ID = f"{TEST_NAME}_{RT_COMPILER}"
+    TEST_LOG = f"rt_{TEST_ID}.log"
+    TEST_LOG_TIME = f"run_{TEST_ID}_timestamp.txt"
+    PASS_CHECK = f"Test {TEST_ID} PASS"
+    MAXS_CHECK = "The maximum resident set size (KB)"
+    test_log = ""
+    pass_flag = False
+    memsize = ""
+
+    try:
+        with open(f'./logs/log_{MACHINE_ID}/{TEST_LOG}') as f:
+            if PASS_CHECK in f.read():
+                pass_flag = True
+    except FileNotFoundError:
+        print(f'./logs/log_{MACHINE_ID}/{TEST_LOG}: does not exist')
+
+    if pass_flag:
+        with open(f'./logs/log_{MACHINE_ID}/{TEST_LOG_TIME}') as f:
+            timing_data = f.read().split('\n', 1)[0]
+            etime = int(timing_data.split(",")[4]) - int(timing_data.split(",")[1])
+            rtime = int(timing_data.split(",")[3]) - int(timing_data.split(",")[2])
+            etime_min, etime_sec = divmod(etime, 60)
+            rtime_min, rtime_sec = divmod(rtime, 60)
+            time_log = f" [{etime_min:02}:{etime_sec:02}, {rtime_min:02}:{rtime_sec:02}]"
+
+        with open(f'./logs/log_{MACHINE_ID}/{TEST_LOG}') as f:
+            for line in f:
+                if MAXS_CHECK in line:
+                    memsize = line.split('=')[1].strip()
+                    break
+        test_log = f"PASS -- TEST {TEST_ID}{time_log} ({memsize} MB)\n"
+    else:
+        test_log = f"FAIL -- TEST {TEST_ID}\n"
+
+    return test_log, TEST_NAME if not pass_flag else None
 
 def get_timestamps(path):
     """Obtain experiment starting and ending time marks through file timestamps
@@ -42,107 +82,31 @@ def finish_log():
         for apps, jobs in rt_yaml.items():
             for key, val in jobs.items():
                 if (str(key) == 'build'):
+                    RT_COMPILER = val['compiler']
+                    COMPILE_ID  = apps
                     machine_check = machine_check_off(env.machine_id, val)
                     PASS_TESTS = False
                     if machine_check:
                         COMPILE_NR += 1
                         RT_COMPILER = val['compiler']
-                        COMPILE_ID  = apps
-                        COMPILE_LOG = 'compile_'+COMPILE_ID+'.log'
-                        COMPILE_LOG_TIME ='compile_'+COMPILE_ID+'_timestamp.txt'
-                        COMPILE_CHECK1 ='Compile '+COMPILE_ID+' Completed'
-                        COMPILE_CHECK2 ='[100%] Linking Fortran executable'
-                        try:
-                            with open('./logs/log_'+env.machine_id+'/'+COMPILE_LOG) as f:
-                                if COMPILE_CHECK1 in f.read() or COMPILE_CHECK2 in f.read():                        
-                                    COMPILE_PASS += 1
-                                    f.seek(0)
-                                    for line in f:
-                                        if 'export RUNDIR_ROOT=' in line:
-                                            RUNDIR_ROOT=line.split("=")[1]
-                                            break
-                                    compile_err = RUNDIR_ROOT.strip('\n')+'/compile_'+COMPILE_ID+'/err'
-                                    count_warning =0
-                                    count_remarks =0
-                                    with open(compile_err) as ferr:
-                                        contents = ferr.read()
-                                        count_warning = contents.count(": warning #")
-                                        count_remarks = contents.count(": remark #")
-                                        ferr.close()
-                                    warning_log = ""
-                                    warning_log = "("+str(count_warning)+" warnings"
-                                    warning_log+= ","+str(count_remarks)+" remarks)"
-                                    flog = open('./logs/log_'+env.machine_id+'/'+COMPILE_LOG_TIME)
-                                    timing_data = flog.read()
-                                    first_line = timing_data.split('\n', 1)[0]
-                                    etime = int(first_line.split(",")[4].strip()) - int(first_line.split(",")[1].strip())
-                                    btime = int(first_line.split(",")[3].strip()) - int(first_line.split(",")[2].strip())
-                                    etime_min, etime_sec = divmod(int(etime), 60)
-                                    etime_min = f"{etime_min:02}"; etime_sec = f"{etime_sec:02}"
-                                    btime_min, btime_sec = divmod(int(btime), 60)
-                                    btime_min = f"{btime_min:02}"; btime_sec = f"{btime_sec:02}"
-                                    time_log = " ["+etime_min+':'+etime_sec+', '+btime_min+':'+btime_sec+"]"
-                                    flog.close()
-                                    compile_log = "PASS -- COMPILE "+COMPILE_ID+time_log+warning_log+"\n"
-                                else:
-                                    compile_log = "FAIL -- COMPILE "+COMPILE_ID+"\n"                                        
-                                f.close()
-                        except FileNotFoundError:
-                            compile_log = "FAIL -- COMPILE "+COMPILE_ID+"\n"
-                            print('./logs/log_'+env.machine_id+'/'+COMPILE_LOG+': does not exist')
+                        COMPILE_ID = apps
+                        compile_log, passed = process_compile_log(env.machine_id, COMPILE_ID, RT_COMPILER, env.pathrt)
                         run_logs += compile_log
-                    else:
-                        PASS_TESTS = True
+                        if passed:
+                            COMPILE_PASS += 1
                 if (str(key) == 'tests' and env.compile_only == 'false' and not PASS_TESTS):
                     for test in val:
                         case, config = get_testcase(test)
                         machine_check = machine_check_off(env.machine_id, config)
                         if machine_check:
                             JOB_NR+=1
-                            TEST_NAME = case
-                            TEST_ID   = TEST_NAME+'_'+RT_COMPILER
-                            TEST_LOG  = 'rt_'+TEST_ID+'.log'
-                            TEST_LOG_TIME= 'run_'+TEST_ID+'_timestamp.txt'
-                            if 'dependency' in config.keys():
-                                DEP_RUN = str(config['dependency'])+'_'+RT_COMPILER
-                            else:
-                                DEP_RUN = ""
-                            PASS_CHECK = 'Test '+TEST_ID+' PASS'
-                            MAXS_CHECK = 'The maximum resident set size (KB)'
-                            pass_flag = False
-                            try:
-                                with open('./logs/log_'+env.machine_id+'/'+TEST_LOG) as f:
-                                    if PASS_CHECK in f.read():
-                                        pass_flag = True
-                                        f.close()                                    
-                            except FileNotFoundError:
-                                print('./logs/log_'+env.machine_id+'/'+TEST_LOG+': does not exist')
-                            if pass_flag:
-                                f = open('./logs/log_'+env.machine_id+'/'+TEST_LOG_TIME)
-                                timing_data = f.read()
-                                first_line = timing_data.split('\n', 1)[0]
-                                etime = str(int(first_line.split(",")[4].strip()) - int(first_line.split(",")[1].strip()))
-                                rtime = str(int(first_line.split(",")[3].strip()) - int(first_line.split(",")[2].strip()))
-                                etime_min, etime_sec = divmod(int(etime), 60)
-                                etime_min = f"{etime_min:02}"; etime_sec = f"{etime_sec:02}"
-                                rtime_min, rtime_sec = divmod(int(rtime), 60)
-                                rtime_min = f"{rtime_min:02}"; rtime_sec = f"{rtime_sec:02}"
-                                time_log = " ["+etime_min+':'+etime_sec+', '+rtime_min+':'+rtime_sec+"]"
-                                f.close()
-                                if pass_flag :
-                                    with open('./logs/log_'+env.machine_id+'/'+TEST_LOG) as f:
-                                        rtlog_file = f.readlines()
-                                        for line in rtlog_file:
-                                            if MAXS_CHECK in line:
-                                                memsize= line.split('=')[1].strip()
-                                        test_log = 'PASS -- TEST '+TEST_ID+time_log+' ('+memsize+' MB)\n'
-                                        PASS_NR += 1
-                                        f.close()
-                                else:
-                                    test_log = 'FAIL -- TEST '+TEST_ID+'\n'
-                                    failed_list.append(TEST_NAME+' '+RT_COMPILER)
-                                    FAIL_NR += 1
-                                run_logs += test_log
+                            test_log, failed_name = process_test_job(test, RT_COMPILER, env.machine_id)
+                            run_logs += test_log
+                            if failed_name:
+                                failed_list.append(failed_name)
+                            run_logs += test_log
+                            if not "FAIL" in test_log:
+                                PASS_NR += 1
                     run_logs += '\n'
     filename = env.pathrt+'/logs/RegressionTests_'+env.machine_id+'.log'
     write_logfile(filename, "a", output=run_logs)
