@@ -197,7 +197,7 @@ If you are using this log as a pull request verification, please commit test_cha
 
 Result: {SUCCESS}
 
-====END OF {MACHINE_ID} REGRESSION TESTING LOG====
+====END OF {env.machine_id} REGRESSION TESTING LOG====
 """
         write_logfile(filename, "a", output=comment_log)
     else:
