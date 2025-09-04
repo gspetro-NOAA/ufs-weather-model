@@ -100,13 +100,13 @@ def finish_log():
                         machine_check = machine_check_off(env.machine_id, config)
                         if machine_check:
                             JOB_NR+=1
-                            test_log, failed_name = process_test_job(test, RT_COMPILER, env.machine_id)
+                            test_log, passed, failed_name = process_test_log(env.machine_id, case, RT_COMPILER, config)
                             run_logs += test_log
-                            if failed_name:
-                                failed_list.append(failed_name)
-                            run_logs += test_log
-                            if not "FAIL" in test_log:
+                            if passed:
                                 PASS_NR += 1
+                            else:
+                                FAIL_NR += 1
+                                failed_list.append(failed_name + " " + RT_COMPILER)
                     run_logs += '\n'
     filename = env.pathrt+'/logs/RegressionTests_'+env.machine_id+'.log'
     write_logfile(filename, "a", output=run_logs)
