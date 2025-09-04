@@ -4,9 +4,8 @@ import subprocess
 import yaml
 from datetime import datetime
 #import datetime
-from ufs_test_utils import get_testcase, write_logfile, delete_files, machine_check_off
+from ufs_test_utils import get_testcase, write_logfile, delete_files, machine_check_off, process_compile_log, process_test_log
 from runtime_env import EnvConfig
-from ufs_test_utils import process_compile_log
 
 env = EnvConfig()
 
