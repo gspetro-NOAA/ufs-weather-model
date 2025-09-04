@@ -9,45 +9,6 @@ from runtime_env import EnvConfig
 
 env = EnvConfig()
 
-def process_test_job(test, RT_COMPILER, MACHINE_ID):
-    case, config = get_testcase(test)
-    TEST_NAME = case
-    TEST_ID = f"{TEST_NAME}_{RT_COMPILER}"
-    TEST_LOG = f"rt_{TEST_ID}.log"
-    TEST_LOG_TIME = f"run_{TEST_ID}_timestamp.txt"
-    PASS_CHECK = f"Test {TEST_ID} PASS"
-    MAXS_CHECK = "The maximum resident set size (KB)"
-    test_log = ""
-    pass_flag = False
-    memsize = ""
-
-    try:
-        with open(f'./logs/log_{MACHINE_ID}/{TEST_LOG}') as f:
-            if PASS_CHECK in f.read():
-                pass_flag = True
-    except FileNotFoundError:
-        print(f'./logs/log_{MACHINE_ID}/{TEST_LOG}: does not exist')
-
-    if pass_flag:
-        with open(f'./logs/log_{MACHINE_ID}/{TEST_LOG_TIME}') as f:
-            timing_data = f.read().split('\n', 1)[0]
-            etime = int(timing_data.split(",")[4]) - int(timing_data.split(",")[1])
-            rtime = int(timing_data.split(",")[3]) - int(timing_data.split(",")[2])
-            etime_min, etime_sec = divmod(etime, 60)
-            rtime_min, rtime_sec = divmod(rtime, 60)
-            time_log = f" [{etime_min:02}:{etime_sec:02}, {rtime_min:02}:{rtime_sec:02}]"
-
-        with open(f'./logs/log_{MACHINE_ID}/{TEST_LOG}') as f:
-            for line in f:
-                if MAXS_CHECK in line:
-                    memsize = line.split('=')[1].strip()
-                    break
-        test_log = f"PASS -- TEST {TEST_ID}{time_log} ({memsize} MB)\n"
-    else:
-        test_log = f"FAIL -- TEST {TEST_ID}\n"
-
-    return test_log, TEST_NAME if not pass_flag else None
-
 def get_timestamps(path):
     """Obtain experiment starting and ending time marks through file timestamps
 
