@@ -6,6 +6,53 @@ import yaml
 import shutil
 import subprocess
 
+def finalize_regression_log(env, run_logs, compile_pass, compile_nr, job_nr, pass_nr, fail_nr, failed_list, test_changes_list):
+    filename = os.path.join(env.pathrt, f"logs/RegressionTests_{env.machine_id}.log")
+    write_logfile(filename, "a", output=run_logs)
+
+    test_start_time, test_end_time = get_timestamps(f"./logs/log_{env.machine_id}/")
+    start_time = datetime.strptime(test_start_time.split('.')[0], "%Y-%m-%d %H:%M:%S")
+    end_time = datetime.strptime(test_end_time.split('.')[0], "%Y-%m-%d %H:%M:%S")
+    elapsed = end_time - start_time
+    hours, remainder = divmod(elapsed.total_seconds(), 3600)
+    minutes, seconds = divmod(remainder, 60)
+
+    elapsed_time = f"{int(hours):02}h:{int(minutes):02}m:{int(seconds):02}s"
+    synop_log = f"""
+SYNOPSIS:
+Starting Date/Time: {test_start_time}
+Ending Date/Time: {test_end_time}
+Total Time: {elapsed_time}
+Compiles Completed: {int(compile_pass)}/{int(compile_nr)}
+Tests Completed: {int(pass_nr)}/{int(job_nr)}
+"""
+    write_logfile(filename, "a", output=synop_log)
+
+    if int(fail_nr) == 0:
+        if os.path.isfile(test_changes_list):
+            delete_files(test_changes_list)
+        open(test_changes_list, 'a').close()
+        comment_log = f"""
+NOTES:
+A file test_changes.list was generated but is empty.
+If you are using this log as a pull request verification, please commit test_changes.list.
+Result: SUCCESS
+====END OF {env.machine_id} REGRESSION TESTING LOG====
+"""
+    else:
+        with open(test_changes_list, 'w') as listfile:
+            for line in failed_list:
+                listfile.write(f"{line}\n")
+        comment_log = f"""
+NOTES:
+A file test_changes.list was generated with list of all failed tests.
+You can use './rt.sh -c -b test_changes.list' to create baselines for the failed tests.
+If you are using this log as a pull request verification, please commit test_changes.list.
+Result: FAILURE
+====END OF {env.machine_id} REGRESSION TESTING LOG====
+"""
+    write_logfile(filename, "a", output=comment_log)
+
 def process_test_job(machine_id, test_name, compiler, config):
     """
     Process a single test job and return its log string and pass status.
