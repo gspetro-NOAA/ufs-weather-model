@@ -29,7 +29,7 @@ class RegressionLogManager:
         }
 
     def get_timestamps(self, path):
-       """
+        """
         Extracts the earliest and latest modification timestamps from files in a given directory.
 
         Args:
@@ -38,8 +38,7 @@ class RegressionLogManager:
         Returns:
             tuple[str, str]: ISO-formatted strings for earliest and latest timestamps.
         """        
-        timestamps = [datetime.fromtimestamp(os.path.getmtime(os.path.join(path, f)))
-        for f in os.listdir(path)]
+        timestamps = [datetime.fromtimestamp(os.path.getmtime(os.path.join(path, f))) for f in os.listdir(path)]
         return str(min(timestamps)), str(max(timestamps))
 
     def parse_compile_log(self, app, val):
