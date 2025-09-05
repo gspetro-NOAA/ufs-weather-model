@@ -39,7 +39,7 @@ class RegressionLogManager:
             tuple[str, str]: ISO-formatted strings for earliest and latest timestamps.
         """        
         timestamps = [datetime.fromtimestamp(os.path.getmtime(os.path.join(path, f)))
-                      for f in os.listdir(path)]
+        for f in os.listdir(path)]
         return str(min(timestamps)), str(max(timestamps))
 
     def parse_compile_log(self, app, val):
