@@ -30,11 +30,11 @@ def finish_log():
     """
     run_logs= f"""
 """
-    COMPILE_PASS= 0
-    COMPILE_NR  = 0
-    JOB_NR = 0
-    PASS_NR= 0
-    FAIL_NR= 0
+    compile_pass= 0
+    compile_nr  = 0
+    job_nr = 0
+    pass_nr= 0
+    fail_nr= 0
     failed_list= []
     test_changes_list= env.pathrt+'/test_changes.list'
     with open(env.ufs_test_yaml, 'r') as f:
@@ -42,41 +42,41 @@ def finish_log():
         for apps, jobs in rt_yaml.items():
             for key, val in jobs.items():
                 if (str(key) == 'build'):
-                    RT_COMPILER = val['compiler']
-                    COMPILE_ID  = apps
+                    rt_compiler = val['compiler']
+                    Ccompile_id  = apps
                     machine_check = machine_check_off(env.machine_id, val)
-                    PASS_TESTS = False
+                    pass_tests = False
                     if machine_check:
-                        COMPILE_NR += 1
-                        RT_COMPILER = val['compiler']
-                        COMPILE_ID = apps
-                        compile_log, passed = process_compile_log(env.machine_id, COMPILE_ID, RT_COMPILER, env.pathrt)
+                        compile_nr += 1
+                        rt_compiler = val['compiler']
+                        compile_id = apps
+                        compile_log, passed = process_compile_log(env.machine_id, compile_id, rt_compiler, env.pathrt)
                         run_logs += compile_log
                         if passed:
-                            COMPILE_PASS += 1
-                if (str(key) == 'tests' and env.compile_only == 'false' and not PASS_TESTS):
+                            compile_pass += 1
+                if (str(key) == 'tests' and env.compile_only == 'false' and not pass_tests):
                     for test in val:
                         case, config = get_testcase(test)
                         machine_check = machine_check_off(env.machine_id, config)
                         if machine_check:
-                            JOB_NR+=1
-                            test_log, passed, failed_name = process_test_log(env.machine_id, case, RT_COMPILER, config)
+                            job_nr+=1
+                            test_log, passed, failed_name = process_test_log(env.machine_id, case, rt_compiler, config)
                             run_logs += test_log
                             if passed:
-                                PASS_NR += 1
+                                pass_nr += 1
                             else:
-                                FAIL_NR += 1
-                                failed_list.append(failed_name + " " + RT_COMPILER)
+                                fail_nr += 1
+                                failed_list.append(failed_name + " " + rt_compiler)
                     run_logs += '\n'
     filename = env.pathrt+'/logs/RegressionTests_'+env.machine_id+'.log'
     write_logfile(filename, "a", output=run_logs)
 
-    TEST_START_TIME, TEST_END_TIME = get_timestamps('./logs/log_'+env.machine_id+'/')
+    test_start_time, test_end_time = get_timestamps('./logs/log_'+env.machine_id+'/')
     
-    clean_START_TIME= TEST_START_TIME.split('.')[0]
-    start_time      = datetime.strptime(clean_START_TIME, "%Y-%m-%d %H:%M:%S")
-    clean_END_TIME= TEST_END_TIME.split('.')[0]
-    end_time        = datetime.strptime(clean_END_TIME, "%Y-%m-%d %H:%M:%S")
+    clean_start_time= test_start_time.split('.')[0]
+    start_time      = datetime.strptime(clean_start_time, "%Y-%m-%d %H:%M:%S")
+    clean_end_time  = test_end_time.split('.')[0]
+    end_time        = datetime.strptime(clean_end_time, "%Y-%m-%d %H:%M:%S")
 
     hours, remainder= divmod((end_time - start_time).total_seconds(), 3600)
     minutes, seconds= divmod(remainder, 60)
@@ -84,23 +84,23 @@ def finish_log():
     hours = f"{hours:02}"; minutes= f"{minutes:02}"; seconds= f"{seconds:02}"
     elapsed_time = hours+'h:'+minutes+'m:'+seconds+'s'
 
-    COMPILE_PASS = str(int(COMPILE_PASS))
-    COMPILE_NR   = str(int(COMPILE_NR))
-    JOB_NR       = str(int(JOB_NR))
-    PASS_NR      = str(int(PASS_NR))
-    FAIL_NR      = str(int(FAIL_NR))
+    compile_pass = str(int(compile_pass))
+    compile_nr   = str(int(compile_nr))
+    job_nr       = str(int(job_nr))
+    pass_nr      = str(int(pass_nr))
+    fail_nr      = str(int(fail_nr))
     synop_log    = f"""
 SYNOPSIS:
-Starting Date/Time: {TEST_START_TIME}
-Ending Date/Time: {TEST_END_TIME}
+Starting Date/Time: {test_start_time}
+Ending Date/Time: {test_end_time}
 Total Time: {elapsed_time}
-Compiles Completed: {COMPILE_PASS}/{COMPILE_NR}
-Tests Completed: {PASS_NR}/{JOB_NR}
+Compiles Completed: {compile_pass}/{compile_nr}
+Tests Completed: {pass_nr}/{job_nr}
 
 """    
     write_logfile(filename, "a", output=synop_log)
 
-    if (int(FAIL_NR) == 0):
+    if (int(fail_nr) == 0):
         if os.path.isfile(test_changes_list):
             delete_files(test_changes_list)
         open(test_changes_list, 'a').close()
