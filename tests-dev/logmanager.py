@@ -4,6 +4,11 @@ from datetime import datetime
 from ufs_test_utils import get_testcase, write_logfile, delete_files, machine_check_off
 
 class RegressionLogManager:
+    """
+    Manages regression test logging for the UFS weather model.
+    Parses compile and test logs, tracks statistics, and generates summary reports.
+    """
+    
     def __init__(self):
         self.pathrt = os.getenv("PATHRT")
         self.machine_id = os.getenv("MACHINE_ID")
@@ -25,11 +30,31 @@ class RegressionLogManager:
         }
 
     def get_timestamps(self, path):
+       """
+        Extracts the earliest and latest modification timestamps from files in a given directory.
+
+        Args:
+            path (str): Directory path containing log files.
+
+        Returns:
+            tuple[str, str]: ISO-formatted strings for earliest and latest timestamps.
+        """        
         timestamps = [datetime.fromtimestamp(os.path.getmtime(os.path.join(path, f)))
                       for f in os.listdir(path)]
         return str(min(timestamps)), str(max(timestamps))
 
     def parse_compile_log(self, app, val):
+        """
+        Parses a compile log to determine success, extract timing and warning info,
+        and update compile statistics.
+
+        Args:
+            app (str): Application name used as compile identifier.
+            val (dict): Dictionary containing compiler configuration and metadata.
+
+        Side Effects:
+            Updates self.stats and appends formatted result to self.run_logs.
+        """
         if not machine_check_off(self.machine_id, val):
             return
         self.stats["compile_total"] += 1
@@ -81,6 +106,18 @@ class RegressionLogManager:
         self.run_logs += result
 
     def parse_test_log(self, test, config, compiler):
+        """
+        Parses a test log to determine pass/fail status, extract timing and memory usage,
+        and update test statistics.
+
+        Args:
+            test (str): Test case name.
+            config (dict): Configuration dictionary for the test.
+            compiler (str): Compiler identifier used in the test.
+
+        Side Effects:
+            Updates self.stats and appends formatted result to self.run_logs.
+        """        
         if not machine_check_off(self.machine_id, config):
             return
         self.stats["job_total"] += 1
@@ -124,6 +161,12 @@ class RegressionLogManager:
         self.run_logs += result
 
     def summarize(self):
+        """
+        Generates a summary report of compile and test results, including timing and pass/fail counts.
+
+        Returns:
+            str: Multi-line formatted summary string.
+        """        
         start, end = self.get_timestamps(os.path.join(self.pathrt, f"logs/log_{self.machine_id}/"))
         elapsed = datetime.strptime(end.split('.')[0], "%Y-%m-%d %H:%M:%S") - \
                   datetime.strptime(start.split('.')[0], "%Y-%m-%d %H:%M:%S")
@@ -139,6 +182,15 @@ Tests Completed: {self.stats['test_pass']}/{self.stats['job_total']}
 """
 
     def finalize(self):
+        """
+        Finalizes the regression test log by writing results and summary to disk.
+        Cleans up temporary files and rundir if configured.
+
+        Side Effects:
+            Writes to self.logfile and test_changes.list.
+            Deletes temporary files and directories.
+            Prints final result to stdout.
+        """        
         write_logfile(self.logfile, "a", output=self.run_logs)
         write_logfile(self.logfile, "a", output=self.summarize())
 
@@ -176,6 +228,14 @@ Result: {result}
         print(f"REGRESSION TEST RESULT: {result}")
 
     def run(self):
+        """
+        Executes the full regression logging workflow:
+        parses YAML test configuration, processes compile and test logs,
+        and finalizes the output.
+
+        Side Effects:
+            Populates self.stats and writes logs to disk.
+        """        
         with open(self.yaml_path, "r") as f:
             rt_yaml = yaml.load(f, Loader=yaml.FullLoader)
 
@@ -192,6 +252,9 @@ Result: {result}
         self.finalize()
       
 def run_regression_logging():
+    """
+    Entry point for executing regression logging via the RegressionLogManager class.
+    """    
     from logmanager import RegressionLogManager  # adjust import if needed
     logger = RegressionLogManager()
     logger.run()
