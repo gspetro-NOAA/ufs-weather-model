@@ -182,11 +182,12 @@ Result: {result}
         for app, jobs in rt_yaml.items():
             for key, val in jobs.items():
                 if key == "build":
+                    rt_compiler = val['compiler']
                     self.parse_compile_log(app, val)
                 elif key == "tests" and not self.compile_only:
                     for test in val:
                         case, config = get_testcase(test)
-                        self.parse_test_log(case, config, val["compiler"])
+                        self.parse_test_log(case, config, rt_compiler)
 
         self.finalize()
       
