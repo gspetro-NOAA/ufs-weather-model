@@ -9,22 +9,6 @@ from runtime_env import EnvConfig
 
 env = EnvConfig()
 
-def get_timestamps(path):
-    """Obtain experiment starting and ending time marks through file timestamps
-
-    Args:
-        path (str): experiment log directory
-    Returns:
-        str: experiment starting and ending time strings
-    """
-    dir_list = os.listdir(path)
-    dt = []
-    for f in dir_list:
-        m_time = os.path.getmtime(path+f)
-        dt.append(datetime.fromtimestamp(m_time))
-    dtsort=sorted(dt)
-    return str(dtsort[0]),str(dtsort[-1])
-
 def finish_log():
     """Collect regression test results and generate log file.
     """

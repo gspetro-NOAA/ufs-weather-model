@@ -5,6 +5,23 @@ import glob
 import yaml
 import shutil
 import subprocess
+from datetime import datetime
+
+def get_timestamps(path):
+    """Obtain experiment starting and ending time marks through file timestamps
+
+    Args:
+        path (str): experiment log directory
+    Returns:
+        str: experiment starting and ending time strings
+    """
+    dir_list = os.listdir(path)
+    dt = []
+    for f in dir_list:
+        m_time = os.path.getmtime(path+f)
+        dt.append(datetime.fromtimestamp(m_time))
+    dtsort=sorted(dt)
+    return str(dtsort[0]),str(dtsort[-1])
 
 def finalize_regression_log(env, run_logs, compile_pass, compile_nr, job_nr, pass_nr, fail_nr, failed_list, test_changes_list):
     filename = os.path.join(env.pathrt, f"logs/RegressionTests_{env.machine_id}.log")
@@ -53,7 +70,7 @@ Result: FAILURE
 """
     write_logfile(filename, "a", output=comment_log)
 
-def process_test_job(machine_id, test_name, compiler, config):
+def process_test_log(machine_id, test_name, compiler, config):
     """
     Process a single test job and return its log string and pass status.
     """
