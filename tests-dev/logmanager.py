@@ -8,7 +8,6 @@ class RegressionLogManager:
     Manages regression test logging for the UFS weather model.
     Parses compile and test logs, tracks statistics, and generates summary reports.
     """
-    
     def __init__(self):
         self.pathrt = os.getenv("PATHRT")
         self.machine_id = os.getenv("MACHINE_ID")
