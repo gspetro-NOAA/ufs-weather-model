@@ -74,6 +74,7 @@ def main():
     parser.add_argument("--yamls_dir", default="tests-yamls/configs/by_app")
     parser.add_argument("--manifest", default="app_manifest.yaml")
     parser.add_argument("--changes_list", default=None)
+    parser.add_argument("--user_yaml", default=None, help="Path to user-defined YAML for full workflow")
     parser.add_argument("--output", default="workflow.xml")
     parser.add_argument("--project", default=None)
     parser.add_argument("--dry_run", action="store_true", help="Preview matched tests without writing XML")
@@ -84,7 +85,12 @@ def main():
     if args.machine not in baseline_config:
         raise ValueError(f"❌ Machine '{args.machine}' not found in baseline setup.")
 
-    if args.changes_list:
+    if args.user_yaml:
+        with open(args.user_yaml) as f:
+            rt_yaml = yaml.safe_load(f)
+        filter_tests = None
+
+    elif args.changes_list:
         test_map, raw_entries = parse_test_changes(args.changes_list)
         full_yaml = load_all_app_yamls(args.yamls_dir)
         rt_yaml, matched = filter_yaml_by_test_map(full_yaml, test_map)
@@ -94,7 +100,6 @@ def main():
             print("\n🧪 Dry Run: Matched Tests")
             for entry in sorted(matched):
                 print(f"  ✅ {entry}")
-
             skipped = [entry for entry in raw_entries if entry not in matched]
             if skipped:
                 print("\n⚠️ Skipped Entries (not found in YAMLs):")
@@ -102,7 +107,6 @@ def main():
                     print(f"  ❌ {entry}")
             else:
                 print("\n✅ All entries matched successfully.")
-
             print("\n🛑 Dry run complete. No XML written.\n")
             return
 
