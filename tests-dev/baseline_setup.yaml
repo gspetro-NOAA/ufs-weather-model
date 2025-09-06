@@ -36,7 +36,8 @@ orion:
   SCHEDULER: slurm
   INPUTDATA_ROOT: /work/noaa/epic/UFS-WM_RT/NEMSfv3gfs/input-data-20250507
   INPUTDATA_ROOT_WW3: /work/noaa/epic/UFS-WM_RT/NEMSfv3gfs/input-data-20250507/WW3_input_data_20250807
-  INPUTDATA_ROOT_BMIC: /work/noaa/epic/UFS-WM_RT/NEMSfv3gfs/BM_IC-20220207  
+  INPUTDATA_ROOT_BMIC: /work/noaa/epic/UFS-WM_RT/NEMSfv3gfs/BM_IC-20220207
+  NEW_BASELINE: /work/noaa/stmp/${USER}/FV3_RT/REGRESSION_TEST
 hercules:
   QUEUE: batch
   COMPILE_QUEUE: batch
