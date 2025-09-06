@@ -1,0 +1,15 @@
+apps:
+  - s2swa
+  - atm
+  - mom6
+  - hycom
+  - fv3
+  - gocart
+  - noahmp
+  - cice
+  - datm
+  - land
+  - ww3
+  - nuopc
+  - chem
+  - s2s
