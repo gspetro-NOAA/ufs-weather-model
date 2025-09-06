@@ -17,18 +17,73 @@
 ]>
 <workflow realtime="F" scheduler="slurm" taskthrottle="10">
   <cycledef name="forecast" start="2025010100" end="2025123100" interval="06:00:00" />
-  <log>&amp;LOG;</log>
-  <task name="compile_ng-godas_intel">
-    <command>bash -c "set -xe -o pipefail; ./build.sh --compiler=intel -DAPP=NG-GODAS |&amp; tee &amp;LOG;/${TASK}.log"</comman
-d>
-    <jobname>compile_ng-godas_intel</jobname>
+  <log>&amp;LOG;/workflow.log</log>
+  <task name="compile_ng-godas_datm_cdeps_intel">
+    <command>&amp;PATHRT;/run_compile.sh &amp;PATHRT; &amp;RUNDIR_ROOT; "-DAPP=NG-GODAS" ng-godas_datm_cdeps_intel 2&gt;&amp;1
+| tee &amp;LOG;/compile_ng-godas_datm_cdeps_intel.log</command>
+    <jobname>compile_ng-godas_datm_cdeps_intel</jobname>
     <account>GFS-DEV</account>
     <queue>batch</queue>
     <partition>orion</partition>
     <nodes>1</nodes>
     <walltime>00:30:00</walltime>
-    <join>yes</join>
+    <join>&amp;RUNDIR_ROOT;/compile_{key}.log</join>
     <maxtries>2</maxtries>
     </task>
-  <metatask name="compile_ng-godas_intel_tasks" />
+  <metatask name="compile_ng-godas_datm_cdeps_intel_tests">
+    <var name="TEST" value="datm_cdeps_control_cfsr" />
+    <task name="datm_cdeps_control_cfsr">
+      <command>&amp;PATHRT;/run_test.sh &amp;PATHRT; &amp;RUNDIR_ROOT; $TEST ng-godas_datm_cdeps_intel intel 2&gt;&amp;1 | tee
+&amp;LOG;/run_ng-godas_datm_cdeps_intel.log</command>
+      <dependency>
+        <taskdep task="compile_ng-godas_datm_cdeps_intel" />
+        </dependency>
+      <jobname>datm_cdeps_control_cfsr</jobname>
+      <account>GFS-DEV</account>
+      <queue>batch</queue>
+      <partition>orion</partition>
+      <nodes>1</nodes>
+      <walltime>00:30:00</walltime>
+      <join>&amp;RUNDIR_ROOT;/ng-godas_datm_cdeps_intel.log</join>
+      <maxtries>2</maxtries>
+      <turnoff>wcoss2</turnoff>
+      <project>daily</project>
+      </task>
+    <var name="TEST" value="datm_cdeps_ciceC_cfsr" />
+    <task name="datm_cdeps_ciceC_cfsr">
+      <command>&amp;PATHRT;/run_test.sh &amp;PATHRT; &amp;RUNDIR_ROOT; $TEST ng-godas_datm_cdeps_intel intel 2&gt;&amp;1 | tee
+&amp;LOG;/run_ng-godas_datm_cdeps_intel.log</command>
+      <dependency>
+        <taskdep task="compile_ng-godas_datm_cdeps_intel" />
+        </dependency>
+      <jobname>datm_cdeps_ciceC_cfsr</jobname>
+      <account>GFS-DEV</account>
+      <queue>batch</queue>
+      <partition>orion</partition>
+      <nodes>1</nodes>
+      <walltime>00:30:00</walltime>
+      <join>&amp;RUNDIR_ROOT;/ng-godas_datm_cdeps_intel.log</join>
+      <maxtries>2</maxtries>
+      <turnoff>wcoss2,noaacloud</turnoff>
+      <project>daily</project>
+      </task>
+    <var name="TEST" value="datm_cdeps_bulk_cfsr" />
+    <task name="datm_cdeps_bulk_cfsr">
+      <command>&amp;PATHRT;/run_test.sh &amp;PATHRT; &amp;RUNDIR_ROOT; $TEST ng-godas_datm_cdeps_intel intel 2&gt;&amp;1 | tee
+&amp;LOG;/run_ng-godas_datm_cdeps_intel.log</command>
+      <dependency>
+        <taskdep task="compile_ng-godas_datm_cdeps_intel" />
+        </dependency>
+      <jobname>datm_cdeps_bulk_cfsr</jobname>
+      <account>GFS-DEV</account>
+      <queue>batch</queue>
+      <partition>orion</partition>
+      <nodes>1</nodes>
+      <walltime>00:30:00</walltime>
+      <join>&amp;RUNDIR_ROOT;/ng-godas_datm_cdeps_intel.log</join>
+      <maxtries>2</maxtries>
+      <turnoff>wcoss2,noaacloud</turnoff>
+      <project>daily</project>
+      </task>
+    </metatask>
   </workflow>
