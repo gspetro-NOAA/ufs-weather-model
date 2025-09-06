@@ -75,6 +75,7 @@ def main():
     parser.add_argument("--manifest", default="app_manifest.yaml")
     parser.add_argument("--changes_list", default=None)
     parser.add_argument("--user_yaml", default=None, help="Path to user-defined YAML for full workflow")
+    parser.add_argument("--name_case", default=None, help='Single test case in format "test_name compiler"')
     parser.add_argument("--output", default="workflow.xml")
     parser.add_argument("--project", default=None)
     parser.add_argument("--dry_run", action="store_true", help="Preview matched tests without writing XML")
@@ -85,11 +86,40 @@ def main():
     if args.machine not in baseline_config:
         raise ValueError(f"❌ Machine '{args.machine}' not found in baseline setup.")
 
+    # Priority 1: user_yaml
     if args.user_yaml:
         with open(args.user_yaml) as f:
             rt_yaml = yaml.safe_load(f)
         filter_tests = None
 
+    # Priority 2: name_case
+    elif args.name_case:
+        parts = args.name_case.strip().split()
+        if len(parts) != 2:
+            raise ValueError("❌ --name_case must be in format 'test_name compiler'")
+        test_name, compiler = parts
+        compiler = compiler.lower()
+        full_yaml = load_all_app_yamls(args.yamls_dir)
+
+        matched_key = None
+        for key, block in full_yaml.items():
+            block_compiler = block.get("build", {}).get("compiler", "unknown").lower()
+            if block_compiler != compiler:
+                continue
+            for test in block.get("tests", []):
+                if test_name in test:
+                    matched_key = key
+                    break
+            if matched_key:
+                break
+
+        if not matched_key:
+            raise ValueError(f"❌ Test name '{test_name}' with compiler '{compiler}' not found in any YAML")
+
+        rt_yaml = {matched_key: full_yaml[matched_key]}
+        filter_tests = {f"{test_name}_{compiler}"}
+
+    # Priority 3: changes_list
     elif args.changes_list:
         test_map, raw_entries = parse_test_changes(args.changes_list)
         full_yaml = load_all_app_yamls(args.yamls_dir)
@@ -110,6 +140,7 @@ def main():
             print("\n🛑 Dry run complete. No XML written.\n")
             return
 
+    # Priority 4: manifest
     else:
         apps = load_manifest(args.manifest)
         rt_yaml = merge_app_yamls(apps, args.yamls_dir)
