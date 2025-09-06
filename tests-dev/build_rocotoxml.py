@@ -5,6 +5,7 @@ from xmlbuilder import RocotoXMLBuilder
 
 def parse_test_changes(path):
     test_map = {}
+    raw_entries = []
     with open(path) as f:
         for line in f:
             if not line.strip():
@@ -13,10 +14,9 @@ def parse_test_changes(path):
             if len(parts) != 2:
                 continue
             test_name, compiler = parts
-            key = f"{test_name}_{compiler}"
-            app = test_name.split("_")[0]
-            test_map.setdefault((app, compiler), []).append(key)
-    return test_map
+            test_map[(test_name, compiler.lower())] = True
+            raw_entries.append(f"{test_name}_{compiler}")
+    return test_map, raw_entries
 
 def load_manifest(manifest_path):
     with open(manifest_path) as f:
@@ -46,24 +46,26 @@ def merge_app_yamls(apps, base_dir):
 
 def filter_yaml_by_test_map(rt_yaml, test_map):
     filtered = {}
+    matched = set()
+
     for key, block in rt_yaml.items():
         build = block.get("build", {})
         compiler = build.get("compiler", "unknown").lower()
-        option = build.get("option", "")
-        app = option.split("-DAPP=")[-1].split()[0].lower() if "-DAPP=" in option else key.split("_")[0]
 
         matched_tests = []
         for test in block.get("tests", []):
             for test_name in test:
-                if (app, compiler) in test_map and test_name in test_map[(app, compiler)]:
+                if (test_name, compiler) in test_map:
                     matched_tests.append(test)
+                    matched.add(f"{test_name}_{compiler}")
 
         if matched_tests:
             filtered[key] = {
                 "build": build,
                 "tests": matched_tests
             }
-    return filtered
+
+    return filtered, matched
 
 def main():
     parser = argparse.ArgumentParser(description="Generate Rocoto XML workflow")
@@ -74,6 +76,7 @@ def main():
     parser.add_argument("--changes_list", default=None)
     parser.add_argument("--output", default="workflow.xml")
     parser.add_argument("--project", default=None)
+    parser.add_argument("--dry_run", action="store_true", help="Preview matched tests without writing XML")
 
     args = parser.parse_args()
     baseline_config = load_baseline_config(args.baseline_yaml)
@@ -82,10 +85,27 @@ def main():
         raise ValueError(f"❌ Machine '{args.machine}' not found in baseline setup.")
 
     if args.changes_list:
-        test_map = parse_test_changes(args.changes_list)
+        test_map, raw_entries = parse_test_changes(args.changes_list)
         full_yaml = load_all_app_yamls(args.yamls_dir)
-        rt_yaml = filter_yaml_by_test_map(full_yaml, test_map)
-        filter_tests = {test for tests in test_map.values() for test in tests}
+        rt_yaml, matched = filter_yaml_by_test_map(full_yaml, test_map)
+        filter_tests = set(matched)
+
+        if args.dry_run:
+            print("\n🧪 Dry Run: Matched Tests")
+            for entry in sorted(matched):
+                print(f"  ✅ {entry}")
+
+            skipped = [entry for entry in raw_entries if entry not in matched]
+            if skipped:
+                print("\n⚠️ Skipped Entries (not found in YAMLs):")
+                for entry in skipped:
+                    print(f"  ❌ {entry}")
+            else:
+                print("\n✅ All entries matched successfully.")
+
+            print("\n🛑 Dry run complete. No XML written.\n")
+            return
+
     else:
         apps = load_manifest(args.manifest)
         rt_yaml = merge_app_yamls(apps, args.yamls_dir)
