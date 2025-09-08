@@ -55,8 +55,8 @@ export LIST_FILES="sfcf004.tile1.nc \
                    RESTART/iced.2021-03-22-36000.nc \
                    RESTART/ufs.cpld.cpl.r.2021-03-22-36000.nc \
                    ufs.cpld.ww3.r.2021-03-22-36000.nc \
-                   #20210322.100000.out_pnt.ww3.nc \
-                   #20210322.100000.out_grd.ww3 
+                   20210322.100000.out_pnt.ww3.nc \
+                   20210322.100000.out_grd.ww3 
                    "
 export DT_ATMOS=720
 export_fv3

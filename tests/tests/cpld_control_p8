@@ -30,7 +30,7 @@ export LIST_FILES="sfcf002.tile1.nc \
                    atmf004.tile4.nc \
                    atmf004.tile5.nc \
                    atmf004.tile6.nc \
-                   ## gocart.inst_aod.20210322_1000z.nc4 \
+                   gocart.inst_aod.20210322_1000z.nc4 \
                    RESTART/20210322.100000.coupler.res \
                    RESTART/20210322.100000.fv_core.res.nc \
                    RESTART/20210322.100000.fv_core.res.tile1.nc \
@@ -63,6 +63,7 @@ export LIST_FILES="sfcf002.tile1.nc \
                    RESTART/20210322.100000.sfc_data.tile4.nc \
                    RESTART/20210322.100000.sfc_data.tile5.nc \
                    RESTART/20210322.100000.sfc_data.tile6.nc \
+                   gocart.inst_aod.20210322_0800z.nc4 \
                    RESTART/20210322.080000.coupler.res \
                    RESTART/20210322.080000.fv_core.res.nc \
                    RESTART/20210322.080000.fv_core.res.tile1.nc \
