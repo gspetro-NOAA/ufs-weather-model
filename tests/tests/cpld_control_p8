@@ -117,6 +117,7 @@ export SDAY=22
 export SHOUR=06
 
 export FHMAX=4
+export FHZERO=2
 export RESTART_N=2
 export RESTART_INTERVAL="${RESTART_N} -1"
 export OUTPUT_FH='0 2 4'
