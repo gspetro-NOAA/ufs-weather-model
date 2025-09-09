@@ -69,6 +69,7 @@ export RESTART_FH="2"
 export OUTPUT_GRID='gaussian_grid'
 export NSTF_NAME='2,0,0,0,0'
 export WRITE_DOPOST=.true.
+export AOD_FRQ=020000
 
 export CPL=.true.
 export CPLCHM=.true.

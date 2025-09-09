@@ -122,6 +122,7 @@ export RESTART_N=2
 export RESTART_INTERVAL="${RESTART_N} -1"
 export OUTPUT_FH='0 2 4'
 export RESTART_FH="2"
+export AOD_FRQ=020000
 
 export MOM6_TOPOEDITS=ufs.topo_edits_011818.nc
 export MOM6_ALLOW_LANDMASK_CHANGES=True
