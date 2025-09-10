@@ -6,18 +6,18 @@ export TEST_DESCR="Restart of fully coupled FV3-CCPP-GOCART-MOM6-CICE-CMEPS-WW3 
 
 export CNTL_DIR=cpld_control_p8
 
-export LIST_FILES="sfcf004.tile1.nc \
-                   sfcf004.tile2.nc \
-                   sfcf004.tile3.nc \
-                   sfcf004.tile4.nc \
-                   sfcf004.tile5.nc \
-                   sfcf004.tile6.nc \
-                   atmf004.tile1.nc \
-                   atmf004.tile2.nc \
-                   atmf004.tile3.nc \
-                   atmf004.tile4.nc \
-                   atmf004.tile5.nc \
-                   atmf004.tile6.nc \
+export LIST_FILES="sfcf002.tile1.nc \
+                   sfcf002.tile2.nc \
+                   sfcf002.tile3.nc \
+                   sfcf002.tile4.nc \
+                   sfcf002.tile5.nc \
+                   sfcf002.tile6.nc \
+                   atmf002.tile1.nc \
+                   atmf002.tile2.nc \
+                   atmf002.tile3.nc \
+                   atmf002.tile4.nc \
+                   atmf002.tile5.nc \
+                   atmf002.tile6.nc \
                    gocart.inst_aod.20210322_1000z.nc4 \
                    RESTART/20210322.100000.coupler.res \
                    RESTART/20210322.100000.fv_core.res.nc \
@@ -56,8 +56,8 @@ export LIST_FILES="sfcf004.tile1.nc \
                    RESTART/ufs.cpld.cpl.r.2021-03-22-36000.nc \
                    ufs.cpld.ww3.r.2021-03-22-36000.nc \
                    20210322.100000.out_pnt.ww3.nc \
-                   20210322.100000.out_grd.ww3 
-                   "
+                   20210322.100000.out_grd.ww3 "
+
 export DT_ATMOS=720
 export_fv3
 export_ugwpv1
@@ -67,9 +67,10 @@ export CCPP_SUITE=FV3_GFS_v17_coupled_p8_ugwpv1
 export SYEAR=2021
 export SMONTH=03
 export SDAY=22
-export SHOUR=08
+export SHOUR=8
 
 export FHMAX=2
+export FHROT=0
 export FHZERO=2
 export RESTART_N=2
 export RESTART_INTERVAL="${RESTART_N} -1"
