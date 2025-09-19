@@ -20,5 +20,6 @@ jobs:
     steps:
       - uses: actions/add-to-project@v1.0.2
         with:
-          project-url: https://github.com/users/gspetro-NOAA/projects/3 # Test Project
+          #project-url: https://github.com/users/gspetro-NOAA/projects/3 # Test Project
+          project-url: https://github.com/orgs/ufs-community/projects/70 # Test Project
           github-token: ${{ secrets.PR_PROJECT_TOKEN }}
