@@ -1,15 +1,10 @@
 name: Add PR Project Board
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - reopened
       - labeled
-  workflow_call:
-    secrets:
-      pr_project_token:
-        required: true
-        description: Token for the github action to add pull requests to the project board
 
 jobs:
   add-to-project:
@@ -23,4 +18,4 @@ jobs:
       - uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.pr_project_token }}
+          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
