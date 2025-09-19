@@ -1,4 +1,4 @@
-name: Add PR Project Board
+name: Add PR to Project Board
 on:
   pull_request:
     types:
