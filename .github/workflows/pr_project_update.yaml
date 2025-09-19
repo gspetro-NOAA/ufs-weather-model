@@ -1,0 +1,29 @@
+name: Add PR Project Board
+on:
+  pull_request:
+    types:
+      - opened
+      - labeled
+
+jobs:
+  add-to-project:
+    name: Add pull request to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/ufs-community/projects/70
+          #github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+  update-status:
+    name: Update fields
+    runs-on: ubuntu-latest
+    #permissions:
+    #  contents: read
+    #  pull-requests: write
+    #  issues: write
+    steps:
+      - uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/ufs-community/projects/70
+          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
