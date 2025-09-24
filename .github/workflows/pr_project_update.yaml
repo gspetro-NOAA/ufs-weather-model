@@ -17,6 +17,8 @@ jobs:
       pull-requests: write
       issues: write
     steps:
+      - name: Get code
+        uses: actions/checkout@v4
       - name: Add PR to board
         uses: actions/add-to-project@v1.0.2
         with:
