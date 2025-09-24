@@ -1,18 +1,15 @@
 name: Project Board Updates
 on:
-  pull_request:
+  pull_request_target:
     types:
       - opened
       - reopened
       - labeled
   repository_dispatch:
     types: [add-to-project, label-project]
+
   #schedule:
     #- cron: "1 * * * *"
-
-#env:
-#  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#  PR_PROJECT_TOKEN: ${{ secrets.PR_PROJECT_TOKEN }}
 
 jobs:
   add-to-project:
