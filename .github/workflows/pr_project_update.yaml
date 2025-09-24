@@ -7,6 +7,7 @@ on:
       - labeled
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PR_PROJECT_TOKEN: ${{ secrets.PR_PROJECT_TOKEN }}
 
 jobs:
   add-to-project:
@@ -23,7 +24,7 @@ jobs:
         uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ env.GITHUB_TOKEN }} # ${{ secrets.PR_PROJECT_TOKEN }}
+          github-token: ${{ secrets.PR_PROJECT_TOKEN }} # ${{ env.GITHUB_TOKEN }} # 
   label-project:
     name: Update project with labels
     runs-on: ubuntu-latest
