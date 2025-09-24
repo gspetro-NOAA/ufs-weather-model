@@ -10,6 +10,10 @@ on:
   #schedule:
     #- cron: "1 * * * *"
 
+#env:
+#  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#  PR_PROJECT_TOKEN: ${{ secrets.PR_PROJECT_TOKEN }}
+
 jobs:
   add-to-project:
     name: Add pull request to project
@@ -21,7 +25,8 @@ jobs:
     steps:
       - uses: actions/add-to-project@v1.0.2
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
+          #project-url: https://github.com/orgs/ufs-community/projects/70
+          project-url: https://github.com/orgs/NOAA-EPIC/projects/18
           github-token: ${{ secrets.PR_PROJECT_TOKEN }}
   label-project:
     name: Update project with labels
