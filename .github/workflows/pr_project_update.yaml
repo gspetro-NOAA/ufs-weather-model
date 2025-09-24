@@ -6,29 +6,9 @@ on:
       - reopened
       - labeled
 env:
-  PR_PROJECT_TOKEN: ${{ secrets.PR_PROJECT_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  add-to-project:
-    name: Add pull request to project
-    runs-on: ubuntu-latest
-    #permissions:
-      #contents: read
-      #pull-requests: write
-      #issues: write
-    steps:
-      - name: Get pull request number
-        run: |
-          pr_num=$(curl -H "Authorization: Bearer $PR_PROJECT_TOKEN" \
-          -H "Content-Type: application/json" \
-          -X POST https://api.github.com/graphql \
-          -d '{
-            "query": "query { repository(owner: \"ufs-community\", name: \"ufs-weather-model\") { pullRequests(headRefName: \"feature/login-ui\", states: OPEN, first: 1) { nodes { number id title url } } } }"
-          }')
-          echo ${pr_num}
-        env: 
-          PR_PROJECT_TOKEN: ${{ secrets.PR_PROJECT_TOKEN }}
   label-project:
     name: Update project with labels
     runs-on: ubuntu-latest
