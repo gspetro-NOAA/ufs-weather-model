@@ -7,7 +7,6 @@ on:
       - labeled
   repository_dispatch:
     types: [add-to-project, label-project]
-
   #schedule:
     #- cron: "1 * * * *"
 
