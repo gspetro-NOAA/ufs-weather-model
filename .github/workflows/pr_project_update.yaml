@@ -24,7 +24,7 @@ jobs:
         uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }} # ${{ env.GITHUB_TOKEN }} # 
+          github-token: ${{ env.PR_PROJECT_TOKEN }} # ${{ env.GITHUB_TOKEN }} # 
   label-project:
     name: Update project with labels
     runs-on: ubuntu-latest
