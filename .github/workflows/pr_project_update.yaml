@@ -18,10 +18,15 @@ jobs:
       #pull-requests: write
       #issues: write
     steps:
-      - uses: actions/add-to-project@v1.0.2
-        with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ env.GITHUB_TOKEN }} # ${{ env.GITHUB_TOKEN }} # 
+      - name: Get pull request number
+        run: |
+          pr_num=$(curl -H "Authorization: bearer ${{ secrets.PR_PROJECT_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -X POST https://api.github.com/graphql \
+          -d '{
+            "query": "query { repository(owner: \"ufs-community\", name: \"ufs-weather-model\") { pullRequests(headRefName: \"feature/login-ui\", states: OPEN, first: 1) { nodes { number id title url } } } }"
+          }')
+          echo ${pr_num}
   label-project:
     name: Update project with labels
     runs-on: ubuntu-latest
