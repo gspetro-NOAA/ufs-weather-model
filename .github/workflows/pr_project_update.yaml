@@ -15,7 +15,10 @@ jobs:
       pull-requests: write
       issues: write
     steps:
-      - uses: actions/add-to-project@v1.0.2
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Add PR to board
+        uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/ufs-community/projects/70
           github-token: ${{ secrets.GITHUB_TOKEN }} # ${{ secrets.PR_PROJECT_TOKEN }}
