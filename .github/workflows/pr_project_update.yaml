@@ -5,6 +5,8 @@ on:
       - opened
       - reopened
       - labeled
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   add-to-project:
@@ -15,13 +17,11 @@ jobs:
       pull-requests: write
       issues: write
     steps:
-      - name: Get code
-        uses: actions/checkout@v4
       - name: Add PR to board
         uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.GITHUB_TOKEN }} # ${{ secrets.PR_PROJECT_TOKEN }}
+          github-token: ${{ env.GITHUB_TOKEN }} # ${{ secrets.PR_PROJECT_TOKEN }}
   label-project:
     name: Update project with labels
     runs-on: ubuntu-latest
