@@ -2,15 +2,24 @@ help([[
 loads UFS Model prerequisites for Derecho/GNU
 ]])
 
-setenv("LMOD_TMOD_FIND_FIRST","yes")
-prepend_path("MODULEPATH", "/glade/work/epicufsrt/contrib/spack-stack/derecho/spack-stack-1.9.2/envs/ue-gcc-12.4/install/modulefiles/Core")
+purge(true)
 
-unload("ncarcompilers")
-stack_gnu_ver=os.getenv("stack_gnu_ver") or "12.4.0"
+setenv("LMOD_TMOD_FIND_FIRST","yes")
+
+prepend_path("MODULEPATH", "/glade/work/epicufsrt/contrib/spack-stack/derecho/spack-stack-2.1.0/envs/ue-gcc-13.3.1/modules/Core")
+prepend_path("MODULEPATH", "/opt/cray/pe/modulefiles")
+
+-- unload("ncarcompilers")
+
+load("crayenv/25.03")
+
+stack_gnu_ver=os.getenv("stack_gnu_ver") or "13.3.1"
 load(pathJoin("stack-gcc", stack_gnu_ver))
 
-stack_cray_mpich_ver=os.getenv("stack_cray_mpich_ver") or "8.1.29"
+stack_cray_mpich_ver=os.getenv("stack_cray_mpich_ver") or "8.1.32"
 load(pathJoin("stack-cray-mpich", stack_cray_mpich_ver))
+
+unload("cray-libsci")
 
 cmake_ver=os.getenv("cmake_ver") or "3.27.9"
 load(pathJoin("cmake", cmake_ver))
