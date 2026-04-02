@@ -21,7 +21,7 @@ load(pathJoin("stack-cray-mpich", stack_cray_mpich_ver))
 
 unload("cray-libsci")
 
-cmake_ver=os.getenv("cmake_ver") or "3.27.9"
+cmake_ver=os.getenv("cmake_ver") or "3.31.8""
 load(pathJoin("cmake", cmake_ver))
 
 stack_python_ver=os.getenv("stack_python_ver") or "3.11.7"

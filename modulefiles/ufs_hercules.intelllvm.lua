@@ -11,11 +11,10 @@ load(pathJoin("stack-intel-oneapi-compilers", stack_intel_ver))
 stack_impi_ver=os.getenv("stack_impi_ver") or "2021.17"
 load(pathJoin("stack-intel-oneapi-mpi", stack_impi_ver))
 
-cmake_ver=os.getenv("cmake_ver") or "3.27.9"
+cmake_ver=os.getenv("cmake_ver") or "3.31.8""
 load(pathJoin("cmake", cmake_ver))
 
 load("ufs_common")
-load("zlib/1.2.13")
 
 nccmp_ver=os.getenv("nccmp_ver") or "1.9.0.1"
 load(pathJoin("nccmp", nccmp_ver))
