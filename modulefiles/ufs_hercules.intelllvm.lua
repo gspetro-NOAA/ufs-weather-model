@@ -26,6 +26,6 @@ setenv("I_MPI_F90", "ifx")
 setenv("CC", "mpiicc")
 setenv("CXX", "mpiicpc")
 setenv("FC", "mpiifort")
-setenv("CMAKE_Platform", "hercules.intel")
+setenv("CMAKE_Platform", "hercules.intelllvm")
 
 whatis("Description: UFS build environment")

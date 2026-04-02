@@ -27,6 +27,6 @@ setenv("I_MPI_CC", "icx")
 setenv("I_MPI_CXX", "icpx")
 setenv("I_MPI_FC", "ifx")
 
-setenv("CMAKE_Platform", "ursa.intel")
+setenv("CMAKE_Platform", "ursa.intelllvm")
 
 whatis("Description: UFS build environment")
