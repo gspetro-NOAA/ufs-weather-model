@@ -14,7 +14,7 @@ remove_path("MODULEPATH", "/apps/ops/prod/libs/modulefiles/mpi/intel/19.1.3.304/
 remove_path("MODULEPATH", "/apps/prod/lmodules/intel/19.1.3.304")
 remove_path("MODULEPATH", "/apps/prod/lmodules/INTEL_cray_mpich/19.1.3.304/cray-mpich/8.1.4")
 
-load("cmake")
+load("cmake") -- or load("cmake/3.31.8") ?
 load("ufs_common")
 
 setenv("CC", "cc")
