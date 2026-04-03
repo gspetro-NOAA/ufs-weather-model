@@ -18,7 +18,7 @@ load(pathJoin("stack-cray-mpich", stack_cray_mpich_ver))
 stack_python_ver=os.getenv("stack_python_ver") or "3.11.7"
 load(pathJoin("stack-python", stack_python_ver))
 
-cmake_ver=os.getenv("cmake_ver") or "3.31.8""
+cmake_ver=os.getenv("cmake_ver") or "3.31.8"
 load(pathJoin("cmake", cmake_ver))
 
 load("ufs_common")

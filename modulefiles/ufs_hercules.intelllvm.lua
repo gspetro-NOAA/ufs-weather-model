@@ -11,7 +11,7 @@ load(pathJoin("stack-intel-oneapi-compilers", stack_intel_ver))
 stack_impi_ver=os.getenv("stack_impi_ver") or "2021.17"
 load(pathJoin("stack-intel-oneapi-mpi", stack_impi_ver))
 
-cmake_ver=os.getenv("cmake_ver") or "3.31.8""
+cmake_ver=os.getenv("cmake_ver") or "3.31.8"
 load(pathJoin("cmake", cmake_ver))
 
 load("ufs_common")

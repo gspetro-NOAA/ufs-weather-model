@@ -12,7 +12,7 @@ load(pathJoin("stack-gcc", stack_gnu_ver))
 stack_openmpi_ver=os.getenv("stack_openmpi_ver") or "4.1.4"
 load(pathJoin("stack-openmpi", stack_openmpi_ver))
 
-cmake_ver=os.getenv("cmake_ver") or "3.31.8""
+cmake_ver=os.getenv("cmake_ver") or "3.31.8"
 load(pathJoin("cmake", cmake_ver))
 
 load("ufs_common")
