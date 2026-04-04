@@ -187,7 +187,7 @@ if(CMEPS OR CDEPS)
 endif()
 
 find_package(bacio 2.4.0 REQUIRED)
-find_package(sp 2.3.3 REQUIRED)
+find_package(ip REQUIRED)
 find_package(w3emc 2.9.2 REQUIRED)
 
 if(MPAS)
