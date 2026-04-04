@@ -2,8 +2,6 @@ help([[
 loads UFS Model prerequisites for Ursa/GNU
 ]])
 
-purge()
-
 prepend_path("MODULEPATH", "/contrib/spack-stack/spack-stack-2.1.0/envs/ue-gcc-12.4.0/modules/Core")
 
 stack_gnu_ver=os.getenv("stack_gnu_ver") or "12.4.0"

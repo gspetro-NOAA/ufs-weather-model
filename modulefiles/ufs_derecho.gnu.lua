@@ -2,8 +2,6 @@ help([[
 loads UFS Model prerequisites for Derecho/GNU
 ]])
 
-purge(true)
-
 setenv("LMOD_TMOD_FIND_FIRST","yes")
 
 prepend_path("MODULEPATH", "/glade/work/epicufsrt/contrib/spack-stack/derecho/spack-stack-2.1.0/envs/ue-gcc-13.3.1/modules/Core")

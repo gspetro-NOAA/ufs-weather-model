@@ -2,8 +2,6 @@ help([[
 loads UFS Model prerequisites for NOAA Parallelworks/Intel
 ]])
 
-purge(true)
-
 setenv("LMOD_TMOD_FIND_FIRST","yes")
 
 prepend_path("MODULEPATH", "/glade/work/epicufsrt/contrib/spack-stack/derecho/spack-stack-2.1.0/envs/ue-oneapi-2025.3.1/modules/Core")

@@ -5,8 +5,6 @@ help([[
 
 whatis([===[Loads libraries needed for building the UFS Weather Model on Gaea C6]===])
 
-purge()
-
 prepend_path("MODULEPATH", "/ncrc/proj/epic/spack-stack/c6/spack-stack-2.1.0/envs/ue-oneapi-2025.2.1/modules/Core")
 
 stack_intel_ver=os.getenv("stack_intel_ver") or "2025.2.1"
