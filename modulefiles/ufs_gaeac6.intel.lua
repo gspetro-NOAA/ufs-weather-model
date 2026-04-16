@@ -33,4 +33,3 @@ setenv("CC","cc")
 setenv("CXX","CC")
 setenv("FC","ftn")
 setenv("CMAKE_Platform","gaeac6.intel")
-

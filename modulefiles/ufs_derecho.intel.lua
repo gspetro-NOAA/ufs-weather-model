@@ -29,4 +29,3 @@ setenv("FC", "mpif90")
 setenv("CMAKE_Platform", "derecho.gnu")
 
 whatis("Description: UFS build environment")
-

@@ -23,4 +23,3 @@ setenv("FC", "ftn")
 setenv("CMAKE_Platform", "acorn")
 
 whatis("Description: UFS build environment")
-
