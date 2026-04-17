@@ -1,5 +1,5 @@
 help([[
-loads UFS Model prerequisites for Hercules/IntelLLVM
+loads UFS Model prerequisites for Hercules/IntelLLVM (OneAPI)
 ]])
 
 prepend_path("MODULEPATH", "/apps/contrib/spack-stack/spack-stack-2.1.0/envs/ue-oneapi-2025.3.1/modules/Core")
