@@ -26,6 +26,6 @@ setenv("I_MPI_F90", "ifort")
 setenv("CC", "mpiicx")
 setenv("CXX", "mpiicpx")
 setenv("FC", "mpiifx")
-setenv("CMAKE_Platform", "orion.intelllvm")
+setenv("CMAKE_Platform", "orion.oneapi")
 
 whatis("Description: UFS build environment")
