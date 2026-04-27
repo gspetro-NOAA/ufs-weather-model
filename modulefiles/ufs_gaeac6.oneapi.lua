@@ -33,8 +33,8 @@ load("intel-oneapi/2023.2.0")
 setenv("I_MPI_CC", "icx")
 setenv("I_MPI_CXX", "icpx")
 setenv("I_MPI_F90", "ifx")
-
 setenv("CC","cc")
 setenv("CXX","CC")
 setenv("FC","ftn")
+
 setenv("CMAKE_Platform","gaeac6.oneapi")

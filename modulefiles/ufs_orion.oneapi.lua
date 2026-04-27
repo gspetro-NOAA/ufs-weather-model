@@ -19,13 +19,13 @@ load("ufs_common")
 nccmp_ver=os.getenv("nccmp_ver") or "1.9.0.1"
 load(pathJoin("nccmp", nccmp_ver))
 
-setenv("I_MPI_CC", "icx")
-setenv("I_MPI_CXX", "icpx")
-setenv("I_MPI_F90", "ifort")
-
 setenv("CC", "mpiicx")
 setenv("CXX", "mpiicpx")
 setenv("FC", "mpiifx")
+setenv("I_MPI_CC", "icx")
+setenv("I_MPI_CXX", "icpx")
+setenv("I_MPI_FC", "ifx")
+
 setenv("CMAKE_Platform", "orion.oneapi")
 
 whatis("Description: UFS build environment")
