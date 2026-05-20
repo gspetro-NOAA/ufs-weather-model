@@ -90,8 +90,16 @@ class Log():
       data_dict.update({test_name: (warnings, remarks)})
 
    def handle_failures(self, data_dict, reason, test):
+      self.handle_duplicates(data_dict, reason, test)
       data_dict.setdefault(reason, []).append(test)
 
+   def handle_duplicates(self, data_dict, reason, test):
+      
+      for key, value in data_dict.items():
+         if test in value:
+            logging.info(f"Duplicate entry found for {test} under reason {reason}. Overwriting previous entry.")
+            value.remove(test)
+   
    def _clean_data(self, test_data):
       """Convert None values to zeros in the test_data dictionary"""
       clean_data = {
@@ -173,7 +181,7 @@ def main():
    compile_pattern = r"COMPILE \'(.*)\' \[\d+:\d+, \d+:\d+\](?: \( (?:(\d+) warnings)?\s*(?:(\d+) remarks)? \))?"
    # failure_pattern = r"^(?:FAILED|SKIPPED): (?!UNABLE TO (?:COMPLETE COMPARISON|START TEST))(.+?) -- (?:TEST|COMPILE) '([^']+)"
    failure_pattern = r"^(?:FAILED|SKIPPED): (.+?) -- (?:TEST|COMPILE) '([^']+)"
-      
+   
 
    # For each machine, increased_warnings_remarks records where warnings and/or remarks increase
    increased_warnings_remarks = {}
