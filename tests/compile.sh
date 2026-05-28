@@ -57,7 +57,7 @@ BUILD_JOBS=${BUILD_JOBS:-8}
 set +x
 case ${MACHINE_ID} in
   macosx|linux)
-    # shellcheck source=/github/workspace/modulefiles/ufs_ursa.intelllvm.lua
+    # shellcheck source=/github/workspace/modulefiles/ufs_ursa.oneapi.lua
     source "${PATHTR}/modulefiles/ufs_${MACHINE_ID}.${RT_COMPILER}"
     ;;
   *)
