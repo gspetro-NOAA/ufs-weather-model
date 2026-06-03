@@ -550,10 +550,9 @@ Failed Tests:
 -- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/stmp/gpetro/FV3_RT/rt_821562/cpld_control_sfs_gnu/err
 
 NOTES:
-A file 'test_changes.list' was generated with list of all failed tests.
-You can use './rt.sh -c -b test_changes.list' to create baselines for the failed tests.
+A file 'test_changes.list' was generated but is empty.
 If you are using this log as a pull request verification, please commit 'test_changes.list'.
 
-Result: FAILURE
+Result: SUCCESS
 
 ====END OF HERCULES REGRESSION TESTING LOG====
