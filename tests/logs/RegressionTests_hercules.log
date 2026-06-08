@@ -1,7 +1,7 @@
 ====START OF HERCULES REGRESSION TESTING LOG====
 
 UFSWM hash used in testing:
-d09389bb41992b178cde366750609efa56add5b4
+3443a3c2f158cf80b9f918349600017b07ca88cd
 
 Submodule hashes used in testing:
  fc153862cfcc01fc4da513a2ff56af0bbd1234e0 AQM (v0.2.0-73-gfc15386)
@@ -18,19 +18,19 @@ Submodule hashes used in testing:
  c38ddb7ebdd2d58c517b63a99bbdc8e348732db2 MOM6-interface/MOM6/pkg/CVMix-src (c38ddb7)
  29e64d652786e1d076a05128c920f394202bfe10 MOM6-interface/MOM6/pkg/GSW-Fortran (29e64d6)
  2c7b3bc2a8096f6232020c47507593058795102e NOAHMP-interface/noahmp (v3.7.1-471-g2c7b3bc)
- 5f8e6340dc63571fdf72a2068331b521a506abd3 UFSATM (heads/feature/ss2.x)
+ 813639a20c53800567c1f9104a26a0b168d554a1 UFSATM (remotes/origin/feature/ss2.x)
  22bc1a5de8a19996310aedc3482931616cd74a1b UFSATM/ccpp/framework (2025-10-15-dev-5-g22bc1a5)
- 673b3a20f0c4b9ac3a52df199a6769ab2ec66781 UFSATM/ccpp/physics (heads/feature/ss2.x)
+ af3eb8654c70580483d36feb2e70928dfb8b85b0 UFSATM/ccpp/physics (remotes/origin/feature/ss2.x)
  c62efd27caa26f660edf24232f33f154e608b77a UFSATM/ccpp/physics/physics/MP/TEMPO/TEMPO (v2.1.3~3)
  41c5fcd950fed09b8afe186dede266824eca7fd3 UFSATM/ccpp/physics/physics/Radiation/RRTMGP/rte-rrtmgp (41c5fcd)
- 0c00ba42a222a26754348c6f103a8e97d26f33e7 UFSATM/ccpp/physics/physics/SFC_Layer/MYNN/MYNN (0c00ba4)
- 2d81eeca6344d8b78f7cc05fc720f700820efe7d UFSATM/fv3/atmos_cubed_sphere (201912_public_release-530-g2d81eec)
- 38d2177aef842a5c6abe26ffe876804b95fd9e0a UFSATM/mpas/MPAS-Model (remotes/origin/master-60-g38d2177a)
+ cce9a5fc4479749f489be24020e5c06c3e4202d4 UFSATM/ccpp/physics/physics/SFC_Layer/MYNN/MYNN (remotes/origin/ccpp/dev)
+ 30baf0826f51b47e630a236193440df0746dcf25 UFSATM/fv3/atmos_cubed_sphere (201912_public_release-538-g30baf08)
+ 99890240d93a6b28a75f84c9f7248161797656ae UFSATM/mpas/MPAS-Model (remotes/origin/master-101-g99890240)
  b49f9df5ee502e17b21a3a05fb74e82ba94ba90c UFSATM/upp (upp_v10.2.0-355-gb49f9df5)
 -5afd607642ae0fd6a53b137230336386beb47ce6 UFSATM/upp/sorc/libIFI.fd
 -3d35332fe66e3e63a285cc8d96facdf255a33481 UFSATM/upp/sorc/ncep_post.fd/post_gtg.fd
  dcc9da76c2d32c6ca7a5318a56db033295d9f43c WW3 (6.07.1-531-gdcc9da76)
- 23a6e57b5bb6b9288a7ff1fbbd20a599e908f718 fire_behavior (v0.2.0-176-g23a6e57)
+ ba2bc410e55e89b392eec2ab8a08052bfe7b0c2c fire_behavior (v0.2.0-179-gba2bc41)
  ae192f119b8614b4476a1b04ba55f6fb93e2953d stochastic_physics (ufs-v2.0.0-298-gae192f1)
 
 
@@ -40,8 +40,8 @@ The first time is for the full script (prep+run+finalize).
 The second time is specifically for the run phase.
 Times/Memory will be empty for failed tests.
 
-BASELINE DIRECTORY: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/stmp/gpetro/FV3_RT/REGRESSION_TEST
-COMPARISON DIRECTORY: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/stmp/gpetro/FV3_RT/rt_821562
+BASELINE DIRECTORY: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/stmp/gpetro/FV3_RT/REGRESSION_TEST_3174
+COMPARISON DIRECTORY: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/stmp/gpetro/FV3_RT/rt_3493743
 
 RT.SH OPTIONS USED:
 * (-a) - HPC PROJECT ACCOUNT: epic
@@ -49,127 +49,128 @@ RT.SH OPTIONS USED:
 * (-k) - KEEP RUN DIRECTORY
 * (-e) - USE ECFLOW
 
-PASS -- COMPILE 's2swa_32bit_oneapi' [12:11, 11:06]
-PASS -- TEST 'cpld_control_gefs_oneapi' [35:32, 20:32](3101 MB)
-PASS -- TEST 'cpld_restart_gefs_oneapi' [25:54, 07:29](2802 MB)
-PASS -- TEST 'cpld_dcp_gefs_oneapi' [35:56, 19:44](3178 MB)
+PASS -- COMPILE 's2swa_32bit_oneapi' [13:10, 11:57]
+PASS -- TEST 'cpld_control_gefs_oneapi' [30:17, 18:09](3114 MB)
+PASS -- TEST 'cpld_restart_gefs_oneapi' [22:08, 07:04](2863 MB)
+PASS -- TEST 'cpld_dcp_gefs_oneapi' [30:25, 17:21](3224 MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_oneapi' [12:11, 10:46]
-PASS -- TEST 'cpld_control_gfsv17_oneapi' [18:29, 13:43](2027 MB)
-PASS -- TEST 'cpld_control_gfsv17_iau_oneapi' [18:21, 15:00](2373 MB)
-PASS -- TEST 'cpld_restart_gfsv17_oneapi' [09:54, 05:17](1405 MB)
-PASS -- TEST 'cpld_restart_gfsv17_iau_oneapi' [10:27, 06:32](2257 MB)
-PASS -- TEST 'cpld_mpi_gfsv17_oneapi' [19:13, 14:24](1937 MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_oneapi' [13:10, 11:46]
+PASS -- TEST 'cpld_control_gfsv17_oneapi' [18:13, 14:23](2030 MB)
+PASS -- TEST 'cpld_control_gfsv17_iau_oneapi' [14:47, 11:13](2378 MB)
+PASS -- TEST 'cpld_restart_gfsv17_oneapi' [09:46, 05:26](1387 MB)
+PASS -- TEST 'cpld_restart_gfsv17_iau_oneapi' [09:55, 06:46](2238 MB)
+PASS -- TEST 'cpld_mpi_gfsv17_oneapi' [18:14, 14:33](1955 MB)
+PASS -- TEST 'cpld_decomp_gfsv17_oneapi' [30:27, 26:31](2029 MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_oneapi' [10:11, 09:02]
-PASS -- TEST 'cpld_control_sfs_oneapi' [14:47, 10:39](2331 MB)
-PASS -- TEST 'cpld_restart_sfs_oneapi' [10:56, 05:38](1633 MB)
+PASS -- COMPILE 's2s_32bit_sfs_oneapi' [12:10, 10:17]
+PASS -- TEST 'cpld_control_sfs_oneapi' [14:19, 10:52](2334 MB)
+PASS -- TEST 'cpld_restart_sfs_oneapi' [10:06, 05:31](1629 MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_debug_oneapi' [03:11, 02:08]
+PASS -- COMPILE 's2s_32bit_sfs_debug_oneapi' [03:10, 02:06]
 FAILED: RUN DID NOT COMPLETE -- TEST 'cpld_debug_sfs_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_debug_oneapi' [04:11, 02:24]
+PASS -- COMPILE 's2sw_32bit_pdlib_debug_oneapi' [04:10, 02:14]
 FAILED: RUN DID NOT COMPLETE -- TEST 'cpld_debug_gfsv17_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2sw_oneapi' [11:11, 10:02]
-PASS -- TEST 'cpld_control_p8_oneapi' [10:18, 07:54](2150 MB)
-PASS -- TEST 'cpld_control_p8.v2.sfc_oneapi' [10:21, 07:29](2146 MB)
-PASS -- TEST 'cpld_restart_p8_oneapi' [06:46, 04:02](1723 MB)
-PASS -- TEST 'cpld_2threads_p8_oneapi' [14:19, 11:12](2217 MB)
-PASS -- TEST 'cpld_decomp_p8_oneapi' [10:15, 07:22](2115 MB)
-PASS -- TEST 'cpld_mpi_p8_oneapi' [08:14, 06:05](2045 MB)
-PASS -- TEST 'cpld_control_ciceC_p8_oneapi' [10:24, 07:35](2138 MB)
-PASS -- TEST 'cpld_control_c192_p8_oneapi' [12:45, 08:46](2624 MB)
-PASS -- TEST 'cpld_restart_c192_p8_oneapi' [10:59, 05:18](2595 MB)
+PASS -- COMPILE 's2sw_oneapi' [13:10, 12:00]
+PASS -- TEST 'cpld_control_p8_oneapi' [10:17, 07:43](2148 MB)
+PASS -- TEST 'cpld_control_p8.v2.sfc_oneapi' [10:14, 07:29](2149 MB)
+PASS -- TEST 'cpld_restart_p8_oneapi' [08:24, 05:00](1731 MB)
+PASS -- TEST 'cpld_2threads_p8_oneapi' [14:13, 11:09](2237 MB)
+PASS -- TEST 'cpld_decomp_p8_oneapi' [10:03, 07:24](2136 MB)
+PASS -- TEST 'cpld_mpi_p8_oneapi' [08:13, 06:04](2044 MB)
+PASS -- TEST 'cpld_control_ciceC_p8_oneapi' [10:15, 07:27](2148 MB)
+PASS -- TEST 'cpld_control_c192_p8_oneapi' [11:40, 08:04](2645 MB)
+PASS -- TEST 'cpld_restart_c192_p8_oneapi' [09:57, 04:54](2590 MB)
 
-PASS -- COMPILE 's2swl_oneapi' [12:11, 10:11]
-PASS -- TEST 'cpld_control_p8_lnd_oneapi' [11:19, 08:20](2126 MB)
-PASS -- TEST 'cpld_restart_p8_lnd_oneapi' [07:47, 04:18](1693 MB)
+PASS -- COMPILE 's2swl_oneapi' [12:10, 10:38]
+PASS -- TEST 'cpld_control_p8_lnd_oneapi' [10:08, 07:32](2122 MB)
+PASS -- TEST 'cpld_restart_p8_lnd_oneapi' [06:28, 03:49](1698 MB)
 
-PASS -- COMPILE 's2s_aoflux_oneapi' [10:11, 09:03]
-PASS -- TEST 'cpld_control_noaero_p8_agrid_oneapi' [07:10, 05:07](2100 MB)
+PASS -- COMPILE 's2s_aoflux_oneapi' [14:11, 12:13]
+PASS -- TEST 'cpld_control_noaero_p8_agrid_oneapi' [07:12, 04:52](2098 MB)
 
-PASS -- COMPILE 's2sw_pdlib_oneapi' [18:11, 16:18]
-PASS -- TEST 'cpld_control_c48_5deg_oneapi' [08:52, 06:51](2987 MB)
-PASS -- TEST 'cpld_warmstart_c48_5deg_oneapi' [03:44, 02:00](2965 MB)
-PASS -- TEST 'cpld_restart_c48_5deg_oneapi' [03:59, 01:10](2422 MB)
-PASS -- TEST 'cpld_control_c24_5deg_oneapi' [03:27, 01:22](2176 MB)
-PASS -- TEST 'cpld_warmstart_c24_5deg_oneapi' [02:29, 00:37](2180 MB)
-PASS -- TEST 'cpld_restart_c24_5deg_oneapi' [02:40, 00:29](1490 MB)
-PASS -- TEST 'cpld_control_c24_9deg_oneapi' [02:31, 01:06](2175 MB)
-PASS -- TEST 'cpld_warmstart_c24_9deg_oneapi' [02:33, 01:04](2170 MB)
-PASS -- TEST 'cpld_restart_c24_9deg_oneapi' [02:30, 00:31](1488 MB)
-PASS -- TEST 'cpld_control_c12_9deg_oneapi' [02:28, 00:37](2105 MB)
-PASS -- TEST 'cpld_warmstart_c12_9deg_oneapi' [02:32, 00:26](2104 MB)
-PASS -- TEST 'cpld_restart_c12_9deg_oneapi' [02:39, 00:32](1447 MB)
+PASS -- COMPILE 's2sw_pdlib_oneapi' [14:10, 12:10]
+PASS -- TEST 'cpld_control_c48_5deg_oneapi' [08:47, 06:31](2989 MB)
+PASS -- TEST 'cpld_warmstart_c48_5deg_oneapi' [03:46, 01:55](2956 MB)
+PASS -- TEST 'cpld_restart_c48_5deg_oneapi' [03:39, 01:07](2405 MB)
+PASS -- TEST 'cpld_control_c24_5deg_oneapi' [02:28, 01:02](2176 MB)
+PASS -- TEST 'cpld_warmstart_c24_5deg_oneapi' [02:31, 00:33](2171 MB)
+PASS -- TEST 'cpld_restart_c24_5deg_oneapi' [02:31, 00:25](1493 MB)
+PASS -- TEST 'cpld_control_c24_9deg_oneapi' [02:33, 01:01](2174 MB)
+PASS -- TEST 'cpld_warmstart_c24_9deg_oneapi' [02:31, 00:32](2175 MB)
+PASS -- TEST 'cpld_restart_c24_9deg_oneapi' [02:31, 00:26](1489 MB)
+PASS -- TEST 'cpld_control_c12_9deg_oneapi' [02:29, 00:33](2107 MB)
+PASS -- TEST 'cpld_warmstart_c12_9deg_oneapi' [02:31, 00:25](2104 MB)
+PASS -- TEST 'cpld_restart_c12_9deg_oneapi' [02:30, 00:22](1445 MB)
 
-PASS -- COMPILE 'atm_dyn32_oneapi' [14:11, 12:32]
-PASS -- TEST 'control_CubedSphereGrid_oneapi' [06:38, 02:50](1618 MB)
-PASS -- TEST 'control_CubedSphereGrid_parallel_oneapi' [04:45, 02:54](1610 MB)
-PASS -- TEST 'control_latlon_oneapi' [04:25, 02:46](1620 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_wrtGauss_netcdf_parallel_oneapi' [, ]( MB)
-PASS -- TEST 'control_c48_oneapi' [08:32, 07:01](1652 MB)
-PASS -- TEST 'control_c48.v2.sfc_oneapi' [08:32, 06:43](782 MB)
-PASS -- TEST 'control_c48_lnd_iau_oneapi' [09:32, 07:13](1652 MB)
-PASS -- TEST 'control_c192_oneapi' [11:50, 09:16](1770 MB)
-PASS -- TEST 'control_c384_oneapi' [13:38, 10:45](2025 MB)
-PASS -- TEST 'control_c384gdas_oneapi' [17:24, 11:49](1487 MB)
-PASS -- TEST 'control_stochy_oneapi' [03:23, 01:48](678 MB)
-PASS -- TEST 'control_stochy_restart_oneapi' [02:26, 01:06](566 MB)
-PASS -- TEST 'control_lndp_oneapi' [03:22, 01:41](672 MB)
-PASS -- TEST 'control_iovr4_gfdlmpv3_oneapi' [05:35, 03:14](967 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_p8_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_p8.v2.sfc_oneapi' [, ]( MB)
-PASS -- TEST 'control_p8_ugwpv1_oneapi' [06:00, 03:18](1902 MB)
-PASS -- TEST 'control_p8_ugwpv1_tempo_oneapi' [04:55, 03:06](1924 MB)
-PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_oneapi' [06:04, 03:23](1934 MB)
-PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_hail_oneapi' [04:56, 02:22](2438 MB)
-FAILED: UNABLE TO START TEST -- TEST 'control_restart_p8_oneapi' [, ]( MB)
-FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_noqr_p8_oneapi' [, ]( MB)
-FAILED: UNABLE TO START TEST -- TEST 'control_restart_noqr_p8_oneapi' [, ]( MB)
-FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_decomp_p8_oneapi' [, ]( MB)
-FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_2threads_p8_oneapi' [, ]( MB)
-PASS -- TEST 'control_p8_lndp_oneapi' [07:51, 05:55](1910 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_p8_rrtmgp_oneapi' [, ]( MB)
-PASS -- TEST 'control_p8_mynn_oneapi' [05:59, 03:21](1926 MB)
-PASS -- TEST 'merra2_thompson_oneapi' [06:03, 03:53](1914 MB)
-PASS -- TEST 'merra2_hf_thompson_oneapi' [08:00, 05:50](1929 MB)
-PASS -- TEST 'regional_control_oneapi' [07:29, 05:11](1213 MB)
-PASS -- TEST 'regional_restart_oneapi' [04:38, 03:00](1184 MB)
-PASS -- TEST 'regional_decomp_oneapi' [07:31, 05:23](1196 MB)
-PASS -- TEST 'regional_2threads_oneapi' [06:28, 04:59](1115 MB)
-PASS -- TEST 'regional_noquilt_oneapi' [07:35, 05:12](1510 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'regional_netcdf_parallel_oneapi' [, ]( MB)
-PASS -- TEST 'regional_2dwrtdecomp_oneapi' [06:36, 05:06](1200 MB)
-PASS -- TEST 'regional_wofs_oneapi' [08:31, 06:32](2097 MB)
+PASS -- COMPILE 'atm_dyn32_oneapi' [16:11, 14:49]
+PASS -- TEST 'control_CubedSphereGrid_oneapi' [06:31, 02:21](1619 MB)
+PASS -- TEST 'control_CubedSphereGrid_parallel_oneapi' [04:34, 02:24](1616 MB)
+PASS -- TEST 'control_latlon_oneapi' [04:23, 02:26](1628 MB)
+PASS -- TEST 'control_wrtGauss_netcdf_parallel_oneapi' [04:25, 02:30](1627 MB)
+PASS -- TEST 'control_c48_oneapi' [08:26, 07:08](1713 MB)
+PASS -- TEST 'control_c48.v2.sfc_oneapi' [08:26, 06:43](848 MB)
+PASS -- TEST 'control_c48_lnd_iau_oneapi' [09:27, 07:17](1726 MB)
+PASS -- TEST 'control_c192_oneapi' [09:40, 07:25](1764 MB)
+PASS -- TEST 'control_c384_oneapi' [11:20, 08:34](2057 MB)
+PASS -- TEST 'control_c384gdas_oneapi' [13:15, 09:13](1501 MB)
+PASS -- TEST 'control_stochy_oneapi' [03:21, 01:36](688 MB)
+PASS -- TEST 'control_stochy_restart_oneapi' [02:27, 00:53](571 MB)
+PASS -- TEST 'control_lndp_oneapi' [03:21, 01:32](679 MB)
+PASS -- TEST 'control_iovr4_gfdlmpv3_oneapi' [04:28, 02:51](980 MB)
+PASS -- TEST 'control_p8_oneapi' [05:06, 02:42](1906 MB)
+PASS -- TEST 'control_p8.v2.sfc_oneapi' [05:00, 02:52](1905 MB)
+PASS -- TEST 'control_p8_ugwpv1_oneapi' [04:49, 02:45](1904 MB)
+PASS -- TEST 'control_p8_ugwpv1_tempo_oneapi' [04:50, 02:47](1933 MB)
+PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_oneapi' [04:56, 02:52](1943 MB)
+PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_hail_oneapi' [03:45, 01:57](2447 MB)
+PASS -- TEST 'control_restart_p8_oneapi' [03:58, 01:39](1257 MB)
+PASS -- TEST 'control_noqr_p8_oneapi' [04:51, 02:44](1906 MB)
+PASS -- TEST 'control_restart_noqr_p8_oneapi' [03:47, 01:35](1259 MB)
+PASS -- TEST 'control_decomp_p8_oneapi' [04:44, 02:53](1893 MB)
+PASS -- TEST 'control_2threads_p8_oneapi' [05:53, 04:08](1964 MB)
+PASS -- TEST 'control_p8_lndp_oneapi' [06:32, 05:01](1912 MB)
+PASS -- TEST 'control_p8_rrtmgp_oneapi' [05:57, 03:39](1972 MB)
+PASS -- TEST 'control_p8_mynn_oneapi' [04:49, 02:46](1932 MB)
+PASS -- TEST 'merra2_thompson_oneapi' [05:54, 03:17](1923 MB)
+PASS -- TEST 'merra2_hf_thompson_oneapi' [06:48, 04:59](1935 MB)
+PASS -- TEST 'regional_control_oneapi' [07:26, 05:20](1208 MB)
+PASS -- TEST 'regional_restart_oneapi' [04:27, 02:50](1183 MB)
+PASS -- TEST 'regional_decomp_oneapi' [07:28, 05:20](1199 MB)
+PASS -- TEST 'regional_2threads_oneapi' [06:27, 04:56](1102 MB)
+PASS -- TEST 'regional_noquilt_oneapi' [07:38, 05:15](1547 MB)
+PASS -- TEST 'regional_netcdf_parallel_oneapi' [07:26, 05:10](1197 MB)
+PASS -- TEST 'regional_2dwrtdecomp_oneapi' [07:24, 05:13](1211 MB)
+PASS -- TEST 'regional_wofs_oneapi' [08:29, 06:21](2091 MB)
 
-PASS -- COMPILE 'atm_dyn32_rad32_oneapi' [14:11, 12:11]
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_p8_rrtmgp_rad32_oneapi' [, ]( MB)
+PASS -- COMPILE 'atm_dyn32_rad32_oneapi' [16:10, 14:19]
+PASS -- TEST 'control_p8_rrtmgp_rad32_oneapi' [06:03, 03:53](1944 MB)
 
-PASS -- COMPILE 'rrfs_oneapi' [14:11, 12:33]
-PASS -- TEST 'rap_control_oneapi' [05:57, 03:37](1193 MB)
-PASS -- TEST 'regional_spp_sppt_shum_skeb_oneapi' [06:03, 04:01](1361 MB)
-PASS -- TEST 'rap_decomp_oneapi' [05:56, 03:44](1122 MB)
-PASS -- TEST 'rap_2threads_oneapi' [07:57, 05:34](1207 MB)
-PASS -- TEST 'rap_restart_oneapi' [03:49, 01:59](1144 MB)
-PASS -- TEST 'rap_sfcdiff_oneapi' [05:54, 03:37](1163 MB)
-PASS -- TEST 'rap_sfcdiff_decomp_oneapi' [05:45, 03:44](1132 MB)
-PASS -- TEST 'rap_sfcdiff_restart_oneapi' [03:56, 01:58](1125 MB)
-PASS -- TEST 'hrrr_control_oneapi' [06:10, 03:25](1182 MB)
-PASS -- TEST 'hrrr_control_decomp_oneapi' [05:43, 03:27](1110 MB)
-PASS -- TEST 'hrrr_control_2threads_oneapi' [06:40, 05:03](1157 MB)
-PASS -- TEST 'hrrr_control_restart_oneapi' [03:23, 01:45](1089 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rrfs_v1beta_oneapi' [, ]( MB)
-PASS -- TEST 'rrfs_v1nssl_oneapi' [08:24, 07:03](2016 MB)
-PASS -- TEST 'rrfs_v1nssl_nohailnoccn_oneapi' [08:22, 06:39](2277 MB)
+PASS -- COMPILE 'rrfs_oneapi' [16:10, 14:31]
+PASS -- TEST 'rap_control_oneapi' [05:55, 03:25](1192 MB)
+PASS -- TEST 'regional_spp_sppt_shum_skeb_oneapi' [05:50, 03:36](1373 MB)
+PASS -- TEST 'rap_decomp_oneapi' [05:41, 03:36](1137 MB)
+PASS -- TEST 'rap_2threads_oneapi' [07:50, 05:25](1208 MB)
+PASS -- TEST 'rap_restart_oneapi' [03:44, 01:53](1131 MB)
+PASS -- TEST 'rap_sfcdiff_oneapi' [05:48, 03:23](1199 MB)
+PASS -- TEST 'rap_sfcdiff_decomp_oneapi' [05:45, 03:36](1146 MB)
+PASS -- TEST 'rap_sfcdiff_restart_oneapi' [04:04, 01:52](1134 MB)
+PASS -- TEST 'hrrr_control_oneapi' [05:54, 03:13](1180 MB)
+PASS -- TEST 'hrrr_control_decomp_oneapi' [05:45, 03:20](1112 MB)
+PASS -- TEST 'hrrr_control_2threads_oneapi' [06:44, 04:54](1181 MB)
+PASS -- TEST 'hrrr_control_restart_oneapi' [03:26, 01:44](1085 MB)
+PASS -- TEST 'rrfs_v1beta_oneapi' [09:04, 06:12](1309 MB)
+PASS -- TEST 'rrfs_v1nssl_oneapi' [09:21, 06:52](2044 MB)
+PASS -- TEST 'rrfs_v1nssl_nohailnoccn_oneapi' [08:20, 06:32](2282 MB)
 
-PASS -- COMPILE 'csawmg_oneapi' [05:10, 04:04]
-PASS -- TEST 'control_csawmg_oneapi' [07:35, 05:55](1062 MB)
+PASS -- COMPILE 'csawmg_oneapi' [06:11, 04:28]
+PASS -- TEST 'control_csawmg_oneapi' [07:30, 05:50](1072 MB)
 
-PASS -- COMPILE 'wam_oneapi' [05:10, 04:05]
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_wam_oneapi' [, ]( MB)
+PASS -- COMPILE 'wam_oneapi' [06:11, 04:25]
+PASS -- TEST 'control_wam_oneapi' [05:40, 03:38](1679 MB)
 
-PASS -- COMPILE 'atm_debug_dyn32_oneapi' [04:12, 02:46]
+PASS -- COMPILE 'atm_debug_dyn32_oneapi' [04:10, 02:34]
 FAILED: RUN DID NOT COMPLETE -- TEST 'control_CubedSphereGrid_debug_oneapi' [, ]( MB)
 FAILED: RUN DID NOT COMPLETE -- TEST 'control_wrtGauss_netcdf_parallel_debug_oneapi' [, ]( MB)
 FAILED: RUN DID NOT COMPLETE -- TEST 'control_stochy_debug_oneapi' [, ]( MB)
@@ -193,29 +194,29 @@ FAILED: RUN DID NOT COMPLETE -- TEST 'rap_sfcdiff_debug_oneapi' [, ]( MB)
 FAILED: RUN DID NOT COMPLETE -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_oneapi' [, ]( MB)
 FAILED: RUN DID NOT COMPLETE -- TEST 'rap_clm_lake_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'wam_debug_oneapi' [03:11, 01:50]
+PASS -- COMPILE 'wam_debug_oneapi' [03:10, 01:41]
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_oneapi' [14:12, 13:01]
-PASS -- TEST 'regional_spp_sppt_shum_skeb_dyn32_phy32_oneapi' [06:00, 03:39](1240 MB)
-PASS -- TEST 'rap_control_dyn32_phy32_oneapi' [05:57, 03:24](1124 MB)
-PASS -- TEST 'hrrr_control_dyn32_phy32_oneapi' [04:50, 03:02](1113 MB)
-PASS -- TEST 'rap_2threads_dyn32_phy32_oneapi' [06:46, 04:36](1078 MB)
-PASS -- TEST 'hrrr_control_2threads_dyn32_phy32_oneapi' [07:08, 04:26](1080 MB)
-PASS -- TEST 'hrrr_control_decomp_dyn32_phy32_oneapi' [04:42, 03:07](1066 MB)
-PASS -- TEST 'rap_restart_dyn32_phy32_oneapi' [04:08, 01:43](1017 MB)
-PASS -- TEST 'hrrr_control_restart_dyn32_phy32_oneapi' [03:22, 01:41](1021 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_control_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_2threads_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_decomp_oneapi' [, ]( MB)
-FAILED: UNABLE TO START TEST -- TEST 'conus13km_restart_oneapi' [, ]( MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_oneapi' [15:11, 13:58]
+PASS -- TEST 'regional_spp_sppt_shum_skeb_dyn32_phy32_oneapi' [05:48, 03:22](1253 MB)
+PASS -- TEST 'rap_control_dyn32_phy32_oneapi' [04:44, 03:06](1133 MB)
+PASS -- TEST 'hrrr_control_dyn32_phy32_oneapi' [04:54, 02:54](1125 MB)
+PASS -- TEST 'rap_2threads_dyn32_phy32_oneapi' [06:46, 04:35](1115 MB)
+PASS -- TEST 'hrrr_control_2threads_dyn32_phy32_oneapi' [06:56, 04:23](1090 MB)
+PASS -- TEST 'hrrr_control_decomp_dyn32_phy32_oneapi' [04:41, 03:04](1069 MB)
+PASS -- TEST 'rap_restart_dyn32_phy32_oneapi' [03:50, 01:42](1011 MB)
+PASS -- TEST 'hrrr_control_restart_dyn32_phy32_oneapi' [03:21, 01:33](1011 MB)
+PASS -- TEST 'conus13km_control_oneapi' [04:57, 03:02](1499 MB)
+PASS -- TEST 'conus13km_2threads_oneapi' [03:49, 01:31](1353 MB)
+PASS -- TEST 'conus13km_decomp_oneapi' [04:51, 03:08](1510 MB)
+PASS -- TEST 'conus13km_restart_oneapi' [03:41, 01:58](1253 MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_faster_cdeps_oneapi' [14:11, 13:02]
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_gl_inline_oneapi' [, ]( MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_faster_cdeps_oneapi' [16:11, 15:03]
+PASS -- TEST 'conus13km_gl_inline_oneapi' [04:04, 02:02](1076 MB)
 
-PASS -- COMPILE 'rrfs_dyn64_phy32_oneapi' [15:11, 13:41]
-PASS -- TEST 'rap_control_dyn64_phy32_oneapi' [05:51, 03:56](1114 MB)
+PASS -- COMPILE 'rrfs_dyn64_phy32_oneapi' [17:11, 15:41]
+PASS -- TEST 'rap_control_dyn64_phy32_oneapi' [05:34, 03:44](1138 MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_debug_oneapi' [03:11, 01:29]
+PASS -- COMPILE 'rrfs_dyn32_phy32_debug_oneapi' [03:11, 01:39]
 FAILED: RUN DID NOT COMPLETE -- TEST 'rap_control_debug_dyn32_phy32_oneapi' [, ]( MB)
 FAILED: RUN DID NOT COMPLETE -- TEST 'hrrr_control_debug_dyn32_phy32_oneapi' [, ]( MB)
 FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_debug_oneapi' [, ]( MB)
@@ -224,335 +225,259 @@ FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_debug_2threads_oneapi' [, ]( MB)
 FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_debug_decomp_oneapi' [, ]( MB)
 FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_radar_tten_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'rrfs_dyn64_phy32_debug_oneapi' [03:11, 01:29]
+PASS -- COMPILE 'rrfs_dyn64_phy32_debug_oneapi' [03:11, 01:41]
 FAILED: RUN DID NOT COMPLETE -- TEST 'rap_control_dyn64_phy32_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'hafsw_oneapi' [16:12, 14:15]
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_atm_oneapi' [, ]( MB)
-PASS -- TEST 'hafs_regional_atm_gfdlmpv3_oneapi' [07:35, 05:07](1078 MB)
-PASS -- TEST 'hafs_regional_atm_thompson_gfdlsf_oneapi' [05:36, 04:02](1251 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_atm_wav_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_1nest_atm_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_telescopic_2nests_atm_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_global_1nest_atm_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_global_multiple_4nests_atm_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_specified_moving_1nest_atm_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_storm_following_1nest_atm_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_global_storm_following_1nest_atm_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'gnv1_nested_oneapi' [, ]( MB)
+PASS -- COMPILE 'hafsw_oneapi' [16:12, 15:01]
+PASS -- TEST 'hafs_regional_atm_oneapi' [05:47, 03:50](889 MB)
+PASS -- TEST 'hafs_regional_atm_gfdlmpv3_oneapi' [07:15, 05:08](1087 MB)
+PASS -- TEST 'hafs_regional_atm_thompson_gfdlsf_oneapi' [05:21, 03:28](1278 MB)
+PASS -- TEST 'hafs_regional_atm_wav_oneapi' [13:19, 10:36](982 MB)
+PASS -- TEST 'hafs_regional_1nest_atm_oneapi' [07:43, 05:37](632 MB)
+PASS -- TEST 'hafs_regional_telescopic_2nests_atm_oneapi' [08:59, 06:24](637 MB)
+PASS -- TEST 'hafs_global_1nest_atm_oneapi' [04:43, 02:53](461 MB)
+PASS -- TEST 'hafs_global_multiple_4nests_atm_oneapi' [12:30, 09:28](571 MB)
+PASS -- TEST 'hafs_regional_specified_moving_1nest_atm_oneapi' [05:46, 03:32](635 MB)
+PASS -- TEST 'hafs_regional_storm_following_1nest_atm_oneapi' [05:43, 03:25](638 MB)
+PASS -- TEST 'hafs_global_storm_following_1nest_atm_oneapi' [03:28, 01:10](490 MB)
+PASS -- TEST 'gnv1_nested_oneapi' [06:21, 03:13](1756 MB)
 
-PASS -- COMPILE 'hafs_mom6w_oneapi' [09:11, 08:02]
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi' [, ]( MB)
+PASS -- COMPILE 'hafs_mom6w_oneapi' [09:11, 07:29]
+PASS -- TEST 'hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi' [09:59, 07:17](839 MB)
 
-PASS -- COMPILE 'hafs_all_oneapi' [07:11, 05:26]
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_docn_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hafs_regional_docn_oisst_oneapi' [, ]( MB)
+PASS -- COMPILE 'hafs_all_oneapi' [07:11, 05:11]
+PASS -- TEST 'hafs_regional_docn_oneapi' [07:57, 05:47](940 MB)
+PASS -- TEST 'hafs_regional_docn_oisst_oneapi' [07:47, 05:53](932 MB)
 
-PASS -- COMPILE 'datm_cdeps_oneapi' [12:12, 10:20]
-PASS -- TEST 'datm_cdeps_control_cfsr_oneapi' [04:23, 02:20](1786 MB)
-PASS -- TEST 'datm_cdeps_restart_cfsr_oneapi' [03:24, 01:40](1739 MB)
-PASS -- TEST 'datm_cdeps_control_gefs_oneapi' [04:19, 02:11](1022 MB)
-PASS -- TEST 'datm_cdeps_iau_gefs_oneapi' [04:17, 02:11](1024 MB)
-PASS -- TEST 'datm_cdeps_stochy_gefs_oneapi' [04:18, 02:14](1024 MB)
-PASS -- TEST 'datm_cdeps_ciceC_cfsr_oneapi' [04:17, 02:20](1791 MB)
-PASS -- TEST 'datm_cdeps_mx025_cfsr_oneapi' [08:13, 05:47](1724 MB)
-PASS -- TEST 'datm_cdeps_mx025_gefs_oneapi' [08:08, 05:44](1199 MB)
-PASS -- TEST 'datm_cdeps_multiple_files_cfsr_oneapi' [04:19, 02:18](1793 MB)
-PASS -- TEST 'datm_cdeps_3072x1536_cfsr_oneapi' [05:19, 03:47](4764 MB)
-PASS -- TEST 'datm_cdeps_gfs_oneapi' [05:21, 03:43](4766 MB)
+PASS -- COMPILE 'datm_cdeps_oneapi' [11:11, 09:13]
+PASS -- TEST 'datm_cdeps_control_cfsr_oneapi' [04:17, 02:19](1790 MB)
+PASS -- TEST 'datm_cdeps_restart_cfsr_oneapi' [03:17, 01:31](1730 MB)
+PASS -- TEST 'datm_cdeps_control_gefs_oneapi' [04:15, 02:10](1020 MB)
+PASS -- TEST 'datm_cdeps_iau_gefs_oneapi' [04:16, 02:11](1022 MB)
+PASS -- TEST 'datm_cdeps_stochy_gefs_oneapi' [04:15, 02:12](1031 MB)
+PASS -- TEST 'datm_cdeps_ciceC_cfsr_oneapi' [04:15, 02:19](1789 MB)
+PASS -- TEST 'datm_cdeps_mx025_cfsr_oneapi' [07:56, 05:47](1715 MB)
+PASS -- TEST 'datm_cdeps_mx025_gefs_oneapi' [07:50, 05:36](1244 MB)
+PASS -- TEST 'datm_cdeps_multiple_files_cfsr_oneapi' [04:18, 02:20](1788 MB)
+PASS -- TEST 'datm_cdeps_3072x1536_cfsr_oneapi' [05:18, 03:37](4763 MB)
+PASS -- TEST 'datm_cdeps_gfs_oneapi' [05:17, 03:41](4766 MB)
 
-PASS -- COMPILE 'datm_cdeps_debug_oneapi' [03:11, 01:24]
+PASS -- COMPILE 'datm_cdeps_debug_oneapi' [03:11, 01:13]
 FAILED: RUN DID NOT COMPLETE -- TEST 'datm_cdeps_debug_cfsr_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'datm_cdeps_land_oneapi' [02:12, 00:51]
-PASS -- TEST 'datm_cdeps_lnd_gswp3_oneapi' [03:37, 01:12](329 MB)
-PASS -- TEST 'datm_cdeps_lnd_era5_oneapi' [02:29, 00:44](546 MB)
-PASS -- TEST 'datm_cdeps_lnd_era5_rst_oneapi' [02:39, 00:31](549 MB)
+PASS -- COMPILE 'datm_cdeps_land_oneapi' [02:10, 00:42]
+PASS -- TEST 'datm_cdeps_lnd_gswp3_oneapi' [02:31, 00:57](339 MB)
+PASS -- TEST 'datm_cdeps_lnd_era5_oneapi' [02:25, 00:40](545 MB)
+PASS -- TEST 'datm_cdeps_lnd_era5_rst_oneapi' [02:29, 00:28](546 MB)
 
-PASS -- COMPILE 'atm_ds2s_docn_pcice_oneapi' [10:12, 08:59]
-PASS -- TEST 'atm_ds2s_docn_pcice_oneapi' [09:03, 04:18](2016 MB)
+PASS -- COMPILE 'atm_ds2s_docn_pcice_oneapi' [11:11, 09:23]
+PASS -- TEST 'atm_ds2s_docn_pcice_oneapi' [07:44, 03:28](2026 MB)
 
-PASS -- COMPILE 'atml_oneapi' [14:12, 12:26]
-PASS -- TEST 'control_p8_atmlnd_oneapi' [09:23, 03:43](1901 MB)
-PASS -- TEST 'control_restart_p8_atmlnd_oneapi' [04:49, 01:52](1234 MB)
+PASS -- COMPILE 'atml_oneapi' [15:12, 14:02]
+PASS -- TEST 'control_p8_atmlnd_oneapi' [07:56, 03:05](1905 MB)
+PASS -- TEST 'control_restart_p8_atmlnd_oneapi' [04:50, 01:44](1250 MB)
 
-PASS -- COMPILE 'atml_debug_oneapi' [04:13, 02:19]
+PASS -- COMPILE 'atml_debug_oneapi' [04:11, 02:26]
 FAILED: RUN DID NOT COMPLETE -- TEST 'control_p8_atmlnd_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atmw_oneapi' [06:11, 04:35]
-PASS -- TEST 'atmwav_control_noaero_p8_oneapi' [04:07, 01:44](1940 MB)
+PASS -- COMPILE 'atmw_oneapi' [06:11, 04:48]
+PASS -- TEST 'atmwav_control_noaero_p8_oneapi' [03:53, 01:44](1964 MB)
 
-PASS -- COMPILE 'atmaero_oneapi' [06:11, 04:58]
-PASS -- TEST 'atmaero_control_p8_oneapi' [07:06, 04:48](2018 MB)
-PASS -- TEST 'atmaero_control_p8_rad_oneapi' [07:57, 05:12](1786 MB)
-PASS -- TEST 'atmaero_control_p8_rad_micro_oneapi' [06:53, 04:59](1806 MB)
+PASS -- COMPILE 'atmaero_oneapi' [06:11, 05:03]
+PASS -- TEST 'atmaero_control_p8_oneapi' [05:47, 04:02](2036 MB)
+PASS -- TEST 'atmaero_control_p8_rad_oneapi' [06:41, 04:46](1783 MB)
+PASS -- TEST 'atmaero_control_p8_rad_micro_oneapi' [06:40, 04:52](1805 MB)
 
-PASS -- COMPILE 'atmaq_oneapi' [06:12, 04:44]
-PASS -- TEST 'regional_atmaq_oneapi' [18:39, 15:26](2919 MB)
-PASS -- TEST 'regional_atmaq_canopy_oneapi' [22:41, 19:55](2917 MB)
+PASS -- COMPILE 'atmaq_oneapi' [06:11, 04:42]
+PASS -- TEST 'regional_atmaq_oneapi' [17:35, 14:28](2922 MB)
+PASS -- TEST 'regional_atmaq_canopy_oneapi' [22:14, 19:11](2925 MB)
 
-PASS -- COMPILE 'atmaq_debug_oneapi' [03:11, 01:43]
+PASS -- COMPILE 'atmaq_debug_oneapi' [03:11, 02:06]
 FAILED: RUN DID NOT COMPLETE -- TEST 'regional_atmaq_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atm_fbh_oneapi' [14:12, 12:28]
-PASS -- TEST 'cpld_regional_atm_fbh_oneapi' [11:29, 09:40](1024 MB)
+PASS -- COMPILE 'atm_fbh_oneapi' [16:12, 14:23]
+PASS -- TEST 'cpld_regional_atm_fbh_oneapi' [10:23, 08:52](1020 MB)
 
-PASS -- COMPILE 'atm_gnu' [05:12, 03:31] ( 37 warnings )
-PASS -- TEST 'control_c48_gnu' [09:36, 07:54](1513 MB)
-PASS -- TEST 'control_stochy_gnu' [09:24, 07:34](492 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_p8_gnu' [, ]( MB)
-PASS -- TEST 'control_p8_ugwpv1_gnu' [07:49, 05:27](1455 MB)
+PASS -- COMPILE 'atm_gnu' [05:11, 03:50] ( 37 warnings )
+PASS -- TEST 'control_c48_gnu' [10:31, 08:13](1513 MB)
+PASS -- TEST 'control_stochy_gnu' [09:22, 08:03](503 MB)
+PASS -- TEST 'control_p8_gnu' [07:59, 05:11](1452 MB)
+PASS -- TEST 'control_p8_ugwpv1_gnu' [07:43, 05:20](1461 MB)
 
-PASS -- COMPILE 'rrfs_gnu' [05:11, 03:21] ( 37 warnings )
-PASS -- TEST 'rap_control_gnu' [10:52, 08:16](835 MB)
-PASS -- TEST 'rap_decomp_gnu' [10:51, 08:34](835 MB)
-PASS -- TEST 'rap_2threads_gnu' [08:01, 05:41](897 MB)
-PASS -- TEST 'rap_restart_gnu' [06:58, 04:45](566 MB)
-PASS -- TEST 'rap_sfcdiff_gnu' [10:08, 07:47](834 MB)
-PASS -- TEST 'rap_sfcdiff_decomp_gnu' [10:55, 08:12](835 MB)
-PASS -- TEST 'rap_sfcdiff_restart_gnu' [07:04, 04:40](565 MB)
-PASS -- TEST 'hrrr_control_gnu' [10:02, 07:24](837 MB)
-PASS -- TEST 'hrrr_control_noqr_gnu' [09:44, 07:36](822 MB)
-PASS -- TEST 'hrrr_control_2threads_gnu' [07:54, 05:31](890 MB)
-PASS -- TEST 'hrrr_control_decomp_gnu' [09:38, 07:56](834 MB)
-PASS -- TEST 'hrrr_control_restart_gnu' [06:22, 04:13](559 MB)
-PASS -- TEST 'hrrr_control_restart_noqr_gnu' [05:24, 04:02](645 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rrfs_v1beta_gnu' [, ]( MB)
+PASS -- COMPILE 'rrfs_gnu' [05:11, 03:50] ( 37 warnings )
+PASS -- TEST 'rap_control_gnu' [08:47, 06:38](852 MB)
+PASS -- TEST 'rap_decomp_gnu' [08:33, 07:05](853 MB)
+PASS -- TEST 'rap_2threads_gnu' [06:46, 04:55](900 MB)
+PASS -- TEST 'rap_restart_gnu' [05:53, 03:59](577 MB)
+PASS -- TEST 'rap_sfcdiff_gnu' [08:43, 06:44](854 MB)
+PASS -- TEST 'rap_sfcdiff_decomp_gnu' [08:42, 06:51](854 MB)
+PASS -- TEST 'rap_sfcdiff_restart_gnu' [05:58, 03:43](576 MB)
+PASS -- TEST 'hrrr_control_gnu' [08:47, 06:09](846 MB)
+PASS -- TEST 'hrrr_control_noqr_gnu' [08:36, 06:20](832 MB)
+PASS -- TEST 'hrrr_control_2threads_gnu' [06:45, 05:02](892 MB)
+PASS -- TEST 'hrrr_control_decomp_gnu' [08:41, 06:38](844 MB)
+PASS -- TEST 'hrrr_control_restart_gnu' [05:24, 03:31](568 MB)
+PASS -- TEST 'hrrr_control_restart_noqr_gnu' [05:24, 03:32](651 MB)
+PASS -- TEST 'rrfs_v1beta_gnu' [13:58, 11:49](849 MB)
 
-PASS -- COMPILE 'csawmg_gnu' [05:12, 03:11] ( 37 warnings )
-PASS -- TEST 'control_csawmg_gnu' [10:30, 08:48](737 MB)
+PASS -- COMPILE 'csawmg_gnu' [05:11, 03:10] ( 37 warnings )
+PASS -- TEST 'control_csawmg_gnu' [10:30, 08:53](748 MB)
 
-PASS -- COMPILE 'atm_dyn32_debug_gnu' [08:11, 06:18] ( 40 warnings )
-PASS -- TEST 'control_diag_debug_gnu' [04:34, 02:43](1267 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'regional_debug_gnu' [, ]( MB)
-PASS -- TEST 'rap_control_debug_gnu' [05:25, 03:10](844 MB)
-PASS -- TEST 'hrrr_control_debug_gnu' [04:25, 03:06](844 MB)
-PASS -- TEST 'hrrr_gf_debug_gnu' [04:18, 03:09](848 MB)
-PASS -- TEST 'hrrr_c3_debug_gnu' [05:28, 03:14](849 MB)
-PASS -- TEST 'rap_diag_debug_gnu' [05:42, 03:32](934 MB)
-PASS -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_gnu' [06:29, 04:37](844 MB)
-PASS -- TEST 'rap_progcld_thompson_debug_gnu' [05:22, 03:52](847 MB)
-PASS -- TEST 'control_stochy_debug_gnu' [07:19, 05:27](479 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_debug_p8_gnu' [, ]( MB)
-PASS -- TEST 'rap_clm_lake_debug_gnu' [05:30, 03:26](848 MB)
-PASS -- TEST 'gnv1_c96_no_nest_debug_gnu' [07:52, 05:17](851 MB)
+PASS -- COMPILE 'atm_dyn32_debug_gnu' [08:12, 06:33] ( 40 warnings )
+PASS -- TEST 'control_diag_debug_gnu' [04:28, 02:14](1281 MB)
+PASS -- TEST 'regional_debug_gnu' [08:30, 07:03](751 MB)
+PASS -- TEST 'rap_control_debug_gnu' [04:17, 02:44](859 MB)
+PASS -- TEST 'hrrr_control_debug_gnu' [04:24, 02:58](853 MB)
+PASS -- TEST 'hrrr_gf_debug_gnu' [04:18, 02:56](854 MB)
+PASS -- TEST 'hrrr_c3_debug_gnu' [05:18, 03:14](858 MB)
+PASS -- TEST 'rap_diag_debug_gnu' [05:29, 03:12](948 MB)
+PASS -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_gnu' [06:23, 04:26](858 MB)
+PASS -- TEST 'rap_progcld_thompson_debug_gnu' [05:21, 03:17](860 MB)
+PASS -- TEST 'control_stochy_debug_gnu' [07:17, 05:35](487 MB)
+PASS -- TEST 'control_debug_p8_gnu' [04:41, 02:18](1457 MB)
+PASS -- TEST 'rap_clm_lake_debug_gnu' [04:26, 03:05](865 MB)
+PASS -- TEST 'gnv1_c96_no_nest_debug_gnu' [06:50, 04:36](858 MB)
 
-PASS -- COMPILE 'wam_debug_gnu' [03:11, 01:44] ( 37 warnings )
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_wam_debug_gnu' [, ]( MB)
+PASS -- COMPILE 'wam_debug_gnu' [03:10, 01:44] ( 37 warnings )
+PASS -- TEST 'control_wam_debug_gnu' [08:39, 06:50](1292 MB)
 
-PASS -- COMPILE 'atm_debug_dyn32_gnu' [04:11, 03:04] ( 37 warnings )
-PASS -- TEST 'control_csawmg_debug_gnu' [04:24, 03:03](730 MB)
+PASS -- COMPILE 'atm_debug_dyn32_gnu' [05:11, 03:09] ( 37 warnings )
+PASS -- TEST 'control_csawmg_debug_gnu' [04:29, 03:01](732 MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_gnu' [05:16, 03:17] ( 37 warnings )
-PASS -- TEST 'rap_control_dyn32_phy32_gnu' [08:40, 06:55](694 MB)
-PASS -- TEST 'hrrr_control_dyn32_phy32_gnu' [08:45, 06:34](696 MB)
-PASS -- TEST 'rap_2threads_dyn32_phy32_gnu' [07:56, 05:40](738 MB)
-PASS -- TEST 'hrrr_control_2threads_dyn32_phy32_gnu' [07:51, 05:18](730 MB)
-PASS -- TEST 'hrrr_control_decomp_dyn32_phy32_gnu' [08:43, 06:52](696 MB)
-PASS -- TEST 'rap_restart_dyn32_phy32_gnu' [06:52, 04:23](539 MB)
-PASS -- TEST 'hrrr_control_restart_dyn32_phy32_gnu' [05:23, 03:50](536 MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_control_gnu' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_2threads_gnu' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_decomp_gnu' [, ]( MB)
-FAILED: UNABLE TO START TEST -- TEST 'conus13km_restart_gnu' [, ]( MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_gnu' [05:11, 03:27] ( 37 warnings )
+PASS -- TEST 'rap_control_dyn32_phy32_gnu' [08:41, 06:53](704 MB)
+PASS -- TEST 'hrrr_control_dyn32_phy32_gnu' [08:45, 06:35](700 MB)
+PASS -- TEST 'rap_2threads_dyn32_phy32_gnu' [07:47, 05:36](735 MB)
+PASS -- TEST 'hrrr_control_2threads_dyn32_phy32_gnu' [07:55, 05:27](729 MB)
+PASS -- TEST 'hrrr_control_decomp_dyn32_phy32_gnu' [08:36, 06:50](700 MB)
+PASS -- TEST 'rap_restart_dyn32_phy32_gnu' [05:37, 04:03](546 MB)
+PASS -- TEST 'hrrr_control_restart_dyn32_phy32_gnu' [05:20, 03:36](543 MB)
+PASS -- TEST 'conus13km_control_gnu' [07:01, 04:59](909 MB)
+PASS -- TEST 'conus13km_2threads_gnu' [04:48, 02:32](914 MB)
+PASS -- TEST 'conus13km_decomp_gnu' [07:50, 05:08](910 MB)
+PASS -- TEST 'conus13km_restart_gnu' [04:37, 03:03](592 MB)
 
-PASS -- COMPILE 'atm_dyn64_phy32_gnu' [10:12, 08:52] ( 40 warnings )
-PASS -- TEST 'rap_control_dyn64_phy32_gnu' [09:44, 07:10](725 MB)
+PASS -- COMPILE 'atm_dyn64_phy32_gnu' [11:12, 09:41] ( 40 warnings )
+PASS -- TEST 'rap_control_dyn64_phy32_gnu' [08:37, 06:28](728 MB)
 
-PASS -- COMPILE 'atm_dyn32_phy32_debug_gnu' [08:11, 06:34] ( 40 warnings )
-PASS -- TEST 'rap_control_debug_dyn32_phy32_gnu' [05:22, 03:13](700 MB)
-PASS -- TEST 'hrrr_control_debug_dyn32_phy32_gnu' [04:27, 03:06](706 MB)
-PASS -- TEST 'conus13km_debug_gnu' [11:44, 09:19](927 MB)
-PASS -- TEST 'conus13km_debug_qr_gnu' [11:39, 09:14](653 MB)
-PASS -- TEST 'conus13km_debug_2threads_gnu' [11:32, 09:33](931 MB)
-PASS -- TEST 'conus13km_debug_decomp_gnu' [11:35, 09:27](929 MB)
-PASS -- TEST 'conus13km_radar_tten_debug_gnu' [10:32, 09:07](995 MB)
+PASS -- COMPILE 'atm_dyn32_phy32_debug_gnu' [08:12, 07:07] ( 40 warnings )
+PASS -- TEST 'rap_control_debug_dyn32_phy32_gnu' [05:17, 03:13](710 MB)
+PASS -- TEST 'hrrr_control_debug_dyn32_phy32_gnu' [04:21, 02:43](704 MB)
+PASS -- TEST 'conus13km_debug_gnu' [11:39, 09:21](924 MB)
+PASS -- TEST 'conus13km_debug_qr_gnu' [11:36, 09:19](652 MB)
+PASS -- TEST 'conus13km_debug_2threads_gnu' [11:31, 09:25](930 MB)
+PASS -- TEST 'conus13km_debug_decomp_gnu' [11:29, 09:21](928 MB)
+PASS -- TEST 'conus13km_radar_tten_debug_gnu' [11:29, 09:16](993 MB)
 
-PASS -- COMPILE 'atm_dyn64_phy32_debug_gnu' [08:11, 06:27] ( 40 warnings )
-PASS -- TEST 'rap_control_dyn64_phy32_debug_gnu' [05:23, 03:12](729 MB)
+PASS -- COMPILE 'atm_dyn64_phy32_debug_gnu' [09:11, 07:27] ( 40 warnings )
+PASS -- TEST 'rap_control_dyn64_phy32_debug_gnu' [04:21, 02:47](736 MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_gnu' [17:13, 15:54] ( 37 warnings )
-PASS -- TEST 'cpld_control_gfsv17_gnu' [27:33, 22:54](1463 MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_gnu' [18:12, 16:59] ( 37 warnings )
+PASS -- TEST 'cpld_control_gfsv17_gnu' [28:19, 23:37](1495 MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_debug_gnu' [03:11, 02:02] ( 1929 warnings )
-PASS -- TEST 'cpld_debug_gfsv17_gnu' [19:23, 15:49](1490 MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_debug_gnu' [04:11, 02:10] ( 1929 warnings )
+PASS -- TEST 'cpld_debug_gfsv17_gnu' [20:01, 16:38](1481 MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_gnu' [16:12, 14:48] ( 37 warnings )
+PASS -- COMPILE 's2s_32bit_sfs_gnu' [18:12, 16:39] ( 37 warnings )
 FAILED: TEST TIMED OUT -- TEST 'cpld_control_sfs_gnu' [, ]( MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_debug_gnu' [04:11, 02:11] ( 1170 warnings )
-PASS -- TEST 'cpld_debug_sfs_gnu' [25:16, 21:47](1739 MB)
+PASS -- COMPILE 's2s_32bit_sfs_debug_gnu' [03:10, 02:03] ( 1170 warnings )
+PASS -- TEST 'cpld_debug_sfs_gnu' [27:32, 24:16](1744 MB)
 
-PASS -- COMPILE 'datm_cdeps_gnu' [17:12, 15:25]
-PASS -- TEST 'datm_cdeps_control_cfsr_gnu' [04:21, 02:44](1516 MB)
+PASS -- COMPILE 'datm_cdeps_gnu' [18:12, 17:07]
+PASS -- TEST 'datm_cdeps_control_cfsr_gnu' [04:17, 02:42](1516 MB)
 
-PASS -- COMPILE 'atm_mpas_dyn32_gnu' [04:11, 02:41] ( 1 warnings )
-PASS -- TEST 'control_gfs_mpas_gnu' [02:24, 00:34](7020 MB)
+PASS -- COMPILE 'atm_mpas_dyn32_gnu' [04:11, 03:05] ( 1 warnings )
+PASS -- TEST 'control_gfs_mpas_gnu' [03:25, 01:58](1116 MB)
+
+PASS -- COMPILE 'atm_mpas_dyn32_debug_gnu' [04:11, 02:26] ( 1 warnings )
+PASS -- TEST 'control_gfs_mpas_debug_gnu' [05:24, 03:28](1118 MB)
 
 SYNOPSIS:
-Starting Date/Time: 20260428 00:29:36
-Ending Date/Time: 20260428 02:31:39
-Total Time: 02h:03m:14s
-Compiles Completed: 51/51
-Tests Completed: 162/238
+Starting Date/Time: 20260604 21:58:04
+Ending Date/Time: 20260605 00:04:07
+Total Time: 02h:06m:57s
+Compiles Completed: 52/52
+Tests Completed: 204/240
 Failed Tests:
 * TEST cpld_debug_sfs_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_cpld_debug_sfs_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_cpld_debug_sfs_oneapi.log
 * TEST cpld_debug_gfsv17_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_cpld_debug_gfsv17_oneapi.log
-* TEST control_wrtGauss_netcdf_parallel_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_wrtGauss_netcdf_parallel_oneapi.log
-* TEST control_p8_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_p8_oneapi.log
-* TEST control_p8.v2.sfc_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_p8.v2.sfc_oneapi.log
-* TEST control_restart_p8_oneapi: FAILED: UNABLE TO START TEST
--- LOG: N/A
-* TEST control_noqr_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_noqr_p8_oneapi.log
-* TEST control_restart_noqr_p8_oneapi: FAILED: UNABLE TO START TEST
--- LOG: N/A
-* TEST control_decomp_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_decomp_p8_oneapi.log
-* TEST control_2threads_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_2threads_p8_oneapi.log
-* TEST control_p8_rrtmgp_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_p8_rrtmgp_oneapi.log
-* TEST regional_netcdf_parallel_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_regional_netcdf_parallel_oneapi.log
-* TEST control_p8_rrtmgp_rad32_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_p8_rrtmgp_rad32_oneapi.log
-* TEST rrfs_v1beta_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rrfs_v1beta_oneapi.log
-* TEST control_wam_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_wam_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_cpld_debug_gfsv17_oneapi.log
 * TEST control_CubedSphereGrid_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_CubedSphereGrid_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_control_CubedSphereGrid_debug_oneapi.log
 * TEST control_wrtGauss_netcdf_parallel_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_wrtGauss_netcdf_parallel_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_control_wrtGauss_netcdf_parallel_debug_oneapi.log
 * TEST control_stochy_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_stochy_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_control_stochy_debug_oneapi.log
 * TEST control_lndp_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_lndp_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_control_lndp_debug_oneapi.log
 * TEST control_csawmg_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_csawmg_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_control_csawmg_debug_oneapi.log
 * TEST control_diag_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_diag_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_control_diag_debug_oneapi.log
 * TEST control_debug_p8_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_debug_p8_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_control_debug_p8_oneapi.log
 * TEST regional_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_regional_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_regional_debug_oneapi.log
 * TEST rap_control_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_control_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_control_debug_oneapi.log
 * TEST hrrr_control_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hrrr_control_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_hrrr_control_debug_oneapi.log
 * TEST hrrr_gf_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hrrr_gf_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_hrrr_gf_debug_oneapi.log
 * TEST hrrr_c3_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hrrr_c3_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_hrrr_c3_debug_oneapi.log
 * TEST rap_unified_drag_suite_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_unified_drag_suite_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_unified_drag_suite_debug_oneapi.log
 * TEST rap_diag_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_diag_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_diag_debug_oneapi.log
 * TEST rap_cires_ugwp_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_cires_ugwp_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_cires_ugwp_debug_oneapi.log
 * TEST rap_unified_ugwp_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_unified_ugwp_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_unified_ugwp_debug_oneapi.log
 * TEST rap_lndp_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_lndp_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_lndp_debug_oneapi.log
 * TEST rap_progcld_thompson_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_progcld_thompson_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_progcld_thompson_debug_oneapi.log
 * TEST rap_noah_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_noah_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_noah_debug_oneapi.log
 * TEST rap_sfcdiff_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_sfcdiff_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_sfcdiff_debug_oneapi.log
 * TEST rap_noah_sfcdiff_cires_ugwp_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_noah_sfcdiff_cires_ugwp_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_noah_sfcdiff_cires_ugwp_debug_oneapi.log
 * TEST rap_clm_lake_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_clm_lake_debug_oneapi.log
-* TEST conus13km_control_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_control_oneapi.log
-* TEST conus13km_2threads_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_2threads_oneapi.log
-* TEST conus13km_decomp_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_decomp_oneapi.log
-* TEST conus13km_restart_oneapi: FAILED: UNABLE TO START TEST
--- LOG: N/A
-* TEST conus13km_gl_inline_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_gl_inline_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_clm_lake_debug_oneapi.log
 * TEST rap_control_debug_dyn32_phy32_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_control_debug_dyn32_phy32_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_control_debug_dyn32_phy32_oneapi.log
 * TEST hrrr_control_debug_dyn32_phy32_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hrrr_control_debug_dyn32_phy32_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_hrrr_control_debug_dyn32_phy32_oneapi.log
 * TEST conus13km_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_conus13km_debug_oneapi.log
 * TEST conus13km_debug_qr_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_debug_qr_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_conus13km_debug_qr_oneapi.log
 * TEST conus13km_debug_2threads_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_debug_2threads_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_conus13km_debug_2threads_oneapi.log
 * TEST conus13km_debug_decomp_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_debug_decomp_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_conus13km_debug_decomp_oneapi.log
 * TEST conus13km_radar_tten_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_radar_tten_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_conus13km_radar_tten_debug_oneapi.log
 * TEST rap_control_dyn64_phy32_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rap_control_dyn64_phy32_debug_oneapi.log
-* TEST hafs_regional_atm_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_atm_oneapi.log
-* TEST hafs_regional_atm_wav_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_atm_wav_oneapi.log
-* TEST hafs_regional_1nest_atm_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_1nest_atm_oneapi.log
-* TEST hafs_regional_telescopic_2nests_atm_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_telescopic_2nests_atm_oneapi.log
-* TEST hafs_global_1nest_atm_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_global_1nest_atm_oneapi.log
-* TEST hafs_global_multiple_4nests_atm_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_global_multiple_4nests_atm_oneapi.log
-* TEST hafs_regional_specified_moving_1nest_atm_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_specified_moving_1nest_atm_oneapi.log
-* TEST hafs_regional_storm_following_1nest_atm_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_storm_following_1nest_atm_oneapi.log
-* TEST hafs_global_storm_following_1nest_atm_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_global_storm_following_1nest_atm_oneapi.log
-* TEST gnv1_nested_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_gnv1_nested_oneapi.log
-* TEST hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi.log
-* TEST hafs_regional_docn_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_docn_oneapi.log
-* TEST hafs_regional_docn_oisst_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_hafs_regional_docn_oisst_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_rap_control_dyn64_phy32_debug_oneapi.log
 * TEST datm_cdeps_debug_cfsr_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_datm_cdeps_debug_cfsr_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_datm_cdeps_debug_cfsr_oneapi.log
 * TEST control_p8_atmlnd_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_p8_atmlnd_debug_oneapi.log
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_control_p8_atmlnd_debug_oneapi.log
 * TEST regional_atmaq_debug_oneapi: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_regional_atmaq_debug_oneapi.log
-* TEST control_p8_gnu: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_p8_gnu.log
-* TEST rrfs_v1beta_gnu: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_rrfs_v1beta_gnu.log
-* TEST regional_debug_gnu: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_regional_debug_gnu.log
-* TEST control_debug_p8_gnu: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_debug_p8_gnu.log
-* TEST control_wam_debug_gnu: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_control_wam_debug_gnu.log
-* TEST conus13km_control_gnu: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_control_gnu.log
-* TEST conus13km_2threads_gnu: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_2threads_gnu.log
-* TEST conus13km_decomp_gnu: FAILED: RUN DID NOT COMPLETE
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/ss-og/tests/logs/log_hercules/run_conus13km_decomp_gnu.log
-* TEST conus13km_restart_gnu: FAILED: UNABLE TO START TEST
--- LOG: N/A
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/pretests/3174cm/tests/logs/log_hercules/run_regional_atmaq_debug_oneapi.log
 * TEST cpld_control_sfs_gnu: FAILED: TEST TIMED OUT
--- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/stmp/gpetro/FV3_RT/rt_821562/cpld_control_sfs_gnu/err
+-- LOG: /work2/noaa/epic/gpetro/hercules/RTs/ufs-wm/stmp/gpetro/FV3_RT/rt_3493743/cpld_control_sfs_gnu/err
 
 NOTES:
-A file 'test_changes.list' was generated but is empty.
+A file 'test_changes.list' was generated with list of all failed tests.
+You can use './rt.sh -c -b test_changes.list' to create baselines for the failed tests.
 If you are using this log as a pull request verification, please commit 'test_changes.list'.
 
-Result: SUCCESS
+Result: FAILURE
 
 ====END OF HERCULES REGRESSION TESTING LOG====
