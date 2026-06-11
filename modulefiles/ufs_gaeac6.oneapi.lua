@@ -26,7 +26,7 @@ unload("cray-libsci")
 
 setenv("I_MPI_CC", "icx")
 setenv("I_MPI_CXX", "icpx")
-setenv("I_MPI_F90", "ifx")
+setenv("I_MPI_FC", "ifx")
 setenv("CC","cc")
 setenv("CXX","CC")
 setenv("FC","ftn")
