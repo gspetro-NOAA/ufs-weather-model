@@ -2,7 +2,7 @@ help([[
 loads UFS Model prerequisites for OrionLLVM/Intel
 ]])
 
-prepend_path("MODULEPATH", "/apps/contrib/spack-stack/spack-stack-2.1.0/envs/ue-oneapi-2025.3.1/modules/Core")
+prepend_path("MODULEPATH", "/apps/contrib/spack-stack/spack-stack-2.1.1/envs/ue-oneapi-2025.3.1/modules/Core")
 prepend_path("MODULEPATH", "/apps/contrib/spack-stack/modulefiles")
 
 stack_intel_ver=os.getenv("stack_intel_ver") or "2025.3.1"

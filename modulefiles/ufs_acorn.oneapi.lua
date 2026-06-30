@@ -2,10 +2,10 @@ help([[
 Load environment to build UFS on Acorn with Intel compiler
 ]])
 
-prepend_path("MODULEPATH", "/lfs/h1/emc/nceplibs/noscrub/spack-stack/spack-stack-2.1.0/envs/ue-oneapi-2024.2.1/modules/Core")
+prepend_path("MODULEPATH", "/lfs/h1/emc/nceplibs/noscrub/spack-stack/spack-stack-2.1.1/envs/ue-oneapi-2024.2.1/modules/Core")
 
-load("stack-intel-oneapi-compilers/2024.2.1") -- or load("stack-intel-oneapi-compilers") ?
-load("stack-cray-mpich/8.1.29") -- or load("stack-cray-mpich") ?
+load("stack-intel-oneapi-compilers") -- or load("stack-intel-oneapi-compilers/2024.2.1") ?
+load("stack-cray-mpich") -- or load("stack-cray-mpich/8.1.29") ?
 
 --Avoid production installations; use spack-stack only:
 remove_path("MODULEPATH", "/apps/ops/prod/libs/modulefiles/compiler/intel/19.1.3.304")
