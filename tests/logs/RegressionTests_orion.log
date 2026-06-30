@@ -1,30 +1,30 @@
 ====START OF ORION REGRESSION TESTING LOG====
 
 UFSWM hash used in testing:
-2899b7264144952312546e8711b8d744dafd4ee3
+e5387eebb117e56dda60e1821fa7f2cf37739305
 
 Submodule hashes used in testing:
- fc153862cfcc01fc4da513a2ff56af0bbd1234e0 AQM (v0.2.0-73-gfc15386)
+ 532ad5c6da1c827e055df90eaf6c91134f909eed AQM (v0.2.0-77-g532ad5c)
  642e81395472d5887b54f601b60ee607ed39bf09 AQM/src/model/CMAQ (CMAQv5.2.1_07Feb2018-6194-g642e81395)
  9f53664ef2e607ad25d6b6c939f2eac9ec818ee6 CDEPS-interface/CDEPS (cdeps0.4.17-432-g9f53664)
  def9c53b17d6722cc9991ba72ddae8ad2d5d25d9 CICE-interface/CICE (CICE6.0.0-445-gdef9c53)
  4954a6f9033f78e5c32bf33780384cbf2d0843e6 CICE-interface/CICE/icepack (Icepack1.1.0-225-g4954a6f)
- 7a51d2fd28f366e987b480396ec20ebd37fe987e CMEPS-interface/CMEPS (cmeps_v0.4.1-2344-g7a51d2fd)
+ a45ce1c208a69cb801e140fa8a8302e173e7c6dd CMEPS-interface/CMEPS (cmeps_v0.4.1-3529-ga45ce1c2)
  69049ec0c26b3160c3dbe1980b2feb78470a37a6 CMakeModules (v1.0.0-36-g69049ec)
  9ff3df9545dd582f415f682d3297e8c6c841e5cb GOCART (sdr_v2.1.2.6-291-g9ff3df9)
  513b67312510a15ae178ea5c3eddb0854e41486b LM4-driver (baseline_change_240904-8-g513b673)
- c61e4e280dbde13af0023b1e86d98296ff65d6a7 LM4-driver/LM4 (land_lad2_2021.02-3-gc61e4e2)
+ c61e4e280dbde13af0023b1e86d98296ff65d6a7 LM4-driver/LM4 (land_lad2_2021.02-3-gc61e4e28)
  4778b91ffebac913de85bd24abed3839c3545312 MOM6-interface/MOM6 (dev/master/repository_split_2014.10.10-10796-g4778b91ff)
  c38ddb7ebdd2d58c517b63a99bbdc8e348732db2 MOM6-interface/MOM6/pkg/CVMix-src (c38ddb7)
  29e64d652786e1d076a05128c920f394202bfe10 MOM6-interface/MOM6/pkg/GSW-Fortran (29e64d6)
  2c7b3bc2a8096f6232020c47507593058795102e NOAHMP-interface/noahmp (v3.7.1-471-g2c7b3bc)
- dbba1826c30ed9921b10ae1366f29c7bd1800ed2 UFSATM (remotes/origin/feature/ss2.x)
+ a671d2c00868d1498d17fd0bcccde8684be867bc UFSATM (remotes/origin/fix/hailcast_def)
  22bc1a5de8a19996310aedc3482931616cd74a1b UFSATM/ccpp/framework (2025-10-15-dev-5-g22bc1a5)
  af3eb8654c70580483d36feb2e70928dfb8b85b0 UFSATM/ccpp/physics (remotes/origin/feature/ss2.x)
  c62efd27caa26f660edf24232f33f154e608b77a UFSATM/ccpp/physics/physics/MP/TEMPO/TEMPO (v2.1.3~3)
  41c5fcd950fed09b8afe186dede266824eca7fd3 UFSATM/ccpp/physics/physics/Radiation/RRTMGP/rte-rrtmgp (41c5fcd)
  cce9a5fc4479749f489be24020e5c06c3e4202d4 UFSATM/ccpp/physics/physics/SFC_Layer/MYNN/MYNN (remotes/origin/ccpp/dev)
- 30baf0826f51b47e630a236193440df0746dcf25 UFSATM/fv3/atmos_cubed_sphere (201912_public_release-538-g30baf08)
+ 560f0a9a9c6e321ac5ae851128019642d3e649db UFSATM/fv3/atmos_cubed_sphere (201912_public_release-529-g560f0a9)
  99890240d93a6b28a75f84c9f7248161797656ae UFSATM/mpas/MPAS-Model (remotes/origin/master-101-g99890240)
  e44af2d81bedb1a26ace395e16dbc5b17d563266 UFSATM/upp (upp_v10.2.0-401-ge44af2d8)
 -68953f566b4d728b9ecf9a352c56e2aaeec6d8ec UFSATM/upp/sorc/libIFI.fd
@@ -40,8 +40,8 @@ The first time is for the full script (prep+run+finalize).
 The second time is specifically for the run phase.
 Times/Memory will be empty for failed tests.
 
-BASELINE DIRECTORY: /work2/noaa/epic/gpetro/orion/RTs/ufs-wm/stmp/gpetro/FV3_RT/REGRESSION_TEST-3174
-COMPARISON DIRECTORY: /work2/noaa/epic/gpetro/orion/RTs/ufs-wm/stmp/gpetro/FV3_RT/rt_3000737
+BASELINE DIRECTORY: /work2/noaa/epic/UFS-WM_RT/NEMSfv3gfs/develop-20260616
+COMPARISON DIRECTORY: /work2/noaa/epic/gpetro/orion/RTs/ufs-wm/stmp/gpetro/FV3_RT/rt_242549
 
 RT.SH OPTIONS USED:
 * (-a) - HPC PROJECT ACCOUNT: epic
@@ -49,263 +49,256 @@ RT.SH OPTIONS USED:
 * (-k) - KEEP RUN DIRECTORY
 * (-e) - USE ECFLOW
 
-PASS -- COMPILE 's2swa_32bit_oneapi' [19:11, 17:48]
-PASS -- TEST 'cpld_control_gefs_oneapi' [39:57, 22:21](3057 MB)
-PASS -- TEST 'cpld_restart_gefs_oneapi' [26:27, 08:13](2731 MB)
-PASS -- TEST 'cpld_dcp_gefs_oneapi' [40:58, 22:16](3092 MB)
+PASS -- COMPILE 's2swa_32bit_intel' [29:11, 27:59] ( 1 warnings 1051 remarks )
+PASS -- TEST 'cpld_control_gefs_intel' [36:22, 19:36](3033 MB)
+PASS -- TEST 'cpld_restart_gefs_intel' [24:58, 07:02](2709 MB)
+PASS -- TEST 'cpld_dcp_gefs_intel' [37:59, 19:32](3057 MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_oneapi' [19:13, 17:12]
-PASS -- TEST 'cpld_control_gfsv17_oneapi' [34:27, 21:09](1977 MB)
-PASS -- TEST 'cpld_control_gfsv17_iau_oneapi' [27:50, 22:37](2171 MB)
-PASS -- TEST 'cpld_restart_gfsv17_oneapi' [18:34, 10:40](1287 MB)
-PASS -- TEST 'cpld_restart_gfsv17_iau_oneapi' [15:30, 09:11](2130 MB)
-PASS -- TEST 'cpld_mpi_gfsv17_oneapi' [36:49, 22:55](1909 MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_intel' [28:11, 26:44] ( 1 warnings 1032 remarks )
+PASS -- TEST 'cpld_control_gfsv17_intel' [23:26, 20:09](1977 MB)
+PASS -- TEST 'cpld_control_gfsv17_iau_intel' [27:30, 22:17](2144 MB)
+PASS -- TEST 'cpld_restart_gfsv17_intel' [15:22, 10:29](1263 MB)
+PASS -- TEST 'cpld_restart_gfsv17_iau_intel' [14:35, 09:19](2115 MB)
+PASS -- TEST 'cpld_mpi_gfsv17_intel' [26:21, 22:38](1882 MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_oneapi' [17:11, 15:50]
-PASS -- TEST 'cpld_control_sfs_oneapi' [24:33, 17:39](2245 MB)
-PASS -- TEST 'cpld_restart_sfs_oneapi' [17:27, 09:43](1527 MB)
+PASS -- COMPILE 's2s_32bit_sfs_intel' [29:11, 27:51] ( 1 warnings 946 remarks )
+PASS -- TEST 'cpld_control_sfs_intel' [21:37, 14:02](2222 MB)
+PASS -- TEST 'cpld_restart_sfs_intel' [16:58, 08:03](1525 MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_debug_oneapi' [05:11, 04:05]
-FAILED: RUN DID NOT COMPLETE -- TEST 'cpld_debug_sfs_oneapi' [, ]( MB)
+PASS -- COMPILE 's2s_32bit_sfs_debug_intel' [07:11, 05:50] ( 309 warnings 946 remarks )
+PASS -- TEST 'cpld_debug_sfs_intel' [20:44, 13:14](2265 MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_debug_oneapi' [05:11, 04:01]
-FAILED: RUN DID NOT COMPLETE -- TEST 'cpld_debug_gfsv17_oneapi' [, ]( MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_debug_intel' [08:11, 06:12] ( 309 warnings 1344 remarks )
+PASS -- TEST 'cpld_debug_gfsv17_intel' [26:23, 22:47](1943 MB)
 
-PASS -- COMPILE 's2sw_oneapi' [17:11, 15:11]
-PASS -- TEST 'cpld_control_p8_oneapi' [17:30, 09:51](2098 MB)
-PASS -- TEST 'cpld_control_p8.v2.sfc_oneapi' [17:06, 09:42](2095 MB)
-PASS -- TEST 'cpld_restart_p8_oneapi' [10:40, 06:18](1538 MB)
-PASS -- TEST 'cpld_2threads_p8_oneapi' [19:15, 10:57](2170 MB)
-PASS -- TEST 'cpld_decomp_p8_oneapi' [18:22, 09:57](2089 MB)
-PASS -- TEST 'cpld_mpi_p8_oneapi' [14:52, 08:10](1998 MB)
-PASS -- TEST 'cpld_control_ciceC_p8_oneapi' [17:08, 09:56](2090 MB)
-PASS -- TEST 'cpld_control_c192_p8_oneapi' [18:03, 11:05](2299 MB)
-PASS -- TEST 'cpld_restart_c192_p8_oneapi' [15:49, 07:04](2567 MB)
+PASS -- COMPILE 's2sw_intel' [27:11, 25:55] ( 1 warnings 1033 remarks )
+PASS -- TEST 'cpld_control_c192_p8_intel' [14:11, 09:18](2268 MB)
+PASS -- TEST 'cpld_restart_c192_p8_intel' [12:07, 05:32](2643 MB)
 
-PASS -- COMPILE 's2swl_oneapi' [17:11, 15:29]
-PASS -- TEST 'cpld_control_p8_lnd_oneapi' [13:08, 10:10](2075 MB)
-PASS -- TEST 'cpld_restart_p8_lnd_oneapi' [09:42, 05:52](1520 MB)
+PASS -- COMPILE 's2swl_intel' [29:11, 27:53] ( 1 warnings 1054 remarks )
+PASS -- TEST 'cpld_control_p8_lnd_intel' [11:14, 07:29](2069 MB)
+PASS -- TEST 'cpld_restart_p8_lnd_intel' [09:03, 04:42](1503 MB)
 
-PASS -- COMPILE 's2s_aoflux_oneapi' [16:11, 15:09]
-PASS -- TEST 'cpld_control_noaero_p8_agrid_oneapi' [09:58, 06:53](2075 MB)
+PASS -- COMPILE 's2s_aoflux_intel' [29:11, 27:50] ( 1 warnings 956 remarks )
+PASS -- TEST 'cpld_control_noaero_p8_agrid_intel' [09:17, 05:55](2105 MB)
 
-PASS -- COMPILE 's2sw_pdlib_oneapi' [18:11, 16:40]
-PASS -- TEST 'cpld_control_c48_5deg_oneapi' [18:26, 12:15](2983 MB)
-PASS -- TEST 'cpld_warmstart_c48_5deg_oneapi' [11:23, 05:14](2977 MB)
-PASS -- TEST 'cpld_restart_c48_5deg_oneapi' [06:35, 03:50](2417 MB)
-PASS -- TEST 'cpld_control_c24_5deg_oneapi' [09:55, 03:42](2184 MB)
-PASS -- TEST 'cpld_warmstart_c24_5deg_oneapi' [08:54, 03:02](2178 MB)
-PASS -- TEST 'cpld_restart_c24_5deg_oneapi' [05:48, 02:21](1492 MB)
-PASS -- TEST 'cpld_control_c24_9deg_oneapi' [08:54, 03:40](2175 MB)
-PASS -- TEST 'cpld_warmstart_c24_9deg_oneapi' [07:53, 02:24](2172 MB)
-PASS -- TEST 'cpld_restart_c24_9deg_oneapi' [07:50, 02:33](1489 MB)
-PASS -- TEST 'cpld_control_c12_9deg_oneapi' [07:52, 02:30](2107 MB)
-PASS -- TEST 'cpld_warmstart_c12_9deg_oneapi' [07:53, 02:29](2100 MB)
-PASS -- TEST 'cpld_restart_c12_9deg_oneapi' [06:49, 02:06](1448 MB)
+PASS -- COMPILE 's2sw_pdlib_intel' [27:11, 26:09] ( 1 warnings 1042 remarks )
+PASS -- TEST 'cpld_control_c48_5deg_intel' [10:13, 07:45](3051 MB)
+PASS -- TEST 'cpld_warmstart_c48_5deg_intel' [05:10, 02:26](3041 MB)
+PASS -- TEST 'cpld_restart_c48_5deg_intel' [04:20, 01:26](2478 MB)
+PASS -- TEST 'cpld_control_c24_5deg_intel' [03:49, 01:21](2243 MB)
+PASS -- TEST 'cpld_warmstart_c24_5deg_intel' [02:44, 00:47](2241 MB)
+PASS -- TEST 'cpld_restart_c24_5deg_intel' [03:56, 01:42](1555 MB)
+PASS -- TEST 'cpld_control_c24_9deg_intel' [03:38, 01:21](2251 MB)
+PASS -- TEST 'cpld_warmstart_c24_9deg_intel' [04:47, 02:22](2240 MB)
+PASS -- TEST 'cpld_restart_c24_9deg_intel' [02:43, 00:36](1551 MB)
+PASS -- TEST 'cpld_control_c12_9deg_intel' [03:45, 02:01](2170 MB)
+PASS -- TEST 'cpld_warmstart_c12_9deg_intel' [04:46, 02:12](2168 MB)
+PASS -- TEST 'cpld_restart_c12_9deg_intel' [02:38, 00:32](1513 MB)
 
-PASS -- COMPILE 'atm_dyn32_oneapi' [23:12, 21:39]
-PASS -- TEST 'control_CubedSphereGrid_oneapi' [11:28, 03:48](1596 MB)
-PASS -- TEST 'control_CubedSphereGrid_parallel_oneapi' [06:54, 03:56](1609 MB)
-PASS -- TEST 'control_latlon_oneapi' [06:37, 03:40](1601 MB)
-PASS -- TEST 'control_wrtGauss_netcdf_parallel_oneapi' [06:43, 03:50](1608 MB)
-PASS -- TEST 'control_c48_oneapi' [14:48, 12:09](1650 MB)
-PASS -- TEST 'control_c48.v2.sfc_oneapi' [15:44, 12:37](777 MB)
-PASS -- TEST 'control_c48_lnd_iau_oneapi' [15:49, 12:36](1657 MB)
-PASS -- TEST 'control_c192_oneapi' [17:08, 11:23](1763 MB)
-PASS -- TEST 'control_c384_oneapi' [19:10, 13:32](2000 MB)
-PASS -- TEST 'control_c384gdas_oneapi' [24:04, 16:27](1341 MB)
-PASS -- TEST 'control_stochy_oneapi' [06:31, 02:43](669 MB)
-PASS -- TEST 'control_stochy_restart_oneapi' [05:17, 01:43](527 MB)
-PASS -- TEST 'control_lndp_oneapi' [05:31, 02:34](667 MB)
-PASS -- TEST 'control_iovr4_gfdlmpv3_oneapi' [07:58, 05:53](952 MB)
-PASS -- TEST 'control_p8_oneapi' [09:03, 05:40](1883 MB)
-PASS -- TEST 'control_p8.v2.sfc_oneapi' [08:38, 06:03](1897 MB)
-PASS -- TEST 'control_p8_ugwpv1_oneapi' [06:47, 03:55](1895 MB)
-PASS -- TEST 'control_p8_ugwpv1_tempo_oneapi' [07:42, 04:17](1916 MB)
-PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_oneapi' [07:55, 04:52](1928 MB)
-PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_hail_oneapi' [06:46, 04:03](2434 MB)
-PASS -- TEST 'control_restart_p8_oneapi' [08:11, 03:55](1181 MB)
-PASS -- TEST 'control_noqr_p8_oneapi' [10:07, 05:30](1888 MB)
-PASS -- TEST 'control_restart_noqr_p8_oneapi' [06:57, 03:43](1175 MB)
-PASS -- TEST 'control_decomp_p8_oneapi' [08:55, 05:46](1895 MB)
-PASS -- TEST 'control_2threads_p8_oneapi' [09:43, 05:49](1964 MB)
-PASS -- TEST 'control_p8_lndp_oneapi' [12:02, 08:41](1887 MB)
-PASS -- TEST 'control_p8_rrtmgp_oneapi' [10:34, 06:35](1954 MB)
-PASS -- TEST 'control_p8_mynn_oneapi' [09:31, 05:56](1907 MB)
-PASS -- TEST 'merra2_thompson_oneapi' [09:51, 06:37](1900 MB)
-PASS -- TEST 'merra2_hf_thompson_oneapi' [10:28, 07:20](1910 MB)
-PASS -- TEST 'regional_control_oneapi' [11:52, 09:56](1109 MB)
-PASS -- TEST 'regional_restart_oneapi' [06:56, 04:43](1110 MB)
-PASS -- TEST 'regional_decomp_oneapi' [11:43, 10:00](1109 MB)
-PASS -- TEST 'regional_2threads_oneapi' [10:02, 06:34](1058 MB)
-PASS -- TEST 'regional_noquilt_oneapi' [13:07, 10:02](1372 MB)
-PASS -- TEST 'regional_netcdf_parallel_oneapi' [12:53, 10:08](1108 MB)
-PASS -- TEST 'regional_2dwrtdecomp_oneapi' [12:51, 09:55](1103 MB)
-PASS -- TEST 'regional_wofs_oneapi' [12:47, 10:05](1911 MB)
+PASS -- COMPILE 'atm_dyn32_intel' [18:11, 16:22] ( 1 warnings 495 remarks )
+PASS -- TEST 'control_CubedSphereGrid_intel' [04:45, 02:33](1598 MB)
+PASS -- TEST 'control_CubedSphereGrid_parallel_intel' [04:55, 02:45](1600 MB)
+PASS -- TEST 'control_latlon_intel' [04:39, 02:41](1603 MB)
+PASS -- TEST 'control_wrtGauss_netcdf_parallel_intel' [04:43, 02:43](1602 MB)
+PASS -- TEST 'control_c48_intel' [10:50, 08:38](1722 MB)
+PASS -- TEST 'control_c48.v2.sfc_intel' [09:43, 07:58](842 MB)
+PASS -- TEST 'control_c48_lnd_iau_intel' [10:49, 08:50](1714 MB)
+PASS -- TEST 'control_c192_intel' [10:12, 07:57](1787 MB)
+PASS -- TEST 'control_c384_intel' [13:34, 10:00](1973 MB)
+PASS -- TEST 'control_c384gdas_intel' [16:26, 11:03](1320 MB)
+PASS -- TEST 'control_stochy_intel' [03:32, 01:51](663 MB)
+PASS -- TEST 'control_stochy_restart_intel' [03:41, 01:09](501 MB)
+PASS -- TEST 'control_lndp_intel' [03:31, 01:44](665 MB)
+PASS -- TEST 'control_iovr4_gfdlmpv3_intel' [06:16, 04:03](955 MB)
+PASS -- TEST 'control_p8_intel' [07:53, 04:22](1887 MB)
+PASS -- TEST 'control_p8.v2.sfc_intel' [07:03, 03:46](1891 MB)
+PASS -- TEST 'control_p8_ugwpv1_intel' [08:04, 04:41](1900 MB)
+PASS -- TEST 'control_p8_ugwpv1_tempo_intel' [07:03, 04:06](1912 MB)
+PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_intel' [08:22, 04:32](1922 MB)
+PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_hail_intel' [06:52, 03:54](2415 MB)
+PASS -- TEST 'control_restart_p8_intel' [04:27, 01:51](1150 MB)
+PASS -- TEST 'control_noqr_p8_intel' [07:50, 04:11](1885 MB)
+PASS -- TEST 'control_restart_noqr_p8_intel' [04:30, 01:47](1156 MB)
+PASS -- TEST 'control_decomp_p8_intel' [07:50, 04:13](1876 MB)
+PASS -- TEST 'control_2threads_p8_intel' [07:51, 05:04](1968 MB)
+PASS -- TEST 'control_p8_lndp_intel' [09:20, 06:22](1892 MB)
+PASS -- TEST 'control_p8_rrtmgp_intel' [09:00, 05:51](1949 MB)
+PASS -- TEST 'control_p8_mynn_intel' [08:02, 04:30](1893 MB)
+PASS -- TEST 'merra2_thompson_intel' [08:19, 05:03](1901 MB)
+PASS -- TEST 'merra2_hf_thompson_intel' [08:40, 05:57](1906 MB)
+PASS -- TEST 'regional_control_intel' [09:14, 06:17](1085 MB)
+PASS -- TEST 'regional_restart_intel' [06:47, 04:26](1096 MB)
+PASS -- TEST 'regional_decomp_intel' [09:41, 07:12](1087 MB)
+PASS -- TEST 'regional_2threads_intel' [06:33, 04:16](1053 MB)
+PASS -- TEST 'regional_noquilt_intel' [08:46, 06:12](1364 MB)
+PASS -- TEST 'regional_netcdf_parallel_intel' [08:36, 06:12](1076 MB)
+PASS -- TEST 'regional_2dwrtdecomp_intel' [08:39, 06:15](1084 MB)
+PASS -- TEST 'regional_wofs_intel' [09:38, 07:54](1900 MB)
 
-PASS -- COMPILE 'atm_dyn32_rad32_oneapi' [23:12, 21:46]
-PASS -- TEST 'control_p8_rrtmgp_rad32_oneapi' [10:44, 06:58](1925 MB)
+PASS -- COMPILE 'atm_dyn32_rad32_intel' [16:11, 14:47] ( 1 warnings 476 remarks )
+PASS -- TEST 'control_p8_rrtmgp_rad32_intel' [07:51, 04:45](1918 MB)
 
-PASS -- COMPILE 'rrfs_oneapi' [23:12, 21:29]
-PASS -- TEST 'rap_control_oneapi' [09:44, 05:57](1063 MB)
-PASS -- TEST 'regional_spp_sppt_shum_skeb_oneapi' [09:20, 06:34](1281 MB)
-PASS -- TEST 'rap_decomp_oneapi' [09:19, 06:18](1049 MB)
-PASS -- TEST 'rap_2threads_oneapi' [08:50, 05:39](1125 MB)
-PASS -- TEST 'rap_restart_oneapi' [07:12, 03:11](1073 MB)
-PASS -- TEST 'rap_sfcdiff_oneapi' [08:37, 05:51](1059 MB)
-PASS -- TEST 'rap_sfcdiff_decomp_oneapi' [09:43, 06:15](1054 MB)
-PASS -- TEST 'rap_sfcdiff_restart_oneapi' [06:58, 03:11](1062 MB)
-PASS -- TEST 'hrrr_control_oneapi' [08:28, 05:33](1054 MB)
-PASS -- TEST 'hrrr_control_decomp_oneapi' [08:18, 05:40](1050 MB)
-PASS -- TEST 'hrrr_control_2threads_oneapi' [08:31, 05:16](1115 MB)
-PASS -- TEST 'hrrr_control_restart_oneapi' [04:54, 02:58](1033 MB)
-PASS -- TEST 'rrfs_v1beta_oneapi' [13:47, 10:49](1092 MB)
-PASS -- TEST 'rrfs_v1nssl_oneapi' [12:37, 10:52](2005 MB)
-PASS -- TEST 'rrfs_v1nssl_nohailnoccn_oneapi' [12:41, 10:22](2071 MB)
+PASS -- COMPILE 'rrfs_intel' [15:11, 13:36] ( 4 warnings 446 remarks )
+PASS -- TEST 'rap_control_intel' [07:19, 04:16](1048 MB)
+PASS -- TEST 'regional_spp_sppt_shum_skeb_intel' [08:14, 05:21](1317 MB)
+PASS -- TEST 'rap_decomp_intel' [07:09, 04:26](1046 MB)
+PASS -- TEST 'rap_2threads_intel' [07:40, 04:33](1120 MB)
+PASS -- TEST 'rap_restart_intel' [05:49, 02:21](1023 MB)
+PASS -- TEST 'rap_sfcdiff_intel' [07:21, 04:13](1056 MB)
+PASS -- TEST 'rap_sfcdiff_decomp_intel' [07:09, 04:26](1042 MB)
+PASS -- TEST 'rap_sfcdiff_restart_intel' [05:47, 02:19](1042 MB)
+PASS -- TEST 'hrrr_control_intel' [06:40, 04:05](1045 MB)
+PASS -- TEST 'hrrr_control_decomp_intel' [07:14, 04:12](1046 MB)
+PASS -- TEST 'hrrr_control_2threads_intel' [07:11, 04:16](1114 MB)
+PASS -- TEST 'hrrr_control_restart_intel' [04:47, 02:15](998 MB)
+PASS -- TEST 'rrfs_v1beta_intel' [10:27, 07:31](1090 MB)
+PASS -- TEST 'rrfs_v1nssl_intel' [11:38, 09:18](1988 MB)
+PASS -- TEST 'rrfs_v1nssl_nohailnoccn_intel' [10:42, 09:06](2059 MB)
 
-PASS -- COMPILE 'csawmg_oneapi' [09:12, 07:23]
-PASS -- TEST 'control_csawmg_oneapi' [10:54, 09:03](1032 MB)
+PASS -- COMPILE 'csawmg_intel' [14:12, 12:48] ( 1 warnings 399 remarks )
+PASS -- TEST 'control_csawmg_intel' [08:50, 06:26](1031 MB)
 
-PASS -- COMPILE 'wam_oneapi' [09:11, 07:43]
-PASS -- TEST 'control_wam_oneapi' [07:03, 05:04](1671 MB)
+PASS -- COMPILE 'wam_intel' [14:11, 12:20] ( 1 warnings 398 remarks )
+PASS -- TEST 'control_wam_intel' [05:54, 03:44](1678 MB)
 
-PASS -- COMPILE 'atm_debug_dyn32_oneapi' [06:11, 04:23]
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_CubedSphereGrid_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_wrtGauss_netcdf_parallel_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_stochy_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_lndp_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_csawmg_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_diag_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_debug_p8_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'regional_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_control_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hrrr_control_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hrrr_gf_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hrrr_c3_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_unified_drag_suite_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_diag_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_cires_ugwp_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_unified_ugwp_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_lndp_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_progcld_thompson_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_noah_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_sfcdiff_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_clm_lake_debug_oneapi' [, ]( MB)
+PASS -- COMPILE 'atm_debug_dyn32_intel' [08:11, 06:21] ( 415 warnings 582 remarks )
+PASS -- TEST 'control_CubedSphereGrid_debug_intel' [04:41, 02:21](1622 MB)
+PASS -- TEST 'control_wrtGauss_netcdf_parallel_debug_intel' [04:33, 02:24](1626 MB)
+PASS -- TEST 'control_stochy_debug_intel' [04:24, 03:07](829 MB)
+PASS -- TEST 'control_lndp_debug_intel' [04:25, 02:48](827 MB)
+PASS -- TEST 'control_csawmg_debug_intel' [07:48, 05:24](1135 MB)
+PASS -- TEST 'control_diag_debug_intel' [04:32, 03:05](1681 MB)
+PASS -- TEST 'control_debug_p8_intel' [05:54, 03:49](1925 MB)
+PASS -- TEST 'regional_debug_intel' [20:49, 18:52](1105 MB)
+PASS -- TEST 'rap_control_debug_intel' [06:28, 05:03](1223 MB)
+PASS -- TEST 'hrrr_control_debug_intel' [06:30, 04:56](1220 MB)
+PASS -- TEST 'hrrr_gf_debug_intel' [06:37, 05:03](1216 MB)
+PASS -- TEST 'hrrr_c3_debug_intel' [07:24, 05:29](1218 MB)
+PASS -- TEST 'rap_unified_drag_suite_debug_intel' [06:30, 05:08](1221 MB)
+PASS -- TEST 'rap_diag_debug_intel' [07:51, 05:19](1308 MB)
+PASS -- TEST 'rap_cires_ugwp_debug_intel' [06:33, 05:06](1224 MB)
+PASS -- TEST 'rap_unified_ugwp_debug_intel' [06:31, 05:09](1221 MB)
+PASS -- TEST 'rap_lndp_debug_intel' [06:29, 05:04](1223 MB)
+PASS -- TEST 'rap_progcld_thompson_debug_intel' [07:29, 05:26](1220 MB)
+PASS -- TEST 'rap_noah_debug_intel' [06:26, 04:59](1220 MB)
+PASS -- TEST 'rap_sfcdiff_debug_intel' [06:26, 05:03](1215 MB)
+PASS -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_intel' [10:26, 08:20](1218 MB)
+PASS -- TEST 'rap_clm_lake_debug_intel' [06:36, 05:03](1220 MB)
 
-PASS -- COMPILE 'wam_debug_oneapi' [04:11, 03:08]
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_wam_debug_oneapi' [, ]( MB)
+PASS -- COMPILE 'wam_debug_intel' [06:11, 04:18] ( 380 warnings 398 remarks )
+PASS -- TEST 'control_wam_debug_intel' [15:58, 13:51](1694 MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_oneapi' [25:13, 21:56]
-PASS -- TEST 'regional_spp_sppt_shum_skeb_dyn32_phy32_oneapi' [09:26, 06:17](1160 MB)
-PASS -- TEST 'rap_control_dyn32_phy32_oneapi' [08:22, 05:33](1009 MB)
-PASS -- TEST 'hrrr_control_dyn32_phy32_oneapi' [07:33, 05:10](991 MB)
-PASS -- TEST 'rap_2threads_dyn32_phy32_oneapi' [08:21, 05:17](985 MB)
-PASS -- TEST 'hrrr_control_2threads_dyn32_phy32_oneapi' [07:33, 04:51](966 MB)
-PASS -- TEST 'hrrr_control_decomp_dyn32_phy32_oneapi' [09:04, 05:24](947 MB)
-PASS -- TEST 'rap_restart_dyn32_phy32_oneapi' [06:43, 03:10](977 MB)
-PASS -- TEST 'hrrr_control_restart_dyn32_phy32_oneapi' [05:09, 02:54](965 MB)
-PASS -- TEST 'conus13km_control_oneapi' [08:36, 05:14](1307 MB)
-PASS -- TEST 'conus13km_2threads_oneapi' [04:15, 01:59](1227 MB)
-PASS -- TEST 'conus13km_decomp_oneapi' [07:24, 05:09](1336 MB)
-PASS -- TEST 'conus13km_restart_oneapi' [05:07, 03:05](1185 MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_intel' [14:11, 12:16] ( 4 warnings 413 remarks )
+PASS -- TEST 'regional_spp_sppt_shum_skeb_dyn32_phy32_intel' [08:21, 05:10](1175 MB)
+PASS -- TEST 'rap_control_dyn32_phy32_intel' [06:40, 03:52](988 MB)
+PASS -- TEST 'hrrr_control_dyn32_phy32_intel' [06:57, 03:39](980 MB)
+PASS -- TEST 'rap_2threads_dyn32_phy32_intel' [06:58, 04:12](973 MB)
+PASS -- TEST 'hrrr_control_2threads_dyn32_phy32_intel' [06:20, 03:52](969 MB)
+PASS -- TEST 'hrrr_control_decomp_dyn32_phy32_intel' [06:07, 03:48](936 MB)
+PASS -- TEST 'rap_restart_dyn32_phy32_intel' [04:56, 02:05](935 MB)
+PASS -- TEST 'hrrr_control_restart_dyn32_phy32_intel' [03:33, 02:01](910 MB)
+PASS -- TEST 'conus13km_control_intel' [06:30, 03:43](1301 MB)
+PASS -- TEST 'conus13km_2threads_intel' [04:16, 01:38](1208 MB)
+PASS -- TEST 'conus13km_decomp_intel' [06:15, 03:51](1334 MB)
+PASS -- TEST 'conus13km_restart_intel' [04:03, 02:08](1168 MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_faster_cdeps_oneapi' [24:12, 21:43]
-PASS -- TEST 'conus13km_gl_inline_oneapi' [06:50, 03:44](988 MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_faster_cdeps_intel' [14:12, 12:37] ( 4 warnings 446 remarks )
+PASS -- TEST 'conus13km_gl_inline_intel' [05:51, 02:51](978 MB)
 
-PASS -- COMPILE 'rrfs_dyn64_phy32_oneapi' [24:12, 21:15]
-PASS -- TEST 'rap_control_dyn64_phy32_oneapi' [08:09, 06:02](987 MB)
+PASS -- COMPILE 'rrfs_dyn64_phy32_intel' [14:11, 12:39] ( 4 warnings 413 remarks )
+PASS -- TEST 'rap_control_dyn64_phy32_intel' [07:11, 04:26](1003 MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_debug_oneapi' [08:12, 03:30]
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_control_debug_dyn32_phy32_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'hrrr_control_debug_dyn32_phy32_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_debug_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_debug_qr_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_debug_2threads_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_debug_decomp_oneapi' [, ]( MB)
-FAILED: RUN DID NOT COMPLETE -- TEST 'conus13km_radar_tten_debug_oneapi' [, ]( MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_debug_intel' [06:11, 04:37] ( 283 warnings 419 remarks )
+PASS -- TEST 'rap_control_debug_dyn32_phy32_intel' [06:33, 05:03](1104 MB)
+PASS -- TEST 'hrrr_control_debug_dyn32_phy32_intel' [06:33, 05:02](1090 MB)
+PASS -- TEST 'conus13km_debug_intel' [25:59, 23:18](1313 MB)
+PASS -- TEST 'conus13km_debug_qr_intel' [25:11, 22:56](1032 MB)
+PASS -- TEST 'conus13km_debug_2threads_intel' [23:51, 21:58](1249 MB)
+PASS -- TEST 'conus13km_debug_decomp_intel' [25:47, 23:43](1367 MB)
+PASS -- TEST 'conus13km_radar_tten_debug_intel' [24:54, 22:42](1391 MB)
 
-PASS -- COMPILE 'rrfs_dyn64_phy32_debug_oneapi' [06:11, 03:30]
-FAILED: RUN DID NOT COMPLETE -- TEST 'rap_control_dyn64_phy32_debug_oneapi' [, ]( MB)
+PASS -- COMPILE 'rrfs_dyn64_phy32_debug_intel' [06:11, 05:03] ( 283 warnings 413 remarks )
+PASS -- TEST 'rap_control_dyn64_phy32_debug_intel' [06:29, 05:05](1179 MB)
 
-PASS -- COMPILE 'hafsw_oneapi' [24:12, 21:54]
-PASS -- TEST 'hafs_regional_atm_oneapi' [08:07, 06:06](738 MB)
-PASS -- TEST 'hafs_regional_atm_gfdlmpv3_oneapi' [12:03, 08:13](939 MB)
-PASS -- TEST 'hafs_regional_atm_thompson_gfdlsf_oneapi' [07:50, 05:59](1093 MB)
-PASS -- TEST 'hafs_regional_atm_wav_oneapi' [16:58, 13:54](848 MB)
-PASS -- TEST 'hafs_regional_1nest_atm_oneapi' [12:13, 09:43](506 MB)
-PASS -- TEST 'hafs_regional_telescopic_2nests_atm_oneapi' [13:27, 10:40](514 MB)
-PASS -- TEST 'hafs_global_1nest_atm_oneapi' [06:59, 04:57](389 MB)
-PASS -- TEST 'hafs_global_multiple_4nests_atm_oneapi' [20:09, 16:24](446 MB)
-PASS -- TEST 'hafs_regional_specified_moving_1nest_atm_oneapi' [09:03, 06:10](544 MB)
-PASS -- TEST 'hafs_regional_storm_following_1nest_atm_oneapi' [07:55, 05:59](540 MB)
-PASS -- TEST 'hafs_global_storm_following_1nest_atm_oneapi' [03:37, 01:58](426 MB)
-PASS -- TEST 'gnv1_nested_oneapi' [08:00, 04:54](1722 MB)
+PASS -- COMPILE 'hafsw_intel' [16:11, 14:58] ( 1 warnings 646 remarks )
+PASS -- TEST 'hafs_regional_atm_intel' [07:00, 04:51](842 MB)
+PASS -- TEST 'hafs_regional_atm_gfdlmpv3_intel' [10:30, 08:00](1047 MB)
+PASS -- TEST 'hafs_regional_atm_thompson_gfdlsf_intel' [06:36, 04:23](1111 MB)
+PASS -- TEST 'hafs_regional_atm_wav_intel' [15:19, 12:59](972 MB)
+PASS -- TEST 'hafs_regional_1nest_atm_intel' [09:04, 06:47](490 MB)
+PASS -- TEST 'hafs_regional_telescopic_2nests_atm_intel' [10:11, 07:42](504 MB)
+PASS -- TEST 'hafs_global_1nest_atm_intel' [05:58, 03:25](365 MB)
+PASS -- TEST 'hafs_global_multiple_4nests_atm_intel' [15:17, 11:33](414 MB)
+PASS -- TEST 'hafs_regional_specified_moving_1nest_atm_intel' [06:59, 04:30](520 MB)
+PASS -- TEST 'hafs_regional_storm_following_1nest_atm_intel' [07:07, 04:15](525 MB)
+PASS -- TEST 'hafs_global_storm_following_1nest_atm_intel' [03:35, 01:26](398 MB)
+PASS -- TEST 'gnv1_nested_intel' [07:57, 03:49](1720 MB)
 
-PASS -- COMPILE 'hafs_mom6w_oneapi' [13:11, 11:52]
-PASS -- TEST 'hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi' [10:54, 07:20](732 MB)
+PASS -- COMPILE 'hafs_mom6w_intel' [17:11, 15:47] ( 1 warnings 936 remarks )
+PASS -- TEST 'hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_intel' [10:38, 06:51](722 MB)
 
-PASS -- COMPILE 'hafs_all_oneapi' [13:11, 09:00]
-PASS -- TEST 'hafs_regional_docn_oneapi' [11:14, 09:04](836 MB)
-PASS -- TEST 'hafs_regional_docn_oisst_oneapi' [12:24, 09:09](823 MB)
+PASS -- COMPILE 'hafs_all_intel' [15:11, 14:09] ( 1 warnings 583 remarks )
+PASS -- TEST 'hafs_regional_docn_intel' [09:05, 06:35](938 MB)
+PASS -- TEST 'hafs_regional_docn_oisst_intel' [09:13, 06:44](938 MB)
 
-PASS -- COMPILE 'datm_cdeps_oneapi' [15:12, 12:52]
-PASS -- TEST 'datm_cdeps_control_cfsr_oneapi' [05:23, 03:37](1792 MB)
-PASS -- TEST 'datm_cdeps_restart_cfsr_oneapi' [04:24, 02:27](1735 MB)
-PASS -- TEST 'datm_cdeps_control_gefs_oneapi' [05:22, 03:09](1025 MB)
-PASS -- TEST 'datm_cdeps_iau_gefs_oneapi' [05:26, 03:12](1026 MB)
-PASS -- TEST 'datm_cdeps_stochy_gefs_oneapi' [05:22, 03:12](1023 MB)
-PASS -- TEST 'datm_cdeps_ciceC_cfsr_oneapi' [05:25, 03:31](1785 MB)
-PASS -- TEST 'datm_cdeps_mx025_cfsr_oneapi' [11:02, 07:52](1670 MB)
-PASS -- TEST 'datm_cdeps_mx025_gefs_oneapi' [10:48, 07:31](1036 MB)
-PASS -- TEST 'datm_cdeps_multiple_files_cfsr_oneapi' [05:24, 03:29](1782 MB)
-PASS -- TEST 'datm_cdeps_3072x1536_cfsr_oneapi' [07:22, 05:58](4715 MB)
-PASS -- TEST 'datm_cdeps_gfs_oneapi' [07:25, 05:54](4715 MB)
+PASS -- COMPILE 'datm_cdeps_intel' [24:11, 23:02] ( 572 remarks )
+PASS -- TEST 'datm_cdeps_control_cfsr_intel' [05:21, 03:31](1852 MB)
+PASS -- TEST 'datm_cdeps_restart_cfsr_intel' [04:25, 02:25](1805 MB)
+PASS -- TEST 'datm_cdeps_control_gefs_intel' [05:21, 03:09](1090 MB)
+PASS -- TEST 'datm_cdeps_iau_gefs_intel' [05:20, 03:12](1077 MB)
+PASS -- TEST 'datm_cdeps_stochy_gefs_intel' [05:19, 03:11](1090 MB)
+PASS -- TEST 'datm_cdeps_ciceC_cfsr_intel' [05:20, 03:28](1854 MB)
+PASS -- TEST 'datm_cdeps_mx025_cfsr_intel' [10:28, 07:40](1650 MB)
+PASS -- TEST 'datm_cdeps_mx025_gefs_intel' [10:20, 07:19](1029 MB)
+PASS -- TEST 'datm_cdeps_multiple_files_cfsr_intel' [05:21, 03:30](1853 MB)
+PASS -- TEST 'datm_cdeps_3072x1536_cfsr_intel' [07:21, 05:56](4781 MB)
+PASS -- TEST 'datm_cdeps_gfs_intel' [07:22, 05:57](4782 MB)
 
-PASS -- COMPILE 'datm_cdeps_debug_oneapi' [05:12, 02:33]
-FAILED: RUN DID NOT COMPLETE -- TEST 'datm_cdeps_debug_cfsr_oneapi' [, ]( MB)
+PASS -- COMPILE 'datm_cdeps_debug_intel' [05:10, 03:37] ( 2 warnings 572 remarks )
+PASS -- TEST 'datm_cdeps_debug_cfsr_intel' [08:25, 06:53](1778 MB)
 
-PASS -- COMPILE 'datm_cdeps_land_oneapi' [03:11, 01:47]
-PASS -- TEST 'datm_cdeps_lnd_gswp3_oneapi' [03:37, 01:47](275 MB)
-PASS -- TEST 'datm_cdeps_lnd_era5_oneapi' [02:31, 01:02](326 MB)
-PASS -- TEST 'datm_cdeps_lnd_era5_rst_oneapi' [02:36, 00:38](325 MB)
+PASS -- COMPILE 'datm_cdeps_land_intel' [03:10, 01:20] ( 132 remarks )
+PASS -- TEST 'datm_cdeps_lnd_gswp3_intel' [03:34, 01:24](267 MB)
+PASS -- TEST 'datm_cdeps_lnd_era5_intel' [03:27, 00:48](324 MB)
+PASS -- TEST 'datm_cdeps_lnd_era5_rst_intel' [02:36, 00:30](323 MB)
 
-PASS -- COMPILE 'datm_cdeps_lm4_oneapi' [03:11, 01:43]
-PASS -- TEST 'datm_cdeps_lm4_gswp3_oneapi' [02:35, 00:41](491 MB)
-PASS -- TEST 'datm_cdeps_lm4_gswp3_rst_oneapi' [02:37, 00:22](376 MB)
+PASS -- COMPILE 'datm_cdeps_lm4_intel' [03:10, 01:33] ( 170 remarks )
+PASS -- TEST 'datm_cdeps_lm4_gswp3_intel' [03:35, 00:41](562 MB)
+PASS -- TEST 'datm_cdeps_lm4_gswp3_rst_intel' [02:38, 00:20](450 MB)
 
-PASS -- COMPILE 'atm_ds2s_docn_pcice_oneapi' [15:12, 13:37]
-PASS -- TEST 'atm_ds2s_docn_pcice_oneapi' [11:39, 04:42](1986 MB)
+PASS -- COMPILE 'atm_ds2s_docn_pcice_intel' [25:11, 23:16] ( 1 warnings 615 remarks )
+PASS -- TEST 'atm_ds2s_docn_pcice_intel' [06:22, 03:51](1987 MB)
 
-PASS -- COMPILE 'atml_oneapi' [23:13, 21:40]
-PASS -- TEST 'control_p8_atmlnd_oneapi' [14:53, 04:41](1870 MB)
-PASS -- TEST 'control_restart_p8_atmlnd_oneapi' [07:28, 02:42](1170 MB)
+PASS -- COMPILE 'atml_intel' [16:11, 14:59] ( 9 warnings 553 remarks )
+PASS -- TEST 'control_p8_atmlnd_intel' [06:43, 03:34](1863 MB)
+PASS -- TEST 'control_restart_p8_atmlnd_intel' [04:09, 02:01](1132 MB)
 
-PASS -- COMPILE 'atml_debug_oneapi' [06:11, 04:38]
-FAILED: RUN DID NOT COMPLETE -- TEST 'control_p8_atmlnd_debug_oneapi' [, ]( MB)
+PASS -- COMPILE 'atml_debug_intel' [07:11, 06:06] ( 424 warnings 553 remarks )
+PASS -- TEST 'control_p8_atmlnd_debug_intel' [09:46, 06:12](1880 MB)
 
-PASS -- COMPILE 'atmw_oneapi' [10:11, 08:53]
-PASS -- TEST 'atmwav_control_noaero_p8_oneapi' [05:36, 02:25](1925 MB)
+PASS -- COMPILE 'atmw_intel' [15:11, 13:18] ( 1 warnings 527 remarks )
+PASS -- TEST 'atmwav_control_noaero_p8_intel' [04:36, 01:58](1910 MB)
 
-PASS -- COMPILE 'atmaero_oneapi' [10:56, 08:33]
-PASS -- TEST 'atmaero_control_p8_oneapi' [08:32, 05:22](1997 MB)
-PASS -- TEST 'atmaero_control_p8_rad_oneapi' [09:05, 06:34](1756 MB)
-PASS -- TEST 'atmaero_control_p8_rad_micro_oneapi' [09:08, 06:40](1777 MB)
+PASS -- COMPILE 'atmaero_intel' [17:11, 15:34] ( 1 warnings 416 remarks )
+PASS -- TEST 'atmaero_control_p8_intel' [07:30, 04:40](1983 MB)
+PASS -- TEST 'atmaero_control_p8_rad_intel' [08:07, 05:28](1763 MB)
+PASS -- TEST 'atmaero_control_p8_rad_micro_intel' [08:07, 05:36](1776 MB)
 
-PASS -- COMPILE 'atmaq_oneapi' [10:11, 08:30]
-PASS -- TEST 'regional_atmaq_oneapi' [25:13, 21:24](3024 MB)
-PASS -- TEST 'regional_atmaq_canopy_oneapi' [30:20, 27:13](3025 MB)
+PASS -- COMPILE 'atmaq_intel' [15:11, 13:25] ( 1 warnings 602 remarks )
+PASS -- TEST 'regional_atmaq_intel' [23:29, 19:07](2920 MB)
+PASS -- TEST 'regional_atmaq_canopy_intel' [28:28, 23:49](2918 MB)
 
-PASS -- COMPILE 'atmaq_debug_oneapi' [05:11, 03:18]
-FAILED: RUN DID NOT COMPLETE -- TEST 'regional_atmaq_debug_oneapi' [, ]( MB)
+PASS -- COMPILE 'atmaq_debug_intel' [06:10, 04:42] ( 397 warnings 602 remarks )
+PASS -- TEST 'regional_atmaq_debug_intel' [44:17, 40:40](2933 MB)
 
-PASS -- COMPILE 'atm_fbh_oneapi' [23:12, 21:41]
-PASS -- TEST 'cpld_regional_atm_fbh_oneapi' [16:31, 14:27](1031 MB)
+PASS -- COMPILE 'atm_fbh_intel' [13:11, 12:08] ( 4 warnings 428 remarks )
+PASS -- TEST 'cpld_regional_atm_fbh_intel' [13:31, 12:07](1086 MB)
 
 SYNOPSIS:
-Starting Date/Time: 20260611 08:14:08
-Ending Date/Time: 20260611 09:55:21
-Total Time: 01h:42m:12s
+Starting Date/Time: 20260624 20:21:15
+Ending Date/Time: 20260624 22:02:22
+Total Time: 01h:42m:04s
 Compiles Completed: 36/36
 Tests Completed: 145/181
 Failed Tests:
