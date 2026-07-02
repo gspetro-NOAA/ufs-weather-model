@@ -1,7 +1,7 @@
 ====START OF URSA REGRESSION TESTING LOG====
 
 UFSWM hash used in testing:
-6cb49ee411e7aa4f0211ece458625477f26c3aad
+17f1119fbc94a28235ec31bc1b6858219363db7c
 
 Submodule hashes used in testing:
  532ad5c6da1c827e055df90eaf6c91134f909eed AQM (v0.2.0-77-g532ad5c)
@@ -41,374 +41,798 @@ The first time is for the full script (prep+run+finalize).
 The second time is specifically for the run phase.
 Times/Memory will be empty for failed tests.
 
-BASELINE DIRECTORY: /scratch3/NAGAPE/epic/Gillian.Petro/stmp/RT_BASELINE/Gillian.Petro/FV3_RT/REGRESSION_TEST-3174
-COMPARISON DIRECTORY: /scratch3/NAGAPE/epic/Gillian.Petro/stmp/RT_RUNDIRS/Gillian.Petro/FV3_RT/rt_1502732
+BASELINE DIRECTORY: /scratch4/NAGAPE/epic/role-epic/UFS-WM_RT/NEMSfv3gfs/develop-20260616
+COMPARISON DIRECTORY: /scratch3/NAGAPE/epic/Gillian.Petro/stmp/RT_RUNDIRS/Gillian.Petro/FV3_RT/rt_493949
 
 RT.SH OPTIONS USED:
 * (-a) - HPC PROJECT ACCOUNT: epic
-* (-m) - COMPARE AGAINST CREATED BASELINES
-* (-k) - KEEP RUN DIRECTORY
 * (-e) - USE ECFLOW
 
-PASS -- COMPILE 's2swa_32bit_oneapi' [09:10, 07:26]
-PASS -- TEST 'cpld_control_gefs_oneapi' [30:20, 16:42](3151 MB)
-PASS -- TEST 'cpld_restart_gefs_oneapi' [19:06, 06:35](2875 MB)
-PASS -- TEST 'cpld_dcp_gefs_oneapi' [42:47, 27:32](3362 MB)
+PASS -- COMPILE 's2swa_32bit_oneapi' [09:11, 07:41]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_gefs_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_gefs_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_dcp_gefs_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_oneapi' [09:10, 07:32]
-PASS -- TEST 'cpld_control_gfsv17_oneapi' [17:45, 09:24](2036 MB)
-PASS -- TEST 'cpld_control_gfsv17_iau_oneapi' [12:59, 10:07](2557 MB)
-PASS -- TEST 'cpld_restart_gfsv17_oneapi' [05:53, 03:53](1474 MB)
-PASS -- TEST 'cpld_restart_gfsv17_iau_oneapi' [07:01, 04:39](2311 MB)
-PASS -- TEST 'cpld_mpi_gfsv17_oneapi' [24:40, 16:05](1979 MB)
-PASS -- TEST 'cpld_decomp_gfsv17_oneapi' [29:41, 21:11](2010 MB)
-PASS -- TEST 'cpld_2threads_gfsv17_oneapi' [34:40, 26:20](2439 MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_oneapi' [09:10, 07:46]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_gfsv17_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_control_gfsv17_iau_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_gfsv17_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_gfsv17_iau_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_mpi_gfsv17_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_decomp_gfsv17_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_2threads_gfsv17_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_oneapi' [08:10, 06:22]
-PASS -- TEST 'cpld_control_sfs_oneapi' [13:37, 09:48](2382 MB)
-PASS -- TEST 'cpld_restart_sfs_oneapi' [09:55, 05:06](1800 MB)
+PASS -- COMPILE 's2s_32bit_sfs_oneapi' [09:11, 07:15]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_sfs_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_sfs_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_debug_oneapi' [04:10, 02:10]
-PASS -- TEST 'cpld_debug_sfs_oneapi' [14:35, 09:02](2407 MB)
+PASS -- COMPILE 's2s_32bit_sfs_debug_oneapi' [04:11, 02:13]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_debug_sfs_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_debug_oneapi' [04:10, 02:14]
-PASS -- TEST 'cpld_debug_gfsv17_oneapi' [18:54, 13:25](2042 MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_debug_oneapi' [04:11, 02:25]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_debug_gfsv17_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2sw_oneapi' [08:10, 06:31]
-PASS -- TEST 'cpld_control_p8_oneapi' [09:59, 07:03](2184 MB)
-PASS -- TEST 'cpld_control_p8.v2.sfc_oneapi' [10:03, 06:41](2189 MB)
-PASS -- TEST 'cpld_restart_p8_oneapi' [08:04, 03:28](1927 MB)
-PASS -- TEST 'cpld_2threads_p8_oneapi' [08:59, 06:21](2616 MB)
-PASS -- TEST 'cpld_decomp_p8_oneapi' [08:59, 06:55](2157 MB)
-PASS -- TEST 'cpld_mpi_p8_oneapi' [08:59, 06:39](2111 MB)
-PASS -- TEST 'cpld_control_ciceC_p8_oneapi' [09:03, 06:55](2185 MB)
-PASS -- TEST 'cpld_control_c192_p8_oneapi' [14:44, 10:45](3090 MB)
-PASS -- TEST 'cpld_restart_c192_p8_oneapi' [10:22, 06:32](2840 MB)
+PASS -- COMPILE 's2sw_oneapi' [08:11, 06:56]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_p8.v2.sfc_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_2threads_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_decomp_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_mpi_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_ciceC_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_c192_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_c192_p8_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2swl_oneapi' [09:10, 07:49]
-PASS -- TEST 'cpld_control_p8_lnd_oneapi' [15:55, 07:09](2192 MB)
-PASS -- TEST 'cpld_restart_p8_lnd_oneapi' [06:01, 03:27](1954 MB)
+PASS -- COMPILE 's2swl_oneapi' [09:11, 07:20]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_p8_lnd_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_p8_lnd_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2s_aoflux_oneapi' [09:10, 07:38]
-PASS -- TEST 'cpld_control_noaero_p8_agrid_oneapi' [12:53, 04:15](2094 MB)
+PASS -- COMPILE 's2s_aoflux_oneapi' [09:11, 07:34]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_noaero_p8_agrid_oneapi' [, ]( MB)
 
-PASS -- COMPILE 's2sw_pdlib_oneapi' [08:10, 07:02]
-PASS -- TEST 'cpld_control_c48_5deg_oneapi' [06:38, 04:58](3027 MB)
-PASS -- TEST 'cpld_warmstart_c48_5deg_oneapi' [03:37, 01:31](3020 MB)
-PASS -- TEST 'cpld_restart_c48_5deg_oneapi' [03:30, 00:55](2463 MB)
-PASS -- TEST 'cpld_control_c24_5deg_oneapi' [02:32, 00:53](2212 MB)
-PASS -- TEST 'cpld_warmstart_c24_5deg_oneapi' [02:33, 00:30](2216 MB)
-PASS -- TEST 'cpld_restart_c24_5deg_oneapi' [03:25, 00:26](1538 MB)
-PASS -- TEST 'cpld_control_c24_9deg_oneapi' [09:32, 08:01](2216 MB)
-PASS -- TEST 'cpld_warmstart_c24_9deg_oneapi' [02:33, 00:30](2214 MB)
-PASS -- TEST 'cpld_restart_c24_9deg_oneapi' [03:25, 00:45](1537 MB)
-PASS -- TEST 'cpld_control_c12_9deg_oneapi' [02:31, 00:31](2145 MB)
-PASS -- TEST 'cpld_warmstart_c12_9deg_oneapi' [02:31, 00:25](2142 MB)
-PASS -- TEST 'cpld_restart_c12_9deg_oneapi' [02:25, 00:22](1493 MB)
+PASS -- COMPILE 's2sw_pdlib_oneapi' [09:10, 07:29]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_c48_5deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_warmstart_c48_5deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_c48_5deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_c24_5deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_warmstart_c24_5deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_c24_5deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_c24_9deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_warmstart_c24_9deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_c24_9deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_c12_9deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_warmstart_c12_9deg_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'cpld_restart_c12_9deg_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atm_dyn32_oneapi' [13:10, 11:08]
-PASS -- TEST 'control_CubedSphereGrid_oneapi' [05:18, 01:52](2214 MB)
-PASS -- TEST 'control_CubedSphereGrid_parallel_oneapi' [05:19, 01:56](2236 MB)
-PASS -- TEST 'control_latlon_oneapi' [11:17, 08:11](2243 MB)
-PASS -- TEST 'control_wrtGauss_netcdf_parallel_oneapi' [04:19, 01:56](2231 MB)
-PASS -- TEST 'control_c48_oneapi' [07:20, 05:25](1670 MB)
-PASS -- TEST 'control_c48.v2.sfc_oneapi' [06:20, 04:44](801 MB)
-PASS -- TEST 'control_c48_lnd_iau_oneapi' [07:19, 05:27](1674 MB)
-PASS -- TEST 'control_c192_oneapi' [07:31, 05:45](1775 MB)
-PASS -- TEST 'control_c384_oneapi' [09:12, 06:31](2032 MB)
-PASS -- TEST 'control_c384gdas_oneapi' [12:55, 07:22](1828 MB)
-PASS -- TEST 'control_stochy_oneapi' [10:17, 08:35](1317 MB)
-PASS -- TEST 'control_stochy_restart_oneapi' [02:17, 00:48](1191 MB)
-PASS -- TEST 'control_lndp_oneapi' [10:17, 07:23](1320 MB)
-PASS -- TEST 'control_iovr4_gfdlmpv3_oneapi' [04:27, 02:17](1594 MB)
-PASS -- TEST 'control_p8_oneapi' [05:35, 02:27](2502 MB)
-PASS -- TEST 'control_p8.v2.sfc_oneapi' [15:38, 13:15](2541 MB)
-PASS -- TEST 'control_p8_ugwpv1_oneapi' [04:33, 02:16](2517 MB)
-PASS -- TEST 'control_p8_ugwpv1_tempo_oneapi' [04:35, 02:22](2526 MB)
-PASS -- TEST 'control_p8_ugwpv1_tempo_aerosol_oneapi' [04:35, 02:45](2536 MB)
-PASS -- TEST 'control_restart_p8_oneapi' [03:33, 01:24](1870 MB)
-PASS -- TEST 'control_noqr_p8_oneapi' [04:32, 02:31](2497 MB)
-PASS -- TEST 'control_restart_noqr_p8_oneapi' [03:32, 01:33](1868 MB)
-PASS -- TEST 'control_decomp_p8_oneapi' [04:31, 02:21](2506 MB)
-PASS -- TEST 'control_2threads_p8_oneapi' [04:31, 01:53](1977 MB)
-PASS -- TEST 'control_p8_lndp_oneapi' [22:30, 20:27](2519 MB)
-PASS -- TEST 'control_p8_rrtmgp_oneapi' [04:34, 02:56](2576 MB)
-PASS -- TEST 'control_p8_mynn_oneapi' [04:37, 02:32](2527 MB)
-PASS -- TEST 'merra2_thompson_oneapi' [04:33, 02:46](2524 MB)
-PASS -- TEST 'merra2_hf_thompson_oneapi' [06:25, 04:12](2529 MB)
-PASS -- TEST 'regional_control_oneapi' [06:27, 03:58](1731 MB)
-PASS -- TEST 'regional_restart_oneapi' [04:26, 02:13](1661 MB)
-PASS -- TEST 'regional_decomp_oneapi' [06:27, 04:07](1722 MB)
-PASS -- TEST 'regional_2threads_oneapi' [04:25, 02:19](1568 MB)
-PASS -- TEST 'regional_noquilt_oneapi' [05:26, 03:58](1997 MB)
-PASS -- TEST 'regional_netcdf_parallel_oneapi' [05:26, 04:02](1716 MB)
-PASS -- TEST 'regional_2dwrtdecomp_oneapi' [05:25, 03:59](1732 MB)
-PASS -- TEST 'regional_wofs_oneapi' [06:24, 04:52](2642 MB)
+PASS -- COMPILE 'atm_dyn32_oneapi' [12:11, 11:07]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_CubedSphereGrid_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_CubedSphereGrid_parallel_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_latlon_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_wrtGauss_netcdf_parallel_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_c48_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_c48.v2.sfc_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_c48_lnd_iau_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_c192_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_c384_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_c384gdas_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_stochy_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'control_stochy_restart_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_lndp_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_iovr4_gfdlmpv3_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8.v2.sfc_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_ugwpv1_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_ugwpv1_tempo_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_ugwpv1_tempo_aerosol_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'control_restart_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_noqr_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'control_restart_noqr_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_decomp_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_2threads_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_lndp_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_rrtmgp_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_mynn_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'merra2_thompson_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'merra2_hf_thompson_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_control_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'regional_restart_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_decomp_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_2threads_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_noquilt_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_netcdf_parallel_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_2dwrtdecomp_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_wofs_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atm_dyn32_rad32_oneapi' [12:10, 10:42]
-PASS -- TEST 'control_p8_rrtmgp_rad32_oneapi' [14:33, 12:29](2564 MB)
+PASS -- COMPILE 'atm_dyn32_rad32_oneapi' [12:11, 10:35]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_rrtmgp_rad32_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'rrfs_oneapi' [13:10, 11:17]
-PASS -- TEST 'rap_control_oneapi' [04:27, 02:53](1793 MB)
-PASS -- TEST 'regional_spp_sppt_shum_skeb_oneapi' [04:45, 02:57](1512 MB)
-PASS -- TEST 'rap_decomp_oneapi' [05:23, 03:15](1818 MB)
-PASS -- TEST 'rap_2threads_oneapi' [04:23, 02:21](1162 MB)
-PASS -- TEST 'rap_restart_oneapi' [03:26, 01:47](1725 MB)
-PASS -- TEST 'rap_sfcdiff_oneapi' [04:27, 02:52](1795 MB)
-PASS -- TEST 'rap_sfcdiff_decomp_oneapi' [14:27, 12:32](1799 MB)
-PASS -- TEST 'rap_sfcdiff_restart_oneapi' [03:26, 01:32](1753 MB)
-PASS -- TEST 'hrrr_control_oneapi' [04:28, 02:41](1792 MB)
-PASS -- TEST 'hrrr_control_decomp_oneapi' [04:22, 02:45](1800 MB)
-PASS -- TEST 'hrrr_control_2threads_oneapi' [04:23, 02:08](1150 MB)
-PASS -- TEST 'hrrr_control_restart_oneapi' [03:18, 01:25](1694 MB)
-PASS -- TEST 'rrfs_v1beta_oneapi' [13:27, 11:22](2120 MB)
-PASS -- TEST 'rrfs_v1nssl_oneapi' [24:18, 22:52](2785 MB)
-PASS -- TEST 'rrfs_v1nssl_nohailnoccn_oneapi' [22:18, 20:13](3240 MB)
+PASS -- COMPILE 'rrfs_oneapi' [12:11, 10:51]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_spp_sppt_shum_skeb_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_decomp_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_2threads_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'rap_restart_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_sfcdiff_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_sfcdiff_decomp_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'rap_sfcdiff_restart_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_decomp_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_2threads_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'hrrr_control_restart_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rrfs_v1beta_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rrfs_v1nssl_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rrfs_v1nssl_nohailnoccn_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'csawmg_oneapi' [05:10, 03:24]
-PASS -- TEST 'control_csawmg_oneapi' [06:26, 04:46](1775 MB)
+PASS -- COMPILE 'csawmg_oneapi' [05:11, 03:12]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_csawmg_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'wam_oneapi' [05:10, 03:20]
-PASS -- TEST 'control_wam_oneapi' [05:37, 03:23](2640 MB)
+PASS -- COMPILE 'wam_oneapi' [05:11, 03:18]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_wam_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atm_debug_dyn32_oneapi' [04:10, 02:40]
-PASS -- TEST 'control_CubedSphereGrid_debug_oneapi' [08:19, 05:17](2221 MB)
-PASS -- TEST 'control_wrtGauss_netcdf_parallel_debug_oneapi' [09:20, 06:31](2246 MB)
-PASS -- TEST 'control_stochy_debug_oneapi' [10:17, 07:45](1466 MB)
-PASS -- TEST 'control_lndp_debug_oneapi' [10:17, 07:02](1473 MB)
-PASS -- TEST 'control_csawmg_debug_oneapi' [08:29, 03:13](1770 MB)
-PASS -- TEST 'control_diag_debug_oneapi' [06:24, 02:07](2306 MB)
-PASS -- TEST 'control_debug_p8_oneapi' [06:27, 02:07](2530 MB)
-PASS -- TEST 'regional_debug_oneapi' [14:26, 12:29](1583 MB)
-PASS -- TEST 'rap_control_debug_oneapi' [05:17, 03:44](1867 MB)
-PASS -- TEST 'hrrr_control_debug_oneapi' [05:16, 03:37](1866 MB)
-PASS -- TEST 'hrrr_gf_debug_oneapi' [05:16, 03:38](1837 MB)
-PASS -- TEST 'hrrr_c3_debug_oneapi' [05:16, 03:38](1836 MB)
-PASS -- TEST 'rap_unified_drag_suite_debug_oneapi' [05:16, 03:43](1874 MB)
-PASS -- TEST 'rap_diag_debug_oneapi' [05:23, 03:53](1922 MB)
-PASS -- TEST 'rap_cires_ugwp_debug_oneapi' [05:17, 03:50](1867 MB)
-PASS -- TEST 'rap_unified_ugwp_debug_oneapi' [05:16, 04:00](1863 MB)
-PASS -- TEST 'rap_lndp_debug_oneapi' [13:17, 11:08](1871 MB)
-PASS -- TEST 'rap_progcld_thompson_debug_oneapi' [11:17, 09:27](1873 MB)
-PASS -- TEST 'rap_noah_debug_oneapi' [05:17, 03:36](1870 MB)
-PASS -- TEST 'rap_sfcdiff_debug_oneapi' [05:16, 03:42](1861 MB)
-PASS -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_oneapi' [07:17, 05:57](1871 MB)
-PASS -- TEST 'rap_clm_lake_debug_oneapi' [05:17, 03:42](1871 MB)
-PASS -- TEST 'gnv1_c96_no_nest_debug_oneapi' [08:28, 06:24](1872 MB)
+PASS -- COMPILE 'atm_debug_dyn32_oneapi' [04:11, 02:33]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_CubedSphereGrid_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_wrtGauss_netcdf_parallel_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_stochy_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_lndp_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_csawmg_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_diag_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_debug_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_gf_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_c3_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_unified_drag_suite_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_diag_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_cires_ugwp_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_unified_ugwp_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_lndp_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_progcld_thompson_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_noah_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_sfcdiff_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_clm_lake_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'gnv1_c96_no_nest_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'wam_debug_oneapi' [03:10, 01:34]
-PASS -- TEST 'control_wam_debug_oneapi' [12:31, 10:35](2300 MB)
+PASS -- COMPILE 'wam_debug_oneapi' [03:11, 01:39]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_wam_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_oneapi' [12:10, 10:29]
-PASS -- TEST 'regional_spp_sppt_shum_skeb_dyn32_phy32_oneapi' [04:46, 02:46](1384 MB)
-PASS -- TEST 'rap_control_dyn32_phy32_oneapi' [04:22, 02:30](1731 MB)
-PASS -- TEST 'hrrr_control_dyn32_phy32_oneapi' [04:23, 02:20](1728 MB)
-PASS -- TEST 'rap_2threads_dyn32_phy32_oneapi' [03:26, 01:54](1070 MB)
-PASS -- TEST 'hrrr_control_2threads_dyn32_phy32_oneapi' [03:25, 01:54](1040 MB)
-PASS -- TEST 'hrrr_control_decomp_dyn32_phy32_oneapi' [04:21, 02:34](1760 MB)
-PASS -- TEST 'rap_restart_dyn32_phy32_oneapi' [03:25, 01:19](1659 MB)
-PASS -- TEST 'hrrr_control_restart_dyn32_phy32_oneapi' [03:18, 01:23](1634 MB)
-PASS -- TEST 'conus13km_control_oneapi' [04:44, 02:31](1763 MB)
-PASS -- TEST 'conus13km_2threads_oneapi' [03:32, 01:18](1759 MB)
-PASS -- TEST 'conus13km_decomp_oneapi' [04:33, 02:23](1799 MB)
-PASS -- TEST 'conus13km_restart_oneapi' [03:36, 01:41](1539 MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_oneapi' [13:11, 11:24]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_spp_sppt_shum_skeb_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_2threads_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_2threads_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_decomp_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'rap_restart_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'hrrr_control_restart_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_control_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_2threads_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_decomp_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'conus13km_restart_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_faster_cdeps_oneapi' [12:10, 10:52]
-PASS -- TEST 'conus13km_gl_inline_oneapi' [06:39, 04:20](1317 MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_faster_cdeps_oneapi' [12:11, 10:39]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_gl_inline_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'rrfs_dyn64_phy32_oneapi' [13:10, 12:06]
-PASS -- TEST 'rap_control_dyn64_phy32_oneapi' [05:28, 03:04](1805 MB)
+PASS -- COMPILE 'rrfs_dyn64_phy32_oneapi' [12:11, 10:35]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_dyn64_phy32_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_debug_oneapi' [03:10, 01:31]
-PASS -- TEST 'rap_control_debug_dyn32_phy32_oneapi' [05:17, 03:34](1748 MB)
-PASS -- TEST 'hrrr_control_debug_dyn32_phy32_oneapi' [05:16, 03:28](1746 MB)
-PASS -- TEST 'conus13km_debug_oneapi' [18:35, 16:25](1756 MB)
-PASS -- TEST 'conus13km_debug_qr_oneapi' [18:33, 16:15](1375 MB)
-PASS -- TEST 'conus13km_debug_2threads_oneapi' [10:31, 09:08](1757 MB)
-PASS -- TEST 'conus13km_debug_decomp_oneapi' [18:30, 16:55](1806 MB)
-PASS -- TEST 'conus13km_radar_tten_debug_oneapi' [18:30, 16:10](1841 MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_debug_oneapi' [03:11, 01:32]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_debug_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_debug_dyn32_phy32_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_debug_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_debug_qr_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_debug_2threads_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_debug_decomp_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_radar_tten_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'rrfs_dyn64_phy32_debug_oneapi' [03:10, 01:34]
-PASS -- TEST 'rap_control_dyn64_phy32_debug_oneapi' [11:18, 09:14](1844 MB)
+PASS -- COMPILE 'rrfs_dyn64_phy32_debug_oneapi' [03:11, 01:34]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_dyn64_phy32_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'hafsw_oneapi' [13:10, 11:31]
-PASS -- TEST 'hafs_regional_atm_oneapi' [04:35, 03:02](971 MB)
-PASS -- TEST 'hafs_regional_atm_gfdlmpv3_oneapi' [05:56, 03:59](1191 MB)
-PASS -- TEST 'hafs_regional_atm_thompson_gfdlsf_oneapi' [05:22, 03:23](1431 MB)
-PASS -- TEST 'hafs_regional_atm_wav_oneapi' [18:35, 16:58](1159 MB)
-PASS -- TEST 'hafs_regional_1nest_atm_oneapi' [06:29, 04:18](768 MB)
-PASS -- TEST 'hafs_regional_telescopic_2nests_atm_oneapi' [06:34, 04:43](771 MB)
-PASS -- TEST 'hafs_global_1nest_atm_oneapi' [03:24, 01:54](539 MB)
-PASS -- TEST 'hafs_global_multiple_4nests_atm_oneapi' [11:52, 07:06](602 MB)
-PASS -- TEST 'hafs_regional_specified_moving_1nest_atm_oneapi' [05:24, 02:56](749 MB)
-PASS -- TEST 'hafs_regional_storm_following_1nest_atm_oneapi' [05:25, 02:51](747 MB)
-PASS -- TEST 'hafs_global_storm_following_1nest_atm_oneapi' [04:20, 00:55](544 MB)
-PASS -- TEST 'gnv1_nested_oneapi' [05:43, 02:41](1712 MB)
+PASS -- COMPILE 'hafsw_oneapi' [13:11, 11:21]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_atm_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_atm_gfdlmpv3_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_atm_thompson_gfdlsf_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_atm_wav_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_1nest_atm_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_telescopic_2nests_atm_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_global_1nest_atm_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_global_multiple_4nests_atm_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_specified_moving_1nest_atm_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_storm_following_1nest_atm_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_global_storm_following_1nest_atm_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'gnv1_nested_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'hafs_mom6w_oneapi' [08:10, 05:49]
-PASS -- TEST 'hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi' [13:46, 10:11](1050 MB)
+PASS -- COMPILE 'hafs_mom6w_oneapi' [07:11, 06:00]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'hafs_all_oneapi' [05:10, 03:44]
-PASS -- TEST 'hafs_regional_docn_oneapi' [07:33, 04:40](1111 MB)
-PASS -- TEST 'hafs_regional_docn_oisst_oneapi' [08:34, 05:02](1116 MB)
+PASS -- COMPILE 'hafs_all_oneapi' [05:11, 03:56]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_docn_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hafs_regional_docn_oisst_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'datm_cdeps_oneapi' [08:10, 06:06]
-PASS -- TEST 'datm_cdeps_control_cfsr_oneapi' [03:15, 01:59](1911 MB)
-PASS -- TEST 'datm_cdeps_restart_cfsr_oneapi' [06:17, 04:36](1872 MB)
-PASS -- TEST 'datm_cdeps_control_gefs_oneapi' [03:15, 01:52](1163 MB)
-PASS -- TEST 'datm_cdeps_iau_gefs_oneapi' [06:16, 04:48](1153 MB)
-PASS -- TEST 'datm_cdeps_stochy_gefs_oneapi' [03:15, 01:42](1145 MB)
-PASS -- TEST 'datm_cdeps_ciceC_cfsr_oneapi' [03:15, 02:01](1917 MB)
-PASS -- TEST 'datm_cdeps_mx025_cfsr_oneapi' [08:08, 05:36](1798 MB)
-PASS -- TEST 'datm_cdeps_mx025_gefs_oneapi' [08:03, 05:33](1331 MB)
-PASS -- TEST 'datm_cdeps_multiple_files_cfsr_oneapi' [03:15, 02:03](1912 MB)
-PASS -- TEST 'datm_cdeps_3072x1536_cfsr_oneapi' [05:16, 03:14](4788 MB)
-PASS -- TEST 'datm_cdeps_gfs_oneapi' [15:17, 13:23](4791 MB)
+PASS -- COMPILE 'datm_cdeps_oneapi' [08:11, 06:49]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_control_cfsr_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'datm_cdeps_restart_cfsr_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_control_gefs_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_iau_gefs_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_stochy_gefs_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_ciceC_cfsr_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_mx025_cfsr_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_mx025_gefs_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_multiple_files_cfsr_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_3072x1536_cfsr_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_gfs_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'datm_cdeps_debug_oneapi' [03:10, 01:19]
-PASS -- TEST 'datm_cdeps_debug_cfsr_oneapi' [05:16, 03:58](1823 MB)
+PASS -- COMPILE 'datm_cdeps_debug_oneapi' [03:11, 01:16]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_debug_cfsr_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'datm_cdeps_land_oneapi' [02:10, 00:48]
-PASS -- TEST 'datm_cdeps_lnd_gswp3_oneapi' [03:25, 01:12](342 MB)
-PASS -- TEST 'datm_cdeps_lnd_era5_oneapi' [03:21, 00:48](583 MB)
-PASS -- TEST 'datm_cdeps_lnd_era5_rst_oneapi' [02:21, 00:32](585 MB)
+PASS -- COMPILE 'datm_cdeps_land_oneapi' [02:11, 00:46]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_lnd_gswp3_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_lnd_era5_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'datm_cdeps_lnd_era5_rst_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'datm_cdeps_lm4_oneapi' [02:10, 00:55]
-PASS -- TEST 'datm_cdeps_lm4_gswp3_oneapi' [02:25, 00:24](600 MB)
-PASS -- TEST 'datm_cdeps_lm4_gswp3_rst_oneapi' [04:24, 02:28](465 MB)
+PASS -- COMPILE 'datm_cdeps_lm4_oneapi' [02:11, 00:49]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_lm4_gswp3_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'datm_cdeps_lm4_gswp3_rst_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atm_ds2s_docn_pcice_oneapi' [08:10, 06:29]
-PASS -- TEST 'atm_ds2s_docn_pcice_oneapi' [04:43, 02:55](2789 MB)
+PASS -- COMPILE 'atm_ds2s_docn_pcice_oneapi' [08:11, 06:11]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'atm_ds2s_docn_pcice_oneapi' [, ]( MB)
 
 PASS -- COMPILE 'atml_oneapi' [12:11, 10:54]
-PASS -- TEST 'control_p8_atmlnd_oneapi' [05:36, 03:17](1902 MB)
-PASS -- TEST 'control_restart_p8_atmlnd_oneapi' [03:30, 01:42](1308 MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_atmlnd_oneapi' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'control_restart_p8_atmlnd_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atml_debug_oneapi' [04:10, 02:48]
-PASS -- TEST 'control_p8_atmlnd_debug_oneapi' [05:36, 04:00](1913 MB)
+PASS -- COMPILE 'atml_debug_oneapi' [04:10, 02:28]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_p8_atmlnd_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atmw_oneapi' [05:10, 03:47]
-PASS -- TEST 'atmwav_control_noaero_p8_oneapi' [03:33, 01:53](2675 MB)
+PASS -- COMPILE 'atmw_oneapi' [05:10, 03:41]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'atmwav_control_noaero_p8_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atmaero_oneapi' [05:10, 03:35]
-PASS -- TEST 'atmaero_control_p8_oneapi' [05:42, 03:36](1990 MB)
-PASS -- TEST 'atmaero_control_p8_rad_oneapi' [05:33, 03:54](2385 MB)
-PASS -- TEST 'atmaero_control_p8_rad_micro_oneapi' [18:38, 16:31](2402 MB)
+PASS -- COMPILE 'atmaero_oneapi' [05:10, 03:43]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'atmaero_control_p8_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'atmaero_control_p8_rad_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'atmaero_control_p8_rad_micro_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atmaq_oneapi' [05:10, 03:33]
-PASS -- TEST 'regional_atmaq_oneapi' [15:31, 12:32](2835 MB)
-PASS -- TEST 'regional_atmaq_canopy_oneapi' [18:22, 15:59](2836 MB)
+PASS -- COMPILE 'atmaq_oneapi' [05:10, 03:36]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_atmaq_oneapi' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_atmaq_canopy_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atmaq_debug_oneapi' [03:10, 01:38]
-PASS -- TEST 'regional_atmaq_debug_oneapi' [28:18, 25:11](2833 MB)
+PASS -- COMPILE 'atmaq_debug_oneapi' [03:10, 01:59]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'regional_atmaq_debug_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atm_fbh_oneapi' [12:11, 10:40]
-PASS -- TEST 'cpld_regional_atm_fbh_oneapi' [08:22, 06:38](1129 MB)
+PASS -- COMPILE 'atm_fbh_oneapi' [12:10, 11:04]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_regional_atm_fbh_oneapi' [, ]( MB)
 
-PASS -- COMPILE 'atm_gnu' [04:10, 02:38]
-PASS -- TEST 'control_c48_gnu' [07:21, 05:55](1506 MB)
-PASS -- TEST 'control_stochy_gnu' [09:17, 07:28](517 MB)
-PASS -- TEST 'control_p8_gnu' [05:40, 03:08](1476 MB)
-PASS -- TEST 'control_p8_ugwpv1_gnu' [05:35, 03:07](1492 MB)
+PASS -- COMPILE 'atm_gnu' [04:10, 02:51]
+PASS -- TEST 'control_c48_gnu' [07:24, 05:51](1506 MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_stochy_gnu' [, ]( MB)
+PASS -- TEST 'control_p8_gnu' [05:49, 03:08](1442 MB)
+PASS -- TEST 'control_p8_ugwpv1_gnu' [05:40, 03:04](1489 MB)
 
-PASS -- COMPILE 'rrfs_gnu' [04:10, 02:38]
-PASS -- TEST 'rap_control_gnu' [05:25, 03:36](862 MB)
-PASS -- TEST 'rap_decomp_gnu' [05:24, 03:38](862 MB)
-PASS -- TEST 'rap_2threads_gnu' [04:28, 02:43](889 MB)
-PASS -- TEST 'rap_restart_gnu' [04:27, 01:57](596 MB)
-PASS -- TEST 'rap_sfcdiff_gnu' [11:28, 09:43](860 MB)
-FAILED: TEST TIMED OUT -- TEST 'rap_sfcdiff_decomp_gnu' [, ]( MB)
-PASS -- TEST 'rap_sfcdiff_restart_gnu' [09:28, 08:03](592 MB)
-PASS -- TEST 'hrrr_control_gnu' [05:24, 03:24](863 MB)
-PASS -- TEST 'hrrr_control_noqr_gnu' [05:23, 03:22](849 MB)
-PASS -- TEST 'hrrr_control_2threads_gnu' [04:26, 02:37](881 MB)
-PASS -- TEST 'hrrr_control_decomp_gnu' [05:23, 03:21](861 MB)
-PASS -- TEST 'hrrr_control_restart_gnu' [03:19, 02:04](579 MB)
-PASS -- TEST 'hrrr_control_restart_noqr_gnu' [03:20, 01:45](670 MB)
-PASS -- TEST 'rrfs_v1beta_gnu' [08:29, 06:14](858 MB)
+PASS -- COMPILE 'rrfs_gnu' [04:10, 02:47]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_decomp_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_2threads_gnu' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'rap_restart_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_sfcdiff_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_sfcdiff_decomp_gnu' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'rap_sfcdiff_restart_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_noqr_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_2threads_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_decomp_gnu' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'hrrr_control_restart_gnu' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'hrrr_control_restart_noqr_gnu' [, ]( MB)
+FAILED: TEST TIMED OUT -- TEST 'rrfs_v1beta_gnu' [, ]( MB)
 
-PASS -- COMPILE 'csawmg_gnu' [04:11, 02:19]
-PASS -- TEST 'control_csawmg_gnu' [07:26, 05:48](764 MB)
+PASS -- COMPILE 'csawmg_gnu' [05:10, 02:25]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'control_csawmg_gnu' [, ]( MB)
 
-PASS -- COMPILE 'atm_dyn32_debug_gnu' [07:11, 05:53] ( 3 warnings )
-PASS -- TEST 'control_diag_debug_gnu' [03:25, 01:18](1295 MB)
-PASS -- TEST 'regional_debug_gnu' [07:28, 05:54](770 MB)
-PASS -- TEST 'rap_control_debug_gnu' [04:18, 02:08](868 MB)
-PASS -- TEST 'hrrr_control_debug_gnu' [03:18, 01:51](868 MB)
-PASS -- TEST 'hrrr_gf_debug_gnu' [07:18, 05:24](870 MB)
-PASS -- TEST 'hrrr_c3_debug_gnu' [06:18, 04:47](869 MB)
-PASS -- TEST 'rap_diag_debug_gnu' [24:25, 22:43](954 MB)
-PASS -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_gnu' [04:18, 02:51](867 MB)
-PASS -- TEST 'rap_progcld_thompson_debug_gnu' [03:19, 01:50](871 MB)
-PASS -- TEST 'control_stochy_debug_gnu' [03:17, 01:11](503 MB)
-PASS -- TEST 'control_debug_p8_gnu' [05:29, 03:17](1445 MB)
-PASS -- TEST 'rap_clm_lake_debug_gnu' [04:19, 01:48](870 MB)
-PASS -- TEST 'gnv1_c96_no_nest_debug_gnu' [04:29, 02:58](874 MB)
+PASS -- COMPILE 'atm_dyn32_debug_gnu' [08:10, 05:53] ( 3 warnings )
+PASS -- TEST 'control_diag_debug_gnu' [28:25, 01:17](1293 MB)
+PASS -- TEST 'regional_debug_gnu' [29:31, 05:48](770 MB)
+PASS -- TEST 'rap_control_debug_gnu' [25:19, 01:50](870 MB)
+PASS -- TEST 'hrrr_control_debug_gnu' [25:19, 01:49](868 MB)
+PASS -- TEST 'hrrr_gf_debug_gnu' [24:19, 01:49](872 MB)
+PASS -- TEST 'hrrr_c3_debug_gnu' [24:19, 01:49](871 MB)
+PASS -- TEST 'rap_diag_debug_gnu' [24:26, 02:04](960 MB)
+PASS -- TEST 'rap_noah_sfcdiff_cires_ugwp_debug_gnu' [25:20, 02:54](867 MB)
+PASS -- TEST 'rap_progcld_thompson_debug_gnu' [23:20, 01:51](870 MB)
+PASS -- TEST 'control_stochy_debug_gnu' [10:18, 01:11](503 MB)
+PASS -- TEST 'control_debug_p8_gnu' [07:40, 01:19](1457 MB)
+PASS -- TEST 'rap_clm_lake_debug_gnu' [03:23, 01:50](870 MB)
+PASS -- TEST 'gnv1_c96_no_nest_debug_gnu' [05:34, 03:05](877 MB)
 
-PASS -- COMPILE 'wam_debug_gnu' [03:11, 01:29]
-PASS -- TEST 'control_wam_debug_gnu' [07:37, 05:29](1317 MB)
+PASS -- COMPILE 'wam_debug_gnu' [04:10, 01:29]
+PASS -- TEST 'control_wam_debug_gnu' [07:38, 05:22](1318 MB)
 
-PASS -- COMPILE 'atm_debug_dyn32_gnu' [04:11, 02:36]
-PASS -- TEST 'control_csawmg_debug_gnu' [03:26, 01:47](747 MB)
+PASS -- COMPILE 'atm_debug_dyn32_gnu' [05:10, 02:39]
+PASS -- TEST 'control_csawmg_debug_gnu' [03:27, 01:56](748 MB)
 
-PASS -- COMPILE 'rrfs_dyn32_phy32_gnu' [04:10, 02:35]
-PASS -- TEST 'rap_control_dyn32_phy32_gnu' [13:25, 11:29](703 MB)
-PASS -- TEST 'hrrr_control_dyn32_phy32_gnu' [05:22, 03:23](714 MB)
-PASS -- TEST 'rap_2threads_dyn32_phy32_gnu' [04:26, 02:34](726 MB)
-PASS -- TEST 'hrrr_control_2threads_dyn32_phy32_gnu' [04:25, 02:28](718 MB)
-PASS -- TEST 'hrrr_control_decomp_dyn32_phy32_gnu' [05:22, 03:19](712 MB)
-PASS -- TEST 'rap_restart_dyn32_phy32_gnu' [32:27, 29:16](554 MB)
-PASS -- TEST 'hrrr_control_restart_dyn32_phy32_gnu' [17:18, 15:57](552 MB)
-PASS -- TEST 'conus13km_control_gnu' [05:42, 03:17](902 MB)
-PASS -- TEST 'conus13km_2threads_gnu' [03:33, 01:42](900 MB)
-PASS -- TEST 'conus13km_decomp_gnu' [05:35, 03:19](904 MB)
-PASS -- TEST 'conus13km_restart_gnu' [05:31, 01:59](579 MB)
+PASS -- COMPILE 'rrfs_dyn32_phy32_gnu' [05:10, 02:39]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_dyn32_phy32_gnu' [, ]( MB)
+FAILED: TEST TIMED OUT -- TEST 'hrrr_control_dyn32_phy32_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_2threads_dyn32_phy32_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_2threads_dyn32_phy32_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'hrrr_control_decomp_dyn32_phy32_gnu' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'rap_restart_dyn32_phy32_gnu' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'hrrr_control_restart_dyn32_phy32_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_control_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_2threads_gnu' [, ]( MB)
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'conus13km_decomp_gnu' [, ]( MB)
+FAILED: UNABLE TO START TEST -- TEST 'conus13km_restart_gnu' [, ]( MB)
 
-PASS -- COMPILE 'atm_dyn64_phy32_gnu' [09:10, 07:46] ( 3 warnings )
-PASS -- TEST 'rap_control_dyn64_phy32_gnu' [05:29, 04:01](741 MB)
+PASS -- COMPILE 'atm_dyn64_phy32_gnu' [09:10, 07:06] ( 3 warnings )
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'rap_control_dyn64_phy32_gnu' [, ]( MB)
 
-PASS -- COMPILE 'atm_dyn32_phy32_debug_gnu' [07:10, 05:54] ( 3 warnings )
-PASS -- TEST 'rap_control_debug_dyn32_phy32_gnu' [07:18, 05:19](719 MB)
-PASS -- TEST 'hrrr_control_debug_dyn32_phy32_gnu' [21:19, 19:49](720 MB)
-PASS -- TEST 'conus13km_debug_gnu' [09:36, 07:27](921 MB)
-PASS -- TEST 'conus13km_debug_qr_gnu' [09:36, 07:21](645 MB)
-PASS -- TEST 'conus13km_debug_2threads_gnu' [06:32, 04:36](920 MB)
-PASS -- TEST 'conus13km_debug_decomp_gnu' [09:32, 07:38](922 MB)
-PASS -- TEST 'conus13km_radar_tten_debug_gnu' [09:32, 07:24](988 MB)
+PASS -- COMPILE 'atm_dyn32_phy32_debug_gnu' [08:10, 05:50] ( 3 warnings )
+PASS -- TEST 'rap_control_debug_dyn32_phy32_gnu' [04:21, 01:51](720 MB)
+PASS -- TEST 'hrrr_control_debug_dyn32_phy32_gnu' [04:18, 01:45](720 MB)
+PASS -- TEST 'conus13km_debug_gnu' [10:35, 07:29](920 MB)
+PASS -- TEST 'conus13km_debug_qr_gnu' [10:33, 07:29](647 MB)
+PASS -- TEST 'conus13km_debug_2threads_gnu' [06:31, 04:35](923 MB)
+PASS -- TEST 'conus13km_debug_decomp_gnu' [09:31, 07:38](923 MB)
+PASS -- TEST 'conus13km_radar_tten_debug_gnu' [09:32, 07:26](988 MB)
 
-PASS -- COMPILE 'atm_dyn64_phy32_debug_gnu' [07:10, 05:56] ( 3 warnings )
-PASS -- TEST 'rap_control_dyn64_phy32_debug_gnu' [27:19, 25:47](734 MB)
+PASS -- COMPILE 'atm_dyn64_phy32_debug_gnu' [08:10, 05:59] ( 3 warnings )
+PASS -- TEST 'rap_control_dyn64_phy32_debug_gnu' [03:19, 01:51](745 MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_gnu' [14:10, 12:20]
-PASS -- TEST 'cpld_control_gfsv17_gnu' [07:46, 06:00](1555 MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_gnu' [14:10, 12:10]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_gfsv17_gnu' [, ]( MB)
 
-PASS -- COMPILE 's2sw_32bit_pdlib_debug_gnu' [03:10, 01:43] ( 1892 warnings )
-PASS -- TEST 'cpld_debug_gfsv17_gnu' [07:39, 05:25](1565 MB)
+PASS -- COMPILE 's2sw_32bit_pdlib_debug_gnu' [03:10, 01:49] ( 1892 warnings )
+PASS -- TEST 'cpld_debug_gfsv17_gnu' [07:44, 05:27](1561 MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_gnu' [13:14, 11:43]
-PASS -- TEST 'cpld_control_sfs_gnu' [16:42, 13:27](1797 MB)
+PASS -- COMPILE 's2s_32bit_sfs_gnu' [13:10, 11:27]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'cpld_control_sfs_gnu' [, ]( MB)
 
-PASS -- COMPILE 's2s_32bit_sfs_debug_gnu' [03:10, 01:45] ( 1133 warnings )
-PASS -- TEST 'cpld_debug_sfs_gnu' [08:26, 05:27](1798 MB)
+PASS -- COMPILE 's2s_32bit_sfs_debug_gnu' [04:10, 01:42] ( 1133 warnings )
+PASS -- TEST 'cpld_debug_sfs_gnu' [19:37, 05:23](1795 MB)
 
-PASS -- COMPILE 'datm_cdeps_gnu' [18:15, 16:31]
-PASS -- TEST 'datm_cdeps_control_cfsr_gnu' [05:15, 03:24](1514 MB)
+PASS -- COMPILE 'datm_cdeps_gnu' [15:10, 12:24]
+FAILED: UNABLE TO COMPLETE COMPARISON -- TEST 'datm_cdeps_control_cfsr_gnu' [, ]( MB)
 
-PASS -- COMPILE 'atm_mpas_dyn32_gnu' [03:10, 01:52] ( 1 warnings )
-PASS -- TEST 'control_gfs_mpas_gnu' [07:25, 06:05](1110 MB)
+PASS -- COMPILE 'atm_mpas_dyn32_gnu' [04:10, 01:56] ( 1 warnings )
+PASS -- TEST 'control_gfs_mpas_gnu' [03:25, 01:53](1111 MB)
 
 PASS -- COMPILE 'atm_mpas_dyn32_debug_gnu' [03:10, 01:36] ( 1 warnings )
-PASS -- TEST 'control_gfs_mpas_debug_gnu' [04:24, 02:56](1116 MB)
+PASS -- TEST 'control_gfs_mpas_debug_gnu' [06:24, 02:56](1115 MB)
 
 SYNOPSIS:
-Starting Date/Time: 20260630 21:45:16
-Ending Date/Time: 20260630 23:45:19
-Total Time: 02h:00m:42s
+Starting Date/Time: 20260701 02:47:22
+Ending Date/Time: 20260701 05:53:38
+Total Time: 03h:07m:21s
 Compiles Completed: 53/53
-Tests Completed: 243/244
+Tests Completed: 30/244
 Failed Tests:
-* TEST rap_sfcdiff_decomp_gnu: FAILED: TEST TIMED OUT
--- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/stmp/RT_RUNDIRS/Gillian.Petro/FV3_RT/rt_1502732/rap_sfcdiff_decomp_gnu/err
+* TEST cpld_control_gefs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_gefs_oneapi.log
+* TEST cpld_restart_gefs_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_dcp_gefs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_dcp_gefs_oneapi.log
+* TEST cpld_control_gfsv17_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_gfsv17_oneapi.log
+* TEST cpld_control_gfsv17_iau_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_restart_gfsv17_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_restart_gfsv17_iau_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_mpi_gfsv17_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_mpi_gfsv17_oneapi.log
+* TEST cpld_decomp_gfsv17_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_decomp_gfsv17_oneapi.log
+* TEST cpld_2threads_gfsv17_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_2threads_gfsv17_oneapi.log
+* TEST cpld_control_sfs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_sfs_oneapi.log
+* TEST cpld_restart_sfs_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_debug_sfs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_debug_sfs_oneapi.log
+* TEST cpld_debug_gfsv17_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_debug_gfsv17_oneapi.log
+* TEST cpld_control_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_p8_oneapi.log
+* TEST cpld_control_p8.v2.sfc_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_p8.v2.sfc_oneapi.log
+* TEST cpld_restart_p8_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_2threads_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_2threads_p8_oneapi.log
+* TEST cpld_decomp_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_decomp_p8_oneapi.log
+* TEST cpld_mpi_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_mpi_p8_oneapi.log
+* TEST cpld_control_ciceC_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_ciceC_p8_oneapi.log
+* TEST cpld_control_c192_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_c192_p8_oneapi.log
+* TEST cpld_restart_c192_p8_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_control_p8_lnd_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_p8_lnd_oneapi.log
+* TEST cpld_restart_p8_lnd_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_control_noaero_p8_agrid_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_noaero_p8_agrid_oneapi.log
+* TEST cpld_control_c48_5deg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_c48_5deg_oneapi.log
+* TEST cpld_warmstart_c48_5deg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_warmstart_c48_5deg_oneapi.log
+* TEST cpld_restart_c48_5deg_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_control_c24_5deg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_c24_5deg_oneapi.log
+* TEST cpld_warmstart_c24_5deg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_warmstart_c24_5deg_oneapi.log
+* TEST cpld_restart_c24_5deg_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_control_c24_9deg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_c24_9deg_oneapi.log
+* TEST cpld_warmstart_c24_9deg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_warmstart_c24_9deg_oneapi.log
+* TEST cpld_restart_c24_9deg_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST cpld_control_c12_9deg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_c12_9deg_oneapi.log
+* TEST cpld_warmstart_c12_9deg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_warmstart_c12_9deg_oneapi.log
+* TEST cpld_restart_c12_9deg_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST control_CubedSphereGrid_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_CubedSphereGrid_oneapi.log
+* TEST control_CubedSphereGrid_parallel_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_CubedSphereGrid_parallel_oneapi.log
+* TEST control_latlon_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_latlon_oneapi.log
+* TEST control_wrtGauss_netcdf_parallel_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_wrtGauss_netcdf_parallel_oneapi.log
+* TEST control_c48_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_c48_oneapi.log
+* TEST control_c48.v2.sfc_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_c48.v2.sfc_oneapi.log
+* TEST control_c48_lnd_iau_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_c48_lnd_iau_oneapi.log
+* TEST control_c192_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_c192_oneapi.log
+* TEST control_c384_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_c384_oneapi.log
+* TEST control_c384gdas_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_c384gdas_oneapi.log
+* TEST control_stochy_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_stochy_oneapi.log
+* TEST control_stochy_restart_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST control_lndp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_lndp_oneapi.log
+* TEST control_iovr4_gfdlmpv3_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_iovr4_gfdlmpv3_oneapi.log
+* TEST control_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_oneapi.log
+* TEST control_p8.v2.sfc_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8.v2.sfc_oneapi.log
+* TEST control_p8_ugwpv1_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_ugwpv1_oneapi.log
+* TEST control_p8_ugwpv1_tempo_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_ugwpv1_tempo_oneapi.log
+* TEST control_p8_ugwpv1_tempo_aerosol_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_ugwpv1_tempo_aerosol_oneapi.log
+* TEST control_restart_p8_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST control_noqr_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_noqr_p8_oneapi.log
+* TEST control_restart_noqr_p8_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST control_decomp_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_decomp_p8_oneapi.log
+* TEST control_2threads_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_2threads_p8_oneapi.log
+* TEST control_p8_lndp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_lndp_oneapi.log
+* TEST control_p8_rrtmgp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_rrtmgp_oneapi.log
+* TEST control_p8_mynn_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_mynn_oneapi.log
+* TEST merra2_thompson_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_merra2_thompson_oneapi.log
+* TEST merra2_hf_thompson_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_merra2_hf_thompson_oneapi.log
+* TEST regional_control_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_control_oneapi.log
+* TEST regional_restart_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST regional_decomp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_decomp_oneapi.log
+* TEST regional_2threads_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_2threads_oneapi.log
+* TEST regional_noquilt_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_noquilt_oneapi.log
+* TEST regional_netcdf_parallel_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_netcdf_parallel_oneapi.log
+* TEST regional_2dwrtdecomp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_2dwrtdecomp_oneapi.log
+* TEST regional_wofs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_wofs_oneapi.log
+* TEST control_p8_rrtmgp_rad32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_rrtmgp_rad32_oneapi.log
+* TEST rap_control_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_oneapi.log
+* TEST regional_spp_sppt_shum_skeb_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_spp_sppt_shum_skeb_oneapi.log
+* TEST rap_decomp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_decomp_oneapi.log
+* TEST rap_2threads_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_2threads_oneapi.log
+* TEST rap_restart_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST rap_sfcdiff_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_sfcdiff_oneapi.log
+* TEST rap_sfcdiff_decomp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_sfcdiff_decomp_oneapi.log
+* TEST rap_sfcdiff_restart_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST hrrr_control_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_oneapi.log
+* TEST hrrr_control_decomp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_decomp_oneapi.log
+* TEST hrrr_control_2threads_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_2threads_oneapi.log
+* TEST hrrr_control_restart_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST rrfs_v1beta_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rrfs_v1beta_oneapi.log
+* TEST rrfs_v1nssl_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rrfs_v1nssl_oneapi.log
+* TEST rrfs_v1nssl_nohailnoccn_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rrfs_v1nssl_nohailnoccn_oneapi.log
+* TEST control_csawmg_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_csawmg_oneapi.log
+* TEST control_wam_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_wam_oneapi.log
+* TEST control_CubedSphereGrid_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_CubedSphereGrid_debug_oneapi.log
+* TEST control_wrtGauss_netcdf_parallel_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_wrtGauss_netcdf_parallel_debug_oneapi.log
+* TEST control_stochy_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_stochy_debug_oneapi.log
+* TEST control_lndp_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_lndp_debug_oneapi.log
+* TEST control_csawmg_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_csawmg_debug_oneapi.log
+* TEST control_diag_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_diag_debug_oneapi.log
+* TEST control_debug_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_debug_p8_oneapi.log
+* TEST regional_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_debug_oneapi.log
+* TEST rap_control_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_debug_oneapi.log
+* TEST hrrr_control_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_debug_oneapi.log
+* TEST hrrr_gf_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_gf_debug_oneapi.log
+* TEST hrrr_c3_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_c3_debug_oneapi.log
+* TEST rap_unified_drag_suite_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_unified_drag_suite_debug_oneapi.log
+* TEST rap_diag_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_diag_debug_oneapi.log
+* TEST rap_cires_ugwp_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_cires_ugwp_debug_oneapi.log
+* TEST rap_unified_ugwp_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_unified_ugwp_debug_oneapi.log
+* TEST rap_lndp_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_lndp_debug_oneapi.log
+* TEST rap_progcld_thompson_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_progcld_thompson_debug_oneapi.log
+* TEST rap_noah_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_noah_debug_oneapi.log
+* TEST rap_sfcdiff_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_sfcdiff_debug_oneapi.log
+* TEST rap_noah_sfcdiff_cires_ugwp_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_noah_sfcdiff_cires_ugwp_debug_oneapi.log
+* TEST rap_clm_lake_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_clm_lake_debug_oneapi.log
+* TEST gnv1_c96_no_nest_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_gnv1_c96_no_nest_debug_oneapi.log
+* TEST control_wam_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_wam_debug_oneapi.log
+* TEST regional_spp_sppt_shum_skeb_dyn32_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_spp_sppt_shum_skeb_dyn32_phy32_oneapi.log
+* TEST rap_control_dyn32_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_dyn32_phy32_oneapi.log
+* TEST hrrr_control_dyn32_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_dyn32_phy32_oneapi.log
+* TEST rap_2threads_dyn32_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_2threads_dyn32_phy32_oneapi.log
+* TEST hrrr_control_2threads_dyn32_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_2threads_dyn32_phy32_oneapi.log
+* TEST hrrr_control_decomp_dyn32_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_decomp_dyn32_phy32_oneapi.log
+* TEST rap_restart_dyn32_phy32_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST hrrr_control_restart_dyn32_phy32_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST conus13km_control_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_control_oneapi.log
+* TEST conus13km_2threads_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_2threads_oneapi.log
+* TEST conus13km_decomp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_decomp_oneapi.log
+* TEST conus13km_restart_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST conus13km_gl_inline_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_gl_inline_oneapi.log
+* TEST rap_control_dyn64_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_dyn64_phy32_oneapi.log
+* TEST rap_control_debug_dyn32_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_debug_dyn32_phy32_oneapi.log
+* TEST hrrr_control_debug_dyn32_phy32_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_debug_dyn32_phy32_oneapi.log
+* TEST conus13km_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_debug_oneapi.log
+* TEST conus13km_debug_qr_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_debug_qr_oneapi.log
+* TEST conus13km_debug_2threads_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_debug_2threads_oneapi.log
+* TEST conus13km_debug_decomp_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_debug_decomp_oneapi.log
+* TEST conus13km_radar_tten_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_radar_tten_debug_oneapi.log
+* TEST rap_control_dyn64_phy32_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_dyn64_phy32_debug_oneapi.log
+* TEST hafs_regional_atm_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_atm_oneapi.log
+* TEST hafs_regional_atm_gfdlmpv3_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_atm_gfdlmpv3_oneapi.log
+* TEST hafs_regional_atm_thompson_gfdlsf_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_atm_thompson_gfdlsf_oneapi.log
+* TEST hafs_regional_atm_wav_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_atm_wav_oneapi.log
+* TEST hafs_regional_1nest_atm_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_1nest_atm_oneapi.log
+* TEST hafs_regional_telescopic_2nests_atm_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_telescopic_2nests_atm_oneapi.log
+* TEST hafs_global_1nest_atm_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_global_1nest_atm_oneapi.log
+* TEST hafs_global_multiple_4nests_atm_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_global_multiple_4nests_atm_oneapi.log
+* TEST hafs_regional_specified_moving_1nest_atm_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_specified_moving_1nest_atm_oneapi.log
+* TEST hafs_regional_storm_following_1nest_atm_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_storm_following_1nest_atm_oneapi.log
+* TEST hafs_global_storm_following_1nest_atm_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_global_storm_following_1nest_atm_oneapi.log
+* TEST gnv1_nested_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_gnv1_nested_oneapi.log
+* TEST hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_storm_following_1nest_atm_ocn_wav_mom6_oneapi.log
+* TEST hafs_regional_docn_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_docn_oneapi.log
+* TEST hafs_regional_docn_oisst_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hafs_regional_docn_oisst_oneapi.log
+* TEST datm_cdeps_control_cfsr_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_control_cfsr_oneapi.log
+* TEST datm_cdeps_restart_cfsr_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST datm_cdeps_control_gefs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_control_gefs_oneapi.log
+* TEST datm_cdeps_iau_gefs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_iau_gefs_oneapi.log
+* TEST datm_cdeps_stochy_gefs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_stochy_gefs_oneapi.log
+* TEST datm_cdeps_ciceC_cfsr_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_ciceC_cfsr_oneapi.log
+* TEST datm_cdeps_mx025_cfsr_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_mx025_cfsr_oneapi.log
+* TEST datm_cdeps_mx025_gefs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_mx025_gefs_oneapi.log
+* TEST datm_cdeps_multiple_files_cfsr_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_multiple_files_cfsr_oneapi.log
+* TEST datm_cdeps_3072x1536_cfsr_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_3072x1536_cfsr_oneapi.log
+* TEST datm_cdeps_gfs_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_gfs_oneapi.log
+* TEST datm_cdeps_debug_cfsr_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_debug_cfsr_oneapi.log
+* TEST datm_cdeps_lnd_gswp3_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_lnd_gswp3_oneapi.log
+* TEST datm_cdeps_lnd_era5_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_lnd_era5_oneapi.log
+* TEST datm_cdeps_lnd_era5_rst_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST datm_cdeps_lm4_gswp3_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_lm4_gswp3_oneapi.log
+* TEST datm_cdeps_lm4_gswp3_rst_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST atm_ds2s_docn_pcice_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_atm_ds2s_docn_pcice_oneapi.log
+* TEST control_p8_atmlnd_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_atmlnd_oneapi.log
+* TEST control_restart_p8_atmlnd_oneapi: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST control_p8_atmlnd_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_p8_atmlnd_debug_oneapi.log
+* TEST atmwav_control_noaero_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_atmwav_control_noaero_p8_oneapi.log
+* TEST atmaero_control_p8_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_atmaero_control_p8_oneapi.log
+* TEST atmaero_control_p8_rad_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_atmaero_control_p8_rad_oneapi.log
+* TEST atmaero_control_p8_rad_micro_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_atmaero_control_p8_rad_micro_oneapi.log
+* TEST regional_atmaq_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_atmaq_oneapi.log
+* TEST regional_atmaq_canopy_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_atmaq_canopy_oneapi.log
+* TEST regional_atmaq_debug_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_regional_atmaq_debug_oneapi.log
+* TEST cpld_regional_atm_fbh_oneapi: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_regional_atm_fbh_oneapi.log
+* TEST control_stochy_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_stochy_gnu.log
+* TEST rap_control_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_gnu.log
+* TEST rap_decomp_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_decomp_gnu.log
+* TEST rap_2threads_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_2threads_gnu.log
+* TEST rap_restart_gnu: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST rap_sfcdiff_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_sfcdiff_gnu.log
+* TEST rap_sfcdiff_decomp_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_sfcdiff_decomp_gnu.log
+* TEST rap_sfcdiff_restart_gnu: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST hrrr_control_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_gnu.log
+* TEST hrrr_control_noqr_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_noqr_gnu.log
+* TEST hrrr_control_2threads_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_2threads_gnu.log
+* TEST hrrr_control_decomp_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_decomp_gnu.log
+* TEST hrrr_control_restart_gnu: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST hrrr_control_restart_noqr_gnu: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST rrfs_v1beta_gnu: FAILED: TEST TIMED OUT
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/stmp/RT_RUNDIRS/Gillian.Petro/FV3_RT/rt_493949/rrfs_v1beta_gnu/err
+* TEST control_csawmg_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_control_csawmg_gnu.log
+* TEST rap_control_dyn32_phy32_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_dyn32_phy32_gnu.log
+* TEST hrrr_control_dyn32_phy32_gnu: FAILED: TEST TIMED OUT
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/stmp/RT_RUNDIRS/Gillian.Petro/FV3_RT/rt_493949/hrrr_control_dyn32_phy32_gnu/err
+* TEST rap_2threads_dyn32_phy32_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_2threads_dyn32_phy32_gnu.log
+* TEST hrrr_control_2threads_dyn32_phy32_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_2threads_dyn32_phy32_gnu.log
+* TEST hrrr_control_decomp_dyn32_phy32_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_hrrr_control_decomp_dyn32_phy32_gnu.log
+* TEST rap_restart_dyn32_phy32_gnu: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST hrrr_control_restart_dyn32_phy32_gnu: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST conus13km_control_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_control_gnu.log
+* TEST conus13km_2threads_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_2threads_gnu.log
+* TEST conus13km_decomp_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_conus13km_decomp_gnu.log
+* TEST conus13km_restart_gnu: FAILED: UNABLE TO START TEST
+-- LOG: N/A
+* TEST rap_control_dyn64_phy32_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_rap_control_dyn64_phy32_gnu.log
+* TEST cpld_control_gfsv17_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_gfsv17_gnu.log
+* TEST cpld_control_sfs_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_cpld_control_sfs_gnu.log
+* TEST datm_cdeps_control_cfsr_gnu: FAILED: UNABLE TO COMPLETE COMPARISON
+-- LOG: /scratch3/NAGAPE/epic/Gillian.Petro/ursa/RTs/ufs-wm/pretests/3174/tests/logs/log_ursa/run_datm_cdeps_control_cfsr_gnu.log
 
 NOTES:
 A file 'test_changes.list' was generated with list of all failed tests.
@@ -416,75 +840,5 @@ You can use './rt.sh -c -b test_changes.list' to create baselines for the failed
 If you are using this log as a pull request verification, please commit 'test_changes.list'.
 
 Result: FAILURE
-
-====END OF URSA REGRESSION TESTING LOG====
-====START OF URSA REGRESSION TESTING LOG====
-
-UFSWM hash used in testing:
-6cb49ee411e7aa4f0211ece458625477f26c3aad
-
-Submodule hashes used in testing:
- 532ad5c6da1c827e055df90eaf6c91134f909eed AQM (v0.2.0-77-g532ad5c)
- 642e81395472d5887b54f601b60ee607ed39bf09 AQM/src/model/CMAQ (CMAQv5.2.1_07Feb2018-6194-g642e81395)
- 9f53664ef2e607ad25d6b6c939f2eac9ec818ee6 CDEPS-interface/CDEPS (cdeps0.4.17-432-g9f53664)
- def9c53b17d6722cc9991ba72ddae8ad2d5d25d9 CICE-interface/CICE (CICE6.0.0-445-gdef9c53)
- 4954a6f9033f78e5c32bf33780384cbf2d0843e6 CICE-interface/CICE/icepack (Icepack1.1.0-225-g4954a6f)
- a45ce1c208a69cb801e140fa8a8302e173e7c6dd CMEPS-interface/CMEPS (cmeps_v0.4.1-3529-ga45ce1c2)
- 69049ec0c26b3160c3dbe1980b2feb78470a37a6 CMakeModules (v1.0.0-36-g69049ec)
- 9ff3df9545dd582f415f682d3297e8c6c841e5cb GOCART (sdr_v2.1.2.6-291-g9ff3df9)
- 513b67312510a15ae178ea5c3eddb0854e41486b LM4-driver (baseline_change_240904-8-g513b673)
- c61e4e280dbde13af0023b1e86d98296ff65d6a7 LM4-driver/LM4 (land_lad2_2021.02-3-gc61e4e28)
- 4778b91ffebac913de85bd24abed3839c3545312 MOM6-interface/MOM6 (dev/master/repository_split_2014.10.10-10796-g4778b91ff)
- c38ddb7ebdd2d58c517b63a99bbdc8e348732db2 MOM6-interface/MOM6/pkg/CVMix-src (c38ddb7)
- 29e64d652786e1d076a05128c920f394202bfe10 MOM6-interface/MOM6/pkg/GSW-Fortran (29e64d6)
- 2c7b3bc2a8096f6232020c47507593058795102e NOAHMP-interface/noahmp (v3.7.1-471-g2c7b3bc)
- 7b632e756bfade157c345536a19df5aa400d9357 UFSATM (remotes/origin/feature/ss2.x)
- 22bc1a5de8a19996310aedc3482931616cd74a1b UFSATM/ccpp/framework (2025-10-15-dev-5-g22bc1a5)
- f1b9cad30495447ba2e7e7c5ee2129ea223c48b4 UFSATM/ccpp/physics (remotes/origin/feature/ss2.x)
- 4a4108876b0c68ffcd08b036b480f7cbfdb62e91 UFSATM/ccpp/physics/physics/CONV/C3 (heads/main)
- c62efd27caa26f660edf24232f33f154e608b77a UFSATM/ccpp/physics/physics/MP/TEMPO/TEMPO (v2.1.3~3)
- 41c5fcd950fed09b8afe186dede266824eca7fd3 UFSATM/ccpp/physics/physics/Radiation/RRTMGP/rte-rrtmgp (41c5fcd)
- cce9a5fc4479749f489be24020e5c06c3e4202d4 UFSATM/ccpp/physics/physics/SFC_Layer/MYNN/MYNN (remotes/origin/ccpp/dev)
- 97d71507e5694c2dc2cecc532fd2ae36629f8f2e UFSATM/fv3/atmos_cubed_sphere (201912_public_release-541-g97d7150)
- 99890240d93a6b28a75f84c9f7248161797656ae UFSATM/mpas/MPAS-Model (remotes/origin/master-101-g99890240)
- 842a9cce3346a6d0ba21215a3bb3172acb583785 UFSATM/upp (upp_v10.2.0-408-g842a9cce)
--68953f566b4d728b9ecf9a352c56e2aaeec6d8ec UFSATM/upp/sorc/libIFI.fd
--c49023a61dc184ca85255ddbfdeee9c99d44bfd5 UFSATM/upp/sorc/ncep_post.fd/post_gtg.fd
- dcc9da76c2d32c6ca7a5318a56db033295d9f43c WW3 (6.07.1-531-gdcc9da76)
- ba2bc410e55e89b392eec2ab8a08052bfe7b0c2c fire_behavior (v0.2.0-179-gba2bc41)
- ae192f119b8614b4476a1b04ba55f6fb93e2953d stochastic_physics (ufs-v2.0.0-298-gae192f1)
-
-
-NOTES:
-[Times](Memory) are at the end of each compile/test in format [MM:SS](Size).
-The first time is for the full script (prep+run+finalize).
-The second time is specifically for the run phase.
-Times/Memory will be empty for failed tests.
-
-BASELINE DIRECTORY: /scratch3/NAGAPE/epic/Gillian.Petro/stmp/RT_BASELINE/Gillian.Petro/FV3_RT/REGRESSION_TEST-3174
-COMPARISON DIRECTORY: /scratch3/NAGAPE/epic/Gillian.Petro/stmp/RT_RUNDIRS/Gillian.Petro/FV3_RT/rt_221985
-
-RT.SH OPTIONS USED:
-* (-a) - HPC PROJECT ACCOUNT: epic
-* (-m) - COMPARE AGAINST CREATED BASELINES
-* (-n) - RUN SINGLE TEST: rap_sfcdiff_decomp
-* (-k) - KEEP RUN DIRECTORY
-* (-e) - USE ECFLOW
-
-PASS -- COMPILE 'rrfs_gnu' [04:11, 02:42]
-PASS -- TEST 'rap_sfcdiff_decomp_gnu' [12:32, 10:41](861 MB)
-
-SYNOPSIS:
-Starting Date/Time: 20260701 01:29:56
-Ending Date/Time: 20260701 01:47:56
-Total Time: 00h:18m:06s
-Compiles Completed: 1/1
-Tests Completed: 1/1
-
-NOTES:
-A file 'test_changes.list' was generated but is empty.
-If you are using this log as a pull request verification, please commit 'test_changes.list'.
-
-Result: SUCCESS
 
 ====END OF URSA REGRESSION TESTING LOG====
