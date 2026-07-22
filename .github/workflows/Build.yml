@@ -18,7 +18,7 @@ jobs:
         app: ["S2SWA", "ATM"]
         compiler:
           - name: "gcc"
-            container: "ghcr.io/noaa-emc/ci-common-build-cache/ufs-weather-model-ubuntu-24.04-gcc-13-mpich-x@sha256:0213ab0c9815ae29948c073d460f3dde02bfe04af8407f7ab6b17a7f6baf0110"
+            container: "ghcr.io/noaa-emc/ci-common-build-cache/ufs-weather-model-ubuntu-24.04-gcc-13-mpich-x@sha256:2dcb6aaaa605e00c0cb7357d322d0348c701d74cce327ac949748730b58ef51f"
           - name: "oneapi"
             container: "ghcr.io/noaa-emc/ci-common-build-cache/ufs-weather-model-ubuntu-24.04-oneapi-2025.3-intel-oneapi-mpi-2021.17@sha256:b9686ef67c3e334cc08eb96d7db46e98ab731f75c0d24353981c1beb143b6e71"
         include:
