@@ -1,22 +1,17 @@
 help([[
-loads UFS Model prerequisites for NOAA Parallelworks/Intel
+loads UFS Model prerequisites for Derecho/IntelLLVM
 ]])
-
-purge()
 
 setenv("LMOD_TMOD_FIND_FIRST","yes")
 
-prepend_path("MODULEPATH", "/glade/work/epicufsrt/contrib/spack-stack/derecho/spack-stack-2.1.1/envs/ue-oneapi-2025.3.1/modules/Core")
-prepend_path("MODULEPATH", "/glade/work/epicufsrt/contrib/spack-stack/derecho/installs/oneapi-2025.3.1/modulefiles")
-prepend_path("MODULEPATH", "/opt/cray/pe/modulefiles")
+prepend_path("MODULEPATH", "/lustre/desc1/scratch/heinzell/spst-rel21/envs/ue-oneapi-2025.3.2/modules/Core")
 
 load("crayenv/25.03")
--- unload("ncarcompilers")
 
-stack_intel_ver=os.getenv("stack_intel_ver") or "2025.3.1"
+stack_intel_ver=os.getenv("stack_intel_ver") or "2025.3.2"
 load(pathJoin("stack-intel-oneapi-compilers", stack_intel_ver))
 
-stack_cray_mpich_ver=os.getenv("stack-cray-mpich_ver") or "8.1.32"
+stack_cray_mpich_ver=os.getenv("stack_cray_mpich_ver") or "8.1.29"
 load(pathJoin("stack-cray-mpich", stack_cray_mpich_ver))
 
 unload("cray-libsci")
@@ -29,9 +24,9 @@ load("ufs_common")
 nccmp_ver=os.getenv("nccmp_ver") or "1.9.0.1"
 load(pathJoin("nccmp", nccmp_ver))
 
-setenv("CC", "cc")
-setenv("CXX", "CC")
-setenv("FC", "ftn")
+setenv("CC", "mpicc")
+setenv("CXX", "mpicxx")
+setenv("FC", "mpif90")
 setenv("I_MPI_CC", "icx")
 setenv("I_MPI_CXX", "icpx")
 setenv("I_MPI_FC", "ifx")
