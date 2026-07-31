@@ -4,11 +4,12 @@ loads UFS Model prerequisites for Derecho/IntelLLVM
 
 setenv("LMOD_TMOD_FIND_FIRST","yes")
 
-prepend_path("MODULEPATH", "/lustre/desc1/scratch/heinzell/spst-rel21/envs/ue-oneapi-2025.3.2/modules/Core")
+prepend_path("MODULEPATH", "/glade/work/epicufsrt/contrib/spack-stack/derecho/installs/oneapi-2025.3.1/modulefiles")
+prepend_path("MODULEPATH", "/lustre/desc1/scratch/heinzell/spst-rel21/envs/ue-oneapi-2025.3.1/modules/Core")
 
 load("crayenv/25.03")
 
-stack_intel_ver=os.getenv("stack_intel_ver") or "2025.3.2"
+stack_intel_ver=os.getenv("stack_intel_ver") or "2025.3.1"
 load(pathJoin("stack-intel-oneapi-compilers", stack_intel_ver))
 
 stack_cray_mpich_ver=os.getenv("stack_cray_mpich_ver") or "8.1.29"
