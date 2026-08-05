@@ -342,6 +342,8 @@ EOF
         elif [[ ${COMPILE_RESULT} =~ FAILED ]]; then
           TEST_RESULT="SKIPPED: ASSOCIATED COMPILE FAILED"
           SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
+          #GSP
+          TESTS_SKIPPED_FOR_COMPILE_FAIL+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
         elif [[ ! -f "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log" ]]; then
           TEST_RESULT="FAILED: UNABLE TO START TEST"
           FAIL_LOG="N/A"
@@ -435,6 +437,13 @@ EOF
   # WRITE FAILED_TEST_ID LIST TO TEST_CHANGES_LOG
   if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
     for item in "${FAILED_TEST_ID[@]}"; do
+      echo "${item}" >> "${TEST_CHANGES_LOG}"
+    done
+  fi
+
+  #GSP
+  if [[ "${TESTS_SKIPPED_FOR_COMPILE_FAIL}" -ne "0"]]; then
+    for item in "${FAILED_TEST_ID}[@]"; do
       echo "${item}" >> "${TEST_CHANGES_LOG}"
     done
   fi
