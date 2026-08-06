@@ -699,7 +699,6 @@ done
 [[ ${TEST_SUBSET_FILE} != '' && ${RUN_SINGLE_TEST} == true ]] && die "-s and -n options cannot be used at the same time"
 
 if [[ ${DRY_RUN} == true ]]; then
-   # Could we make it so that DRY_RUN works with -s or -n?
    [[ ${TEST_SUBSET_FILE} == '' ]] || die "-x should not be used with -s"
    [[ ${CREATE_BASELINE} == false ]] || die "-x should not be used with -c"
    [[ ${delete_rundir} == false ]] || die "-x should not be used with -d"
