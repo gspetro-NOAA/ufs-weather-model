@@ -25,6 +25,7 @@ usage() {
   echo "  -n  run single test <name>"
   echo "  -o  compile only, skip tests"
   echo "  -r  use Rocoto workflow manager"
+  echo "  -s  run only the subset of tests listed in <file>"
   echo "  -v  verbose output"
   echo "  -w  for weekly_test, skip comparing baseline results"
   echo "  -x  dry-run"
@@ -62,6 +63,11 @@ update_rtconf() {
     [[ -s "${NEW_BASELINES_FILE}" ]] || die "${NEW_BASELINES_FILE} is empty, exiting..."
     TEST_WITH_COMPILE=()
     readarray -t TEST_WITH_COMPILE < "${NEW_BASELINES_FILE}"
+  # else USER CHOSE THE -s OPTION
+  elif [[ ${TEST_SUBSET_FILE} != '' ]]; then
+    [[ -s "${TEST_SUBSET_FILE}" ]] || die "${TEST_SUBSET_FILE} is empty, exiting..."
+    TEST_WITH_COMPILE=()
+    readarray -t TEST_WITH_COMPILE < "${TEST_SUBSET_FILE}"
   # else USER CHOSE THE -n OPTION
   elif [[ ${RUN_SINGLE_TEST} == true ]]; then
     TEST_WITH_COMPILE=("${SRT_NAME} ${SRT_COMPILER}")
@@ -200,6 +206,7 @@ EOF
 
   [[ -n ${ACCNR} ]] && echo "* (-a) - HPC PROJECT ACCOUNT: ${ACCNR}" >> "${REGRESSIONTEST_LOG}"
   [[ -n ${NEW_BASELINES_FILE} ]] && echo "* (-b) - NEW BASELINES FROM FILE: ${NEW_BASELINES_FILE}" >> "${REGRESSIONTEST_LOG}"
+  [[ -n ${TEST_SUBSET_FILE} ]] && echo "* (-s) - RUN SUBSET OF TESTS: ${TEST_SUBSET_FILE}" >> "${REGRESSIONTEST_LOG}"
   [[ ${CREATE_BASELINE} == true ]] && echo "* (-c) - CREATE NEW BASELINES" >> "${REGRESSIONTEST_LOG}"
   [[ ${DEFINE_CONF_FILE} == true ]] && echo "* (-l) - USE CONFIG FILE: ${TESTS_FILE}" >> "${REGRESSIONTEST_LOG}"
   [[ ${RTPWD_NEW_BASELINE} == true ]] && echo "* (-m) - COMPARE AGAINST CREATED BASELINES" >> "${REGRESSIONTEST_LOG}"
@@ -606,6 +613,7 @@ COMPILE_ONLY=false
 RTPWD_NEW_BASELINE=false
 TESTS_FILE='rt.conf'
 NEW_BASELINES_FILE=''
+TEST_SUBSET_FILE=''
 DEFINE_CONF_FILE=false
 RUN_SINGLE_TEST=false
 RTVERBOSE=false
@@ -614,7 +622,7 @@ export STOP_ECFLOW_AT_END=false
 export DRY_RUN=false
 ACCNR=${ACCNR:-""}
 
-while getopts ":a:b:cl:mn:dwkreovhx" opt; do
+while getopts ":a:b:cl:mn:dwkreovhxs:" opt; do
   case ${opt} in
     a)
       ACCNR=${OPTARG}
@@ -671,6 +679,8 @@ while getopts ":a:b:cl:mn:dwkreovhx" opt; do
       ECFLOW=true
       ROCOTO=false
       ;;
+    s) TEST_SUBSET_FILE=${OPTARG}
+      ;;
     v)
       RTVERBOSE=true
       ;;
@@ -702,9 +712,16 @@ done
 [[ ${CREATE_BASELINE} == true && ${RTPWD_NEW_BASELINE} == true ]] && die "-c and -m options cannot be used at the same time"
 #B&N not run together
 [[ ${NEW_BASELINES_FILE} != '' && ${RUN_SINGLE_TEST} == true ]] && die "-b and -n options cannot be used at the same time"
+#S&N not run together
+[[ ${TEST_SUBSET_FILE} != '' && ${RUN_SINGLE_TEST} == true ]] && die "-s and -n options cannot be used at the same time"
+#B&S not run together
+[[ ${TEST_SUBSET_FILE} != '' && ${NEW_BASELINES_FILE} == true ]] && die "-s and -b options cannot be used at the same time"
+
 
 if [[ ${DRY_RUN} == true ]]; then
    [[ ${NEW_BASELINES_FILE} == '' ]] || die "-x should not be used with -b"
+   # Could we make it so that DRY_RUN works with -s or -n?
+   [[ ${TEST_SUBSET_FILE} == '' ]] || die "-x should not be used with -s"
    [[ ${CREATE_BASELINE} == false ]] || die "-x should not be used with -c"
    [[ ${delete_rundir} == false ]] || die "-x should not be used with -d"
    [[ ${ECFLOW} == false ]] || die "-x should not be used with -e"
