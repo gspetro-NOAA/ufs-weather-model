@@ -163,6 +163,7 @@ generate_log() {
   FAILED_TEST_ID=()
   FAILED_COMPILE_LOGS=()
   FAILED_TEST_LOGS=()
+  TESTS_SKIPPED_FOR_COMPILE_FAIL=()
   TEST_CHANGES_LOG="test_changes.list"
   TEST_END_TIME="$(date '+%Y%m%d %T')"
   GIT_HASHES=$(git rev-parse HEAD)
@@ -344,6 +345,7 @@ EOF
           SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
           #GSP
           TESTS_SKIPPED_FOR_COMPILE_FAIL+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
+          echo "TESTS_SKIPPED_FOR_COMPILE_FAIL: $TESTS_SKIPPED_FOR_COMPILE_FAIL"
         elif [[ ! -f "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log" ]]; then
           TEST_RESULT="FAILED: UNABLE TO START TEST"
           FAIL_LOG="N/A"
@@ -442,8 +444,10 @@ EOF
   fi
 
   #GSP
-  if [[ "${TESTS_SKIPPED_FOR_COMPILE_FAIL}" -ne "0" ]]; then
-    for item in "${FAILED_TEST_ID}[@]"; do
+  if [[ "${#TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}" -ne "0" ]]; then
+    echo "TEST_CHANGES_LOG: ${TEST_CHANGES_LOG}"
+    for item in "${TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}"; do
+      echo "Item: ${item}"
       echo "${item}" >> "${TEST_CHANGES_LOG}"
     done
   fi
