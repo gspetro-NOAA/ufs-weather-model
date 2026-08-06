@@ -343,7 +343,6 @@ EOF
         elif [[ ${COMPILE_RESULT} =~ FAILED ]]; then
           TEST_RESULT="SKIPPED: ASSOCIATED COMPILE FAILED"
           SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
-          #GSP
           TESTS_SKIPPED_FOR_COMPILE_FAIL+=("${TEST_NAME} ${COMPILER}")
         elif [[ ! -f "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log" ]]; then
           TEST_RESULT="FAILED: UNABLE TO START TEST"
@@ -442,7 +441,7 @@ EOF
     done
   fi
 
-  #GSP
+  # WRITE TESTS WHOSE ASSOCIATED COMPILE FAILED TO TEST_CHANGES_LOG
   if [[ "${#TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}" -ne "0" ]]; then
     for item in "${TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}"; do
       echo "${item}" >> "${TEST_CHANGES_LOG}"
@@ -602,7 +601,6 @@ export delete_rundir=false
 COMPILE_ONLY=false
 RTPWD_NEW_BASELINE=false
 TESTS_FILE='rt.conf'
-NEW_BASELINES_FILE=''
 TEST_SUBSET_FILE=''
 DEFINE_CONF_FILE=false
 RUN_SINGLE_TEST=false
