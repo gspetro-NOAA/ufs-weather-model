@@ -442,7 +442,7 @@ EOF
   fi
 
   #GSP
-  if [[ "${TESTS_SKIPPED_FOR_COMPILE_FAIL}" -ne "0"]]; then
+  if [[ "${TESTS_SKIPPED_FOR_COMPILE_FAIL}" -ne "0" ]]; then
     for item in "${FAILED_TEST_ID}[@]"; do
       echo "${item}" >> "${TEST_CHANGES_LOG}"
     done
