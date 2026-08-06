@@ -610,7 +610,7 @@ export STOP_ECFLOW_AT_END=false
 export DRY_RUN=false
 ACCNR=${ACCNR:-""}
 
-while getopts ":a:b:cl:mn:dwkreovhxs:" opt; do
+while getopts ":a:cl:mn:dwkreovhxs:" opt; do
   case ${opt} in
     a)
       ACCNR=${OPTARG}
