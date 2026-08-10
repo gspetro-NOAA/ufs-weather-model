@@ -4,7 +4,7 @@ loads UFS Model prerequisites for Derecho/IntelLLVM
 
 setenv("LMOD_TMOD_FIND_FIRST","yes")
 
-prepend_path("MODULEPATH", "/lustre/desc1/scratch/heinzell/spst-rel21/envs/ue-oneapi-2025.3.2/modules/Core")
+prepend_path("MODULEPATH", "/glade/work/epicufsrt/contrib/spack-stack/derecho/spack-stack-2.1.1/envs/ue-oneapi-2025.3.1-build/modules/Core")
 
 load("crayenv/25.03")
 
