@@ -24,7 +24,7 @@ jobs:
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
-          organization: ufs-community
+          organization: NOAA-EPIC
           #project_number: 70
           project_number: 18
           operation: update
