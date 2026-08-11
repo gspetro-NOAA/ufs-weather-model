@@ -27,6 +27,6 @@ jobs:
           organization: NOAA-EPIC
           project_number: 18
           operation: update
-          content_id: ${{ github.event.client_payload.command.resource.id }}
+          content_id: ${{ github.event.pull_request.node_id }}
           field: 'Date Opened'
           value: ${{ github.event.pull_request.created_at }}
