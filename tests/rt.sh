@@ -155,13 +155,11 @@ update_rtconf() {
 
 #GSP
 print_results() {
-  local -n failures=()
-  failures+="${1}"
-  if [[ "${#failures[@]}" -ne "0" ]]; then
-    for i in "${failures[@]}"; do
-      echo "* ${failures[${i}]}" >> "${REGRESSIONTEST_LOG}"
-    done  
-  fi
+  [[ -z "${1:-}" ]] && return 0
+  local -n failures="${1}"
+  for item in "${failures[@]}"; do
+      echo "* ${item}" >> "${REGRESSIONTEST_LOG}"
+   done
 }
 
 generate_log() {
@@ -465,10 +463,10 @@ EOF
   fi
 
   #GSP
-  print_results ${UNABLE_TO_START_COMPILE}
-  print_results ${UNABLE_TO_FINISH_COMPILE}
-  print_results ${COMPILE_DISK_QUOTA_ISSUE}
-  print_results ${COMPILE_TIMED_OUT}
+  print_results UNABLE_TO_START_COMPILE
+  print_results UNABLE_TO_FINISH_COMPILE
+  print_results COMPILE_DISK_QUOTA_ISSUE
+  print_results COMPILE_TIMED_OUT
 
 
   # PRINT FAILED TESTS
@@ -480,13 +478,13 @@ EOF
     #done
   fi
 
-  print_results ${UNABLE_TO_START_TEST}
-  print_results ${RUN_DID_NOT_COMPLETE}
-  print_results ${TEST_DISK_QUOTA_ISSUE}
-  print_results ${TEST_TIMED_OUT}
-  print_results ${DOES_NOT_GENERATE_BASELINE}
-  print_results ${UNSUCCESSFUL_BASELINE_COMPARISON}
-  print_results ${UNABLE_TO_COMPLETE_COMPARISON}
+  print_results UNABLE_TO_START_TEST
+  print_results RUN_DID_NOT_COMPLETE
+  print_results TEST_DISK_QUOTA_ISSUE
+  print_results TEST_TIMED_OUT
+  print_results DOES_NOT_GENERATE_BASELINE
+  print_results UNSUCCESSFUL_BASELINE_COMPARISON
+  print_results UNABLE_TO_COMPLETE_COMPARISON
 
   #GSP
   # WRITE FAILED_TEST_ID LIST TO TEST_CHANGES_LOG
