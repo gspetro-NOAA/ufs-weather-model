@@ -155,11 +155,13 @@ update_rtconf() {
 
 #GSP
 print_results() {
-  local -n failures=$1
+  local -n failures=()
+  failures+="${1}"
   if [[ "${#failures[@]}" -ne "0" ]]; then
     for i in "${failures[@]}"; do
       echo "* ${failures[${i}]}" >> "${REGRESSIONTEST_LOG}"
     done  
+  fi
 }
 
 generate_log() {
