@@ -15,7 +15,7 @@ jobs:
       issues: write
     steps:
       - name: Add PR
-        uses: actions/add-to-project@v1.0.2
+        uses: actions/add-to-project@v2.0.0
         with:
           project-url: https://github.com/orgs/ufs-community/projects/70
           github-token: ${{ secrets.PR_PROJECT_TOKEN }}
@@ -23,9 +23,13 @@ jobs:
         uses: github/update-project-action@v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
           organization: ufs-community
-          project_number: 70
+          #project_number: 70
+          project_number: 18
           operation: update
           # ??? content_id: ${{ github.event.client_payload.command.resource.id }}
           field: 'Date Opened'
           value: ${{ github.event.pull_request.created_at }}
+
+
