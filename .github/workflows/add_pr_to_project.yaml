@@ -20,9 +20,12 @@ jobs:
           project-url: https://github.com/orgs/ufs-community/projects/70
           github-token: ${{ secrets.PR_PROJECT_TOKEN }}
       - name: Add date created
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Date Opened'
-          field-value: ${{ github.event.pull_request.created_at }}
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          organization: ufs-community
+          project_number: 70
+          operation: update
+          # ??? content_id: ${{ github.event.client_payload.command.resource.id }}
+          field: 'Date Opened'
+          value: ${{ github.event.pull_request.created_at }}
