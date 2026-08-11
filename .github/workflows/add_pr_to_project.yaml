@@ -28,7 +28,7 @@ jobs:
           #project_number: 70
           project_number: 18
           operation: update
-          # ??? content_id: ${{ github.event.client_payload.command.resource.id }}
+          content_id: ${{ github.event.client_payload.command.resource.id }}
           field: 'Date Opened'
           value: ${{ github.event.pull_request.created_at }}
 
