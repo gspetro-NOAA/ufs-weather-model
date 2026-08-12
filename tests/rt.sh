@@ -153,15 +153,17 @@ update_rtconf() {
   fi
 }
 
-#GSP
 print_results() {
   [[ -z "${1:-}" ]] && return 0
   local -n failures="${1}"
   if [[ "${#failures[@]}" -ne "0" ]]; then
     echo "${1//_/ }: " >> "${REGRESSIONTEST_LOG}"
+    echo "" >> "${REGRESSIONTEST_LOG}"
     for item in "${failures[@]}"; do
       echo "  * ${item}" >> "${REGRESSIONTEST_LOG}"
+      echo "" >> "${REGRESSIONTEST_LOG}"
     done
+    echo "" >> "${REGRESSIONTEST_LOG}"
   fi
 }
 
@@ -173,8 +175,6 @@ generate_log() {
   FAILED_TESTS=()
   SKIPPED_TESTS=()
   FAILED_TEST_ID=()
-  #FAILED_COMPILE_LOGS=()
-  #FAILED_TEST_LOGS=()
   UNABLE_TO_START_COMPILE=()
   UNABLE_TO_FINISH_COMPILE=()
   COMPILE_DISK_QUOTA_ISSUE=()
@@ -188,7 +188,6 @@ generate_log() {
   RUN_DID_NOT_COMPLETE=()
   TEST_DISK_QUOTA_ISSUE=()
   TEST_TIMED_OUT=()
-  #SORTED_FAILURES=()
   TEST_CHANGES_LOG="test_changes.list"
   TEST_END_TIME="$(date '+%Y%m%d %T')"
   GIT_HASHES=$(git rev-parse HEAD)
@@ -371,7 +370,6 @@ EOF
         if [[ ${CREATE_BASELINE} == true && ${GEN_BASELINE} != "baseline" ]]; then
           TEST_RESULT="SKIPPED: TEST DOES NOT GENERATE BASELINE"
           SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
-          #GSP
           DOES_NOT_GENERATE_BASELINE+=("${TEST_NAME}_${COMPILER}")
         elif [[ ${COMPILE_RESULT} =~ FAILED ]]; then
           TEST_RESULT="SKIPPED: ASSOCIATED COMPILE FAILED"
@@ -465,7 +463,6 @@ EOF
     #done
   fi
 
-  #GSP
   print_results UNABLE_TO_START_COMPILE
   print_results UNABLE_TO_FINISH_COMPILE
   print_results COMPILE_DISK_QUOTA_ISSUE
@@ -490,7 +487,6 @@ EOF
   print_results UNSUCCESSFUL_BASELINE_COMPARISON
   print_results UNABLE_TO_COMPLETE_COMPARISON
 
-  #GSP
   # WRITE FAILED_TEST_ID LIST TO TEST_CHANGES_LOG
   if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
     for item in "${FAILED_TEST_ID[@]}"; do
