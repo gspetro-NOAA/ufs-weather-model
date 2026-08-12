@@ -157,10 +157,12 @@ update_rtconf() {
 print_results() {
   [[ -z "${1:-}" ]] && return 0
   local -n failures="${1}"
-  echo "${1//_/ }: " >> "${REGRESSIONTEST_LOG}"
-  for item in "${failures[@]}"; do
+  if [[ "${#failures[@]}" -gt "0" ]]; then
+    echo "${1//_/ }: " >> "${REGRESSIONTEST_LOG}"
+    for item in "${failures[@]}"; do
       echo "  * ${item}" >> "${REGRESSIONTEST_LOG}"
-   done
+    done
+  fi
 }
 
 generate_log() {
