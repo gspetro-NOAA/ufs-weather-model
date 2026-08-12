@@ -157,7 +157,7 @@ update_rtconf() {
 print_results() {
   [[ -z "${1:-}" ]] && return 0
   local -n failures="${1}"
-  if [[ "${#failures[@]}" -gt "0" ]]; then
+  if [[ "${#failures[@]}" -ne "0" ]]; then
     echo "${1//_/ }: " >> "${REGRESSIONTEST_LOG}"
     for item in "${failures[@]}"; do
       echo "  * ${item}" >> "${REGRESSIONTEST_LOG}"
@@ -482,6 +482,7 @@ EOF
   fi
 
   print_results UNABLE_TO_START_TEST
+  print_results ASSOCIATED_COMPILE_FAILED
   print_results RUN_DID_NOT_COMPLETE
   print_results TEST_DISK_QUOTA_ISSUE
   print_results TEST_TIMED_OUT
