@@ -456,11 +456,9 @@ Tests Completed: $((TEST_COUNTER-${#FAILED_TESTS[@]}-${#SKIPPED_TESTS[@]}))/${TE
 EOF
   # PRINT FAILED COMPILES
   if [[ "${#FAILED_COMPILES[@]}" -ne "0" ]]; then
+    echo ""
     echo "Failed Compiles:" >> "${REGRESSIONTEST_LOG}"
-    #for i in "${!FAILED_COMPILES[@]}"; do
-    #  echo "* ${FAILED_COMPILES[${i}]}" >> "${REGRESSIONTEST_LOG}"
-    #  echo "-- LOG: ${FAILED_COMPILE_LOGS[${i}]}" >> "${REGRESSIONTEST_LOG}"
-    #done
+    echo ""
   fi
 
   print_results UNABLE_TO_START_COMPILE
@@ -471,11 +469,9 @@ EOF
 
   # PRINT FAILED TESTS
   if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
+    echo ""
     echo "Failed Tests:" >> "${REGRESSIONTEST_LOG}"
-    #for j in "${!FAILED_TESTS[@]}"; do
-      #echo "* ${FAILED_TESTS[${j}]}" >> "${REGRESSIONTEST_LOG}"
-      #echo "-- LOG: ${FAILED_TEST_LOGS[${j}]}" >> "${REGRESSIONTEST_LOG}"
-    #done
+    echo ""
   fi
 
   print_results UNABLE_TO_START_TEST
@@ -494,7 +490,6 @@ EOF
     done
   fi
 
-  # GSP
   # WRITE TESTS WHOSE ASSOCIATED COMPILE FAILED TO TEST_CHANGES_LOG
   if [[ "${#TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}" -ne "0" ]]; then
     for item in "${TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}"; do
