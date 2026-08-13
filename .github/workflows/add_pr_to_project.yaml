@@ -15,17 +15,18 @@ jobs:
       issues: write
     steps:
       - name: Add PR
-        uses: actions/add-to-project@v1.0.2
+        uses: actions/add-to-project@v2
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
+          #project-url: https://github.com/orgs/ufs-community/projects/70
+          project-url: https://github.com/orgs/NOAA-EPIC/projects/18
           github-token: ${{ secrets.PR_PROJECT_TOKEN }}
       - name: Add date created
         uses: github/update-project-action@v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          organization: NOAA-EPIC
+          project_number: 18
           operation: update
-          # ??? content_id: ${{ github.event.client_payload.command.resource.id }}
+          content_id: ${{ github.event.pull_request.node_id }}
           field: 'Date Opened'
           value: ${{ github.event.pull_request.created_at }}
