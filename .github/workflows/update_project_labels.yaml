@@ -142,7 +142,6 @@ jobs:
             contains(github.event.pull_request.labels.*.name, 'Adds Input Data') &&
             contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data')
         uses: github/update-project-action@v4
-        uses: github/update-project-action@v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
