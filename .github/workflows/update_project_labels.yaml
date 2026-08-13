@@ -17,53 +17,73 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
-      issues: write
+      #pull-requests: write
+      #issues: write
     steps:
       - name: Lack of baseline labels
         if: | 
             !contains(github.event.pull_request.labels.*.name, 'No Baseline Change') && 
             !contains(github.event.pull_request.labels.*.name, 'Baseline Updates') && 
             !contains(github.event.pull_request.labels.*.name, 'New Baselines')
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Baseline Changes'
-          field-value: 'Unknown'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Baseline Changes'
+          value: 'Unknown'
       - name: Contradictory labels
         if: | 
             contains(github.event.pull_request.labels.*.name, 'No Baseline Change') && 
             (contains(github.event.pull_request.labels.*.name, 'Baseline Updates') || 
             contains(github.event.pull_request.labels.*.name, 'New Baselines'))
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Baseline Changes'
-          field-value: 'Unknown'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Baseline Changes'
+          value: 'Unknown'
       - name: Baseline changes labels
         if: |
             !contains(github.event.pull_request.labels.*.name, 'No Baseline Change') &&
             ( contains(github.event.pull_request.labels.*.name, 'Baseline Updates') || 
             contains(github.event.pull_request.labels.*.name, 'New Baselines') )
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Baseline Changes'
-          field-value: 'Yes'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Baseline Changes'
+          value: 'Yes'
       - name: No baseline changes label
         if: | 
             contains(github.event.pull_request.labels.*.name, 'No Baseline Change') && 
             !contains(github.event.pull_request.labels.*.name, 'Baseline Updates') && 
             !contains(github.event.pull_request.labels.*.name, 'New Baselines')
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Baseline Changes'
-          field-value: 'No'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Baseline Changes'
+          value: 'No'
   data-labels:
     name: Input data
     runs-on: ubuntu-latest
@@ -76,42 +96,63 @@ jobs:
         if: |
           contains(github.event.pull_request.labels.*.name, 'Adds Input Data') &&
           !contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data')
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: "Input Data Req'd"
-          field-value: 'Adds'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: "Input Data Req'd"
+          value: 'Adds'
       - name: New input-data directory required
         if: |
           contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data') &&
           !contains(github.event.pull_request.labels.*.name, 'Adds Input Data')
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: "Input Data Req'd"
-          field-value: 'Create New'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: "Input Data Req'd"
+          value: 'Create New'
       - name: No input data changes
         if: |
             (!contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data')) && 
             (!contains(github.event.pull_request.labels.*.name, 'Adds Input Data'))
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: "Input Data Req'd"
-          field-value: 'None'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: "Input Data Req'd"
+          value: 'None'
       - name: Contradictory labels
         if: | 
             contains(github.event.pull_request.labels.*.name, 'Adds Input Data') &&
             contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data')
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: "Input Data Req'd"
-          field-value: 'Unknown'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: "Input Data Req'd"
+          value: 'Unknown'
   priority-labels:
     name: Priority
     runs-on: ubuntu-latest
@@ -121,14 +162,17 @@ jobs:
       issues: write
     steps:
       - name: Read Priority field
-        uses: EndBug/project-fields@v2.1.0
+        uses: github/update-project-action@v4
         id: priority_field
         with:
-          operation: get
-          fields: Priority
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          project_url: https://github.com/orgs/ufs-community/projects/70
-          resource_url: ${{ github.event.pull_request.html_url }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: read
+          field: Priority
       - name: Assign value to Priority field
         id: assign_priority
         run: |
@@ -139,42 +183,62 @@ jobs:
             !contains(github.event.pull_request.labels.*.name, 'Priority: Critical') &&
             !contains(github.event.pull_request.labels.*.name, 'Priority: High') &&
             steps.assign_priority.outputs.priority != 'Combine'
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Priority'
-          field-value: 'Normal'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Priority'
+          value: 'Normal'
       - name: Critical priority
         if: |
           contains(github.event.pull_request.labels.*.name, 'Priority: Critical') &&
           steps.assign_priority.outputs.priority != 'Combine'
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Priority'
-          field-value: 'Critical'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Priority'
+          value: 'Critical'
       - name: High Priority
         if: |
             (contains(github.event.pull_request.labels.*.name, 'Priority: High')) &&
             steps.assign_priority.outputs.priority != 'Combine'
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Priority'
-          field-value: 'High'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Priority'
+          value: 'High'
       - name: Unknown Priority
         if: |
             contains(github.event.pull_request.labels.*.name, 'Priority: Critical') &&
             contains(github.event.pull_request.labels.*.name, 'Priority: High')
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: 'Priority'
-          field-value: 'Unknown'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Priority'
+          value: 'Unknown'
   subcomponent-labels:
     name: Subcomponents involved
     runs-on: ubuntu-latest
@@ -244,17 +308,27 @@ jobs:
         run: echo "SUBCOMPONENTS=${SUBCOMPONENTS} CCPP-sub" >> $GITHUB_ENV
       - name: Update subcomponents text
         if: ${{ env.SUBCOMPONENTS != '' }}
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: "Subcomponent PRs"
-          field-value: ${{ env.SUBCOMPONENTS }}
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: "Subcomponent PRs"
+          value: ${{ env.SUBCOMPONENTS }}
       - name: WM only
         if: ${{ env.SUBCOMPONENTS == '' }}
-        uses: nipe0324/update-project-v2-item-field@v2.0.2
+        uses: github/update-project-action@v4
         with:
-          project-url: https://github.com/orgs/ufs-community/projects/70
-          github-token: ${{ secrets.PR_PROJECT_TOKEN }}
-          field-name: "Subcomponent PRs"
-          field-value: 'WM only'
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: "Subcomponent PRs"
+          value: 'WM only'
