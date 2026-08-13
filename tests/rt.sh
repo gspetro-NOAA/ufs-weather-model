@@ -161,7 +161,6 @@ print_results() {
     echo "" >> "${REGRESSIONTEST_LOG}"
     for item in "${failures[@]}"; do
       echo "  * ${item}" >> "${REGRESSIONTEST_LOG}"
-      echo "" >> "${REGRESSIONTEST_LOG}"
     done
     echo "" >> "${REGRESSIONTEST_LOG}"
   fi
@@ -456,9 +455,9 @@ Tests Completed: $((TEST_COUNTER-${#FAILED_TESTS[@]}-${#SKIPPED_TESTS[@]}))/${TE
 EOF
   # PRINT FAILED COMPILES
   if [[ "${#FAILED_COMPILES[@]}" -ne "0" ]]; then
-    echo ""
+    echo "" >> "${REGRESSIONTEST_LOG}"
     echo "Failed Compiles:" >> "${REGRESSIONTEST_LOG}"
-    echo ""
+    echo "" >> "${REGRESSIONTEST_LOG}"
   fi
 
   print_results UNABLE_TO_START_COMPILE
@@ -469,9 +468,9 @@ EOF
 
   # PRINT FAILED TESTS
   if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
-    echo ""
+    echo "" >> "${REGRESSIONTEST_LOG}"
     echo "Failed Tests:" >> "${REGRESSIONTEST_LOG}"
-    echo ""
+    echo "" >> "${REGRESSIONTEST_LOG}"
   fi
 
   print_results UNABLE_TO_START_TEST
