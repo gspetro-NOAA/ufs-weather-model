@@ -1,7 +1,7 @@
-matchedNode = []
-generateBaselineNode = []
+def matchedNode = []
+def generateBaselineNode = []
 for (label in pullRequest.labels) {
-    listOfLabelNodeNames = jenkins.model.Jenkins.instance.nodes.collect {
+    def listOfLabelNodeNames = jenkins.model.Jenkins.instance.nodes.collect {
         node -> node.getLabelString().contains(label) ? node.name : null
 
         if ((label.matches(node.getLabelString()+"-(.*)"))) {
@@ -14,8 +14,8 @@ for (label in pullRequest.labels) {
     }
 }
 
-modifiedLabels = matchedNode.collect{"'" + it + "'"} 
-baselineLabels = generateBaselineNode.collect{"'" + it + "'"} 
+def modifiedLabels = matchedNode.collect{"'" + it + "'"} 
+def baselineLabels = generateBaselineNode.collect{"'" + it + "'"} 
 def generateStage(nodeLabel) {
     return {
         stage("Initialize on ${nodeLabel.replaceAll("'","")}") {
