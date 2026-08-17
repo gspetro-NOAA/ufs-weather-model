@@ -56,5 +56,7 @@
   branch = emc/develop
 [submodule "CATChem"]
   path = CATChem
-  url = https://github.com/ufs-community/CATChem
-  branch = main
+#  url = https://github.com/ufs-community/CATChem
+#  branch = main
+  url = https://github.com/gspetro-NOAA/CATChem
+  branch = feature/ss2.x
