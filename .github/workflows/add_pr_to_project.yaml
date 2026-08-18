@@ -15,13 +15,13 @@ jobs:
       issues: write
     steps:
       - name: Add PR
-        uses: actions/add-to-project@v2.0.0
+        uses: actions/add-to-project@5afcf98fcd03f1c2f92c3c83f58ae24323cc57fd #v2.2.0
         with:
           #project-url: https://github.com/orgs/ufs-community/projects/70
           project-url: https://github.com/orgs/NOAA-EPIC/projects/18
           github-token: ${{ secrets.PR_PROJECT_TOKEN }}
       - name: Add date created
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
