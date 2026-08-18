@@ -3,6 +3,7 @@ import os
 import json
 from pathlib import Path
 from scripts.APICall import APICall
+from scripts.LogManager import LogManager
 from scripts.get_data import *
 
 #@pytest.mark.parametrize("attribute", attributes)

@@ -51,17 +51,16 @@ class PlotManager(Manager):
       tests = self.get_test_names()
 
       # Create a three-level deep dictionary where any key access at the first or second level that doesn't exist will automatically be created
-      metrics = defaultdict(lambda: dict) # --> Need lambda? Could just use dict as arg? Or is lambda necessary for multiple layers...
-
-
+      #metrics = defaultdict(lambda: dict) # --> Need lambda? Could just use dict as arg? Or is lambda necessary for multiple layers...
+      metrics = {}
 
       for test in tests:
          for machine, test_data in self.historical_data.items():
             if test not in test_data:
                continue # No data to add
             else:
-               metrics.setdefault(test, {}).update({machine: test_data[test]})
-               metrics[test].setdefault(machine, {}).update({self.pr_head_commit: self.current_pr_data[machine].setdefault(test, None)})
+               metrics.setdefault(test, {}).update({machine: test_data[test]}) # Add historical test data
+               metrics[test].setdefault(machine, {}).update({self.pr_head_commit: self.current_pr_data[machine].setdefault(test, None)}) # Add data for current PR
       
       return metrics
    
@@ -147,24 +146,31 @@ class PlotManager(Manager):
       plt.savefig(png_path)
       plt.close()
 
+   def load_data(self, file_path):
+      """Loads historical or current PR data from JSON file.
+      Args:
+         file_path (str): Path to file
+      """
+      try:
+         return self.load_json_from_file(file_path)
+      except FileNotFoundError:
+         logging.error(f"Could not load JSON file {file_path}.")
+         sys.exit()
+
+   def process_data(self):
+      """
+      Combines and manipulates the data to prepare it for plotting.
+      """
+      self.historical_data = self.load_data(f"{os.environ.get('PLOT_DATA')}/historical_{self.category}.json")
+      self.current_pr_data = self.load_data(f"{os.environ.get('PLOT_DATA')}/current_pr_{self.category}_data.json")
+      self.metrics = self.organize_data_by_test()
+      self.hashes = self.rearrange_hashes()
+
    def plot_results(self):
       """
       Generates anomaly-highlighted plots.
       """
-
-      # Move into self-contained function? 
-      try:
-         self.historical_data = self.load_json_from_file(f"{os.environ.get('PLOT_DATA')}/historical_{self.category}.json")
-         self.current_pr_data = self.load_json_from_file(f"{os.environ.get('PLOT_DATA')}/current_pr_{self.category}_data.json")
-      except FileNotFoundError:
-         logging.error(f"Could not load JSON file.")
-         sys.exit()
-
       
-
-      self.metrics = self.organize_data_by_test()
-      self.hashes = self.rearrange_hashes()
-
       # Create one plot per test
       for test in self.metrics:
          plt = self.generate_figure(test)
@@ -178,6 +184,7 @@ def main():
    # Maybe need to make new plots w/most recent commit? 
    for category in ["runtime", "memory"]:
       plot_manager = PlotManager(category)
+      plot_manager.process_data()
       plot_manager.plot_results()
    """except:
       logging.error(f"A fatal error occurred. Exiting...")

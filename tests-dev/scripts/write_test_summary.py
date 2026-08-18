@@ -23,7 +23,7 @@ class HTMLBuilder(Manager):
       self.mdFile.new_paragraph("<h4>Key:</h4>")
       self.mdFile.new_paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;✅ = NORMAL {category}: {category.title()} falls within two standard deviations of the mean.")
       self.mdFile.new_paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;⚠️ = {category.title()} WARNING: {category.title()} is greater than two standard deviations above the mean.")
-      self.mdFile.new_paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;❌ = {category.title()} FAIL: For the past 2+ PRs, {category} has been greater than two standard deviations above the mean.")
+      self.mdFile.new_paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;❌ = {category.title()} FAIL: For the past 3+ PRs, {category} has been greater than two standard deviations above the mean.")
       self.mdFile.new_paragraph(f"&nbsp;&nbsp;&nbsp;&nbsp;N/A = Test does not run on this machine.")
       self.mdFile.new_paragraph('\n')
 
@@ -35,7 +35,7 @@ class HTMLBuilder(Manager):
 
       contents = self.load_json_from_file(os.environ.get(f"{category.upper()}_RESULTS"))
       results = pd.DataFrame()
-      
+
       for machine in contents:
          
          machine_results = pd.DataFrame.from_dict(contents[machine], orient='index', columns=[machine])
@@ -60,8 +60,8 @@ class HTMLBuilder(Manager):
          if (data.loc[index] == warn).any() or (data.loc[index] == fail).any() or (index == 'Platform Total (Passing):'):
             rows += 1
             if (index != 'Platform Total (Passing):'):
-               test_img_link = f"[{str(index)}](https://raw.githubusercontent.com/wiki/NOAA-EPIC/ufs-weather-model/plots/{str(index)}_{category}.png)"
-               contents.append(test_img_link)
+               img_link = f"[{str(index)}](https://raw.githubusercontent.com/wiki/NOAA-EPIC/ufs-weather-model/plots/{str(index)}_{category}.png)"
+               contents.append(img_link)
             else: 
                contents.append(index)
             for item in row:
