@@ -19,7 +19,7 @@
 - Transparency in the use of generative AI is required by NOAA policy. Was GenAI used in this work?
    - [ ] No.
    - [ ] Yes. [Generative AI tool (insert name, if any)] was used to assist with developing this code. 
-     - [ ] The code has been reviewed, edited, and validated by NWS staff.
+     - [ ] The code has been reviewed, edited, and validated by NWS staff. (Note: If the code has not yet been reviewed by NWS staff, leave unchecked, and OMD CMs will review as part of the PR review process.)
 - [ ] Fill out all sections of this template.
 
 ---
