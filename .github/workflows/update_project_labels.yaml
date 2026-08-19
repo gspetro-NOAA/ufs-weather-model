@@ -17,8 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      #pull-requests: write
-      #issues: write
     steps:
       - name: Lack of baseline labels
         if: | 
@@ -89,8 +87,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
-      issues: write
     steps:
       - name: Additions to current input-data directory required
         if: |
@@ -157,8 +153,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
-      issues: write
     steps:
       - name: Read Priority field
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
@@ -243,8 +237,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
-      issues: write
     env:
       SUBCOMPONENTS: ''
     steps:
