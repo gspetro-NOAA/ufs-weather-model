@@ -279,19 +279,19 @@ EOF
         if [[ ! -f "${LOG_DIR}/compile_${COMPILE_ID}.log" ]]; then
           COMPILE_RESULT="FAILED: UNABLE TO START COMPILE"
           FAIL_LOG="N/A"
-          UNABLE_TO_START_COMPILE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
+          UNABLE_TO_START_COMPILE+=("compile_${COMPILE_ID}")
         elif [[ -f fail_compile_${COMPILE_ID} ]]; then
           COMPILE_RESULT="FAILED: UNABLE TO FINISH COMPILE"
           FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
-          UNABLE_TO_FINISH_COMPILE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
+          UNABLE_TO_FINISH_COMPILE+=("compile_${COMPILE_ID}")
           if grep -q "quota" "${LOG_DIR}/compile_${COMPILE_ID}.log"; then
             COMPILE_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
-            COMPILE_DISK_QUOTA_ISSUE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
+            COMPILE_DISK_QUOTA_ISSUE+=("compile_${COMPILE_ID}")
           elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"; then
             COMPILE_RESULT="FAILED: COMPILE TIMED OUT"
             FAIL_LOG="${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"
-            COMPILE_TIMED_OUT+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
+            COMPILE_TIMED_OUT+=("compile_${COMPILE_ID}")
           fi
         else
           COMPILE_RESULT="PASS"
@@ -379,13 +379,13 @@ EOF
         elif [[ ! -f "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log" ]]; then
           TEST_RESULT="FAILED: UNABLE TO START TEST"
           FAIL_LOG="N/A"
-          UNABLE_TO_START_TEST+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+          UNABLE_TO_START_TEST+=("${TEST_NAME} ${COMPILER}")
         elif [[ -f fail_test_${TEST_NAME}_${COMPILER} ]]; then
           if [[ -f "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log" ]]; then
             if grep -q "FAIL" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
               TEST_RESULT="FAILED: UNABLE TO COMPLETE COMPARISON"
               FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-              UNABLE_TO_COMPLETE_COMPARISON+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+              UNABLE_TO_COMPLETE_COMPARISON+=("${TEST_NAME} ${COMPILER}")
             # We need to catch a "PASS" in rt_*.log even if a fail_test_* files exists
             # I am not sure why this can happen.
             elif grep -q "PASS" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
@@ -393,21 +393,21 @@ EOF
             else
               TEST_RESULT="FAILED: UNSUCCESSFUL BASELINE COMPARISON"
               FAIL_LOG="${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"
-              UNSUCCESSFUL_BASELINE_COMPARISON+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+              UNSUCCESSFUL_BASELINE_COMPARISON+=("${TEST_NAME} ${COMPILER}")
             fi
           else
             TEST_RESULT="FAILED: RUN DID NOT COMPLETE"
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-            RUN_DID_NOT_COMPLETE+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+            RUN_DID_NOT_COMPLETE+=("${TEST_NAME} ${COMPILER}")
           fi
           if grep -q "quota" "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"; then
             TEST_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-            TEST_DISK_QUOTA_ISSUE+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+            TEST_DISK_QUOTA_ISSUE+=("${TEST_NAME} ${COMPILER}")
           elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"; then
             TEST_RESULT="FAILED: TEST TIMED OUT"
             FAIL_LOG="${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"
-            TEST_TIMED_OUT+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+            TEST_TIMED_OUT+=("${TEST_NAME} ${COMPILER}")
           fi
         else
           TEST_RESULT="PASS"
@@ -444,19 +444,32 @@ EOF
 
   elapsed_time=$( printf '%02dh:%02dm:%02ds\n' $((SECONDS%86400/3600)) $((SECONDS%3600/60)) $((SECONDS%60)) )
 
+  non_baseline_failures=$(( ${#FAILED_TESTS[@]} - ${#UNABLE_TO_COMPLETE_COMPARISON[@]} ))
+  if [[ ${non_baseline_failures} -gt 0 ]]; then
+    non_baseline_failures="*** ${non_baseline_failures} NON_BASELINE FAILURES -- NOT just baseline changes ***"
+  else
+    non_baseline_failures=""
+  fi
+
   cat << EOF >> "${REGRESSIONTEST_LOG}"
 
 SYNOPSIS:
 Starting Date/Time: ${TEST_START_TIME}
 Ending Date/Time: ${TEST_END_TIME}
 Total Time: ${elapsed_time}
+
+${non_baseline_failures}
+
 Compiles Completed: $((COMPILE_COUNTER-${#FAILED_COMPILES[@]}))/${COMPILE_COUNTER}
 Tests Completed: $((TEST_COUNTER-${#FAILED_TESTS[@]}-${#SKIPPED_TESTS[@]}))/${TEST_COUNTER}
+
+LOGPATH: ${LOG_DIR}
+
 EOF
   # PRINT FAILED COMPILES
   if [[ "${#FAILED_COMPILES[@]}" -ne "0" ]]; then
     echo "" >> "${REGRESSIONTEST_LOG}"
-    echo "Failed Compiles:" >> "${REGRESSIONTEST_LOG}"
+    echo "*** FAILED COMPILES ***" >> "${REGRESSIONTEST_LOG}"
     echo "" >> "${REGRESSIONTEST_LOG}"
   fi
 
@@ -469,7 +482,7 @@ EOF
   # PRINT FAILED TESTS
   if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
     echo "" >> "${REGRESSIONTEST_LOG}"
-    echo "Failed Tests:" >> "${REGRESSIONTEST_LOG}"
+    echo "*** FAILED TESTS ***" >> "${REGRESSIONTEST_LOG}"
     echo "" >> "${REGRESSIONTEST_LOG}"
   fi
 
