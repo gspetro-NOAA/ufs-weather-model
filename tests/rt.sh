@@ -489,13 +489,13 @@ EOF
   fi
 
   print_results UNABLE_TO_START_TEST
-  print_results ASSOCIATED_COMPILE_FAILED
   print_results RUN_DID_NOT_COMPLETE
   print_results TEST_DISK_QUOTA_ISSUE
   print_results TEST_TIMED_OUT
-  print_results DOES_NOT_GENERATE_BASELINE
   print_results UNSUCCESSFUL_BASELINE_COMPARISON
   print_results UNABLE_TO_COMPLETE_COMPARISON
+  print_results ASSOCIATED_COMPILE_FAILED
+  print_results DOES_NOT_GENERATE_BASELINE
 
   # WRITE FAILED_TEST_ID LIST TO TEST_CHANGES_LOG
   if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
