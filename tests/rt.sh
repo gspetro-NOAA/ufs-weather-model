@@ -279,19 +279,19 @@ EOF
         if [[ ! -f "${LOG_DIR}/compile_${COMPILE_ID}.log" ]]; then
           COMPILE_RESULT="FAILED: UNABLE TO START COMPILE"
           FAIL_LOG="N/A"
-          UNABLE_TO_START_COMPILE+=("compile_${COMPILE_ID}")
+          UNABLE_TO_START_COMPILE+=("${COMPILE_ID}")
         elif [[ -f fail_compile_${COMPILE_ID} ]]; then
           COMPILE_RESULT="FAILED: UNABLE TO FINISH COMPILE"
           FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
-          UNABLE_TO_FINISH_COMPILE+=("compile_${COMPILE_ID}")
+          UNABLE_TO_FINISH_COMPILE+=("${COMPILE_ID}")
           if grep -q "quota" "${LOG_DIR}/compile_${COMPILE_ID}.log"; then
             COMPILE_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
-            COMPILE_DISK_QUOTA_ISSUE+=("compile_${COMPILE_ID}")
+            COMPILE_DISK_QUOTA_ISSUE+=("${COMPILE_ID}")
           elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"; then
             COMPILE_RESULT="FAILED: COMPILE TIMED OUT"
             FAIL_LOG="${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"
-            COMPILE_TIMED_OUT+=("compile_${COMPILE_ID}")
+            COMPILE_TIMED_OUT+=("${COMPILE_ID}")
           fi
         else
           COMPILE_RESULT="PASS"
@@ -464,6 +464,8 @@ Compiles Completed: $((COMPILE_COUNTER-${#FAILED_COMPILES[@]}))/${COMPILE_COUNTE
 Tests Completed: $((TEST_COUNTER-${#FAILED_TESTS[@]}-${#SKIPPED_TESTS[@]}))/${TEST_COUNTER}
 
 LOGPATH: ${LOG_DIR}
+  * Compile logs located at: compile_<compile_name>_<compiler>.log
+  * Test logs located at: run_<test_name>_<compiler>.log
 
 EOF
   # PRINT FAILED COMPILES
