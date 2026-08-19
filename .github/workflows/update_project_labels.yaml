@@ -175,7 +175,7 @@ jobs:
         if: |
             !contains(github.event.pull_request.labels.*.name, 'Priority: Critical') &&
             !contains(github.event.pull_request.labels.*.name, 'Priority: High') &&
-            !contains(steps.priority_field.outputs.values, 'Combine')
+            !contains(steps.priority_field.outputs.value, 'Combine')
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
