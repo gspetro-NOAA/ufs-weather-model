@@ -488,10 +488,10 @@ EOF
     echo "" >> "${REGRESSIONTEST_LOG}"
   fi
 
-  print_results UNABLE_TO_START_TEST
   print_results RUN_DID_NOT_COMPLETE
   print_results TEST_DISK_QUOTA_ISSUE
   print_results TEST_TIMED_OUT
+  print_results UNABLE_TO_START_TEST
   print_results UNSUCCESSFUL_BASELINE_COMPARISON
   print_results UNABLE_TO_COMPLETE_COMPARISON
   print_results ASSOCIATED_COMPILE_FAILED
