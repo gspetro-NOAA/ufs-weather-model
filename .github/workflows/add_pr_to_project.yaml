@@ -22,7 +22,7 @@ jobs:
           github-token: ${{ secrets.PR_PROJECT_TOKEN }}
       - name: Format PR Opened Date
         id: date
-        run: echo "date=$(date -d "${{ github.event.pull_request.created_at }}" +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        run: echo "date=$(date -u -d "${{ github.event.pull_request.created_at }}" +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Add date created
         uses: github/update-project-action@v4
         with:
@@ -35,3 +35,15 @@ jobs:
           content_id: ${{ github.event.pull_request.node_id }}
           field: 'Date Opened'
           value: ${{ steps.date.outputs.date }}
+      - name: Set default Baseline Changes value to Unknown
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
+        with:
+          github_token: ${{ secrets.PR_PROJECT_TOKEN }}
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
+          content_id: ${{ github.event.pull_request.node_id }}
+          operation: update
+          field: 'Baseline Changes'
+          value: 'Unknown'
