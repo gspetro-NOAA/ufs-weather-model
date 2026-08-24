@@ -440,21 +440,12 @@ EOF
 
   elapsed_time=$( printf '%02dh:%02dm:%02ds\n' $((SECONDS%86400/3600)) $((SECONDS%3600/60)) $((SECONDS%60)) )
 
-  non_baseline_failures=$(( FAILED_TESTS - ${#UNABLE_TO_COMPLETE_COMPARISON[@]} ))
-  if [[ ${non_baseline_failures} -gt 0 ]]; then
-    non_baseline_failures="*** ${non_baseline_failures} NON_BASELINE FAILURES -- NOT just baseline changes ***"
-  else
-    non_baseline_failures=""
-  fi
-
   cat << EOF >> "${REGRESSIONTEST_LOG}"
 
 SYNOPSIS:
 Starting Date/Time: ${TEST_START_TIME}
 Ending Date/Time: ${TEST_END_TIME}
 Total Time: ${elapsed_time}
-
-${non_baseline_failures}
 
 Compiles Completed: $((COMPILE_COUNTER-FAILED_COMPILES))/${COMPILE_COUNTER}
 Tests Completed: $((TEST_COUNTER-FAILED_TESTS-SKIPPED_TESTS))/${TEST_COUNTER}
