@@ -55,9 +55,9 @@ update_rtconf() {
   }
 
   # This script will update the rt.conf ($TESTS_FILE) if needed by the
-  # -b or -n options being called/used.
+  # -s or -n options being called/used.
 
-  # THE USER CHOSE THE -b OPTION
+  # THE USER CHOSE THE -s OPTION
   if [[ ${TEST_SUBSET_FILE} != '' ]]; then
     [[ -s "${TEST_SUBSET_FILE}" ]] || die "${TEST_SUBSET_FILE} is empty, exiting..."
     TEST_WITH_COMPILE=()
@@ -169,10 +169,10 @@ print_results() {
 generate_log() {
   echo "rt.sh: Generating Regression Testing Log..."
   COMPILE_COUNTER=0
-  FAILED_COMPILES=()
+  FAILED_COMPILES=0
   TEST_COUNTER=0
-  FAILED_TESTS=()
-  SKIPPED_TESTS=()
+  FAILED_TESTS=0
+  SKIPPED_TESTS=0
   FAILED_TEST_ID=()
   UNABLE_TO_START_COMPILE=()
   UNABLE_TO_FINISH_COMPILE=()
@@ -331,9 +331,7 @@ EOF
         fi
         echo >> "${REGRESSIONTEST_LOG}"
         echo "${COMPILE_RESULT} -- COMPILE '${COMPILE_ID}' [${RT_COMPILE_TIME}, ${COMPILE_TIME}]${COMPILE_WARNINGS}" >> "${REGRESSIONTEST_LOG}"
-        # Change to a count instead of an array whose other info we don't use? 
-        [[ -n ${FAIL_LOG} ]] && FAILED_COMPILES+=("${COMPILE_ID}")
-        #[[ -n ${FAIL_LOG} ]] && FAILED_COMPILE_LOGS+=("${FAIL_LOG}")
+        [[ -n ${FAIL_LOG} ]] && ((FAILED_COMPILES+=1))
       fi
 
     elif [[ ${line} =~ RUN ]]; then
@@ -368,11 +366,11 @@ EOF
         RT_TEST_MEM=""
         if [[ ${CREATE_BASELINE} == true && ${GEN_BASELINE} != "baseline" ]]; then
           TEST_RESULT="SKIPPED: TEST DOES NOT GENERATE BASELINE"
-          SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
+          ((SKIPPED_TESTS+=1))
           DOES_NOT_GENERATE_BASELINE+=("${TEST_NAME}_${COMPILER}")
         elif [[ ${COMPILE_RESULT} =~ FAILED ]]; then
           TEST_RESULT="SKIPPED: ASSOCIATED COMPILE FAILED"
-          SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
+          ((SKIPPED_TESTS+=1))
           TESTS_SKIPPED_FOR_COMPILE_FAIL+=("${TEST_NAME} ${COMPILER}")
           ASSOCIATED_COMPILE_FAILED+=("${TEST_NAME}_${COMPILER}")
           # Switch to associated_compile_failed? ^
@@ -434,9 +432,7 @@ EOF
         fi
 
         echo "${TEST_RESULT} -- TEST '${TEST_NAME}_${COMPILER}' [${RT_TEST_TIME}, ${TEST_TIME}](${RT_TEST_MEM} MB)" >> "${REGRESSIONTEST_LOG}"
-        # Could change below to a count of failed tests instead of storing an array whose info we won't use...
-        [[ -n ${FAIL_LOG} ]] && FAILED_TESTS+=("${TEST_NAME}_${COMPILER}")
-        #[[ -n ${FAIL_LOG} ]] && FAILED_TEST_LOGS+=("${FAIL_LOG}")
+        [[ -n ${FAIL_LOG} ]] && ((FAILED_TESTS+=1))
         [[ -n ${FAIL_LOG} ]] && FAILED_TEST_ID+=("${TEST_NAME} ${COMPILER}")
       fi
     fi
@@ -444,7 +440,7 @@ EOF
 
   elapsed_time=$( printf '%02dh:%02dm:%02ds\n' $((SECONDS%86400/3600)) $((SECONDS%3600/60)) $((SECONDS%60)) )
 
-  non_baseline_failures=$(( ${#FAILED_TESTS[@]} - ${#UNABLE_TO_COMPLETE_COMPARISON[@]} ))
+  non_baseline_failures=$(( FAILED_TESTS - ${#UNABLE_TO_COMPLETE_COMPARISON[@]} ))
   if [[ ${non_baseline_failures} -gt 0 ]]; then
     non_baseline_failures="*** ${non_baseline_failures} NON_BASELINE FAILURES -- NOT just baseline changes ***"
   else
@@ -460,8 +456,8 @@ Total Time: ${elapsed_time}
 
 ${non_baseline_failures}
 
-Compiles Completed: $((COMPILE_COUNTER-${#FAILED_COMPILES[@]}))/${COMPILE_COUNTER}
-Tests Completed: $((TEST_COUNTER-${#FAILED_TESTS[@]}-${#SKIPPED_TESTS[@]}))/${TEST_COUNTER}
+Compiles Completed: $((COMPILE_COUNTER-FAILED_COMPILES))/${COMPILE_COUNTER}
+Tests Completed: $((TEST_COUNTER-FAILED_TESTS-SKIPPED_TESTS))/${TEST_COUNTER}
 
 LOGPATH: ${LOG_DIR}
   * Compile logs located at: compile_<compile_name>_<compiler>.log
@@ -469,10 +465,12 @@ LOGPATH: ${LOG_DIR}
 
 EOF
   # PRINT FAILED COMPILES
-  if [[ "${#FAILED_COMPILES[@]}" -ne "0" ]]; then
-    echo "" >> "${REGRESSIONTEST_LOG}"
-    echo "*** FAILED COMPILES ***" >> "${REGRESSIONTEST_LOG}"
-    echo "" >> "${REGRESSIONTEST_LOG}"
+  if [[ ${FAILED_COMPILES} -gt 0 ]]; then
+    {
+      echo ""
+      echo "*** FAILED COMPILES ***"
+      echo "" 
+    } >> "${REGRESSIONTEST_LOG}"
   fi
 
   print_results UNABLE_TO_START_COMPILE
@@ -482,10 +480,12 @@ EOF
 
 
   # PRINT FAILED TESTS
-  if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
-    echo "" >> "${REGRESSIONTEST_LOG}"
-    echo "*** FAILED TESTS ***" >> "${REGRESSIONTEST_LOG}"
-    echo "" >> "${REGRESSIONTEST_LOG}"
+  if [[ ${FAILED_TESTS} -gt 0 ]]; then
+    {
+      echo ""
+      echo "*** FAILED TESTS ***"
+      echo ""
+    } >> "${REGRESSIONTEST_LOG}"
   fi
 
   print_results RUN_DID_NOT_COMPLETE
@@ -498,7 +498,7 @@ EOF
   print_results DOES_NOT_GENERATE_BASELINE
 
   # WRITE FAILED_TEST_ID LIST TO TEST_CHANGES_LOG
-  if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
+  if [[ ${FAILED_TESTS} -gt 0 ]]; then
     for item in "${FAILED_TEST_ID[@]}"; do
       echo "${item}" >> "${TEST_CHANGES_LOG}"
     done
@@ -511,7 +511,7 @@ EOF
     done
   fi
 
-  if [[ "${#FAILED_COMPILES[@]}" -eq "0" && "${#FAILED_TESTS[@]}" -eq "0" ]]; then
+  if [[ ${FAILED_COMPILES} -eq 0 && ${FAILED_TESTS} -eq 0 ]]; then
     cat << EOF >> "${REGRESSIONTEST_LOG}"
 
 NOTES:
