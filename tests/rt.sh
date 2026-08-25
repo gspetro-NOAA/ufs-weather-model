@@ -446,7 +446,6 @@ SYNOPSIS:
 Starting Date/Time: ${TEST_START_TIME}
 Ending Date/Time: ${TEST_END_TIME}
 Total Time: ${elapsed_time}
-
 Compiles Completed: $((COMPILE_COUNTER-FAILED_COMPILES))/${COMPILE_COUNTER}
 Tests Completed: $((TEST_COUNTER-FAILED_TESTS-SKIPPED_TESTS))/${TEST_COUNTER}
 
