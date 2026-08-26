@@ -23,7 +23,7 @@ jobs:
             !contains(github.event.pull_request.labels.*.name, 'No Baseline Change') && 
             !contains(github.event.pull_request.labels.*.name, 'Baseline Updates') && 
             !contains(github.event.pull_request.labels.*.name, 'New Baselines')
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -39,7 +39,7 @@ jobs:
             contains(github.event.pull_request.labels.*.name, 'No Baseline Change') && 
             (contains(github.event.pull_request.labels.*.name, 'Baseline Updates') || 
             contains(github.event.pull_request.labels.*.name, 'New Baselines'))
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -55,7 +55,7 @@ jobs:
             !contains(github.event.pull_request.labels.*.name, 'No Baseline Change') &&
             ( contains(github.event.pull_request.labels.*.name, 'Baseline Updates') || 
             contains(github.event.pull_request.labels.*.name, 'New Baselines') )
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -71,7 +71,7 @@ jobs:
             contains(github.event.pull_request.labels.*.name, 'No Baseline Change') && 
             !contains(github.event.pull_request.labels.*.name, 'Baseline Updates') && 
             !contains(github.event.pull_request.labels.*.name, 'New Baselines')
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -92,7 +92,7 @@ jobs:
         if: |
           contains(github.event.pull_request.labels.*.name, 'Adds Input Data') &&
           !contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data')
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -107,7 +107,7 @@ jobs:
         if: |
           contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data') &&
           !contains(github.event.pull_request.labels.*.name, 'Adds Input Data')
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -122,7 +122,7 @@ jobs:
         if: |
             (!contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data')) && 
             (!contains(github.event.pull_request.labels.*.name, 'Adds Input Data'))
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -137,7 +137,7 @@ jobs:
         if: | 
             contains(github.event.pull_request.labels.*.name, 'Adds Input Data') &&
             contains(github.event.pull_request.labels.*.name, 'Changes Existing Input Data')
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -155,7 +155,7 @@ jobs:
       contents: read
     steps:
       - name: Read Priority field
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         id: priority_field
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
@@ -295,7 +295,7 @@ jobs:
         run: echo "SUBCOMPONENTS=${SUBCOMPONENTS} CCPP-sub" >> $GITHUB_ENV
       - name: Update subcomponents text
         if: ${{ env.SUBCOMPONENTS != '' }}
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
@@ -308,7 +308,7 @@ jobs:
           value: ${{ env.SUBCOMPONENTS }}
       - name: WM only
         if: ${{ env.SUBCOMPONENTS == '' }}
-        uses: github/update-project-action@v4
+        uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
           #organization: ufs-community
