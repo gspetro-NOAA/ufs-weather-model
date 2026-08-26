@@ -379,25 +379,6 @@ EOF
           FAIL_LOG="N/A"
           UNABLE_TO_START_TEST+=("${TEST_NAME} ${COMPILER}")
         elif [[ -f fail_test_${TEST_NAME}_${COMPILER} ]]; then
-          if [[ -f "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log" ]]; then
-            if grep -q "FAIL" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
-              TEST_RESULT="FAILED: UNABLE TO COMPLETE COMPARISON"
-              FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-              UNABLE_TO_COMPLETE_COMPARISON+=("${TEST_NAME} ${COMPILER}")
-            # We need to catch a "PASS" in rt_*.log even if a fail_test_* files exists
-            # I am not sure why this can happen.
-            elif grep -q "PASS" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
-              TEST_RESULT="PASS"
-            else
-              TEST_RESULT="FAILED: UNSUCCESSFUL BASELINE COMPARISON"
-              FAIL_LOG="${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"
-              UNSUCCESSFUL_BASELINE_COMPARISON+=("${TEST_NAME} ${COMPILER}")
-            fi
-          else
-            TEST_RESULT="FAILED: RUN DID NOT COMPLETE"
-            FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-            RUN_DID_NOT_COMPLETE+=("${TEST_NAME} ${COMPILER}")
-          fi
           if grep -q "quota" "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"; then
             TEST_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
@@ -406,6 +387,24 @@ EOF
             TEST_RESULT="FAILED: TEST TIMED OUT"
             FAIL_LOG="${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"
             TEST_TIMED_OUT+=("${TEST_NAME} ${COMPILER}")
+          elif [[ -f "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log" ]]; then
+            if grep -q "MISSING baseline" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
+              TEST_RESULT="FAILED: UNABLE TO COMPLETE COMPARISON"
+              FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
+              UNABLE_TO_COMPLETE_COMPARISON+=("${TEST_NAME} ${COMPILER}")
+            elif grep -q "NOT IDENTICAL" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
+              TEST_RESULT="FAILED: UNSUCCESSFUL BASELINE COMPARISON"
+              FAIL_LOG="${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"
+              UNSUCCESSFUL_BASELINE_COMPARISON+=("${TEST_NAME} ${COMPILER}")
+            # We need to catch a "PASS" in rt_*.log even if a fail_test_* files exists
+            # I am not sure why this can happen.
+            elif grep -q "PASS" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
+              TEST_RESULT="PASS"
+            fi
+          else
+            TEST_RESULT="FAILED: RUN DID NOT COMPLETE"
+            FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
+            RUN_DID_NOT_COMPLETE+=("${TEST_NAME} ${COMPILER}")
           fi
         else
           TEST_RESULT="PASS"
