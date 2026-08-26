@@ -182,8 +182,8 @@ generate_log() {
   DOES_NOT_GENERATE_BASELINE=()
   ASSOCIATED_COMPILE_FAILED=()
   UNABLE_TO_START_TEST=()
-  UNABLE_TO_COMPLETE_COMPARISON=()
-  UNSUCCESSFUL_BASELINE_COMPARISON=()
+  MISSING_BASELINE=()
+  BASELINE_NOT_IDENTICAL=()
   RUN_DID_NOT_COMPLETE=()
   TEST_DISK_QUOTA_ISSUE=()
   TEST_TIMED_OUT=()
@@ -389,13 +389,13 @@ EOF
             TEST_TIMED_OUT+=("${TEST_NAME} ${COMPILER}")
           elif [[ -f "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log" ]]; then
             if grep -q "MISSING baseline" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
-              TEST_RESULT="FAILED: UNABLE TO COMPLETE COMPARISON"
+              TEST_RESULT="FAILED: MISSING BASELINE"
               FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-              UNABLE_TO_COMPLETE_COMPARISON+=("${TEST_NAME} ${COMPILER}")
+              MISSING_BASELINE+=("${TEST_NAME} ${COMPILER}")
             elif grep -q "NOT IDENTICAL" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
-              TEST_RESULT="FAILED: UNSUCCESSFUL BASELINE COMPARISON"
+              TEST_RESULT="FAILED: BASELINE NOT IDENTICAL"
               FAIL_LOG="${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"
-              UNSUCCESSFUL_BASELINE_COMPARISON+=("${TEST_NAME} ${COMPILER}")
+              BASELINE_NOT_IDENTICAL+=("${TEST_NAME} ${COMPILER}")
             # We need to catch a "PASS" in rt_*.log even if a fail_test_* files exists
             # I am not sure why this can happen.
             elif grep -q "PASS" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
@@ -481,8 +481,8 @@ EOF
   print_results TEST_DISK_QUOTA_ISSUE
   print_results TEST_TIMED_OUT
   print_results UNABLE_TO_START_TEST
-  print_results UNSUCCESSFUL_BASELINE_COMPARISON
-  print_results UNABLE_TO_COMPLETE_COMPARISON
+  print_results BASELINE_NOT_IDENTICAL
+  print_results MISSING_BASELINE
   print_results ASSOCIATED_COMPILE_FAILED
   print_results DOES_NOT_GENERATE_BASELINE
 
