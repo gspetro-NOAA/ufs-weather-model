@@ -74,7 +74,7 @@ def main():
       message_manager.contents[category] = message_manager.load_json_from_file(os.environ.get(f"{category.upper()}_RESULTS"))
       message_manager.create_message_content(message_manager.contents[category], category)
 
-   #print(message_manager.message_content)
+   print(message_manager.message_content)
    
    return message_manager.message_content
    

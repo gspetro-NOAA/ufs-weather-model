@@ -162,7 +162,7 @@ jobs:
       - name: Generate message text
         id: message_text
         run: |
-          message_text=$(python -m tests-dev.scripts.generate_message_text)
+          echo "message_text=$(python -m tests-dev.scripts.generate_message_text)" >> $GITHUB_OUTPUT
         env: 
           RUNTIME_RESULTS: ${{ github.workspace }}/data/runtime_results.json
           MEMORY_RESULTS: ${{ github.workspace }}/data/memory_results.json
