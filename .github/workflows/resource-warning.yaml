@@ -162,8 +162,10 @@ jobs:
       - name: Generate message text
         id: message_text
         run: |
-          echo "message_text=$(python -m tests-dev.scripts.generate_message_text)"
-          echo "message_text=$(python -m tests-dev.scripts.generate_message_text)" >> $GITHUB_OUTPUT
+          echo "message_text<<EOF" >> $GITHUB_OUTPUT
+          python -m tests-dev.scripts.generate_message_text >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "$(python -m tests-dev.scripts.generate_message_text)"
         env: 
           RUNTIME_RESULTS: ${{ github.workspace }}/data/runtime_results.json
           MEMORY_RESULTS: ${{ github.workspace }}/data/memory_results.json
