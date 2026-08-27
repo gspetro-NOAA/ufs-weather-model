@@ -71,8 +71,7 @@ def main():
 
    for category in message_manager.categories: 
 
-      filepath = os.path.join(os.environ.get(f"{category.upper()}_RESULTS"), f"{category.lower()}_results.json")
-      message_manager.contents[category] = message_manager.load_json_from_file(filepath)
+      message_manager.contents[category] = message_manager.load_json_from_file(os.environ.get(f"{category.upper()}_RESULTS"))
       message_manager.create_message_content(message_manager.contents[category], category)
 
    #print(message_manager.message_content)
