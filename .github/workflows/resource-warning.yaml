@@ -162,22 +162,15 @@ jobs:
       - name: Generate message text
         id: message_text
         run: |
-          echo "message_text<<EOF" >> $GITHUB_OUTPUT
-          python -m tests-dev.scripts.generate_message_text >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-          echo "$(python -m tests-dev.scripts.generate_message_text)"
+          python -m tests-dev.scripts.generate_message_text
         env: 
           RUNTIME_RESULTS: ${{ github.workspace }}/data/runtime_results.json
           MEMORY_RESULTS: ${{ github.workspace }}/data/memory_results.json
+          OUTPUT_FILE: ${{ github.workspace }}/pr_post.md
       - name: Post results
         uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ### ⚠️ Test Suite Performance Threshold Exceeded
-            
-            ${{ steps.message_text.outputs.message_text }}
-
-            @gspetro-NOAA
+          body-path: ${{ github.workspace }}/pr_post.md
           edit-mode: replace

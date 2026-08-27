@@ -1,5 +1,6 @@
 import os
 from .Manager import *
+from mdutils.mdutils import MdUtils
 
 class MessageManager(Manager):
 
@@ -41,7 +42,6 @@ class MessageManager(Manager):
                   continue # No data to add
                else:
                   results.setdefault(test, {}).update({machine: test_data[test]})
-                  #results[test].setdefault(machine, []).update()
                   
          return results
 
@@ -65,6 +65,8 @@ class MessageManager(Manager):
          for test, machines in matching.items():
             self.message_content+=f"  * {test}: {(", ").join(machines)}\n"
 
+         return self.message_content
+
 def main():
    
    message_manager = MessageManager()
@@ -72,9 +74,13 @@ def main():
    for category in message_manager.categories: 
 
       message_manager.contents[category] = message_manager.load_json_from_file(os.environ.get(f"{category.upper()}_RESULTS"))
-      message_manager.create_message_content(message_manager.contents[category], category)
+      mdFile = MdUtils(file_name='pr_post.md')
+      mdFile.write("### ⚠️ Test Suite Performance Threshold Exceeded")
+      mdFile.new_paragraph(message_manager.create_message_content(message_manager.contents[category], category))
 
-   print(message_manager.message_content)
+   mdFile.new_paragraph("@gspetro-NOAA")
+   print(mdFile.get_md_text())
+   mdFile.create_md_file()
    
    return message_manager.message_content
    
