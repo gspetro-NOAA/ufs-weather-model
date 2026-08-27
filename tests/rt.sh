@@ -14,7 +14,6 @@ usage() {
   echo "Usage: $0 -a <account> | -b <file> | -c | -d | -e | -h | -k | -l <file> | -m | -n <name> | -o | -r | -v | -w | -x"
   echo
   echo "  -a  <account> to use on for HPC queue"
-  echo "  -b  create new baselines only for tests listed in <file>"
   echo "  -c  create new baseline results"
   echo "  -d  delete run directories that are not used by other tests"
   echo "  -e  use ecFlow workflow manager"
@@ -25,6 +24,7 @@ usage() {
   echo "  -n  run single test <name>"
   echo "  -o  compile only, skip tests"
   echo "  -r  use Rocoto workflow manager"
+  echo "  -s  run only the subset of tests listed in <file>"
   echo "  -v  verbose output"
   echo "  -w  for weekly_test, skip comparing baseline results"
   echo "  -x  dry-run"
@@ -58,10 +58,10 @@ update_rtconf() {
   # -b or -n options being called/used.
 
   # THE USER CHOSE THE -b OPTION
-  if [[ ${NEW_BASELINES_FILE} != '' ]]; then
-    [[ -s "${NEW_BASELINES_FILE}" ]] || die "${NEW_BASELINES_FILE} is empty, exiting..."
+  if [[ ${TEST_SUBSET_FILE} != '' ]]; then
+    [[ -s "${TEST_SUBSET_FILE}" ]] || die "${TEST_SUBSET_FILE} is empty, exiting..."
     TEST_WITH_COMPILE=()
-    readarray -t TEST_WITH_COMPILE < "${NEW_BASELINES_FILE}"
+    readarray -t TEST_WITH_COMPILE < "${TEST_SUBSET_FILE}"
   # else USER CHOSE THE -n OPTION
   elif [[ ${RUN_SINGLE_TEST} == true ]]; then
     TEST_WITH_COMPILE=("${SRT_NAME} ${SRT_COMPILER}")
@@ -153,6 +153,16 @@ update_rtconf() {
   fi
 }
 
+#GSP
+print_results() {
+  [[ -z "${1:-}" ]] && return 0
+  local -n failures="${1}"
+  echo "${1//_/}: "
+  for item in "${failures[@]}"; do
+      echo "  * ${item}" >> "${REGRESSIONTEST_LOG}"
+   done
+}
+
 generate_log() {
   echo "rt.sh: Generating Regression Testing Log..."
   COMPILE_COUNTER=0
@@ -161,8 +171,22 @@ generate_log() {
   FAILED_TESTS=()
   SKIPPED_TESTS=()
   FAILED_TEST_ID=()
-  FAILED_COMPILE_LOGS=()
-  FAILED_TEST_LOGS=()
+  #FAILED_COMPILE_LOGS=()
+  #FAILED_TEST_LOGS=()
+  UNABLE_TO_START_COMPILE=()
+  UNABLE_TO_FINISH_COMPILE=()
+  COMPILE_DISK_QUOTA_ISSUE=()
+  COMPILE_TIMED_OUT=()
+  TESTS_SKIPPED_FOR_COMPILE_FAIL=()
+  DOES_NOT_GENERATE_BASELINE=()
+  ASSOCIATED_COMPILE_FAILED=()
+  UNABLE_TO_START_TEST=()
+  UNABLE_TO_COMPLETE_COMPARISON=()
+  UNSUCCESSFUL_BASELINE_COMPARISON=()
+  RUN_DID_NOT_COMPLETE=()
+  TEST_DISK_QUOTA_ISSUE=()
+  TEST_TIMED_OUT=()
+  #SORTED_FAILURES=()
   TEST_CHANGES_LOG="test_changes.list"
   TEST_END_TIME="$(date '+%Y%m%d %T')"
   GIT_HASHES=$(git rev-parse HEAD)
@@ -198,7 +222,7 @@ RT.SH OPTIONS USED:
 EOF
 
   [[ -n ${ACCNR} ]] && echo "* (-a) - HPC PROJECT ACCOUNT: ${ACCNR}" >> "${REGRESSIONTEST_LOG}"
-  [[ -n ${NEW_BASELINES_FILE} ]] && echo "* (-b) - NEW BASELINES FROM FILE: ${NEW_BASELINES_FILE}" >> "${REGRESSIONTEST_LOG}"
+  [[ -n ${TEST_SUBSET_FILE} ]] && echo "* (-s) - RUN TESTS FROM FILE: ${TEST_SUBSET_FILE}" >> "${REGRESSIONTEST_LOG}"
   [[ ${CREATE_BASELINE} == true ]] && echo "* (-c) - CREATE NEW BASELINES" >> "${REGRESSIONTEST_LOG}"
   [[ ${DEFINE_CONF_FILE} == true ]] && echo "* (-l) - USE CONFIG FILE: ${TESTS_FILE}" >> "${REGRESSIONTEST_LOG}"
   [[ ${RTPWD_NEW_BASELINE} == true ]] && echo "* (-m) - COMPARE AGAINST CREATED BASELINES" >> "${REGRESSIONTEST_LOG}"
@@ -251,18 +275,23 @@ EOF
         COMPILE_TIME=""
         RT_COMPILE_TIME=""
         COMPILE_WARNINGS=""
+
         if [[ ! -f "${LOG_DIR}/compile_${COMPILE_ID}.log" ]]; then
           COMPILE_RESULT="FAILED: UNABLE TO START COMPILE"
           FAIL_LOG="N/A"
+          UNABLE_TO_START_COMPILE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
         elif [[ -f fail_compile_${COMPILE_ID} ]]; then
           COMPILE_RESULT="FAILED: UNABLE TO FINISH COMPILE"
           FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
+          UNABLE_TO_FINISH_COMPILE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
           if grep -q "quota" "${LOG_DIR}/compile_${COMPILE_ID}.log"; then
             COMPILE_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
+            COMPILE_DISK_QUOTA_ISSUE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
           elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"; then
             COMPILE_RESULT="FAILED: COMPILE TIMED OUT"
             FAIL_LOG="${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"
+            COMPILE_TIMED_OUT+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
           fi
         else
           COMPILE_RESULT="PASS"
@@ -302,8 +331,9 @@ EOF
         fi
         echo >> "${REGRESSIONTEST_LOG}"
         echo "${COMPILE_RESULT} -- COMPILE '${COMPILE_ID}' [${RT_COMPILE_TIME}, ${COMPILE_TIME}]${COMPILE_WARNINGS}" >> "${REGRESSIONTEST_LOG}"
-        [[ -n ${FAIL_LOG} ]] && FAILED_COMPILES+=("COMPILE ${COMPILE_ID}: ${COMPILE_RESULT}")
-        [[ -n ${FAIL_LOG} ]] && FAILED_COMPILE_LOGS+=("${FAIL_LOG}")
+        # Change to a count instead of an array whose other info we don't use? 
+        [[ -n ${FAIL_LOG} ]] && FAILED_COMPILES+=("${COMPILE_ID}")
+        #[[ -n ${FAIL_LOG} ]] && FAILED_COMPILE_LOGS+=("${FAIL_LOG}")
       fi
 
     elif [[ ${line} =~ RUN ]]; then
@@ -339,17 +369,24 @@ EOF
         if [[ ${CREATE_BASELINE} == true && ${GEN_BASELINE} != "baseline" ]]; then
           TEST_RESULT="SKIPPED: TEST DOES NOT GENERATE BASELINE"
           SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
+          #GSP
+          DOES_NOT_GENERATE_BASELINE+=("${TEST_NAME}_${COMPILER}")
         elif [[ ${COMPILE_RESULT} =~ FAILED ]]; then
           TEST_RESULT="SKIPPED: ASSOCIATED COMPILE FAILED"
           SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
+          TESTS_SKIPPED_FOR_COMPILE_FAIL+=("${TEST_NAME} ${COMPILER}")
+          ASSOCIATED_COMPILE_FAILED+=("${TEST_NAME}_${COMPILER}")
+          # Switch to associated_compile_failed? ^
         elif [[ ! -f "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log" ]]; then
           TEST_RESULT="FAILED: UNABLE TO START TEST"
           FAIL_LOG="N/A"
+          UNABLE_TO_START_TEST+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
         elif [[ -f fail_test_${TEST_NAME}_${COMPILER} ]]; then
           if [[ -f "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log" ]]; then
             if grep -q "FAIL" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
               TEST_RESULT="FAILED: UNABLE TO COMPLETE COMPARISON"
               FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
+              UNABLE_TO_COMPLETE_COMPARISON+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
             # We need to catch a "PASS" in rt_*.log even if a fail_test_* files exists
             # I am not sure why this can happen.
             elif grep -q "PASS" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
@@ -357,17 +394,21 @@ EOF
             else
               TEST_RESULT="FAILED: UNSUCCESSFUL BASELINE COMPARISON"
               FAIL_LOG="${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"
+              UNSUCCESSFUL_BASELINE_COMPARISON+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
             fi
           else
             TEST_RESULT="FAILED: RUN DID NOT COMPLETE"
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
+            RUN_DID_NOT_COMPLETE+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
           fi
           if grep -q "quota" "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"; then
             TEST_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
+            TEST_DISK_QUOTA_ISSUE+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
           elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"; then
             TEST_RESULT="FAILED: TEST TIMED OUT"
             FAIL_LOG="${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"
+            TEST_TIMED_OUT+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
           fi
         else
           TEST_RESULT="PASS"
@@ -394,8 +435,9 @@ EOF
         fi
 
         echo "${TEST_RESULT} -- TEST '${TEST_NAME}_${COMPILER}' [${RT_TEST_TIME}, ${TEST_TIME}](${RT_TEST_MEM} MB)" >> "${REGRESSIONTEST_LOG}"
-        [[ -n ${FAIL_LOG} ]] && FAILED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
-        [[ -n ${FAIL_LOG} ]] && FAILED_TEST_LOGS+=("${FAIL_LOG}")
+        # Could change below to a count of failed tests instead of storing an array whose info we won't use...
+        [[ -n ${FAIL_LOG} ]] && FAILED_TESTS+=("${TEST_NAME}_${COMPILER}")
+        #[[ -n ${FAIL_LOG} ]] && FAILED_TEST_LOGS+=("${FAIL_LOG}")
         [[ -n ${FAIL_LOG} ]] && FAILED_TEST_ID+=("${TEST_NAME} ${COMPILER}")
       fi
     fi
@@ -415,26 +457,48 @@ EOF
   # PRINT FAILED COMPILES
   if [[ "${#FAILED_COMPILES[@]}" -ne "0" ]]; then
     echo "Failed Compiles:" >> "${REGRESSIONTEST_LOG}"
-    for i in "${!FAILED_COMPILES[@]}"; do
-      echo "* ${FAILED_COMPILES[${i}]}" >> "${REGRESSIONTEST_LOG}"
-      echo "-- LOG: ${FAILED_COMPILE_LOGS[${i}]}" >> "${REGRESSIONTEST_LOG}"
-    done
+    #for i in "${!FAILED_COMPILES[@]}"; do
+    #  echo "* ${FAILED_COMPILES[${i}]}" >> "${REGRESSIONTEST_LOG}"
+    #  echo "-- LOG: ${FAILED_COMPILE_LOGS[${i}]}" >> "${REGRESSIONTEST_LOG}"
+    #done
   fi
+
+  #GSP
+  print_results UNABLE_TO_START_COMPILE
+  print_results UNABLE_TO_FINISH_COMPILE
+  print_results COMPILE_DISK_QUOTA_ISSUE
+  print_results COMPILE_TIMED_OUT
+
 
   # PRINT FAILED TESTS
   if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
-
     echo "Failed Tests:" >> "${REGRESSIONTEST_LOG}"
-    for j in "${!FAILED_TESTS[@]}"; do
-      echo "* ${FAILED_TESTS[${j}]}" >> "${REGRESSIONTEST_LOG}"
-      echo "-- LOG: ${FAILED_TEST_LOGS[${j}]}" >> "${REGRESSIONTEST_LOG}"
-    done
-
+    #for j in "${!FAILED_TESTS[@]}"; do
+      #echo "* ${FAILED_TESTS[${j}]}" >> "${REGRESSIONTEST_LOG}"
+      #echo "-- LOG: ${FAILED_TEST_LOGS[${j}]}" >> "${REGRESSIONTEST_LOG}"
+    #done
   fi
 
+  print_results UNABLE_TO_START_TEST
+  print_results RUN_DID_NOT_COMPLETE
+  print_results TEST_DISK_QUOTA_ISSUE
+  print_results TEST_TIMED_OUT
+  print_results DOES_NOT_GENERATE_BASELINE
+  print_results UNSUCCESSFUL_BASELINE_COMPARISON
+  print_results UNABLE_TO_COMPLETE_COMPARISON
+
+  #GSP
   # WRITE FAILED_TEST_ID LIST TO TEST_CHANGES_LOG
   if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
     for item in "${FAILED_TEST_ID[@]}"; do
+      echo "${item}" >> "${TEST_CHANGES_LOG}"
+    done
+  fi
+
+  # GSP
+  # WRITE TESTS WHOSE ASSOCIATED COMPILE FAILED TO TEST_CHANGES_LOG
+  if [[ "${#TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}" -ne "0" ]]; then
+    for item in "${TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}"; do
       echo "${item}" >> "${TEST_CHANGES_LOG}"
     done
   fi
@@ -461,7 +525,7 @@ EOF
 
 NOTES:
 A file '${TEST_CHANGES_LOG}' was generated with list of all failed tests.
-You can use './rt.sh -c -b test_changes.list' to create baselines for the failed tests.
+You can use './rt.sh -c -s test_changes.list' to create baselines for the failed tests.
 If you are using this log as a pull request verification, please commit '${TEST_CHANGES_LOG}'.
 
 Result: FAILURE
@@ -592,7 +656,7 @@ export delete_rundir=false
 COMPILE_ONLY=false
 RTPWD_NEW_BASELINE=false
 TESTS_FILE='rt.conf'
-NEW_BASELINES_FILE=''
+TEST_SUBSET_FILE=''
 DEFINE_CONF_FILE=false
 RUN_SINGLE_TEST=false
 RTVERBOSE=false
@@ -601,13 +665,10 @@ export STOP_ECFLOW_AT_END=false
 export DRY_RUN=false
 ACCNR=${ACCNR:-""}
 
-while getopts ":a:b:cl:mn:dwkreovhx" opt; do
+while getopts ":a:cl:mn:dwkreovhxs:" opt; do
   case ${opt} in
     a)
       ACCNR=${OPTARG}
-      ;;
-    b)
-      NEW_BASELINES_FILE=${OPTARG}
       ;;
     c)
       CREATE_BASELINE=true
@@ -658,6 +719,8 @@ while getopts ":a:b:cl:mn:dwkreovhx" opt; do
       ECFLOW=true
       ROCOTO=false
       ;;
+    s) TEST_SUBSET_FILE=${OPTARG}
+      ;;
     v)
       RTVERBOSE=true
       ;;
@@ -687,11 +750,11 @@ done
 [[ ${KEEP_RUNDIR} == true && ${delete_rundir} == true ]] && die "-k and -d options cannot be used at the same time"
 [[ ${ECFLOW} == true && ${ROCOTO} == true ]] && die "-r and -e options cannot be used at the same time"
 [[ ${CREATE_BASELINE} == true && ${RTPWD_NEW_BASELINE} == true ]] && die "-c and -m options cannot be used at the same time"
-#B&N not run together
-[[ ${NEW_BASELINES_FILE} != '' && ${RUN_SINGLE_TEST} == true ]] && die "-b and -n options cannot be used at the same time"
+#S&N not run together
+[[ ${TEST_SUBSET_FILE} != '' && ${RUN_SINGLE_TEST} == true ]] && die "-s and -n options cannot be used at the same time"
 
 if [[ ${DRY_RUN} == true ]]; then
-   [[ ${NEW_BASELINES_FILE} == '' ]] || die "-x should not be used with -b"
+   [[ ${TEST_SUBSET_FILE} == '' ]] || die "-x should not be used with -s"
    [[ ${CREATE_BASELINE} == false ]] || die "-x should not be used with -c"
    [[ ${delete_rundir} == false ]] || die "-x should not be used with -d"
    [[ ${ECFLOW} == false ]] || die "-x should not be used with -e"
@@ -1330,8 +1393,8 @@ if [[ ${ECFLOW} == true ]]; then
   ecflow_run
 fi
 
-# IF -c AND -b; LINK VERIFIED BASELINES TO NEW_BASELINE
-if [[ ${CREATE_BASELINE} == true && ${NEW_BASELINES_FILE} != '' ]]; then
+# IF -c AND -s; LINK VERIFIED BASELINES TO NEW_BASELINE
+if [[ ${CREATE_BASELINE} == true && ${TEST_SUBSET_FILE} != '' ]]; then
   for dir in "${RTPWD}"/*/; do
     dir=${dir%*/}
     [[ -d "${NEW_BASELINE}/${dir##*/}" ]] && continue
