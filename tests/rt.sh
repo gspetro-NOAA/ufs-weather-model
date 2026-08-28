@@ -157,7 +157,13 @@ print_results() {
   [[ -z "${1:-}" ]] && return 0
   local -n failures="${1}"
   if [[ "${#failures[@]}" -ne "0" ]]; then
-    echo "${1//_/ }: " >> "${REGRESSIONTEST_LOG}"
+    if [[ "${1}" == "ASSOCIATED_COMPILE_FAILED" ]]; then
+      local category="ASSOCIATED COMPILE FAILED: TESTS NOT RUN"
+    else
+      local category="${1//_/ }"
+    fi
+
+    echo "${category} " >> "${REGRESSIONTEST_LOG}"
     echo "" >> "${REGRESSIONTEST_LOG}"
     for item in "${failures[@]}"; do
       echo "  * ${item}" >> "${REGRESSIONTEST_LOG}"
