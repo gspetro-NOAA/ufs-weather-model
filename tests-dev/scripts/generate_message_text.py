@@ -75,7 +75,7 @@ class MessageManager(Manager):
          return mdFile
       else:
          logging.error(f"No tests with high runtime or memory.")
-         return
+         return ""
 
 
 def main():
