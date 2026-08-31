@@ -1,6 +1,7 @@
 import os
 from .Manager import *
 from mdutils.mdutils import MdUtils
+import logging
 
 class MessageManager(Manager):
 
@@ -50,41 +51,43 @@ class MessageManager(Manager):
       append this information to self.message_content.
       """
       fail = '❌'
-      self.results[category] = self.organize_data_by_test(data)
+      self.results[category].update(self.organize_data_by_test(data))
 
       matching = {}
       for test, result in self.results[category].items(): 
          for machine, is_fail in result.items():
             if is_fail == fail:
                matching.setdefault(test, []).append(machine)
-
-      if not matching:
-         return
-      else:
+               
+      if matching:
          self.message_content += f"\nFor the past three PRs, {category.upper()} has been greater than two standard deviations above the mean for the following tests: \n\n"
          for test, machines in matching.items():
             self.message_content+=f"  * {test}: {(", ").join(machines)}\n"
 
-         return self.message_content
+   def create_md_file(self):
+      if self.message_content:
+         mdFile = MdUtils(file_name='pr_post.md')
+         mdFile.write("### ⚠️ Test Suite Performance Threshold Exceeded")
+         mdFile.new_paragraph(self.message_content)
+         mdFile.new_paragraph("@gspetro-NOAA")
+         mdFile.create_md_file()
+         print(mdFile.get_md_text())
+         return mdFile
+      else:
+         logging.error(f"No tests with high runtime or memory.")
+         return
+
 
 def main():
    
    message_manager = MessageManager()
 
    for category in message_manager.categories: 
-
-      message_manager.contents[category] = message_manager.load_json_from_file(os.environ.get(f"{category.upper()}_RESULTS"))
-      mdFile = MdUtils(file_name='pr_post.md')
-      mdFile.write("### ⚠️ Test Suite Performance Threshold Exceeded")
-      mdFile.new_paragraph(message_manager.create_message_content(message_manager.contents[category], category))
-
-   mdFile.new_paragraph("@gspetro-NOAA")
-   print(mdFile.get_md_text())
-   mdFile.create_md_file()
+      message_manager.contents[category].update(message_manager.load_json_from_file(os.environ.get(f"{category.upper()}_RESULTS")))
+      message_manager.create_message_content(message_manager.contents[category], category)
    
-   return message_manager.message_content
-   
-      
+   return message_manager.create_md_file()
+
 
 if __name__ == "__main__":
 
