@@ -124,8 +124,6 @@ jobs:
   write-results:  
     runs-on: ubuntu-latest
     needs: get-data
-    permissions:
-      pull-requests: write
     steps:
       - name: Checkout feature branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
@@ -164,7 +162,7 @@ jobs:
         id: find-comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body-includes: "### ⚠️ Test Suite Performance Threshold Exceeded"
+          body-includes: "Test Suite Performance"
           comment-author: 'github-actions[bot]'
       - name: Generate message text
         id: message_text
