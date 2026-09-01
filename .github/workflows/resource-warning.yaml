@@ -164,7 +164,7 @@ jobs:
         id: find-comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body-includes: "### ⚠️ Test Suite Performance Threshold Exceeded"
+          body-includes: "Test Suite Performance"
           comment-author: 'github-actions[bot]'
       - name: Generate message text
         id: message_text
