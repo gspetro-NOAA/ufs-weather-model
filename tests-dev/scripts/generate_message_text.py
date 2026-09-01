@@ -70,11 +70,13 @@ class MessageManager(Manager):
          mdFile.write("### ⚠️ Test Suite Performance Threshold Exceeded")
          mdFile.new_paragraph(self.message_content)
          mdFile.new_paragraph("@gspetro-NOAA")
-         mdFile.create_md_file()
-         print(mdFile.get_md_text())
+         #print(mdFile.get_md_text())
       else:
          mdFile.write("### ✅ Test Suite Performance")
-         mdFile.new_paragraph(f"No tests with high runtime or memory.")
+         mdFile.new_paragraph(f"No tests with repeatedly high runtime or memory.")
+         #print(mdFile.get_md_text())
+
+      mdFile.create_md_file()
 
       return mdFile
 
