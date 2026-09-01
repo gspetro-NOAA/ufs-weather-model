@@ -65,17 +65,18 @@ class MessageManager(Manager):
             self.message_content+=f"  * {test}: {(", ").join(machines)}\n"
 
    def create_md_file(self):
+      mdFile = MdUtils(file_name='pr_post.md')
       if self.message_content:
-         mdFile = MdUtils(file_name='pr_post.md')
          mdFile.write("### ⚠️ Test Suite Performance Threshold Exceeded")
          mdFile.new_paragraph(self.message_content)
          mdFile.new_paragraph("@gspetro-NOAA")
          mdFile.create_md_file()
          print(mdFile.get_md_text())
-         return mdFile
       else:
-         logging.error(f"No tests with high runtime or memory.")
-         return ""
+         mdFile.write("### ✅ Test Suite Performance")
+         mdFile.new_paragraph(f"No tests with high runtime or memory.")
+
+      return mdFile
 
 
 def main():
@@ -85,7 +86,7 @@ def main():
    for category in message_manager.categories: 
       message_manager.contents[category].update(message_manager.load_json_from_file(os.environ.get(f"{category.upper()}_RESULTS")))
       message_manager.create_message_content(message_manager.contents[category], category)
-   
+
    return message_manager.create_md_file()
 
 
