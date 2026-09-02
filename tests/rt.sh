@@ -11,7 +11,7 @@ die() { echo "$@" >&2; exit 1; }
 usage() {
   set +x #No reason to print out a bunch of echo statements here
   echo
-  echo "Usage: $0 -a <account> | -b <file> | -c | -d | -e | -h | -k | -l <file> | -m | -n <name> | -o | -r | -v | -w | -x"
+  echo "Usage: $0 -a <account> | -s <file> | -c | -d | -e | -h | -k | -l <file> | -m | -n <name> | -o | -r | -v | -w | -x"
   echo
   echo "  -a  <account> to use on for HPC queue"
   echo "  -c  create new baseline results"
@@ -55,9 +55,9 @@ update_rtconf() {
   }
 
   # This script will update the rt.conf ($TESTS_FILE) if needed by the
-  # -b or -n options being called/used.
+  # -s or -n options being called/used.
 
-  # THE USER CHOSE THE -b OPTION
+  # THE USER CHOSE THE -s OPTION
   if [[ ${TEST_SUBSET_FILE} != '' ]]; then
     [[ -s "${TEST_SUBSET_FILE}" ]] || die "${TEST_SUBSET_FILE} is empty, exiting..."
     TEST_WITH_COMPILE=()
@@ -153,26 +153,27 @@ update_rtconf() {
   fi
 }
 
-#GSP
 print_results() {
   [[ -z "${1:-}" ]] && return 0
   local -n failures="${1}"
-  echo "${1//_/}: "
-  for item in "${failures[@]}"; do
+  if [[ "${#failures[@]}" -ne "0" ]]; then
+    echo "${1//_/ }: " >> "${REGRESSIONTEST_LOG}"
+    echo "" >> "${REGRESSIONTEST_LOG}"
+    for item in "${failures[@]}"; do
       echo "  * ${item}" >> "${REGRESSIONTEST_LOG}"
-   done
+    done
+    echo "" >> "${REGRESSIONTEST_LOG}"
+  fi
 }
 
 generate_log() {
   echo "rt.sh: Generating Regression Testing Log..."
   COMPILE_COUNTER=0
-  FAILED_COMPILES=()
+  FAILED_COMPILES=0
   TEST_COUNTER=0
-  FAILED_TESTS=()
-  SKIPPED_TESTS=()
+  FAILED_TESTS=0
+  SKIPPED_TESTS=0
   FAILED_TEST_ID=()
-  #FAILED_COMPILE_LOGS=()
-  #FAILED_TEST_LOGS=()
   UNABLE_TO_START_COMPILE=()
   UNABLE_TO_FINISH_COMPILE=()
   COMPILE_DISK_QUOTA_ISSUE=()
@@ -181,12 +182,11 @@ generate_log() {
   DOES_NOT_GENERATE_BASELINE=()
   ASSOCIATED_COMPILE_FAILED=()
   UNABLE_TO_START_TEST=()
-  UNABLE_TO_COMPLETE_COMPARISON=()
-  UNSUCCESSFUL_BASELINE_COMPARISON=()
+  MISSING_BASELINE=()
+  BASELINE_NOT_IDENTICAL=()
   RUN_DID_NOT_COMPLETE=()
   TEST_DISK_QUOTA_ISSUE=()
   TEST_TIMED_OUT=()
-  #SORTED_FAILURES=()
   TEST_CHANGES_LOG="test_changes.list"
   TEST_END_TIME="$(date '+%Y%m%d %T')"
   GIT_HASHES=$(git rev-parse HEAD)
@@ -279,19 +279,19 @@ EOF
         if [[ ! -f "${LOG_DIR}/compile_${COMPILE_ID}.log" ]]; then
           COMPILE_RESULT="FAILED: UNABLE TO START COMPILE"
           FAIL_LOG="N/A"
-          UNABLE_TO_START_COMPILE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
+          UNABLE_TO_START_COMPILE+=("${COMPILE_ID}")
         elif [[ -f fail_compile_${COMPILE_ID} ]]; then
           COMPILE_RESULT="FAILED: UNABLE TO FINISH COMPILE"
           FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
-          UNABLE_TO_FINISH_COMPILE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
+          UNABLE_TO_FINISH_COMPILE+=("${COMPILE_ID}")
           if grep -q "quota" "${LOG_DIR}/compile_${COMPILE_ID}.log"; then
             COMPILE_RESULT="FAILED: DISK QUOTA ISSUE"
             FAIL_LOG="${LOG_DIR}/compile_${COMPILE_ID}.log"
-            COMPILE_DISK_QUOTA_ISSUE+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
+            COMPILE_DISK_QUOTA_ISSUE+=("${COMPILE_ID}")
           elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"; then
             COMPILE_RESULT="FAILED: COMPILE TIMED OUT"
             FAIL_LOG="${RUNDIR_ROOT}/compile_${COMPILE_ID}/err"
-            COMPILE_TIMED_OUT+=("compile_${COMPILE_ID} -- LOG: ${FAIL_LOG}")
+            COMPILE_TIMED_OUT+=("${COMPILE_ID}")
           fi
         else
           COMPILE_RESULT="PASS"
@@ -331,9 +331,7 @@ EOF
         fi
         echo >> "${REGRESSIONTEST_LOG}"
         echo "${COMPILE_RESULT} -- COMPILE '${COMPILE_ID}' [${RT_COMPILE_TIME}, ${COMPILE_TIME}]${COMPILE_WARNINGS}" >> "${REGRESSIONTEST_LOG}"
-        # Change to a count instead of an array whose other info we don't use? 
-        [[ -n ${FAIL_LOG} ]] && FAILED_COMPILES+=("${COMPILE_ID}")
-        #[[ -n ${FAIL_LOG} ]] && FAILED_COMPILE_LOGS+=("${FAIL_LOG}")
+        [[ -n ${FAIL_LOG} ]] && ((FAILED_COMPILES+=1))
       fi
 
     elif [[ ${line} =~ RUN ]]; then
@@ -368,47 +366,45 @@ EOF
         RT_TEST_MEM=""
         if [[ ${CREATE_BASELINE} == true && ${GEN_BASELINE} != "baseline" ]]; then
           TEST_RESULT="SKIPPED: TEST DOES NOT GENERATE BASELINE"
-          SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
-          #GSP
+          ((SKIPPED_TESTS+=1))
           DOES_NOT_GENERATE_BASELINE+=("${TEST_NAME}_${COMPILER}")
         elif [[ ${COMPILE_RESULT} =~ FAILED ]]; then
           TEST_RESULT="SKIPPED: ASSOCIATED COMPILE FAILED"
-          SKIPPED_TESTS+=("TEST ${TEST_NAME}_${COMPILER}: ${TEST_RESULT}")
+          ((SKIPPED_TESTS+=1))
           TESTS_SKIPPED_FOR_COMPILE_FAIL+=("${TEST_NAME} ${COMPILER}")
           ASSOCIATED_COMPILE_FAILED+=("${TEST_NAME}_${COMPILER}")
           # Switch to associated_compile_failed? ^
         elif [[ ! -f "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log" ]]; then
           TEST_RESULT="FAILED: UNABLE TO START TEST"
           FAIL_LOG="N/A"
-          UNABLE_TO_START_TEST+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+          UNABLE_TO_START_TEST+=("${TEST_NAME} ${COMPILER}")
         elif [[ -f fail_test_${TEST_NAME}_${COMPILER} ]]; then
-          if [[ -f "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log" ]]; then
-            if grep -q "FAIL" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
-              TEST_RESULT="FAILED: UNABLE TO COMPLETE COMPARISON"
+          if grep -q "quota" "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"; then
+            TEST_RESULT="FAILED: DISK QUOTA ISSUE"
+            FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
+            TEST_DISK_QUOTA_ISSUE+=("${TEST_NAME} ${COMPILER}")
+          elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"; then
+            TEST_RESULT="FAILED: TEST TIMED OUT"
+            FAIL_LOG="${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"
+            TEST_TIMED_OUT+=("${TEST_NAME} ${COMPILER}")
+          elif [[ -f "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log" ]]; then
+            if grep -q "MISSING baseline" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
+              TEST_RESULT="FAILED: MISSING BASELINE"
               FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-              UNABLE_TO_COMPLETE_COMPARISON+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+              MISSING_BASELINE+=("${TEST_NAME} ${COMPILER}")
+            elif grep -q "NOT IDENTICAL" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
+              TEST_RESULT="FAILED: BASELINE NOT IDENTICAL"
+              FAIL_LOG="${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"
+              BASELINE_NOT_IDENTICAL+=("${TEST_NAME} ${COMPILER}")
             # We need to catch a "PASS" in rt_*.log even if a fail_test_* files exists
             # I am not sure why this can happen.
             elif grep -q "PASS" "${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"; then
               TEST_RESULT="PASS"
-            else
-              TEST_RESULT="FAILED: UNSUCCESSFUL BASELINE COMPARISON"
-              FAIL_LOG="${LOG_DIR}/rt_${TEST_NAME}_${COMPILER}.log"
-              UNSUCCESSFUL_BASELINE_COMPARISON+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
             fi
           else
             TEST_RESULT="FAILED: RUN DID NOT COMPLETE"
             FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-            RUN_DID_NOT_COMPLETE+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
-          fi
-          if grep -q "quota" "${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"; then
-            TEST_RESULT="FAILED: DISK QUOTA ISSUE"
-            FAIL_LOG="${LOG_DIR}/run_${TEST_NAME}_${COMPILER}.log"
-            TEST_DISK_QUOTA_ISSUE+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
-          elif grep -q "TIME LIMIT" "${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"; then
-            TEST_RESULT="FAILED: TEST TIMED OUT"
-            FAIL_LOG="${RUNDIR_ROOT}/${TEST_NAME}_${COMPILER}/err"
-            TEST_TIMED_OUT+=("${TEST_NAME} ${COMPILER} -- LOG: ${FAIL_LOG}")
+            RUN_DID_NOT_COMPLETE+=("${TEST_NAME} ${COMPILER}")
           fi
         else
           TEST_RESULT="PASS"
@@ -435,9 +431,7 @@ EOF
         fi
 
         echo "${TEST_RESULT} -- TEST '${TEST_NAME}_${COMPILER}' [${RT_TEST_TIME}, ${TEST_TIME}](${RT_TEST_MEM} MB)" >> "${REGRESSIONTEST_LOG}"
-        # Could change below to a count of failed tests instead of storing an array whose info we won't use...
-        [[ -n ${FAIL_LOG} ]] && FAILED_TESTS+=("${TEST_NAME}_${COMPILER}")
-        #[[ -n ${FAIL_LOG} ]] && FAILED_TEST_LOGS+=("${FAIL_LOG}")
+        [[ -n ${FAIL_LOG} ]] && ((FAILED_TESTS+=1))
         [[ -n ${FAIL_LOG} ]] && FAILED_TEST_ID+=("${TEST_NAME} ${COMPILER}")
       fi
     fi
@@ -451,19 +445,23 @@ SYNOPSIS:
 Starting Date/Time: ${TEST_START_TIME}
 Ending Date/Time: ${TEST_END_TIME}
 Total Time: ${elapsed_time}
-Compiles Completed: $((COMPILE_COUNTER-${#FAILED_COMPILES[@]}))/${COMPILE_COUNTER}
-Tests Completed: $((TEST_COUNTER-${#FAILED_TESTS[@]}-${#SKIPPED_TESTS[@]}))/${TEST_COUNTER}
+Compiles Completed: $((COMPILE_COUNTER-FAILED_COMPILES))/${COMPILE_COUNTER}
+Tests Completed: $((TEST_COUNTER-FAILED_TESTS-SKIPPED_TESTS))/${TEST_COUNTER}
+
+LOGPATH: ${LOG_DIR}
+  * Compile logs located at: compile_<compile_name>_<compiler>.log
+  * Test logs located at: run_<test_name>_<compiler>.log
+
 EOF
   # PRINT FAILED COMPILES
-  if [[ "${#FAILED_COMPILES[@]}" -ne "0" ]]; then
-    echo "Failed Compiles:" >> "${REGRESSIONTEST_LOG}"
-    #for i in "${!FAILED_COMPILES[@]}"; do
-    #  echo "* ${FAILED_COMPILES[${i}]}" >> "${REGRESSIONTEST_LOG}"
-    #  echo "-- LOG: ${FAILED_COMPILE_LOGS[${i}]}" >> "${REGRESSIONTEST_LOG}"
-    #done
+  if [[ ${FAILED_COMPILES} -gt 0 ]]; then
+    {
+      echo ""
+      echo "*** FAILED COMPILES ***"
+      echo "" 
+    } >> "${REGRESSIONTEST_LOG}"
   fi
 
-  #GSP
   print_results UNABLE_TO_START_COMPILE
   print_results UNABLE_TO_FINISH_COMPILE
   print_results COMPILE_DISK_QUOTA_ISSUE
@@ -471,31 +469,30 @@ EOF
 
 
   # PRINT FAILED TESTS
-  if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
-    echo "Failed Tests:" >> "${REGRESSIONTEST_LOG}"
-    #for j in "${!FAILED_TESTS[@]}"; do
-      #echo "* ${FAILED_TESTS[${j}]}" >> "${REGRESSIONTEST_LOG}"
-      #echo "-- LOG: ${FAILED_TEST_LOGS[${j}]}" >> "${REGRESSIONTEST_LOG}"
-    #done
+  if [[ ${FAILED_TESTS} -gt 0 ]]; then
+    {
+      echo ""
+      echo "*** FAILED TESTS ***"
+      echo ""
+    } >> "${REGRESSIONTEST_LOG}"
   fi
 
-  print_results UNABLE_TO_START_TEST
   print_results RUN_DID_NOT_COMPLETE
   print_results TEST_DISK_QUOTA_ISSUE
   print_results TEST_TIMED_OUT
+  print_results UNABLE_TO_START_TEST
+  print_results BASELINE_NOT_IDENTICAL
+  print_results MISSING_BASELINE
+  print_results ASSOCIATED_COMPILE_FAILED
   print_results DOES_NOT_GENERATE_BASELINE
-  print_results UNSUCCESSFUL_BASELINE_COMPARISON
-  print_results UNABLE_TO_COMPLETE_COMPARISON
 
-  #GSP
   # WRITE FAILED_TEST_ID LIST TO TEST_CHANGES_LOG
-  if [[ "${#FAILED_TESTS[@]}" -ne "0" ]]; then
+  if [[ ${FAILED_TESTS} -gt 0 ]]; then
     for item in "${FAILED_TEST_ID[@]}"; do
       echo "${item}" >> "${TEST_CHANGES_LOG}"
     done
   fi
 
-  # GSP
   # WRITE TESTS WHOSE ASSOCIATED COMPILE FAILED TO TEST_CHANGES_LOG
   if [[ "${#TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}" -ne "0" ]]; then
     for item in "${TESTS_SKIPPED_FOR_COMPILE_FAIL[@]}"; do
@@ -503,7 +500,7 @@ EOF
     done
   fi
 
-  if [[ "${#FAILED_COMPILES[@]}" -eq "0" && "${#FAILED_TESTS[@]}" -eq "0" ]]; then
+  if [[ ${FAILED_COMPILES} -eq 0 && ${FAILED_TESTS} -eq 0 ]]; then
     cat << EOF >> "${REGRESSIONTEST_LOG}"
 
 NOTES:
