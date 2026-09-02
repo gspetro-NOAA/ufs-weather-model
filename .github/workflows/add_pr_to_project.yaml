@@ -17,8 +17,7 @@ jobs:
       - name: Add PR
         uses: actions/add-to-project@5afcf98fcd03f1c2f92c3c83f58ae24323cc57fd #v2.2.0
         with:
-          #project-url: https://github.com/orgs/ufs-community/projects/70
-          project-url: https://github.com/orgs/NOAA-EPIC/projects/18
+          project-url: https://github.com/orgs/ufs-community/projects/70
           github-token: ${{ secrets.PR_PROJECT_TOKEN }}
       - name: Format PR Opened Date
         id: date
@@ -27,10 +26,8 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          #organization: ufs-community
-          organization: NOAA-EPIC
-          #project_number: 70
-          project_number: 18
+          organization: ufs-community
+          project_number: 70
           operation: update
           content_id: ${{ github.event.pull_request.node_id }}
           field: 'Date Opened'
@@ -39,10 +36,8 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          #organization: ufs-community
-          organization: NOAA-EPIC
-          #project_number: 70
-          project_number: 18
+          organization: ufs-community
+          project_number: 70
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Baseline Changes'
