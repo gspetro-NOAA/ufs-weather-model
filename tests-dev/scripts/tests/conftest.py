@@ -523,26 +523,26 @@ def stats_dict_snippet():
    return stats_dict
 
 @pytest.fixture
-def sample_runtime_mem_results(): 
+def sample_memory_results(): 
 
-   sample_runtime_mem_results = {
+   sample_memory_results = {
       "hercules": {
-         "cpld_control_p8_mixedmode_intel": ["\u26a0\ufe0f","\u2705"],
-         "cpld_control_gefs_intel": ["\u26a0\ufe0f","\u2705"],
-         "cpld_control_noaero_p8_agrid_intel": ["\u26a0\ufe0f","\u2705"],
-         "control_c48_intel": ["\u2705","\u2705"],
-         "control_p8_intel": ["\u26a0\ufe0f","\u2705"],
-         "control_restart_p8_intel": ["\u2705","\u2705"],
-         "hrrr_control_intel": ["\u2705","\u2705"],
-         "atmaero_control_p8_intel": ["\u2705","\u2705"],
-         "regional_atmaq_intel": ["\u2705","\u2705"],
-         "hafs_regional_docn_intel": ["\u2705","\u2705"],
-         "datm_cdeps_control_cfsr_intel": ["\u26a0\ufe0f","\u2705"],
-         "control_c48_gnu": ["\u2705","\u2705"],
-         "control_p8_gnu": ["\u2705","\u2705"],
-         "control_debug_p8_gnu": ["\u2705","\u2705"],
-         "hrrr_control_gnu": ["\u26a0\ufe0f","\u26a0\ufe0f"],
-         "datm_cdeps_control_cfsr_gnu": ["\u2705","\u2705"],
+         "cpld_control_p8_mixedmode_intel": "\u2705",
+         "cpld_control_gefs_intel": "\u2705",
+         "cpld_control_noaero_p8_agrid_intel": "\u2705",
+         "control_c48_intel": "\u2705",
+         "control_p8_intel": "\u2705",
+         "control_restart_p8_intel": "\u2705",
+         "hrrr_control_intel": "\u2705",
+         "atmaero_control_p8_intel": "\u2705",
+         "regional_atmaq_intel": "\u2705",
+         "hafs_regional_docn_intel": "\u2705",
+         "datm_cdeps_control_cfsr_intel": "\u2705",
+         "control_c48_gnu": "\u2705",
+         "control_p8_gnu": "\u2705",
+         "control_debug_p8_gnu": "\u2705",
+         "hrrr_control_gnu": "\u26a0\ufe0f",
+         "datm_cdeps_control_cfsr_gnu": "\u2705",
       },
       "orion": {
          "cpld_control_p8_mixedmode_intel": "\u2705",
@@ -588,7 +588,7 @@ def sample_runtime_mem_results():
          "cpld_control_gfsv17_intelllvm": "\u2705",
       }
    }
-   return sample_runtime_mem_results
+   return sample_memory_results
 
 @pytest.fixture
 def actual_passes_per_test():
@@ -812,3 +812,105 @@ def hercules_log_texts_2882(herc_log):
       }
    
    return herc_log.text_per_log
+
+@pytest.fixture
+def message_results():
+
+   message_results = {"runtime": 
+            {
+                     "cpld_control_p8_mixedmode_intel": {"hercules": "\u2705", "orion": "\u2705","ursa": "\u26a0\ufe0f","Passing": "66.7%",},
+                     "cpld_control_gefs_intel": {"hercules": "\u2705", "orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_restart_gefs_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_dcp_gefs_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_control_gfsv17_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_control_gfsv17_iau_intel": {"hercules": "\u26a0\ufe0f","orion": "\u2705","ursa": "\u2705","Passing": "66.7%",},
+                     "cpld_restart_gfsv17_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_restart_gfsv17_iau_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u26a0\ufe0f","Passing": "66.7%",},
+                     "cpld_mpi_gfsv17_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_control_sfs_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u26a0\ufe0f","Passing": "66.7%",},
+                     "cpld_debug_gfsv17_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_control_p8_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u274c","Passing": "66.7%",},
+                     "cpld_control_p8.v2.sfc_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u26a0\ufe0f","Passing": "66.7%",},
+                     "cpld_restart_p8_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_control_qr_p8_intel": {"hercules": "\u26a0\ufe0f","orion": "\u2705","ursa": "\u26a0\ufe0f","Passing": "33.3%",},
+                     "cpld_restart_qr_p8_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_2threads_p8_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u26a0\ufe0f","Passing": "66.7%",},
+                     "cpld_decomp_p8_intel": {"hercules": "\u26a0\ufe0f","orion": "\u2705","ursa": "\u26a0\ufe0f","Passing": "33.3%",},
+                     "cpld_mpi_p8_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705","Passing": "100.0%",},
+                     "cpld_control_gfsv17_intelllvm": {"ursa": "\u2705","Passing": "100.0%",}
+            },
+            "memory": {
+                     "cpld_control_p8_mixedmode_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u26a0\ufe0f",},
+                     "cpld_control_gefs_intel": {"hercules": "\u2705","orion": "\u2705","ursa": "\u2705",},
+                     "cpld_restart_gefs_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_dcp_gefs_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_control_gfsv17_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_control_gfsv17_iau_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_restart_gfsv17_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_restart_gfsv17_iau_intel": {"orion": "\u2705","ursa": "\u26a0\ufe0f",},
+                     "cpld_control_noaero_p8_agrid_intel": {"hercules": "\u2705",},
+                     "cpld_mpi_gfsv17_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_control_sfs_intel": {"orion": "\u2705","ursa": "\u26a0\ufe0f",},
+                     "cpld_debug_gfsv17_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_control_p8_intel": {"orion": "\u2705","ursa": "\u274c",},
+                     "cpld_control_p8.v2.sfc_intel": {"orion": "\u2705","ursa": "\u26a0\ufe0f",},
+                     "cpld_restart_p8_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_control_qr_p8_intel": {"orion": "\u2705","ursa": "\u26a0\ufe0f",},
+                     "cpld_restart_qr_p8_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_2threads_p8_intel": {"orion": "\u2705","ursa": "\u26a0\ufe0f",},
+                     "cpld_decomp_p8_intel": {"orion": "\u2705","ursa": "\u26a0\ufe0f",},
+                     "cpld_mpi_p8_intel": {"orion": "\u2705","ursa": "\u2705",},
+                     "cpld_control_gfsv17_intelllvm": {"ursa": "\u2705",},
+                     "control_c48_intel": {"hercules": "\u2705",},
+                     "control_p8_intel": {"hercules": "\u2705",},
+                     "control_restart_p8_intel": {"hercules": "\u2705",},
+                     "hrrr_control_intel": {"hercules": "\u2705",},
+                     "atmaero_control_p8_intel": {"hercules": "\u2705",},
+                     "regional_atmaq_intel": {"hercules": "\u2705",},
+                     "hafs_regional_docn_intel": {"hercules": "\u2705",},
+                     "datm_cdeps_control_cfsr_intel": {"hercules": "\u2705",},
+                     "control_c48_gnu": {"hercules": "\u2705",},
+                     "control_p8_gnu": {"hercules": "\u2705",},
+                     "control_debug_p8_gnu": {"hercules": "\u2705",},
+                     "hrrr_control_gnu": {"hercules": "\u26a0\ufe0f",},
+                     "datm_cdeps_control_cfsr_gnu": {"hercules": "\u2705",},
+                  },
+         }
+   return message_results
+
+@pytest.fixture
+def message_content():
+
+   messages = {
+      "no_hi_rt_mem": "",
+      "hi_rt_mem": "For the past three PRs, RUNTIME has been greater than two standard deviations above the mean for the following tests: \n\n" + \
+         "  * control_c384gdas_intel: derecho\n  * cpld_debug_sfs_intel: hercules, orion\n\n  * regional_debug_intel: ursa" + \
+         "\n\nFor the past three PRs, MEMORY has been greater than two standard deviations above the mean for the following tests: \n\n" + \
+         "  * cpld_control_p8_lnd_intel: wcoss2\n  * datm_cdeps_lnd_gswp3_intel: ursa, hercules",
+      "hi_rt": "For the past three PRs, RUNTIME has been greater than two standard deviations above the mean for the following tests: \n\n" + \
+         "  * control_c384gdas_intel: derecho\n  * cpld_debug_sfs_intel: hercules, orion\n\n  * regional_debug_intel: ursa",
+      "hi_mem": "For the past three PRs, MEMORY has been greater than two standard deviations above the mean for the following tests: \n\n" + \
+         "  * cpld_control_p8_lnd_intel: wcoss2\n  * datm_cdeps_lnd_gswp3_intel: ursa, hercules",
+   }
+
+   return messages
+
+@pytest.fixture
+def expected_messages():
+
+   messages = {
+      "no_hi_rt_mem": "\n\n\n### ✅ Test Suite Performance\n\nNo tests with repeatedly high runtime or memory.",
+      "hi_rt_mem": "\n\n\n### ⚠️ Test Suite Performance Threshold Exceeded\n\n" + \
+         "For the past three PRs, RUNTIME has been greater than two standard deviations above the mean for the following tests: \n\n" + \
+         "  * control_c384gdas_intel: derecho\n  * cpld_debug_sfs_intel: hercules, orion\n\n  * regional_debug_intel: ursa" + \
+         "\n\nFor the past three PRs, MEMORY has been greater than two standard deviations above the mean for the following tests: \n\n" + \
+         "  * cpld_control_p8_lnd_intel: wcoss2\n  * datm_cdeps_lnd_gswp3_intel: ursa, hercules\n\n@gspetro-NOAA",
+      "hi_rt": "\n\n\n### ⚠️ Test Suite Performance Threshold Exceeded\n\n" + \
+         "For the past three PRs, RUNTIME has been greater than two standard deviations above the mean for the following tests: \n\n" + \
+         "  * control_c384gdas_intel: derecho\n  * cpld_debug_sfs_intel: hercules, orion\n\n  * regional_debug_intel: ursa\n\n@gspetro-NOAA",
+      "hi_mem": "\n\n\n### ⚠️ Test Suite Performance Threshold Exceeded\n\n" + \
+         "For the past three PRs, MEMORY has been greater than two standard deviations above the mean for the following tests: \n\n" + \
+         "  * cpld_control_p8_lnd_intel: wcoss2\n  * datm_cdeps_lnd_gswp3_intel: ursa, hercules\n\n@gspetro-NOAA",
+   }
+
+   return messages
