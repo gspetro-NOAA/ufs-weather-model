@@ -316,6 +316,11 @@ Total Time: 02h:09m:15s
 Compiles Completed: 37/37
 Tests Completed: 182/182
 
+LOGPATH: /work/noaa/epic/role-epic/jenkins/workspace/s-weather-model_pipeline_PR-3313/tests/logs/log_orion
+  * Compile logs located at: compile_<compile_name>_<compiler>.log
+  * Test logs located at: run_<test_name>_<compiler>.log
+
+
 NOTES:
 A file 'test_changes.list' was generated but is empty.
 If you are using this log as a pull request verification, please commit 'test_changes.list'.
