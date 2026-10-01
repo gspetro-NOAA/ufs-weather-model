@@ -26,8 +26,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Baseline Changes'
@@ -40,8 +42,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Baseline Changes'
@@ -54,8 +58,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Baseline Changes'
@@ -68,8 +74,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Baseline Changes'
@@ -87,8 +95,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: "Input Data Req'd"
@@ -100,8 +110,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: "Input Data Req'd"
@@ -113,8 +125,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: "Input Data Req'd"
@@ -126,8 +140,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: "Input Data Req'd"
@@ -143,8 +159,10 @@ jobs:
         id: priority_field
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: read
           field: Priority
@@ -156,8 +174,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Priority'
@@ -169,8 +189,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Priority'
@@ -182,8 +204,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Priority'
@@ -196,8 +220,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: 'Priority'
@@ -272,8 +298,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: "Subcomponent PRs"
@@ -283,8 +311,10 @@ jobs:
         uses: github/update-project-action@af4f6083118f5080c89828b421ef598d1906fb60 #v4
         with:
           github_token: ${{ secrets.PR_PROJECT_TOKEN }}
-          organization: ufs-community
-          project_number: 70
+          #organization: ufs-community
+          organization: NOAA-EPIC
+          #project_number: 70
+          project_number: 18
           content_id: ${{ github.event.pull_request.node_id }}
           operation: update
           field: "Subcomponent PRs"
