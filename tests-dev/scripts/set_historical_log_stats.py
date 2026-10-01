@@ -1,4 +1,3 @@
-import os
 from .Manager import *
 from .HistoricalLogManager import *
 
