@@ -785,7 +785,6 @@ container on Hercules/Orion):
    singularity shell -B /work -B /work2 -B /local <container-image>
    # inside the container:
    source /opt/spack-stack/spack-stack-1.9.2/.bashenv   # or equivalent init script
-   module avail
    module load stack-oneapi/2024.2.1
    module load stack-intel-oneapi-mpi/2021.13
    module avail
@@ -834,7 +833,7 @@ To set up a new platform:
    the default), and ``-s`` runs only the tests listed in ``my_test.list`` (see
    :numref:`Section %s <container-rt-subset>`).
 
-The file is a bash file of ``KEY=value`` assignments, with ``#`` comments. Values containing
+The container definition file is a bash file of ``KEY=value`` assignments, with ``#`` comments. Values containing
 spaces must be quoted. ``rt.sh`` sources the file and uses the entries described in
 :numref:`Section %s <container-rt-conf-fields>`. The ``ROCOTO_SCHEDULER`` and ``WORKFLOW_MODULE_CMD``
 entries are optional and needed only for the Rocoto (``-r``) and ecFlow (``-e``) workflow
